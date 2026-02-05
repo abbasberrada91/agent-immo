@@ -40,6 +40,19 @@ Si vous avez déjà votre nom de domaine, vous pouvez lier le site en quelques m
 - Attendre la propagation DNS (souvent 5 min à 2 h).
 - Vérifier que `https://votredomaine.fr` charge bien le site.
 
+
+## Configuration prête pour votre domaine
+
+Le site est configuré pour le domaine personnalisé suivant :
+- `www.henrimartinimmobilier.fr`
+
+### DNS à créer
+- Type : `CNAME`
+- Nom/Host : `www`
+- Cible/Target : `<votre-compte-github>.github.io`
+
+> Pensez aussi à rediriger `henrimartinimmobilier.fr` vers `www.henrimartinimmobilier.fr` chez votre registrar pour éviter les doublons d’URL.
+
 ## Option 2 : Netlify / Vercel
 
 Vous pouvez aussi connecter ce repo à Netlify ou Vercel sans configuration de build:
