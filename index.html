@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maison Partenaires | Vente & Location Premium</title>
+    <meta
+      name="description"
+      content="Catalogue partenaire de biens à la vente et à la location, inspiré des vitrines premium immobilières."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <div class="overlay"></div>
+      <nav class="top-nav container">
+        <a href="#top" class="brand">Maison<span>Partenaires</span></a>
+        <div class="nav-links">
+          <a href="#biens">Nos biens</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="partner-btn" href="#contact">Accès partenaire</a>
+      </nav>
+
+      <div class="hero-content container">
+        <p class="eyebrow">Catalogue privé pour professionnels</p>
+        <h1>Présentez vos biens en vente et location sur une vitrine haut de gamme</h1>
+        <p class="lead">
+          Une expérience claire et élégante pour vos partenaires : recherche rapide,
+          fiches premium Canva, informations clés et disponibilité en temps réel.
+        </p>
+
+        <form class="search-bar" aria-label="Recherche de biens">
+          <label>
+            Zone
+            <input id="search-zone" type="text" placeholder="Paris, Lyon, Bordeaux..." />
+          </label>
+          <label>
+            Type
+            <select id="search-type">
+              <option value="">Tous les types</option>
+              <option value="Appartement">Appartement</option>
+              <option value="Maison">Maison</option>
+              <option value="Loft">Loft</option>
+              <option value="Penthouse">Penthouse</option>
+              <option value="Villa">Villa</option>
+              <option value="Studio">Studio</option>
+            </select>
+          </label>
+          <label>
+            Budget max
+            <input id="search-budget" type="text" placeholder="1500000 ou 4000" inputmode="numeric" />
+          </label>
+          <button id="search-submit" type="submit">Rechercher</button>
+        </form>
+
+        <div class="stats">
+          <article>
+            <strong id="stats-count">0</strong>
+            <span>Biens actifs</span>
+          </article>
+          <article>
+            <strong>42</strong>
+            <span>Partenaires affiliés</span>
+          </article>
+          <article>
+            <strong>24h</strong>
+            <span>Mise à jour des disponibilités</span>
+          </article>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section-head" id="biens">
+        <div>
+          <p class="eyebrow dark">Sélection exclusive</p>
+          <h2>Biens à la vente & à la location</h2>
+        </div>
+        <div class="filter-controls" role="group" aria-label="Filtrer les biens">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="vente">Vente</button>
+          <button class="filter-btn" data-filter="location">Location</button>
+        </div>
+      </section>
+
+      <p id="listing-summary" class="listing-summary" aria-live="polite"></p>
+      <section class="listing-grid" id="listing-grid" aria-live="polite"></section>
+
+      <section class="services" id="services">
+        <article>
+          <h3>Visibilité premium</h3>
+          <p>
+            Présentation éditoriale haut de gamme de chaque bien, inspirée des codes
+            des portails immobiliers de prestige.
+          </p>
+        </article>
+        <article>
+          <h3>Workflow Canva</h3>
+          <p>
+            Chaque fiche "Dossier complet" pointe vers une création Canva générée via
+            Bulk Create depuis votre table de biens.
+          </p>
+        </article>
+        <article>
+          <h3>Partage instantané</h3>
+          <p>
+            Un simple lien à envoyer pour accéder au catalogue à jour, sans friction
+            ni téléchargement.
+          </p>
+        </article>
+      </section>
+
+      <section class="cta-panel" id="contact">
+        <div>
+          <p class="eyebrow dark">Partenariat</p>
+          <h2>Vous voulez votre version personnalisée avec vos propres biens ?</h2>
+          <p>
+            Contactez-nous pour intégrer votre portefeuille, vos photos, vos quartiers
+            et vos règles de partage partenaires.
+          </p>
+        </div>
+        <a href="mailto:contact@maisonpartenaires.fr">contact@maisonpartenaires.fr</a>
+      </section>
+    </main>
+
+    <template id="property-card-template">
+      <article class="property-card">
+        <img src="" alt="" />
+        <div class="card-content">
+          <div class="card-top">
+            <span class="badge"></span>
+            <span class="ref"></span>
+          </div>
+          <h3></h3>
+          <p class="details"></p>
+          <div class="card-meta">
+            <strong></strong>
+            <a href="#" target="_blank" rel="noopener noreferrer">Dossier complet Canva →</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <footer>
+      <p>© 2026 MaisonPartenaires — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
