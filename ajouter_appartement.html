@@ -206,6 +206,42 @@
         .remove-photo-btn:hover {
             background: #f56565;
         }
+
+        input[type="file"] {
+            padding: 8px;
+            border: 2px dashed #e2e8f0;
+            background: #f7fafc;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+            background: #ebf4ff;
+        }
+
+        .photo-field {
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .photo-field label {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .photo-field input[type="file"],
+        .photo-field input[type="text"] {
+            margin-bottom: 8px;
+        }
+
+        .photo-preview {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 <body>
@@ -338,22 +374,22 @@
             </div>
 
             <div class="form-group">
-                <label>URL de l'image <span class="required">*</span></label>
-                <input type="url" id="image" placeholder="https://images.unsplash.com/photo-..." required>
-                <div class="help-text">URL d'une image Unsplash, Canva, ou votre hébergeur</div>
+                <label>Photo principale <span class="required">*</span></label>
+                <input type="file" id="mainPhoto" accept="image/png,image/jpeg,image/jpg,application/pdf" required>
+                <div class="help-text">Format acceptés: PNG, JPG, PDF</div>
             </div>
 
             <div class="form-group">
-                <label>Description de l'image <span class="required">*</span></label>
-                <input type="text" id="alt" placeholder="Appartement moderne avec balcon" required>
-                <div class="help-text">Décrivez l'image pour l'accessibilité</div>
+                <label>Légende de la photo principale <span class="required">*</span></label>
+                <input type="text" id="mainPhotoCaption" placeholder="Appartement moderne avec balcon" required>
+                <div class="help-text">Décrivez la photo pour l'accessibilité</div>
             </div>
 
             <div class="form-group">
                 <label>Photos supplémentaires</label>
                 <div id="additionalPhotos"></div>
                 <button type="button" class="add-photo-btn" onclick="addPhotoField()">➕ Ajouter une photo</button>
-                <div class="help-text">Ajoutez des URLs de photos supplémentaires (optionnel)</div>
+                <div class="help-text">Ajoutez autant de photos que vous voulez avec leurs légendes</div>
             </div>
 
             <div class="form-group">
@@ -392,10 +428,20 @@
             photoField.className = 'photo-field';
             photoField.id = `photo-field-${photoCount}`;
             photoField.innerHTML = `
-                <input type="url" class="additional-photo" placeholder="https://..." data-photo-id="${photoCount}">
-                <button type="button" class="remove-photo-btn" onclick="removePhotoField(${photoCount})">✕</button>
+                <label>Photo ${photoCount}</label>
+                <input type="file" class="additional-photo-file" accept="image/png,image/jpeg,image/jpg,application/pdf" data-photo-id="${photoCount}">
+                <label>Légende de la photo ${photoCount}</label>
+                <input type="text" class="additional-photo-caption" placeholder="Décrivez cette photo" data-photo-id="${photoCount}">
+                <div class="photo-preview-container" id="preview-${photoCount}"></div>
+                <button type="button" class="remove-photo-btn" onclick="removePhotoField(${photoCount})">✕ Supprimer cette photo</button>
             `;
             container.appendChild(photoField);
+
+            // Add preview handler for the new file input
+            const fileInput = photoField.querySelector('.additional-photo-file');
+            fileInput.addEventListener('change', function(e) {
+                previewPhoto(e.target, photoCount);
+            });
         }
 
         function removePhotoField(id) {
@@ -405,7 +451,59 @@
             }
         }
 
-        document.getElementById('apartmentForm').addEventListener('submit', function(e) {
+        function previewPhoto(input, id) {
+            const previewContainer = document.getElementById(`preview-${id}`);
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                
+                if (file.type.startsWith('image/')) {
+                    reader.onload = function(e) {
+                        previewContainer.innerHTML = `<img src="${e.target.result}" class="photo-preview" alt="Preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else if (file.type === 'application/pdf') {
+                    previewContainer.innerHTML = `<p style="color: #4299e1; margin-top: 8px;">📄 PDF: ${file.name}</p>`;
+                }
+            }
+        }
+
+        // Add preview for main photo
+        document.getElementById('mainPhoto')?.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                // Create or get preview container
+                let previewContainer = document.getElementById('main-photo-preview');
+                if (!previewContainer) {
+                    previewContainer = document.createElement('div');
+                    previewContainer.id = 'main-photo-preview';
+                    previewContainer.style.marginTop = '10px';
+                    e.target.parentElement.appendChild(previewContainer);
+                }
+                
+                if (file.type.startsWith('image/')) {
+                    reader.onload = function(ev) {
+                        previewContainer.innerHTML = `<img src="${ev.target.result}" class="photo-preview" alt="Preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else if (file.type === 'application/pdf') {
+                    previewContainer.innerHTML = `<p style="color: #4299e1;">📄 PDF: ${file.name}</p>`;
+                }
+            }
+        });
+
+        async function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.getElementById('apartmentForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const features = document.getElementById('features').value
@@ -413,10 +511,38 @@
                 .map(f => f.trim())
                 .filter(f => f.length > 0);
 
-            // Collect additional photos
-            const additionalPhotos = Array.from(document.querySelectorAll('.additional-photo'))
-                .map(input => input.value.trim())
-                .filter(url => url.length > 0);
+            // Handle main photo
+            const mainPhotoFile = document.getElementById('mainPhoto').files[0];
+            let mainPhotoData = null;
+            if (mainPhotoFile) {
+                mainPhotoData = {
+                    filename: mainPhotoFile.name,
+                    type: mainPhotoFile.type,
+                    size: mainPhotoFile.size,
+                    data: await fileToBase64(mainPhotoFile),
+                    caption: document.getElementById('mainPhotoCaption').value.trim()
+                };
+            }
+
+            // Collect additional photos with captions
+            const additionalPhotos = [];
+            const photoFiles = document.querySelectorAll('.additional-photo-file');
+            const photoCaptions = document.querySelectorAll('.additional-photo-caption');
+            
+            for (let i = 0; i < photoFiles.length; i++) {
+                const file = photoFiles[i].files[0];
+                const caption = photoCaptions[i].value.trim();
+                
+                if (file) {
+                    additionalPhotos.push({
+                        filename: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: await fileToBase64(file),
+                        caption: caption || ''
+                    });
+                }
+            }
 
             const apartment = {
                 reference: document.getElementById('reference').value.trim(),
@@ -431,8 +557,7 @@
                 bathrooms: parseInt(document.getElementById('bathrooms').value),
                 price: parseInt(document.getElementById('price').value),
                 features: features,
-                image: document.getElementById('image').value.trim(),
-                alt: document.getElementById('alt').value.trim(),
+                mainPhoto: mainPhotoData,
                 brochureUrl: document.getElementById('brochureUrl').value.trim(),
                 heatingType: document.getElementById('heatingType').value,
                 elevator: document.getElementById('elevator').checked,
