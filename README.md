@@ -1,4 +1,4 @@
-# MaisonPartenaires — Mise en ligne
+# Henri Martin Immobilier — Mise en ligne
 
 Oui, ce site peut être mis en ligne facilement car c'est une application statique (HTML/CSS/JS + `biens.json`).
 
