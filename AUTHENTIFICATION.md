@@ -11,6 +11,8 @@ Le système d'authentification a été créé avec succès pour protéger l'acc�
 **Login :** `abbasberrada`  
 **Mot de passe :** `Abbasberr1991`
 
+> 💡 **Mot de passe oublié ?** Consultez la [page de récupération du mot de passe](mot-de-passe.html)
+
 ---
 
 ## 🚀 Comment Utiliser
@@ -108,6 +110,7 @@ Si vous essayez d'accéder à ces pages sans être connecté, vous serez automat
 - Vérifiez que vous utilisez exactement : `abbasberrada` (sans espaces)
 - Le mot de passe est sensible à la casse : `Abbasberr1991`
 - Essayez de vider le cache du navigateur si le problème persiste
+- **🔑 [Page de récupération du mot de passe](mot-de-passe.html)** - Retrouvez vos identifiants
 
 ### Je suis déconnecté automatiquement
 
