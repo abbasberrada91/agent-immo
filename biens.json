@@ -10,7 +10,10 @@
       "surface": 230,
       "rooms": 5,
       "price": 2150000,
-      "features": ["Vue mer", "Piscine chauffée"],
+      "features": [
+        "Vue mer",
+        "Piscine chauffée"
+      ],
       "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
       "alt": "Villa contemporaine avec piscine",
       "brochureUrl": "https://www.canva.com/"
@@ -25,7 +28,10 @@
       "surface": 142,
       "rooms": 4,
       "price": 4600,
-      "features": ["Balcon filant", "Meublé"],
+      "features": [
+        "Balcon filant",
+        "Meublé"
+      ],
       "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement haussmannien lumineux",
       "brochureUrl": "https://www.canva.com/"
@@ -40,7 +46,10 @@
       "surface": 185,
       "rooms": 6,
       "price": 895000,
-      "features": ["Jardin arboré", "Garage"],
+      "features": [
+        "Jardin arboré",
+        "Garage"
+      ],
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
       "alt": "Maison familiale avec jardin",
       "brochureUrl": "https://www.canva.com/"
@@ -55,7 +64,10 @@
       "surface": 96,
       "rooms": 3,
       "price": 2250,
-      "features": ["Dernier étage", "Terrasse"],
+      "features": [
+        "Dernier étage",
+        "Terrasse"
+      ],
       "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
       "alt": "Loft design avec terrasse",
       "brochureUrl": "https://www.canva.com/"
@@ -70,7 +82,10 @@
       "surface": 175,
       "rooms": 4,
       "price": 1430000,
-      "features": ["Rooftop 80 m²", "Parking"],
+      "features": [
+        "Rooftop 80 m²",
+        "Parking"
+      ],
       "image": "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1200&q=80",
       "alt": "Penthouse panoramique de luxe",
       "brochureUrl": "https://www.canva.com/"
@@ -85,7 +100,10 @@
       "surface": 39,
       "rooms": 1,
       "price": 1050,
-      "features": ["Rénové", "Services inclus"],
+      "features": [
+        "Rénové",
+        "Services inclus"
+      ],
       "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
       "alt": "Studio rénové moderne",
       "brochureUrl": "https://www.canva.com/"
@@ -100,7 +118,10 @@
       "surface": 98,
       "rooms": 3,
       "price": 1250000,
-      "features": ["Parquet d'origine", "Cheminée"],
+      "features": [
+        "Parquet d'origine",
+        "Cheminée"
+      ],
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement parisien avec parquet",
       "brochureUrl": "https://www.canva.com/"
@@ -115,7 +136,10 @@
       "surface": 75,
       "rooms": 3,
       "price": 1850,
-      "features": ["Cuisine équipée", "Parking"],
+      "features": [
+        "Cuisine équipée",
+        "Parking"
+      ],
       "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement moderne avec cuisine équipée",
       "brochureUrl": "https://www.canva.com/"
@@ -130,7 +154,10 @@
       "surface": 110,
       "rooms": 4,
       "price": 485000,
-      "features": ["Terrasse 25 m²", "Vue mer"],
+      "features": [
+        "Terrasse 25 m²",
+        "Vue mer"
+      ],
       "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement avec terrasse et vue mer",
       "brochureUrl": "https://www.canva.com/"
@@ -145,7 +172,10 @@
       "surface": 95,
       "rooms": 4,
       "price": 2100,
-      "features": ["Balcon", "Cave"],
+      "features": [
+        "Balcon",
+        "Cave"
+      ],
       "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement familial spacieux",
       "brochureUrl": "https://www.canva.com/"
@@ -160,7 +190,10 @@
       "surface": 82,
       "rooms": 3,
       "price": 395000,
-      "features": ["BBC", "Ascenseur"],
+      "features": [
+        "BBC",
+        "Ascenseur"
+      ],
       "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement neuf avec normes BBC",
       "brochureUrl": "https://www.canva.com/"
@@ -175,7 +208,10 @@
       "surface": 68,
       "rooms": 2,
       "price": 1450,
-      "features": ["Climatisation", "Proche commerces"],
+      "features": [
+        "Climatisation",
+        "Proche commerces"
+      ],
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement rénové climatisé",
       "brochureUrl": "https://www.canva.com/"
@@ -190,7 +226,10 @@
       "surface": 125,
       "rooms": 4,
       "price": 1850000,
-      "features": ["Duplex", "Poutres apparentes"],
+      "features": [
+        "Duplex",
+        "Poutres apparentes"
+      ],
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement duplex avec caractère",
       "brochureUrl": "https://www.canva.com/"
@@ -205,7 +244,10 @@
       "surface": 88,
       "rooms": 3,
       "price": 1600,
-      "features": ["Double exposition", "Loggia"],
+      "features": [
+        "Double exposition",
+        "Loggia"
+      ],
       "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement lumineux avec loggia",
       "brochureUrl": "https://www.canva.com/"
@@ -220,7 +262,10 @@
       "surface": 156,
       "rooms": 5,
       "price": 975000,
-      "features": ["Hauts plafonds", "Garage double"],
+      "features": [
+        "Hauts plafonds",
+        "Garage double"
+      ],
       "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement de prestige avec hauts plafonds",
       "brochureUrl": "https://www.canva.com/"
@@ -235,10 +280,32 @@
       "surface": 52,
       "rooms": 2,
       "price": 980,
-      "features": ["Meublé", "Fibre optique"],
+      "features": [
+        "Meublé",
+        "Fibre optique"
+      ],
       "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement cosy meublé",
       "brochureUrl": "https://www.canva.com/"
+    },
+    {
+      "reference": "VT-2001",
+      "transaction": "vente",
+      "propertyType": "Appartement",
+      "title": "Appartement lumineux",
+      "city": "Paris",
+      "district": "Marais",
+      "surface": 90,
+      "rooms": 3,
+      "price": 780000,
+      "features": [
+        "Balcon",
+        "Parking",
+        "Rénové"
+      ],
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Appartement lumineux avec balcon",
+      "brochureUrl": "https://www.canva.com/design/exemple/view"
     }
   ]
 }
