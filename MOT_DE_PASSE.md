@@ -1,5 +1,7 @@
 # 🔑 Récupération du Mot de Passe - Henri Martin Immobilier
 
+> ⚠️ **Note de Sécurité**: Ce système utilise des identifiants stockés côté client pour simplifier l'accès. Pour un site en production accessible publiquement, il est fortement recommandé d'implémenter une authentification côté serveur avec un système de récupération de mot de passe sécurisé (email, tokens, etc.).
+
 ## Mot de passe oublié ?
 
 Pas de panique ! Voici vos identifiants de connexion :

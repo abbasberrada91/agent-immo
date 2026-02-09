@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+<!--
+    ⚠️ SECURITY WARNING:
+    This page contains hardcoded credentials for development/demonstration purposes.
+    For production use with public access, implement proper authentication:
+    - Server-side authentication
+    - Password reset via email with secure tokens
+    - Never store credentials in client-side code or version control
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -309,40 +317,66 @@
     </div>
 
     <script>
+        // ⚠️ SECURITY NOTE:
+        // This page contains hardcoded credentials for demonstration/development purposes.
+        // For production use, implement proper server-side authentication with:
+        // - Password reset via email
+        // - Secure token-based password recovery
+        // - Backend authentication service
+        // - Never store credentials in client-side code
+        
         function copyToClipboard(text, element) {
-            // Utiliser l'API Clipboard moderne
-            navigator.clipboard.writeText(text).then(function() {
-                // Succès
-                showToast('Copié dans le presse-papier !');
-                
-                // Changer le bouton temporairement
-                const btn = element.querySelector('.copy-btn');
-                const originalText = btn.textContent;
-                btn.textContent = '✓ Copié';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
-            }, function() {
-                // Fallback si l'API n'est pas disponible
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    showToast('Copié dans le presse-papier !');
-                } catch (err) {
-                    showToast('Erreur lors de la copie');
-                }
-                
-                document.body.removeChild(textArea);
-            });
+            // Try modern Clipboard API first (requires HTTPS in production)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showSuccess(element);
+                }).catch(function(err) {
+                    // Fallback if clipboard API fails
+                    fallbackCopy(text, element);
+                });
+            } else {
+                // Fallback for HTTP or older browsers
+                fallbackCopy(text, element);
+            }
+        }
+        
+        function fallbackCopy(text, element) {
+            // Using deprecated execCommand as fallback for legacy browser support
+            // This is maintained for compatibility with older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showSuccess(element);
+            } catch (err) {
+                showError();
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        function showSuccess(element) {
+            showToast('Copié dans le presse-papier !');
+            
+            // Update button state
+            const btn = element.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Copié';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function showError() {
+            showToast('⚠️ Erreur lors de la copie. Copiez manuellement.');
         }
 
         function showToast(message) {
