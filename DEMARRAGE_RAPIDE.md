@@ -1,12 +1,21 @@
 # 🚀 Démarrage Rapide
 
+## 🔗 Lien direct pour ajouter vos appartements
+
+**👉 [CLIQUEZ ICI POUR AJOUTER UN APPARTEMENT](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html) 👈**
+
+> ⚠️ Si le domaine personnalisé `www.henrimartinimmobilier.fr` est configuré, utilisez :  
+> [https://www.henrimartinimmobilier.fr/ajouter_appartement.html](https://www.henrimartinimmobilier.fr/ajouter_appartement.html)
+
 ## Pour ajouter vos appartements en 3 étapes
 
-### Méthode 1 : Formulaire HTML (Recommandé pour débuter)
+### Méthode 1 : Formulaire en ligne (Recommandé - le plus simple !)
 
-1. **Ouvrez** `ajouter_appartement.html` dans votre navigateur
+1. **Cliquez** sur ce lien : **[https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)**
 2. **Remplissez** le formulaire avec les informations de votre appartement
 3. **Copiez** le JSON généré et ajoutez-le dans `biens.json`
+
+💡 **Alternative locale :** Ouvrez `ajouter_appartement.html` depuis votre ordinateur si vous préférez
 
 ### Méthode 2 : Script Python (Pour automatiser)
 

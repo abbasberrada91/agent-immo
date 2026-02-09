@@ -1,6 +1,8 @@
 # Henri Martin Immobilier — Mise en ligne
 
-> **🚀 Vous voulez ajouter vos appartements ?** Consultez le [Guide de démarrage rapide](DEMARRAGE_RAPIDE.md) !
+> **🚀 LIEN DIRECT → [AJOUTER UN APPARTEMENT](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)** 
+> 
+> Vous voulez ajouter vos appartements ? Consultez le [Guide de démarrage rapide](DEMARRAGE_RAPIDE.md) !
 
 Oui, ce site peut être mis en ligne facilement car c'est une application statique (HTML/CSS/JS + `biens.json`).
 
@@ -77,8 +79,8 @@ Consultez le **[Guide d'ajout d'appartements](GUIDE_AJOUT_APPARTEMENTS.md)** pou
 
 ### 🚀 Méthodes disponibles
 
-1. **Formulaire HTML** (le plus simple)
-   - Ouvrez `ajouter_appartement.html` dans votre navigateur
+1. **Formulaire en ligne** (le plus simple - recommandé !)
+   - 🔗 **[Cliquez ici pour ajouter un appartement](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)**
    - Remplissez le formulaire
    - Copiez le JSON généré dans `biens.json`
 
