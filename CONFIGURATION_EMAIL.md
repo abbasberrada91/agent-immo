@@ -108,7 +108,7 @@ Si EmailJS n'est pas configuré, le système :
 - ✅ Valide quand même que l'email est enregistré
 - ✅ Affiche un message de simulation
 - ✅ Montre dans la console ce qui serait envoyé
-- ℹ️ Ne envoie pas d'email réel
+- ℹ️ N'envoie pas d'email réel
 
 ### Mode Production (Avec EmailJS configuré)
 
