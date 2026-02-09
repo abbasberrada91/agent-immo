@@ -402,17 +402,17 @@
         </form>
 
         <div class="output" id="output">
-            <h3>✅ JSON généré avec succès !</h3>
+            <h3>✅ Appartement ajouté avec succès !</h3>
             <pre id="jsonOutput"></pre>
             <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
-            <div style="margin-top: 20px; padding: 15px; background: #fff5f5; border-radius: 6px; border-left: 4px solid #fc8181;">
-                <p style="color: #742a2a; font-size: 13px; line-height: 1.6;">
-                    <strong>📝 Prochaines étapes :</strong><br>
-                    1. Copiez le JSON ci-dessus<br>
-                    2. Ouvrez le fichier <code>biens.json</code><br>
-                    3. Ajoutez une virgule après le dernier bien<br>
-                    4. Collez ce JSON<br>
-                    5. Sauvegardez et testez !
+            <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1; margin-left: 10px;">💾 Télécharger biens.json mis à jour</button>
+            <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 6px; border-left: 4px solid #48bb78;">
+                <p style="color: #155724; font-size: 13px; line-height: 1.6;">
+                    <strong>✨ Automatisation réussie !</strong><br>
+                    1. Le nouveau bien a été ajouté automatiquement<br>
+                    2. Cliquez sur "💾 Télécharger biens.json mis à jour" ci-dessus<br>
+                    3. Remplacez l'ancien fichier biens.json par le nouveau<br>
+                    4. Committez et poussez les changements !
                 </p>
             </div>
         </div>
@@ -503,82 +503,147 @@
             });
         }
 
+        let currentBiensData = null;
+        let newApartmentData = null;
+
+        // Load current biens.json on page load
+        async function loadCurrentBiens() {
+            try {
+                const response = await fetch('biens.json');
+                const data = await response.json();
+                currentBiensData = data;
+                console.log('Biens.json chargé avec succès:', data.properties.length, 'propriétés');
+            } catch (error) {
+                console.error('Erreur lors du chargement de biens.json:', error);
+                currentBiensData = { properties: [] };
+            }
+        }
+
+        // Call on page load
+        loadCurrentBiens();
+
+        function downloadUpdatedBiens() {
+            if (!currentBiensData || !newApartmentData) {
+                alert('Erreur: données manquantes');
+                return;
+            }
+
+            // Add the new apartment to the list
+            const updatedData = {
+                properties: [...currentBiensData.properties, newApartmentData]
+            };
+
+            // Create a blob and download link
+            const jsonString = JSON.stringify(updatedData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'biens.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show success message
+            alert('✅ Le fichier biens.json mis à jour a été téléchargé!\n\nRemplacez l\'ancien fichier par celui-ci dans votre projet.');
+        }
+
         document.getElementById('apartmentForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const features = document.getElementById('features').value
-                .split(',')
-                .map(f => f.trim())
-                .filter(f => f.length > 0);
+            // Show loading message
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = '⏳ Traitement en cours...';
+            submitBtn.disabled = true;
 
-            // Handle main photo
-            const mainPhotoFile = document.getElementById('mainPhoto').files[0];
-            let mainPhotoData = null;
-            if (mainPhotoFile) {
-                mainPhotoData = {
-                    filename: mainPhotoFile.name,
-                    type: mainPhotoFile.type,
-                    size: mainPhotoFile.size,
-                    data: await fileToBase64(mainPhotoFile),
-                    caption: document.getElementById('mainPhotoCaption').value.trim()
-                };
-            }
+            try {
+                const features = document.getElementById('features').value
+                    .split(',')
+                    .map(f => f.trim())
+                    .filter(f => f.length > 0);
 
-            // Collect additional photos with captions
-            const additionalPhotos = [];
-            const photoFiles = document.querySelectorAll('.additional-photo-file');
-            const photoCaptions = document.querySelectorAll('.additional-photo-caption');
-            
-            for (let i = 0; i < photoFiles.length; i++) {
-                const file = photoFiles[i].files[0];
-                const caption = photoCaptions[i].value.trim();
-                
-                if (file) {
-                    additionalPhotos.push({
-                        filename: file.name,
-                        type: file.type,
-                        size: file.size,
-                        data: await fileToBase64(file),
-                        caption: caption || ''
-                    });
+                // Handle main photo
+                const mainPhotoFile = document.getElementById('mainPhoto').files[0];
+                let mainPhotoData = null;
+                if (mainPhotoFile) {
+                    mainPhotoData = {
+                        filename: mainPhotoFile.name,
+                        type: mainPhotoFile.type,
+                        size: mainPhotoFile.size,
+                        data: await fileToBase64(mainPhotoFile),
+                        caption: document.getElementById('mainPhotoCaption').value.trim()
+                    };
                 }
+
+                // Collect additional photos with captions
+                const additionalPhotos = [];
+                const photoFiles = document.querySelectorAll('.additional-photo-file');
+                const photoCaptions = document.querySelectorAll('.additional-photo-caption');
+                
+                for (let i = 0; i < photoFiles.length; i++) {
+                    const file = photoFiles[i].files[0];
+                    const caption = photoCaptions[i].value.trim();
+                    
+                    if (file) {
+                        additionalPhotos.push({
+                            filename: file.name,
+                            type: file.type,
+                            size: file.size,
+                            data: await fileToBase64(file),
+                            caption: caption || ''
+                        });
+                    }
+                }
+
+                const apartment = {
+                    reference: document.getElementById('reference').value.trim(),
+                    transaction: document.getElementById('transaction').value,
+                    propertyType: document.getElementById('propertyType').value,
+                    title: document.getElementById('title').value.trim(),
+                    city: document.getElementById('city').value.trim(),
+                    district: document.getElementById('district').value.trim(),
+                    surface: parseInt(document.getElementById('surface').value),
+                    rooms: parseInt(document.getElementById('rooms').value),
+                    bedrooms: parseInt(document.getElementById('bedrooms').value),
+                    bathrooms: parseInt(document.getElementById('bathrooms').value),
+                    price: parseInt(document.getElementById('price').value),
+                    features: features,
+                    mainPhoto: mainPhotoData,
+                    brochureUrl: document.getElementById('brochureUrl').value.trim(),
+                    heatingType: document.getElementById('heatingType').value,
+                    elevator: document.getElementById('elevator').checked,
+                    roommateAllowed: document.getElementById('roommate').checked
+                };
+
+                // Add charges if provided
+                const chargesValue = document.getElementById('charges').value;
+                if (chargesValue && chargesValue.trim() !== '') {
+                    apartment.charges = parseInt(chargesValue);
+                }
+
+                // Add additional photos if any
+                if (additionalPhotos.length > 0) {
+                    apartment.additionalPhotos = additionalPhotos;
+                }
+
+                // Store the new apartment data for download
+                newApartmentData = apartment;
+
+                const jsonOutput = JSON.stringify(apartment, null, 2);
+                document.getElementById('jsonOutput').textContent = jsonOutput;
+                document.getElementById('output').classList.add('show');
+                document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                alert('Erreur lors du traitement: ' + error.message);
+                console.error(error);
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
             }
-
-            const apartment = {
-                reference: document.getElementById('reference').value.trim(),
-                transaction: document.getElementById('transaction').value,
-                propertyType: document.getElementById('propertyType').value,
-                title: document.getElementById('title').value.trim(),
-                city: document.getElementById('city').value.trim(),
-                district: document.getElementById('district').value.trim(),
-                surface: parseInt(document.getElementById('surface').value),
-                rooms: parseInt(document.getElementById('rooms').value),
-                bedrooms: parseInt(document.getElementById('bedrooms').value),
-                bathrooms: parseInt(document.getElementById('bathrooms').value),
-                price: parseInt(document.getElementById('price').value),
-                features: features,
-                mainPhoto: mainPhotoData,
-                brochureUrl: document.getElementById('brochureUrl').value.trim(),
-                heatingType: document.getElementById('heatingType').value,
-                elevator: document.getElementById('elevator').checked,
-                roommateAllowed: document.getElementById('roommate').checked
-            };
-
-            // Add charges if provided
-            const chargesValue = document.getElementById('charges').value;
-            if (chargesValue && chargesValue.trim() !== '') {
-                apartment.charges = parseInt(chargesValue);
-            }
-
-            // Add additional photos if any
-            if (additionalPhotos.length > 0) {
-                apartment.additionalPhotos = additionalPhotos;
-            }
-
-            const jsonOutput = JSON.stringify(apartment, null, 2);
-            document.getElementById('jsonOutput').textContent = jsonOutput;
-            document.getElementById('output').classList.add('show');
-            document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
         });
 
         function copyToClipboard() {
