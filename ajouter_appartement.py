@@ -143,100 +143,104 @@ def confirmer(question: str) -> bool:
 
 def main():
     """Fonction principale"""
-    afficher_banniere()
+    continuer = True
     
-    # Charger les biens existants
-    data = charger_biens()
-    biens = data.get('properties', [])
-    print(f"📊 Nombre de biens actuels : {len(biens)}\n")
-    
-    # Collecter les informations
-    print("📝 Veuillez renseigner les informations de l'appartement\n")
-    
-    # Transaction
-    transaction = demander_choix(
-        "Type de transaction :",
-        ["vente", "location"]
-    )
-    
-    # Référence
-    ref_auto = generer_reference(transaction, biens)
-    print(f"\n💡 Suggestion de référence : {ref_auto}")
-    utiliser_auto = confirmer("Utiliser cette référence ?")
-    
-    if utiliser_auto:
-        reference = ref_auto
-    else:
-        reference = demander_texte("Référence personnalisée")
-    
-    # Type de bien
-    propertyType = demander_choix(
-        "\nType de bien :",
-        ["Appartement", "Maison", "Villa", "Loft", "Studio", "Penthouse"]
-    )
-    
-    # Informations de base
-    print("\n📍 Informations de base")
-    title = demander_texte("Titre de l'annonce")
-    city = demander_texte("Ville")
-    district = demander_texte("Quartier/Arrondissement")
-    
-    # Caractéristiques
-    print("\n📐 Caractéristiques")
-    surface = demander_nombre("Surface (m²)")
-    rooms = demander_nombre("Nombre de pièces")
-    
-    # Prix
-    print("\n💰 Prix")
-    if transaction == "vente":
-        price = demander_nombre("Prix de vente (€)")
-    else:
-        price = demander_nombre("Loyer mensuel (€)")
-    
-    # Features
-    print("\n✨ Caractéristiques principales")
-    print("Exemples : Balcon, Terrasse, Parking, Vue mer, Rénové, Meublé, etc.")
-    features = demander_liste("Caractéristiques")
-    
-    # Images et Canva
-    print("\n🖼️  Images et documentation")
-    image = demander_texte("URL de l'image principale")
-    alt = demander_texte("Description de l'image", f"{title} à {city}")
-    brochureUrl = demander_texte("URL de la fiche Canva")
-    
-    # Créer l'objet appartement
-    appartement = {
-        "reference": reference,
-        "transaction": transaction,
-        "propertyType": propertyType,
-        "title": title,
-        "city": city,
-        "district": district,
-        "surface": surface,
-        "rooms": rooms,
-        "price": price,
-        "features": features,
-        "image": image,
-        "alt": alt,
-        "brochureUrl": brochureUrl
-    }
-    
-    # Afficher le récapitulatif
-    afficher_recapitulatif(appartement)
-    
-    # Confirmer l'ajout
-    if confirmer("\n✅ Ajouter cet appartement ?"):
-        biens.append(appartement)
-        data['properties'] = biens
-        sauvegarder_biens(data)
-        print(f"\n🎉 Appartement ajouté avec succès ! Total : {len(biens)} biens")
+    while continuer:
+        afficher_banniere()
         
-        # Proposer d'en ajouter un autre
-        if confirmer("\n➕ Voulez-vous ajouter un autre appartement ?"):
-            print("\n")
-            main()
-    else:
-        print("\n❌ Ajout annulé")
+        # Charger les biens existants
+        data = charger_biens()
+        biens = data.get('properties', [])
+        print(f"📊 Nombre de biens actuels : {len(biens)}\n")
+        
+        # Collecter les informations
+        print("📝 Veuillez renseigner les informations de l'appartement\n")
+        
+        # Transaction
+        transaction = demander_choix(
+            "Type de transaction :",
+            ["vente", "location"]
+        )
+        
+        # Référence
+        ref_auto = generer_reference(transaction, biens)
+        print(f"\n💡 Suggestion de référence : {ref_auto}")
+        utiliser_auto = confirmer("Utiliser cette référence ?")
+        
+        if utiliser_auto:
+            reference = ref_auto
+        else:
+            reference = demander_texte("Référence personnalisée")
+        
+        # Type de bien
+        propertyType = demander_choix(
+            "\nType de bien :",
+            ["Appartement", "Maison", "Villa", "Loft", "Studio", "Penthouse"]
+        )
+        
+        # Informations de base
+        print("\n📍 Informations de base")
+        title = demander_texte("Titre de l'annonce")
+        city = demander_texte("Ville")
+        district = demander_texte("Quartier/Arrondissement")
+        
+        # Caractéristiques
+        print("\n📐 Caractéristiques")
+        surface = demander_nombre("Surface (m²)")
+        rooms = demander_nombre("Nombre de pièces")
+        
+        # Prix
+        print("\n💰 Prix")
+        if transaction == "vente":
+            price = demander_nombre("Prix de vente (€)")
+        else:
+            price = demander_nombre("Loyer mensuel (€)")
+        
+        # Features
+        print("\n✨ Caractéristiques principales")
+        print("Exemples : Balcon, Terrasse, Parking, Vue mer, Rénové, Meublé, etc.")
+        features = demander_liste("Caractéristiques")
+        
+        # Images et Canva
+        print("\n🖼️  Images et documentation")
+        image = demander_texte("URL de l'image principale")
+        alt = demander_texte("Description de l'image", f"{title} à {city}")
+        brochureUrl = demander_texte("URL de la fiche Canva")
+        
+        # Créer l'objet appartement
+        appartement = {
+            "reference": reference,
+            "transaction": transaction,
+            "propertyType": propertyType,
+            "title": title,
+            "city": city,
+            "district": district,
+            "surface": surface,
+            "rooms": rooms,
+            "price": price,
+            "features": features,
+            "image": image,
+            "alt": alt,
+            "brochureUrl": brochureUrl
+        }
+        
+        # Afficher le récapitulatif
+        afficher_recapitulatif(appartement)
+        
+        # Confirmer l'ajout
+        if confirmer("\n✅ Ajouter cet appartement ?"):
+            biens.append(appartement)
+            data['properties'] = biens
+            sauvegarder_biens(data)
+            print(f"\n🎉 Appartement ajouté avec succès ! Total : {len(biens)} biens")
+            
+            # Proposer d'en ajouter un autre
+            continuer = confirmer("\n➕ Voulez-vous ajouter un autre appartement ?")
+            if continuer:
+                print("\n")
+        else:
+            print("\n❌ Ajout annulé")
+            continuer = False
 
 if __name__ == "__main__":
     try:
