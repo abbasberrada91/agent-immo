@@ -1,0 +1,4 @@
+reference,transaction,propertyType,title,city,district,surface,rooms,price,features,image,alt,brochureUrl
+VT-1001,vente,Appartement,Appartement lumineux,Paris,Marais,95,3,850000,"Balcon, Parking, Rénové",https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80,Appartement lumineux avec balcon,https://www.canva.com/design/VOTRE-ID/view
+LC-2001,location,Appartement,Appartement moderne,Lyon,Confluence,75,2,1800,"Meublé, Terrasse, Vue",https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80,Appartement moderne meublé,https://www.canva.com/design/VOTRE-ID/view
+VT-1002,vente,Appartement,Duplex de charme,Bordeaux,Centre,120,4,695000,"Duplex, Jardin, Cave",https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80,Duplex de charme avec jardin,https://www.canva.com/design/VOTRE-ID/view

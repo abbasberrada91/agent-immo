@@ -1,0 +1,57 @@
+═══════════════════════════════════════════════════════════════════
+        🚨 VOS CHANGEMENTS NE SONT PAS ENCORE SUR LE SITE ! 🚨
+═══════════════════════════════════════════════════════════════════
+
+POURQUOI ?
+----------
+Votre code est sur la branche "copilot/add-apartment-listing-feature"
+Le site se déploie uniquement depuis "work", "main", ou "master"
+→ Résultat : Pas de déploiement automatique
+
+
+SOLUTION EN 4 ÉTAPES SIMPLES
+-----------------------------
+
+1️⃣  Allez sur GitHub
+    https://github.com/abbasberrada91/agent-immo
+
+
+2️⃣  Créez une Pull Request
+    • Cliquez "Pull requests"
+    • Cliquez "New pull request"
+    • Sélectionnez :
+      Base : work
+      Compare : copilot/add-apartment-listing-feature
+    • "Create pull request"
+
+
+3️⃣  Mergez la Pull Request
+    • Cliquez "Merge pull request"
+    • Confirmez
+
+
+4️⃣  Attendez 1-2 minutes
+    Le déploiement est automatique !
+
+
+VÉRIFIEZ LE RÉSULTAT
+---------------------
+
+Site : https://abbasberrada91.github.io/agent-immo/
+
+Vous devriez voir :
+✓ Bouton "🔐 Se connecter" en haut à droite
+✓ Page de connexion quand vous cliquez dessus
+✓ Système d'authentification fonctionnel
+
+
+TESTEZ LA CONNEXION
+--------------------
+
+Login    : abbasberrada
+Password : Abbasberr1991
+
+
+═══════════════════════════════════════════════════════════════════
+        BESOIN D'AIDE ? Consultez DEPLOIEMENT.md
+═══════════════════════════════════════════════════════════════════
