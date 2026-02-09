@@ -1,5 +1,7 @@
 # Henri Martin Immobilier — Mise en ligne
 
+> **🚀 Vous voulez ajouter vos appartements ?** Consultez le [Guide de démarrage rapide](DEMARRAGE_RAPIDE.md) !
+
 Oui, ce site peut être mis en ligne facilement car c'est une application statique (HTML/CSS/JS + `biens.json`).
 
 ## Option 1 (recommandée) : GitHub Pages automatique
