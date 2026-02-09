@@ -1,63 +1,87 @@
 # 🚀 ACCÈS RAPIDE AU FORMULAIRE
 
-## 🔗 LIEN DIRECT
+## ⚠️ IMPORTANT : Le lien en ligne ne fonctionne pas encore
 
-**Cliquez ici pour ajouter un appartement :**
-
-### 👉 [OUVRIR LE FORMULAIRE](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html) 👈
+**Pourquoi ?** Le site n'est pas déployé car nous sommes sur une branche de travail (`copilot/add-apartment-listing-feature`). GitHub Pages ne déploie que les branches `main`, `work`, ou `master`.
 
 ---
 
-## 📱 Autres méthodes d'accès
+## ✅ SOLUTION IMMÉDIATE (FONCTIONNE MAINTENANT)
 
-### Option 1 : Lien GitHub Pages (principal)
-```
-https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html
-```
+### Méthode 1 : Fichier START.html (RECOMMANDÉ)
 
-### Option 2 : Domaine personnalisé (si configuré)
+**Double-cliquez sur ce fichier :**
 ```
-https://www.henrimartinimmobilier.fr/ajouter_appartement.html
+START.html
 ```
 
-### Option 3 : Fichier local
-1. Double-cliquez sur `ajouter_appartement.html` depuis votre ordinateur
-2. Le formulaire s'ouvre dans votre navigateur
+Cela ouvrira une page d'accueil élégante qui vous guidera vers le formulaire.
 
-### Option 4 : Script Python
+### Méthode 2 : Fichier direct
+
+**Double-cliquez directement sur :**
+```
+ajouter_appartement.html
+```
+
+### Méthode 3 : Script Python
+
 ```bash
 python3 ajouter_appartement.py
 ```
 
 ---
 
-## ✏️ Utilisation en 5 étapes
+## 🌐 Lien en ligne (disponible après déploiement)
 
-1. **Ouvrez** le formulaire (lien ci-dessus)
-2. **Remplissez** les informations de votre appartement
-3. **Cliquez** sur "✨ Générer le JSON"
-4. **Copiez** le JSON (bouton "📋 Copier le JSON")
-5. **Ajoutez** le JSON dans `biens.json` et poussez sur GitHub
+Une fois cette branche mergée sur `main` ou `work`, le formulaire sera accessible à :
 
----
+**[https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)**
 
-## 📖 Besoin d'aide ?
+OU avec le domaine personnalisé (si configuré) :
 
-- **Guide pas à pas** : [UTILISATION_FORMULAIRE.md](UTILISATION_FORMULAIRE.md)
-- **Démarrage rapide** : [DEMARRAGE_RAPIDE.md](DEMARRAGE_RAPIDE.md)
-- **Guide complet** : [GUIDE_AJOUT_APPARTEMENTS.md](GUIDE_AJOUT_APPARTEMENTS.md)
-- **Tous les liens** : [LIENS_RAPIDES.md](LIENS_RAPIDES.md)
+**[https://www.henrimartinimmobilier.fr/ajouter_appartement.html](https://www.henrimartinimmobilier.fr/ajouter_appartement.html)**
 
 ---
 
-## ⚠️ Le lien ne fonctionne pas ?
+## 📱 Guide d'utilisation rapide
 
-Le lien fonctionnera après le déploiement sur GitHub Pages (merge sur `main` ou `work`).
+### Avec START.html (nouvelle méthode)
 
-**En attendant, utilisez :**
-- La méthode locale (double-clic sur `ajouter_appartement.html`)
-- Le script Python (`python3 ajouter_appartement.py`)
+1. **Double-cliquez** sur `START.html`
+2. **Cliquez** sur "✨ Ouvrir le formulaire"
+3. **Remplissez** les informations
+4. **Cliquez** sur "Générer le JSON"
+5. **Copiez** le JSON
+6. **Ouvrez** `biens.json`
+7. **Ajoutez** le JSON copié
+8. **Sauvegardez** et committez
 
 ---
 
-**🎉 Simple et efficace !**
+## 📖 Documentation
+
+- **[UTILISATION_FORMULAIRE.md](UTILISATION_FORMULAIRE.md)** - Guide pas à pas
+- **[DEMARRAGE_RAPIDE.md](DEMARRAGE_RAPIDE.md)** - Quick start
+- **[LIENS_RAPIDES.md](LIENS_RAPIDES.md)** - Tous les liens
+- **[GUIDE_AJOUT_APPARTEMENTS.md](GUIDE_AJOUT_APPARTEMENTS.md)** - Guide complet
+
+---
+
+## ❓ Questions fréquentes
+
+### Pourquoi le lien en ligne ne fonctionne pas ?
+
+Le workflow GitHub Pages ne se déclenche que sur les branches `main`, `work`, ou `master`. Vous êtes actuellement sur une branche de développement.
+
+### La version locale fonctionne-t-elle pareil ?
+
+Oui, exactement pareil ! Vous pouvez même l'utiliser sans connexion internet.
+
+### Quand le lien en ligne sera-t-il actif ?
+
+Dès que cette branche sera mergée sur `main` ou `work`, GitHub Pages déploiera automatiquement le site en 1-2 minutes.
+
+---
+
+**🎉 Utilisez START.html dès maintenant ! Ça fonctionne parfaitement !**
