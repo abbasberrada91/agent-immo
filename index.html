@@ -26,7 +26,10 @@
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
         </div>
-        <a class="partner-btn" href="#contact">Accès partenaire</a>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
+          <a class="partner-btn" href="#contact">Accès partenaire</a>
+        </div>
       </nav>
 
       <div class="hero-content container">
@@ -153,6 +156,19 @@
       <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
     </footer>
 
+    <script src="auth.js"></script>
     <script src="script.js"></script>
+    <script>
+      // Vérifier si l'utilisateur est connecté et mettre à jour le bouton
+      window.addEventListener('DOMContentLoaded', function() {
+        const loginBtn = document.getElementById('loginBtn');
+        if (isLoggedIn()) {
+          const username = getUsername();
+          loginBtn.innerHTML = '✨ Ajouter un bien';
+          loginBtn.href = 'START.html';
+          loginBtn.title = 'Connecté en tant que ' + username;
+        }
+      });
+    </script>
   </body>
 </html>

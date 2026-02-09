@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démarrage - Ajouter un appartement</title>
+    <script src="auth.js"></script>
+    <script>
+        // Vérifier l'authentification au chargement de la page
+        checkAuthentication();
+    </script>
     <style>
         * {
             margin: 0;
@@ -154,6 +159,11 @@
     </div>
 
     <script>
+        // Afficher les infos utilisateur
+        window.addEventListener('DOMContentLoaded', function() {
+            displayUserInfo();
+        });
+
         function openForm() {
             // Afficher le loading
             document.getElementById('loading').style.display = 'block';

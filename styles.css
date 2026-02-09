@@ -410,3 +410,24 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Login Button */
+.login-btn {
+  color: var(--white);
+  text-decoration: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
