@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un appartement - Henri Martin Immobilier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        label .required {
+            color: #e53e3e;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .output {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 6px;
+            border: 2px solid #e2e8f0;
+            display: none;
+        }
+
+        .output.show {
+            display: block;
+        }
+
+        .output h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .output pre {
+            background: #2d3748;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            width: auto;
+            padding: 10px 20px;
+            background: #48bb78;
+        }
+
+        .copy-btn:hover {
+            background: #38a169;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .info-box p {
+            color: #2c5282;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Ajouter un appartement</h1>
+        <p class="subtitle">Remplissez le formulaire pour générer le JSON à ajouter dans biens.json</p>
+
+        <div class="info-box">
+            <p><strong>💡 Astuce :</strong> Créez d'abord votre fiche Canva, publiez-la, puis copiez l'URL dans le champ "URL Fiche Canva" ci-dessous.</p>
+        </div>
+
+        <form id="apartmentForm">
+            <div class="row">
+                <div class="form-group">
+                    <label>Référence <span class="required">*</span></label>
+                    <input type="text" id="reference" placeholder="VT-1001 ou LC-2001" required>
+                    <div class="help-text">VT- pour vente, LC- pour location</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Transaction <span class="required">*</span></label>
+                    <select id="transaction" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option value="vente">Vente</option>
+                        <option value="location">Location</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Type de bien <span class="required">*</span></label>
+                    <select id="propertyType" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option value="Appartement">Appartement</option>
+                        <option value="Maison">Maison</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Loft">Loft</option>
+                        <option value="Studio">Studio</option>
+                        <option value="Penthouse">Penthouse</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Titre <span class="required">*</span></label>
+                    <input type="text" id="title" placeholder="Appartement moderne" required>
+                    <div class="help-text">Court et descriptif</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Ville <span class="required">*</span></label>
+                    <input type="text" id="city" placeholder="Paris" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quartier <span class="required">*</span></label>
+                    <input type="text" id="district" placeholder="16e, Marais, Centre..." required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Surface (m²) <span class="required">*</span></label>
+                    <input type="number" id="surface" placeholder="85" required min="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre de pièces <span class="required">*</span></label>
+                    <input type="number" id="rooms" placeholder="3" required min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Prix (€) <span class="required">*</span></label>
+                <input type="number" id="price" placeholder="850000 (vente) ou 2500 (location/mois)" required min="1">
+                <div class="help-text">Prix total pour vente, loyer mensuel pour location</div>
+            </div>
+
+            <div class="form-group">
+                <label>Caractéristiques <span class="required">*</span></label>
+                <input type="text" id="features" placeholder="Balcon, Parking, Rénové" required>
+                <div class="help-text">Séparez par des virgules (2-3 caractéristiques max)</div>
+            </div>
+
+            <div class="form-group">
+                <label>URL de l'image <span class="required">*</span></label>
+                <input type="url" id="image" placeholder="https://images.unsplash.com/photo-..." required>
+                <div class="help-text">URL d'une image Unsplash, Canva, ou votre hébergeur</div>
+            </div>
+
+            <div class="form-group">
+                <label>Description de l'image <span class="required">*</span></label>
+                <input type="text" id="alt" placeholder="Appartement moderne avec balcon" required>
+                <div class="help-text">Décrivez l'image pour l'accessibilité</div>
+            </div>
+
+            <div class="form-group">
+                <label>URL Fiche Canva <span class="required">*</span></label>
+                <input type="url" id="brochureUrl" placeholder="https://www.canva.com/design/..." required>
+                <div class="help-text">URL publique de votre fiche Canva publiée</div>
+            </div>
+
+            <button type="submit">✨ Générer le JSON</button>
+        </form>
+
+        <div class="output" id="output">
+            <h3>✅ JSON généré avec succès !</h3>
+            <pre id="jsonOutput"></pre>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
+            <div style="margin-top: 20px; padding: 15px; background: #fff5f5; border-radius: 6px; border-left: 4px solid #fc8181;">
+                <p style="color: #742a2a; font-size: 13px; line-height: 1.6;">
+                    <strong>📝 Prochaines étapes :</strong><br>
+                    1. Copiez le JSON ci-dessus<br>
+                    2. Ouvrez le fichier <code>biens.json</code><br>
+                    3. Ajoutez une virgule après le dernier bien<br>
+                    4. Collez ce JSON<br>
+                    5. Sauvegardez et testez !
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('apartmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const features = document.getElementById('features').value
+                .split(',')
+                .map(f => f.trim())
+                .filter(f => f.length > 0);
+
+            const apartment = {
+                reference: document.getElementById('reference').value.trim(),
+                transaction: document.getElementById('transaction').value,
+                propertyType: document.getElementById('propertyType').value,
+                title: document.getElementById('title').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                district: document.getElementById('district').value.trim(),
+                surface: parseInt(document.getElementById('surface').value),
+                rooms: parseInt(document.getElementById('rooms').value),
+                price: parseInt(document.getElementById('price').value),
+                features: features,
+                image: document.getElementById('image').value.trim(),
+                alt: document.getElementById('alt').value.trim(),
+                brochureUrl: document.getElementById('brochureUrl').value.trim()
+            };
+
+            const jsonOutput = JSON.stringify(apartment, null, 2);
+            document.getElementById('jsonOutput').textContent = jsonOutput;
+            document.getElementById('output').classList.add('show');
+            document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function copyToClipboard() {
+            const jsonText = document.getElementById('jsonOutput').textContent;
+            navigator.clipboard.writeText(jsonText).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copié !';
+                btn.style.background = '#38a169';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.style.background = '#48bb78';
+                }, 2000);
+            }, function(err) {
+                alert('Erreur lors de la copie : ' + err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -66,7 +66,51 @@ python3 -m http.server 4173
 ```
 Puis ouvrir `http://localhost:4173`.
 
-## Connexion Canva (solution 2)
+## 🏠 Ajouter vos appartements avec fiches Canva
+
+Vous voulez alimenter le site avec vos propres appartements ? C'est facile !
+
+### 📖 Guide complet
+Consultez le **[Guide d'ajout d'appartements](GUIDE_AJOUT_APPARTEMENTS.md)** pour toutes les instructions détaillées.
+
+### 🚀 Méthodes disponibles
+
+1. **Formulaire HTML** (le plus simple)
+   - Ouvrez `ajouter_appartement.html` dans votre navigateur
+   - Remplissez le formulaire
+   - Copiez le JSON généré dans `biens.json`
+
+2. **Script Python** (automatisé)
+   ```bash
+   python3 ajouter_appartement.py
+   ```
+   Le script vous guide pas à pas et met à jour automatiquement `biens.json`.
+
+3. **Canva Bulk Create** (pour plusieurs biens)
+   - Utilisez `template_canva_bulk_create.csv` comme modèle
+   - Créez vos fiches en masse avec Canva Bulk Create
+   - Récupérez les URLs et ajoutez les biens
+
+### 📋 Format d'un bien
 
 Chaque bien contient un champ `brochureUrl` dans `biens.json`.
-Il suffit d'y placer les URLs de vos fiches Canva publiées pour que le bouton **Dossier complet Canva** pointe vers la bonne fiche.
+Il suffit d'y placer l'URL de votre fiche Canva publiée pour que le bouton **Dossier complet Canva** pointe vers la bonne fiche.
+
+Exemple :
+```json
+{
+  "reference": "VT-1001",
+  "transaction": "vente",
+  "propertyType": "Appartement",
+  "title": "Appartement moderne",
+  "city": "Paris",
+  "district": "15e",
+  "surface": 85,
+  "rooms": 3,
+  "price": 650000,
+  "features": ["Balcon", "Parking"],
+  "image": "https://images.unsplash.com/photo-...",
+  "alt": "Description de l'image",
+  "brochureUrl": "https://www.canva.com/design/VOTRE-ID/view"
+}
+```
