@@ -488,46 +488,135 @@
 
     <!-- Edit Modal -->
     <div class="modal" id="editModal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px;">
             <div class="modal-header">
                 <h2 class="modal-title">Modifier le bien</h2>
             </div>
             <form id="editForm">
                 <input type="hidden" id="editReference">
                 
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Transaction <span style="color: #e53e3e;">*</span></label>
+                        <select id="editTransaction" required>
+                            <option value="">-- Sélectionner --</option>
+                            <option value="vente">Vente</option>
+                            <option value="location">Location</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type de bien <span style="color: #e53e3e;">*</span></label>
+                        <select id="editPropertyType" required>
+                            <option value="">-- Sélectionner --</option>
+                            <option value="Appartement">Appartement</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Loft">Loft</option>
+                            <option value="Studio">Studio</option>
+                            <option value="Penthouse">Penthouse</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label>Titre</label>
+                    <label>Titre <span style="color: #e53e3e;">*</span></label>
                     <input type="text" id="editTitle" required>
                 </div>
 
-                <div class="form-group">
-                    <label>Ville</label>
-                    <input type="text" id="editCity" required>
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Ville <span style="color: #e53e3e;">*</span></label>
+                        <input type="text" id="editCity" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quartier <span style="color: #e53e3e;">*</span></label>
+                        <input type="text" id="editDistrict" required>
+                    </div>
+                </div>
+
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Surface (m²) <span style="color: #e53e3e;">*</span></label>
+                        <input type="number" id="editSurface" required min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre de pièces <span style="color: #e53e3e;">*</span></label>
+                        <input type="number" id="editRooms" required min="1">
+                    </div>
+                </div>
+
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Nombre de chambres <span style="color: #e53e3e;">*</span></label>
+                        <input type="number" id="editBedrooms" required min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre de salles d'eau <span style="color: #e53e3e;">*</span></label>
+                        <input type="number" id="editBathrooms" required min="1">
+                    </div>
+                </div>
+
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Nombre de WC</label>
+                        <input type="number" id="editWc" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact associé</label>
+                        <input type="text" id="editContact">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Quartier</label>
-                    <input type="text" id="editDistrict" required>
+                    <label>Prix (€) <span style="color: #e53e3e;">*</span></label>
+                    <input type="number" id="editPrice" required min="1">
                 </div>
 
                 <div class="form-group">
-                    <label>Prix (€)</label>
-                    <input type="number" id="editPrice" required>
+                    <label>Montant des charges (€/mois)</label>
+                    <input type="number" id="editCharges" min="0">
                 </div>
 
                 <div class="form-group">
-                    <label>Surface (m²)</label>
-                    <input type="number" id="editSurface" required>
+                    <label>Caractéristiques <span style="color: #e53e3e;">*</span></label>
+                    <textarea id="editFeatures" required></textarea>
+                    <div style="font-size: 12px; color: #718096; margin-top: 4px;">Séparez par des virgules</div>
+                </div>
+
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Type de chauffage <span style="color: #e53e3e;">*</span></label>
+                        <select id="editHeatingType" required>
+                            <option value="">-- Sélectionner --</option>
+                            <option value="collectif">Collectif</option>
+                            <option value="individuel">Individuel</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Équipements</label>
+                        <div style="display: flex; gap: 20px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" id="editElevator" style="width: auto; margin-right: 8px;">
+                                Ascenseur
+                            </label>
+                            <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" id="editRoommate" style="width: auto; margin-right: 8px;">
+                                Colocation autorisée
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Nombre de pièces</label>
-                    <input type="number" id="editRooms" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Caractéristiques (séparées par des virgules)</label>
-                    <textarea id="editFeatures"></textarea>
+                    <label>URL Fiche Canva</label>
+                    <input type="url" id="editBrochureUrl">
+                    <div style="font-size: 12px; color: #718096; margin-top: 4px;">URL publique de votre fiche Canva (optionnel)</div>
                 </div>
 
                 <div class="modal-actions">
@@ -749,14 +838,42 @@
             const property = allProperties.find(p => p.reference === reference);
             if (!property) return;
 
+            // Check if token is configured before opening edit modal
+            const token = localStorage.getItem('githubToken');
+            if (!token) {
+                const proceed = confirm(
+                    '⚠️ Token GitHub non configuré\n\n' +
+                    'Pour modifier un bien, vous devez d\'abord configurer votre token GitHub.\n\n' +
+                    'Cliquez sur "OK" pour configurer le token maintenant,\n' +
+                    'ou "Annuler" pour retourner à la liste.'
+                );
+                
+                if (proceed) {
+                    configureToken();
+                }
+                return;
+            }
+
+            // Populate all fields
             document.getElementById('editReference').value = property.reference;
+            document.getElementById('editTransaction').value = property.transaction || '';
+            document.getElementById('editPropertyType').value = property.propertyType || '';
             document.getElementById('editTitle').value = property.title;
             document.getElementById('editCity').value = property.city;
             document.getElementById('editDistrict').value = property.district;
-            document.getElementById('editPrice').value = property.price;
             document.getElementById('editSurface').value = property.surface;
             document.getElementById('editRooms').value = property.rooms;
+            document.getElementById('editBedrooms').value = property.bedrooms !== undefined ? property.bedrooms : 1;
+            document.getElementById('editBathrooms').value = property.bathrooms !== undefined ? property.bathrooms : 1;
+            document.getElementById('editWc').value = property.wc || '';
+            document.getElementById('editContact').value = property.contact || '';
+            document.getElementById('editPrice').value = property.price;
+            document.getElementById('editCharges').value = property.charges || '';
             document.getElementById('editFeatures').value = property.features ? property.features.join(', ') : '';
+            document.getElementById('editHeatingType').value = property.heatingType || 'collectif';
+            document.getElementById('editElevator').checked = property.elevator || false;
+            document.getElementById('editRoommate').checked = property.roommateAllowed || false;
+            document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
 
             document.getElementById('editModal').classList.add('show');
         }
@@ -770,14 +887,42 @@
 
             const reference = document.getElementById('editReference').value;
             const updates = {
+                transaction: document.getElementById('editTransaction').value,
+                propertyType: document.getElementById('editPropertyType').value,
                 title: document.getElementById('editTitle').value,
                 city: document.getElementById('editCity').value,
                 district: document.getElementById('editDistrict').value,
-                price: parseInt(document.getElementById('editPrice').value),
                 surface: parseInt(document.getElementById('editSurface').value),
                 rooms: parseInt(document.getElementById('editRooms').value),
-                features: document.getElementById('editFeatures').value.split(',').map(f => f.trim()).filter(f => f)
+                bedrooms: parseInt(document.getElementById('editBedrooms').value),
+                bathrooms: parseInt(document.getElementById('editBathrooms').value),
+                price: parseInt(document.getElementById('editPrice').value),
+                features: document.getElementById('editFeatures').value.split(',').map(f => f.trim()).filter(f => f),
+                heatingType: document.getElementById('editHeatingType').value,
+                elevator: document.getElementById('editElevator').checked,
+                roommateAllowed: document.getElementById('editRoommate').checked
             };
+
+            // Add optional fields only if they have values
+            const wcValue = document.getElementById('editWc').value;
+            if (wcValue && wcValue.trim() !== '') {
+                updates.wc = parseInt(wcValue);
+            }
+
+            const contactValue = document.getElementById('editContact').value;
+            if (contactValue && contactValue.trim() !== '') {
+                updates.contact = contactValue.trim();
+            }
+
+            const chargesValue = document.getElementById('editCharges').value;
+            if (chargesValue && chargesValue.trim() !== '') {
+                updates.charges = parseInt(chargesValue);
+            }
+
+            const brochureUrlValue = document.getElementById('editBrochureUrl').value;
+            if (brochureUrlValue && brochureUrlValue.trim() !== '') {
+                updates.brochureUrl = brochureUrlValue.trim();
+            }
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
