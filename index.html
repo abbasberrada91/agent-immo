@@ -29,6 +29,7 @@
         <div style="display: flex; gap: 10px; align-items: center;">
           <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
           <a class="partner-btn" href="#contact">Accès partenaire</a>
+          <a class="partner-btn" href="admin_properties.html" id="adminBtn" style="display: none; background: #8b5cf6;">📊 Admin</a>
         </div>
       </nav>
 
@@ -162,11 +163,16 @@
       // Vérifier si l'utilisateur est connecté et mettre à jour le bouton
       window.addEventListener('DOMContentLoaded', function() {
         const loginBtn = document.getElementById('loginBtn');
+        const adminBtn = document.getElementById('adminBtn');
         if (isLoggedIn()) {
           const username = getUsername();
           loginBtn.innerHTML = '✨ Ajouter un bien';
           loginBtn.href = 'START.html';
           loginBtn.title = 'Connecté en tant que ' + username;
+          // Show admin button
+          if (adminBtn) {
+            adminBtn.style.display = 'inline-block';
+          }
         }
       });
     </script>
