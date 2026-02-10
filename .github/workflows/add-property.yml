@@ -1,0 +1,61 @@
+name: Add Property to biens.json
+
+on:
+  workflow_dispatch:
+    inputs:
+      property_json:
+        description: 'Property data in JSON format'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  add-property:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Add property to biens.json
+        run: |
+          python3 << 'EOF'
+          import json
+          import sys
+          import os
+          
+          # Load current biens.json
+          with open('biens.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          
+          # Parse new property from input
+          new_property_json = r'''${{ github.event.inputs.property_json }}'''
+          new_property = json.loads(new_property_json)
+          
+          # Add to properties list
+          data['properties'].append(new_property)
+          
+          # Save updated biens.json
+          with open('biens.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, indent=2, ensure_ascii=False)
+          
+          print(f"✅ Property {new_property.get('reference', 'N/A')} added successfully!")
+          print(f"Total properties: {len(data['properties'])}")
+          EOF
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add biens.json
+          git commit -m "Add new property via workflow"
+          git push

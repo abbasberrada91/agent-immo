@@ -250,7 +250,7 @@
         <p class="subtitle">Remplissez le formulaire pour générer le JSON à ajouter dans biens.json</p>
 
         <div class="info-box">
-            <p><strong>💡 Astuce :</strong> Créez d'abord votre fiche Canva, publiez-la, puis copiez l'URL dans le champ "URL Fiche Canva" ci-dessous.</p>
+            <p><strong>💡 Astuce :</strong> Le lien Canva est désormais optionnel ! Vous pouvez ajouter vos biens sans créer de fiche Canva au préalable. Si vous en créez une plus tard, ajoutez simplement l'URL dans le champ prévu à cet effet.</p>
         </div>
 
         <form id="apartmentForm">
@@ -407,26 +407,33 @@
             </div>
 
             <div class="form-group">
-                <label>URL Fiche Canva <span class="required">*</span></label>
-                <input type="url" id="brochureUrl" placeholder="https://www.canva.com/design/..." required>
-                <div class="help-text">URL publique de votre fiche Canva publiée</div>
+                <label>URL Fiche Canva</label>
+                <input type="url" id="brochureUrl" placeholder="https://www.canva.com/design/...">
+                <div class="help-text">URL publique de votre fiche Canva publiée (optionnel)</div>
             </div>
 
             <button type="submit">✨ Générer le JSON</button>
         </form>
 
         <div class="output" id="output">
-            <h3>✅ Appartement ajouté avec succès !</h3>
+            <h3>✅ Appartement créé avec succès !</h3>
             <pre id="jsonOutput"></pre>
             <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
             <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1; margin-left: 10px;">💾 Télécharger biens.json mis à jour</button>
-            <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 6px; border-left: 4px solid #48bb78;">
-                <p style="color: #155724; font-size: 13px; line-height: 1.6;">
-                    <strong>✨ Automatisation réussie !</strong><br>
-                    1. Le nouveau bien a été ajouté automatiquement<br>
-                    2. Cliquez sur "💾 Télécharger biens.json mis à jour" ci-dessus<br>
-                    3. Remplacez l'ancien fichier biens.json par le nouveau<br>
-                    4. Committez et poussez les changements !
+            <button class="copy-btn" onclick="triggerGitHubWorkflow()" style="background: #10b981; margin-left: 10px;" id="autoAddBtn">🚀 Ajouter automatiquement (GitHub)</button>
+            <div style="margin-top: 20px; padding: 15px; background: #e0f2fe; border-radius: 6px; border-left: 4px solid #0ea5e9;">
+                <p style="color: #0c4a6e; font-size: 13px; line-height: 1.6;">
+                    <strong>💡 Options d'ajout :</strong><br>
+                    <strong>Option 1 (Manuel) :</strong><br>
+                    1. Cliquez sur "💾 Télécharger biens.json mis à jour"<br>
+                    2. Remplacez l'ancien fichier biens.json dans votre projet<br>
+                    3. Committez et poussez les changements<br>
+                    <br>
+                    <strong>Option 2 (Automatique) :</strong><br>
+                    1. Cliquez sur "🚀 Ajouter automatiquement (GitHub)"<br>
+                    2. Connectez-vous à GitHub si demandé<br>
+                    3. Autorisez le workflow à mettre à jour biens.json<br>
+                    4. Le bien sera ajouté automatiquement au site !
                 </p>
             </div>
         </div>
@@ -612,6 +619,8 @@
                     }
                 }
 
+                const brochureUrlValue = document.getElementById('brochureUrl').value.trim();
+                
                 const apartment = {
                     reference: document.getElementById('reference').value.trim(),
                     transaction: document.getElementById('transaction').value,
@@ -626,7 +635,7 @@
                     price: parseInt(document.getElementById('price').value),
                     features: features,
                     mainPhoto: mainPhotoData,
-                    brochureUrl: document.getElementById('brochureUrl').value.trim(),
+                    brochureUrl: brochureUrlValue || 'https://www.canva.com/',
                     heatingType: document.getElementById('heatingType').value,
                     elevator: document.getElementById('elevator').checked,
                     roommateAllowed: document.getElementById('roommate').checked
@@ -686,6 +695,58 @@
             }, function() {
                 alert('Impossible de copier automatiquement. Veuillez copier manuellement le JSON ci-dessus.');
             });
+        }
+
+        function triggerGitHubWorkflow() {
+            if (!newApartmentData) {
+                alert('❌ Erreur: Aucune donnée d\'appartement disponible');
+                return;
+            }
+
+            const btn = document.getElementById('autoAddBtn');
+            const originalText = btn.textContent;
+            const originalBg = btn.style.background;
+
+            // GitHub repository information
+            const owner = 'abbasberrada91';
+            const repo = 'agent-immo';
+            const workflowFile = 'add-property.yml';
+
+            // Prepare the property data (remove mainPhoto as it's too large for workflow input)
+            const propertyForWorkflow = { ...newApartmentData };
+            delete propertyForWorkflow.mainPhoto;
+            delete propertyForWorkflow.additionalPhotos;
+
+            const workflowUrl = `https://github.com/${owner}/${repo}/actions/workflows/${workflowFile}`;
+            const dispatchUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
+
+            // Show instructions
+            const message = `Pour ajouter automatiquement ce bien via GitHub Actions:\n\n` +
+                `1. Cliquez sur "OK" pour copier les données\n` +
+                `2. Vous serez redirigé vers GitHub Actions\n` +
+                `3. Cliquez sur "Run workflow"\n` +
+                `4. Collez les données dans le champ "property_json"\n` +
+                `5. Cliquez sur "Run workflow" (bouton vert)\n\n` +
+                `Note: Cette fonctionnalité nécessite des permissions d'écriture sur le dépôt GitHub.`;
+
+            if (confirm(message)) {
+                // Copy the JSON to clipboard
+                const propertyJson = JSON.stringify(propertyForWorkflow);
+                navigator.clipboard.writeText(propertyJson).then(function() {
+                    btn.textContent = '✅ Données copiées !';
+                    btn.style.background = '#38a169';
+                    
+                    setTimeout(function() {
+                        btn.textContent = originalText;
+                        btn.style.background = originalBg;
+                    }, 3000);
+
+                    // Open GitHub Actions page
+                    window.open(workflowUrl, '_blank');
+                }, function() {
+                    alert('❌ Erreur lors de la copie. Veuillez copier manuellement le JSON ci-dessus.');
+                });
+            }
         }
     </script>
 </body>
