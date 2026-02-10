@@ -496,11 +496,11 @@
             </div>
 
             <div class="form-group">
-                <label>Photos supplémentaires</label>
+                <label for="multiplePhotos">Photos supplémentaires</label>
                 <div class="multiple-files-input">
-                    <input type="file" id="multiplePhotos" accept="image/png,image/jpeg,image/jpg,application/pdf" multiple>
+                    <input type="file" id="multiplePhotos" accept="image/png,image/jpeg,image/jpg,application/pdf" multiple aria-label="Sélectionner plusieurs photos">
                     <div class="help-text">Sélectionnez plusieurs photos en une seule fois (maintenez Ctrl/Cmd pour sélectionner plusieurs fichiers)</div>
-                    <div class="files-info" id="filesInfo"></div>
+                    <div class="files-info" id="filesInfo" role="status" aria-live="polite"></div>
                 </div>
                 <div id="additionalPhotos" class="photos-container"></div>
                 <div class="help-text">💡 Glissez-déposez les photos pour les réorganiser, ou utilisez les flèches ↑↓</div>
@@ -618,24 +618,26 @@
             div.innerHTML = `
                 <div class="photo-item-header">
                     <div class="photo-item-number">
-                        <span class="drag-handle">⋮⋮</span>
+                        <span class="drag-handle" role="img" aria-label="Poignée de glissement">⋮⋮</span>
                         <span>Photo ${index + 1}</span>
                     </div>
                     <div class="photo-item-controls">
-                        <button type="button" class="move-btn" onclick="movePhoto(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
-                        <button type="button" class="move-btn" onclick="movePhoto(${index}, 1)" ${index === photosData.length - 1 ? 'disabled' : ''}>↓</button>
-                        <button type="button" class="remove-photo-btn" onclick="removePhoto(${photo.id})">✕</button>
+                        <button type="button" class="move-btn" onclick="movePhoto(${index}, -1)" ${index === 0 ? 'disabled' : ''} aria-label="Déplacer la photo vers le haut">↑</button>
+                        <button type="button" class="move-btn" onclick="movePhoto(${index}, 1)" ${index === photosData.length - 1 ? 'disabled' : ''} aria-label="Déplacer la photo vers le bas">↓</button>
+                        <button type="button" class="remove-photo-btn" onclick="removePhoto(${photo.id})" aria-label="Supprimer cette photo">✕</button>
                     </div>
                 </div>
                 <div class="photo-item-content">
                     ${previewHtml}
                     <label>Nom du fichier: ${photo.filename}</label>
-                    <label>Légende</label>
+                    <label for="caption-${photo.id}">Légende</label>
                     <input type="text" 
+                           id="caption-${photo.id}"
                            class="photo-caption" 
                            placeholder="Décrivez cette photo" 
                            value="${photo.caption}"
-                           onchange="updatePhotoCaption(${photo.id}, this.value)">
+                           onchange="updatePhotoCaption(${photo.id}, this.value)"
+                           aria-label="Légende de la photo ${index + 1}">
                 </div>
             `;
             
@@ -690,7 +692,7 @@
             draggedElement = this;
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
+            e.dataTransfer.setData('text/plain', this.dataset.index);
         }
 
         function handleDragEnd(e) {
