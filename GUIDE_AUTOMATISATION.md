@@ -1,5 +1,9 @@
 # Guide : Automatisation de l'ajout de biens immobiliers
 
+> **🔑 NOUVEAU** : Vous ne savez pas comment configurer le token GitHub ?  
+> Consultez le **[Guide interactif de configuration du token](configurer-token.html)** (5 minutes seulement !)  
+> Ou lisez le **[Guide détaillé en markdown](CONFIGURATION_TOKEN_GITHUB.md)**
+
 ## 🎯 Problème résolu
 
 Avant, quand vous ajoutiez un bien, vous deviez :

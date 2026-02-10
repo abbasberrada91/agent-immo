@@ -2,6 +2,8 @@
 
 > **🚀 LIEN DIRECT → [AJOUTER UN APPARTEMENT](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)** 
 > 
+> **🔑 NOUVEAU → [GUIDE CONFIGURATION TOKEN GITHUB](https://abbasberrada91.github.io/agent-immo/configurer-token.html)** - Guide interactif pour configurer votre token en 5 minutes !
+> 
 > Vous voulez ajouter vos appartements ? Consultez le [Guide de démarrage rapide](DEMARRAGE_RAPIDE.md) !
 
 Oui, ce site peut être mis en ligne facilement car c'est une application statique (HTML/CSS/JS + `biens.json`).

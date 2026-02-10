@@ -423,6 +423,7 @@
                 <span id="tokenStatusText"></span>
             </div>
             <button class="btn btn-success" onclick="configureToken()">⚙️ Configurer le token GitHub</button>
+            <a href="configurer-token.html" class="btn btn-success" style="background: #10b981; text-decoration: none; display: inline-block; margin-left: 10px;">🔑 Guide Configuration</a>
         </div>
 
         <div class="stats" id="stats">
@@ -564,19 +565,54 @@
         }
 
         function configureToken() {
-            const token = prompt(
-                'Entrez votre GitHub Personal Access Token:\n\n' +
-                'Le token doit avoir les permissions:\n' +
-                '- "repo" (accès complet aux dépôts)\n' +
-                '- "workflow" (pour déclencher les workflows)\n\n' +
-                'Pour créer un token:\n' +
-                'GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token'
+            const currentToken = localStorage.getItem('githubToken');
+            
+            if (currentToken) {
+                const action = confirm(
+                    'Un token GitHub est actuellement configuré.\n\n' +
+                    'Cliquez sur "OK" pour le supprimer\n' +
+                    'Cliquez sur "Annuler" pour le remplacer'
+                );
+                
+                if (action) {
+                    localStorage.removeItem('githubToken');
+                    alert('✅ Token supprimé!');
+                    updateTokenStatus();
+                    return;
+                }
+            }
+            
+            // Ask if user wants guided setup
+            const useGuide = confirm(
+                '🔑 Configuration du Token GitHub\n\n' +
+                'Voulez-vous utiliser le guide pas à pas ?\n\n' +
+                '• OK - Ouvrir le guide interactif (recommandé)\n' +
+                '• Annuler - Entrer le token manuellement'
             );
             
-            if (token && token.trim()) {
-                localStorage.setItem('githubToken', token.trim());
-                alert('✅ Token enregistré avec succès!');
-                updateTokenStatus();
+            if (useGuide) {
+                window.location.href = 'configurer-token.html';
+            } else {
+                const token = prompt(
+                    'Entrez votre GitHub Personal Access Token:\n\n' +
+                    'Le token doit avoir les permissions:\n' +
+                    '- "repo" (accès complet aux dépôts)\n' +
+                    '- "workflow" (pour déclencher les workflows)\n\n' +
+                    'Pour créer un token:\n' +
+                    'GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token\n\n' +
+                    'Besoin d\'aide ? Utilisez le bouton "🔑 Guide Configuration"'
+                );
+                
+                if (token && token.trim()) {
+                    localStorage.setItem('githubToken', token.trim());
+                    alert('✅ Token enregistré avec succès!');
+                    updateTokenStatus();
+                } else if (token === '') {
+                    const openGuide = confirm('Voulez-vous ouvrir le guide de configuration ?');
+                    if (openGuide) {
+                        window.location.href = 'configurer-token.html';
+                    }
+                }
             }
         }
 
