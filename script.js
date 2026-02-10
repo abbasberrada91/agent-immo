@@ -70,7 +70,13 @@ const renderProperties = () => {
     title.textContent = `${property.title} — ${property.city} ${property.district}`;
     details.textContent = `${property.surface} m² • ${property.rooms} pièces • ${property.features.join(' • ')}`;
     price.textContent = formatPrice(property);
-    link.href = property.brochureUrl;
+    
+    // Handle brochureUrl - hide the link if it's null or empty
+    if (property.brochureUrl && property.brochureUrl !== 'null') {
+      link.href = property.brochureUrl;
+    } else {
+      link.style.display = 'none';
+    }
 
     listingGrid.appendChild(fragment);
   });
