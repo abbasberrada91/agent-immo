@@ -1226,9 +1226,11 @@
 
             try {
                 // Prepare property data
-                // Note: Photos are removed because they contain base64 data that would be too large
-                // for the GitHub API request payload (max 1MB). Photos should be handled separately
-                // or uploaded to an image hosting service before adding the property.
+                // NOTE: Photos (mainPhoto and additionalPhotos) are temporarily removed because they contain 
+                // base64 data that would exceed the GitHub API request payload size limit (max 1MB).
+                // Current limitation: Photos need to be managed separately through the manual JSON download option
+                // in "Advanced options" or uploaded to an external image hosting service.
+                // Future improvement: Implement photo upload to GitHub or external storage service.
                 const propertyToAdd = { ...newApartmentData };
                 delete propertyToAdd.mainPhoto;
                 delete propertyToAdd.additionalPhotos;
@@ -1240,14 +1242,22 @@
                     // Success!
                     statusDiv.style.background = '#d1fae5';
                     statusDiv.style.borderLeft = '4px solid #10b981';
+                    
+                    const dateAdded = result.property && result.property.dateAdded 
+                        ? new Date(result.property.dateAdded).toLocaleString('fr-FR')
+                        : 'N/A';
+                    const status = result.property && result.property.status === 'published' 
+                        ? 'Publié' 
+                        : (result.property?.status || 'Inconnu');
+                    
                     statusDiv.innerHTML = `
                         <p style="color: #065f46; font-weight: 600; margin-bottom: 8px;">✅ Bien publié avec succès !</p>
                         <p style="color: #065f46; font-size: 13px; margin-bottom: 10px;">
                             Le bien <strong>${propertyToAdd.reference}</strong> a été publié sur votre site.
                         </p>
                         <p style="color: #065f46; font-size: 13px; margin-bottom: 15px;">
-                            📅 Date d'ajout : ${new Date(result.property.dateAdded).toLocaleString('fr-FR')}<br>
-                            📊 Statut : ${result.property.status === 'published' ? 'Publié' : result.property.status}
+                            📅 Date d'ajout : ${dateAdded}<br>
+                            📊 Statut : ${status}
                         </p>
                         <a href="admin_properties.html" style="
                             display: inline-block;
@@ -1415,9 +1425,11 @@
 
             try {
                 // Prepare property data
-                // Note: Photos are removed because they contain base64 data that would be too large
-                // for the GitHub API request payload (max 1MB). Photos should be handled separately
-                // or uploaded to an image hosting service before adding the property.
+                // NOTE: Photos (mainPhoto and additionalPhotos) are temporarily removed because they contain 
+                // base64 data that would exceed the GitHub API request payload size limit (max 1MB).
+                // Current limitation: Photos need to be managed separately through the manual JSON download option
+                // in "Advanced options" or uploaded to an external image hosting service.
+                // Future improvement: Implement photo upload to GitHub or external storage service.
                 const propertyToAdd = { ...newApartmentData };
                 delete propertyToAdd.mainPhoto;
                 delete propertyToAdd.additionalPhotos;
