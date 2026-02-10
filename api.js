@@ -7,7 +7,7 @@ class PropertyAPI {
     constructor() {
         this.owner = 'abbasberrada91';
         this.repo = 'agent-immo';
-        this.branch = 'work';
+        this.branch = 'main';
         this.filePath = 'biens.json';
     }
 
