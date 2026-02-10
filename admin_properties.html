@@ -863,14 +863,14 @@
             document.getElementById('editDistrict').value = property.district;
             document.getElementById('editSurface').value = property.surface;
             document.getElementById('editRooms').value = property.rooms;
-            document.getElementById('editBedrooms').value = property.bedrooms || 0;
-            document.getElementById('editBathrooms').value = property.bathrooms || 1;
+            document.getElementById('editBedrooms').value = property.bedrooms !== undefined ? property.bedrooms : 1;
+            document.getElementById('editBathrooms').value = property.bathrooms !== undefined ? property.bathrooms : 1;
             document.getElementById('editWc').value = property.wc || '';
             document.getElementById('editContact').value = property.contact || '';
             document.getElementById('editPrice').value = property.price;
             document.getElementById('editCharges').value = property.charges || '';
             document.getElementById('editFeatures').value = property.features ? property.features.join(', ') : '';
-            document.getElementById('editHeatingType').value = property.heatingType || '';
+            document.getElementById('editHeatingType').value = property.heatingType || 'collectif';
             document.getElementById('editElevator').checked = property.elevator || false;
             document.getElementById('editRoommate').checked = property.roommateAllowed || false;
             document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
