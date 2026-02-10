@@ -37,6 +37,45 @@
             padding: 40px;
         }
 
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            background: #f7fafc;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+
+        .nav-link.primary {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .nav-link.primary:hover {
+            background: #7c3aed;
+        }
+
         h1 {
             color: #2d3748;
             margin-bottom: 10px;
@@ -343,11 +382,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>🏠 Ajouter un appartement</h1>
-        <p class="subtitle">Remplissez le formulaire pour créer votre bien. Le lien Canva est optionnel !</p>
+        <div class="page-header">
+            <div>
+                <h1>🏠 Ajouter un appartement</h1>
+                <p class="subtitle" style="margin-bottom: 0;">Remplissez le formulaire pour publier votre bien en ligne</p>
+            </div>
+            <div class="header-nav">
+                <a href="index.html" class="nav-link">🏠 Accueil</a>
+                <a href="admin_properties.html" class="nav-link primary">📊 Gérer mes biens</a>
+            </div>
+        </div>
 
         <div class="info-box">
-            <p><strong>💡 Astuce :</strong> Le lien Canva est désormais optionnel ! Vous pouvez ajouter vos biens sans créer de fiche Canva au préalable. Si vous en créez une plus tard, ajoutez simplement l'URL dans le champ prévu à cet effet.</p>
+            <p><strong>💡 Astuce :</strong> Le lien Canva est optionnel ! Vous pouvez ajouter vos biens sans créer de fiche Canva au préalable. Si vous en créez une plus tard, ajoutez simplement l'URL dans le champ prévu à cet effet.</p>
         </div>
 
         <form id="apartmentForm">
