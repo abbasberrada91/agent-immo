@@ -84,7 +84,8 @@ class PropertyAPI {
             biens.properties.push(newProperty);
             
             // 5. Update file on GitHub
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(biens, null, 2)))); // Encode to base64
+            // Properly encode UTF-8 to base64 for GitHub API
+            const content = btoa(encodeURIComponent(JSON.stringify(biens, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
             
             const response = await fetch(
                 `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.filePath}`,
@@ -164,7 +165,8 @@ class PropertyAPI {
             };
             
             // 4. Update file on GitHub
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(biens, null, 2))));
+            // Properly encode UTF-8 to base64 for GitHub API
+            const content = btoa(encodeURIComponent(JSON.stringify(biens, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
             
             const response = await fetch(
                 `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.filePath}`,
@@ -238,7 +240,8 @@ class PropertyAPI {
             }
             
             // 3. Update file on GitHub
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(biens, null, 2))));
+            // Properly encode UTF-8 to base64 for GitHub API
+            const content = btoa(encodeURIComponent(JSON.stringify(biens, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
             
             const response = await fetch(
                 `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.filePath}`,

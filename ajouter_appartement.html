@@ -1149,7 +1149,10 @@
             `;
 
             try {
-                // Prepare property data (remove photos for now)
+                // Prepare property data
+                // Note: Photos are removed because they contain base64 data that would be too large
+                // for the GitHub API request payload (max 1MB). Photos should be handled separately
+                // or uploaded to an image hosting service before adding the property.
                 const propertyToAdd = { ...newApartmentData };
                 delete propertyToAdd.mainPhoto;
                 delete propertyToAdd.additionalPhotos;
