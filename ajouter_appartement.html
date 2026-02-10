@@ -513,33 +513,39 @@
                 <div class="help-text">URL publique de votre fiche Canva publiée (optionnel)</div>
             </div>
 
-            <button type="submit">✨ Générer le JSON</button>
+            <button type="submit">🚀 Publier le bien en ligne</button>
         </form>
 
         <div class="output" id="output">
-            <h3>✅ Appartement créé avec succès !</h3>
-            <pre id="jsonOutput"></pre>
-            <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
-            <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1; margin-left: 10px;">💾 Télécharger biens.json mis à jour</button>
-            <button class="copy-btn" onclick="publishProperty()" style="background: #10b981; margin-left: 10px;" id="publishBtn">🚀 Publier maintenant</button>
-            <button class="copy-btn" onclick="manageGitHubToken()" style="background: #6366f1; margin-left: 10px; font-size: 13px;" id="tokenBtn">⚙️ Configurer Token</button>
-            <button class="copy-btn" onclick="viewAdminPanel()" style="background: #8b5cf6; margin-left: 10px; font-size: 13px;">📊 Voir mes biens</button>
+            <h3>✅ Publication du bien</h3>
             <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 6px; display: none;"></div>
-            <div style="margin-top: 20px; padding: 15px; background: #e0f2fe; border-radius: 6px; border-left: 4px solid #0ea5e9;">
-                <p style="color: #0c4a6e; font-size: 13px; line-height: 1.6;">
-                    <strong>💡 Nouvelle fonctionnalité - Ajout automatique !</strong><br>
-                    <strong>Option 1 (Automatique - Recommandé) :</strong><br>
-                    1. Cliquez sur "⚙️ Configurer Token" pour ajouter votre GitHub token (une seule fois)<br>
-                    2. Cliquez sur "🚀 Publier maintenant"<br>
-                    3. Le bien sera ajouté automatiquement à votre liste !<br>
-                    4. Vous verrez le statut "Bien ajouté avec succès" ou "Erreur"<br>
-                    <br>
-                    <strong>Option 2 (Manuel) :</strong><br>
-                    1. Cliquez sur "💾 Télécharger biens.json mis à jour"<br>
-                    2. Remplacez l'ancien fichier biens.json dans votre projet<br>
-                    3. Committez et poussez les changements<br>
-                    <br>
-                    <em>Note: Pour créer un token GitHub, allez sur GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token avec les permissions "repo" et "workflow"</em>
+            
+            <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="copy-btn" onclick="viewAdminPanel()" style="background: #8b5cf6;">📊 Gérer mes biens</button>
+                <button class="copy-btn" onclick="manageGitHubToken()" style="background: #6366f1;" id="tokenBtn">⚙️ Configurer Token</button>
+                <button class="copy-btn" onclick="showAdvancedOptions()" style="background: #64748b;" id="advancedBtn">⚙️ Options avancées</button>
+            </div>
+
+            <div id="advancedOptions" style="display: none; margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 6px; border: 2px solid #e2e8f0;">
+                <h4 style="color: #475569; margin-bottom: 15px;">Options avancées</h4>
+                <pre id="jsonOutput" style="display: none;"></pre>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
+                    <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1;">💾 Télécharger biens.json</button>
+                </div>
+                <p style="color: #64748b; font-size: 12px; margin-top: 10px;">
+                    Ces options sont destinées aux utilisateurs avancés qui souhaitent gérer le fichier JSON manuellement.
+                </p>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: #ecfdf5; border-radius: 6px; border-left: 4px solid #10b981;">
+                <p style="color: #065f46; font-size: 13px; line-height: 1.6;">
+                    <strong>💡 Comment ça marche ?</strong><br>
+                    1. Remplissez le formulaire ci-dessus avec les informations du bien<br>
+                    2. Cliquez sur "🚀 Publier le bien en ligne"<br>
+                    3. Si c'est votre première fois, vous serez invité à configurer votre token GitHub<br>
+                    4. Le bien sera automatiquement publié sur votre site !<br>
+                    5. Gérez tous vos biens depuis la page "📊 Gérer mes biens"<br>
                 </p>
             </div>
         </div>
@@ -930,15 +936,24 @@
                 // Store the new apartment data for download
                 newApartmentData = apartment;
 
+                // Store JSON for advanced options
                 const jsonOutput = JSON.stringify(apartment, null, 2);
                 document.getElementById('jsonOutput').textContent = jsonOutput;
+                
+                // Show output section
                 document.getElementById('output').classList.add('show');
                 document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+
+                // Reset button first
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+
+                // Now automatically publish the property
+                await publishPropertyDirectly();
 
             } catch (error) {
                 alert('Erreur lors du traitement: ' + error.message);
                 console.error(error);
-            } finally {
                 submitBtn.textContent = originalBtnText;
                 submitBtn.disabled = false;
             }
@@ -1106,6 +1121,209 @@
                         alert('❌ Erreur lors de la copie. Veuillez copier manuellement le JSON ci-dessus.');
                     });
                 }
+            }
+        }
+
+        async function publishPropertyDirectly() {
+            if (!newApartmentData) {
+                alert('❌ Erreur: Aucune donnée d\'appartement disponible');
+                return;
+            }
+
+            const statusDiv = document.getElementById('statusMessage');
+
+            // Check if token is configured
+            let token = localStorage.getItem('githubToken');
+            if (!token) {
+                // Prompt user to configure token
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#fef3c7';
+                statusDiv.style.borderLeft = '4px solid #f59e0b';
+                statusDiv.innerHTML = `
+                    <p style="color: #92400e; font-weight: 600; margin-bottom: 8px;">🔐 Configuration du token GitHub requise</p>
+                    <p style="color: #92400e; font-size: 13px; margin-bottom: 15px;">
+                        Pour publier automatiquement vos biens, vous devez configurer un token GitHub une seule fois.<br>
+                        Ce token permet au système d'ajouter automatiquement vos biens sur votre site.
+                    </p>
+                    <button onclick="promptForToken()" style="
+                        padding: 10px 20px;
+                        background: #f59e0b;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        font-size: 14px;
+                    ">
+                        ⚙️ Configurer mon token maintenant
+                    </button>
+                    <p style="color: #92400e; font-size: 12px; margin-top: 10px;">
+                        <strong>Comment créer un token :</strong><br>
+                        1. Allez sur GitHub → Settings → Developer settings<br>
+                        2. Personal access tokens → Tokens (classic) → Generate new token<br>
+                        3. Cochez les permissions: <strong>repo</strong> et <strong>workflow</strong><br>
+                        4. Copiez le token et collez-le ici
+                    </p>
+                `;
+                return;
+            }
+
+            // Show loading state
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = '#dbeafe';
+            statusDiv.style.borderLeft = '4px solid #3b82f6';
+            statusDiv.innerHTML = `
+                <p style="color: #1e40af; font-weight: 600;">⏳ Publication du bien en cours...</p>
+                <p style="color: #1e40af; font-size: 13px;">Veuillez patienter quelques secondes.</p>
+            `;
+
+            try {
+                // Prepare property data
+                // Note: Photos are removed because they contain base64 data that would be too large
+                // for the GitHub API request payload (max 1MB). Photos should be handled separately
+                // or uploaded to an image hosting service before adding the property.
+                const propertyToAdd = { ...newApartmentData };
+                delete propertyToAdd.mainPhoto;
+                delete propertyToAdd.additionalPhotos;
+
+                // Call the API
+                const result = await window.propertyAPI.addProperty(propertyToAdd);
+
+                if (result.success) {
+                    // Success!
+                    statusDiv.style.background = '#d1fae5';
+                    statusDiv.style.borderLeft = '4px solid #10b981';
+                    statusDiv.innerHTML = `
+                        <p style="color: #065f46; font-weight: 600; margin-bottom: 8px;">✅ Bien publié avec succès !</p>
+                        <p style="color: #065f46; font-size: 13px; margin-bottom: 10px;">
+                            Le bien <strong>${propertyToAdd.reference}</strong> a été publié sur votre site.
+                        </p>
+                        <p style="color: #065f46; font-size: 13px; margin-bottom: 15px;">
+                            📅 Date d'ajout : ${new Date(result.property.dateAdded).toLocaleString('fr-FR')}<br>
+                            📊 Statut : ${result.property.status === 'published' ? 'Publié' : result.property.status}
+                        </p>
+                        <a href="admin_properties.html" style="
+                            display: inline-block;
+                            padding: 10px 20px;
+                            background: #10b981;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            font-size: 14px;
+                        ">
+                            📊 Gérer tous mes biens
+                        </a>
+                    `;
+
+                } else {
+                    // Error occurred
+                    let errorMessage = result.message;
+                    if (result.error === 'DUPLICATE') {
+                        statusDiv.style.background = '#fee2e2';
+                        statusDiv.style.borderLeft = '4px solid #dc2626';
+                        statusDiv.innerHTML = `
+                            <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur : Bien déjà existant</p>
+                            <p style="color: #991b1b; font-size: 13px;">
+                                ${errorMessage}<br><br>
+                                Veuillez changer la référence du bien ou modifier le bien existant depuis l'interface admin.
+                            </p>
+                            <a href="admin_properties.html" style="
+                                display: inline-block;
+                                margin-top: 15px;
+                                padding: 10px 20px;
+                                background: #dc2626;
+                                color: white;
+                                text-decoration: none;
+                                border-radius: 6px;
+                                font-weight: 600;
+                                font-size: 14px;
+                            ">
+                                📊 Voir mes biens existants
+                            </a>
+                        `;
+                    } else {
+                        statusDiv.style.background = '#fee2e2';
+                        statusDiv.style.borderLeft = '4px solid #dc2626';
+                        statusDiv.innerHTML = `
+                            <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur lors de la publication</p>
+                            <p style="color: #991b1b; font-size: 13px; margin-bottom: 15px;">
+                                ${errorMessage}<br><br>
+                                Veuillez vérifier votre token GitHub et réessayer.
+                            </p>
+                            <button onclick="manageGitHubToken()" style="
+                                padding: 10px 20px;
+                                background: #dc2626;
+                                color: white;
+                                border: none;
+                                border-radius: 6px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                font-size: 14px;
+                                margin-right: 10px;
+                            ">
+                                ⚙️ Vérifier mon token
+                            </button>
+                            <button onclick="showAdvancedOptions()" style="
+                                padding: 10px 20px;
+                                background: #64748b;
+                                color: white;
+                                border: none;
+                                border-radius: 6px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                font-size: 14px;
+                            ">
+                                📋 Voir les options manuelles
+                            </button>
+                        `;
+                    }
+                }
+            } catch (error) {
+                // Unexpected error
+                statusDiv.style.background = '#fee2e2';
+                statusDiv.style.borderLeft = '4px solid #dc2626';
+                statusDiv.innerHTML = `
+                    <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur inattendue</p>
+                    <p style="color: #991b1b; font-size: 13px;">
+                        ${error.message}<br><br>
+                        Veuillez réessayer ou utiliser l'option de téléchargement manuel.
+                    </p>
+                `;
+            }
+        }
+
+        function promptForToken() {
+            const token = prompt(
+                'Entrez votre GitHub Personal Access Token:\n\n' +
+                'Le token doit avoir les permissions:\n' +
+                '- "repo" (accès complet aux dépôts)\n' +
+                '- "workflow" (pour déclencher les workflows)\n\n' +
+                'Pour créer un token:\n' +
+                'GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token'
+            );
+            
+            if (token && token.trim()) {
+                localStorage.setItem('githubToken', token.trim());
+                alert('✅ Token enregistré avec succès!\n\nVous pouvez maintenant publier vos biens automatiquement.');
+                updateTokenButtonStatus();
+                // Retry publishing
+                publishPropertyDirectly();
+            }
+        }
+
+        function showAdvancedOptions() {
+            const advancedDiv = document.getElementById('advancedOptions');
+            const btn = document.getElementById('advancedBtn');
+            const jsonOutput = document.getElementById('jsonOutput');
+            
+            if (advancedDiv.style.display === 'none') {
+                advancedDiv.style.display = 'block';
+                jsonOutput.style.display = 'block';
+                btn.textContent = '⚙️ Masquer les options avancées';
+            } else {
+                advancedDiv.style.display = 'none';
+                btn.textContent = '⚙️ Options avancées';
             }
         }
 
