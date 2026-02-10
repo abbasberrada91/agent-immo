@@ -635,7 +635,7 @@
                     price: parseInt(document.getElementById('price').value),
                     features: features,
                     mainPhoto: mainPhotoData,
-                    brochureUrl: brochureUrlValue || 'https://www.canva.com/',
+                    brochureUrl: brochureUrlValue || null,
                     heatingType: document.getElementById('heatingType').value,
                     elevator: document.getElementById('elevator').checked,
                     roommateAllowed: document.getElementById('roommate').checked
@@ -712,7 +712,10 @@
             const repo = 'agent-immo';
             const workflowFile = 'add-property.yml';
 
-            // Prepare the property data (remove mainPhoto as it's too large for workflow input)
+            // Prepare the property data
+            // Note: mainPhoto and additionalPhotos are removed because they're too large for workflow input.
+            // Photos must be manually added to the repository or handled separately.
+            // To add photos: edit biens.json after the property is created and add the photo data.
             const propertyForWorkflow = { ...newApartmentData };
             delete propertyForWorkflow.mainPhoto;
             delete propertyForWorkflow.additionalPhotos;
@@ -727,7 +730,9 @@
                 `3. Cliquez sur "Run workflow"\n` +
                 `4. Collez les données dans le champ "property_json"\n` +
                 `5. Cliquez sur "Run workflow" (bouton vert)\n\n` +
-                `Note: Cette fonctionnalité nécessite des permissions d'écriture sur le dépôt GitHub.`;
+                `Note: Cette fonctionnalité nécessite des permissions d'écriture sur le dépôt GitHub.\n` +
+                `Si vous n'avez pas ces permissions, demandez l'accès au propriétaire du dépôt\n` +
+                `ou utilisez la méthode manuelle (télécharger biens.json).`;
 
             if (confirm(message)) {
                 // Copy the JSON to clipboard

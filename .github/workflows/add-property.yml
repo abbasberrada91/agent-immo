@@ -27,6 +27,8 @@ jobs:
           python-version: '3.x'
       
       - name: Add property to biens.json
+        env:
+          PROPERTY_JSON: ${{ github.event.inputs.property_json }}
         run: |
           python3 << 'EOF'
           import json
@@ -37,9 +39,27 @@ jobs:
           with open('biens.json', 'r', encoding='utf-8') as f:
               data = json.load(f)
           
-          # Parse new property from input
-          new_property_json = r'''${{ github.event.inputs.property_json }}'''
-          new_property = json.loads(new_property_json)
+          # Parse new property from environment variable (safer than direct interpolation)
+          new_property_json = os.environ.get('PROPERTY_JSON', '{}')
+          
+          try:
+              new_property = json.loads(new_property_json)
+          except json.JSONDecodeError as e:
+              print(f"❌ Error: Invalid JSON input - {e}")
+              sys.exit(1)
+          
+          # Validate required fields
+          required_fields = ['reference', 'transaction', 'propertyType', 'title', 'city', 'district', 'surface', 'rooms', 'price']
+          missing_fields = [field for field in required_fields if field not in new_property]
+          if missing_fields:
+              print(f"❌ Error: Missing required fields: {', '.join(missing_fields)}")
+              sys.exit(1)
+          
+          # Check for duplicate reference
+          existing_references = [p.get('reference') for p in data.get('properties', [])]
+          if new_property.get('reference') in existing_references:
+              print(f"❌ Error: Property with reference '{new_property.get('reference')}' already exists")
+              sys.exit(1)
           
           # Add to properties list
           data['properties'].append(new_property)
@@ -50,12 +70,17 @@ jobs:
           
           print(f"✅ Property {new_property.get('reference', 'N/A')} added successfully!")
           print(f"Total properties: {len(data['properties'])}")
+          
+          # Save reference for commit message
+          with open('/tmp/property_ref.txt', 'w') as f:
+              f.write(new_property.get('reference', 'N/A'))
           EOF
       
       - name: Commit and push changes
         run: |
+          PROPERTY_REF=$(cat /tmp/property_ref.txt || echo "unknown")
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add biens.json
-          git commit -m "Add new property via workflow"
+          git commit -m "Add new property via workflow: ${PROPERTY_REF}"
           git push
