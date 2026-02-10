@@ -70,9 +70,11 @@ python3 -m http.server 4173
 ```
 Puis ouvrir `http://localhost:4173`.
 
-## 🏠 Ajouter vos appartements avec fiches Canva
+## 🏠 Ajouter vos appartements
 
-Vous voulez alimenter le site avec vos propres appartements ? C'est facile !
+Vous voulez alimenter le site avec vos propres appartements ? C'est simple et rapide !
+
+**✨ Nouveauté : Le lien Canva n'est plus obligatoire !** Ajoutez vos biens immédiatement, avec ou sans fiche Canva.
 
 ### 📖 Guide complet
 Consultez le **[Guide d'ajout d'appartements](GUIDE_AJOUT_APPARTEMENTS.md)** pour toutes les instructions détaillées.
@@ -81,8 +83,9 @@ Consultez le **[Guide d'ajout d'appartements](GUIDE_AJOUT_APPARTEMENTS.md)** pou
 
 1. **Formulaire en ligne** (le plus simple - recommandé !)
    - 🔗 **[Cliquez ici pour ajouter un appartement](https://abbasberrada91.github.io/agent-immo/ajouter_appartement.html)**
-   - Remplissez le formulaire
-   - Copiez le JSON généré dans `biens.json`
+   - Remplissez le formulaire (le champ Canva est optionnel)
+   - Cliquez sur "🚀 Ajouter automatiquement" pour utiliser GitHub Actions
+   - Ou téléchargez le `biens.json` mis à jour manuellement
 
 2. **Script Python** (automatisé)
    ```bash
@@ -90,15 +93,15 @@ Consultez le **[Guide d'ajout d'appartements](GUIDE_AJOUT_APPARTEMENTS.md)** pou
    ```
    Le script vous guide pas à pas et met à jour automatiquement `biens.json`.
 
-3. **Canva Bulk Create** (pour plusieurs biens)
+3. **Canva Bulk Create** (pour plusieurs biens avec fiches)
    - Utilisez `template_canva_bulk_create.csv` comme modèle
    - Créez vos fiches en masse avec Canva Bulk Create
    - Récupérez les URLs et ajoutez les biens
 
 ### 📋 Format d'un bien
 
-Chaque bien contient un champ `brochureUrl` dans `biens.json`.
-Il suffit d'y placer l'URL de votre fiche Canva publiée pour que le bouton **Dossier complet Canva** pointe vers la bonne fiche.
+Chaque bien peut optionnellement contenir un champ `brochureUrl` dans `biens.json`.
+Si vous ajoutez l'URL de votre fiche Canva publiée, le bouton **Dossier complet Canva** pointera vers cette fiche.
 
 Exemple :
 ```json

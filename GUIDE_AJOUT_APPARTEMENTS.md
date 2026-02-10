@@ -1,13 +1,15 @@
-# 🏠 Guide : Ajouter vos appartements avec fiches Canva
+# 🏠 Guide : Ajouter vos appartements
 
-Ce guide vous explique comment alimenter le site **Henri Martin Immobilier** avec vos propres appartements et fiches Canva.
+Ce guide vous explique comment alimenter le site **Henri Martin Immobilier** avec vos propres appartements.
 
 ## 📋 Vue d'ensemble
 
 Le site lit les biens immobiliers depuis le fichier `biens.json`. Chaque bien contient :
 - Les informations de l'appartement (prix, surface, localisation, etc.)
-- Un lien vers la fiche Canva complète (`brochureUrl`)
+- Un lien vers une fiche Canva complète (`brochureUrl`) - **maintenant optionnel !**
 - Une image de présentation
+
+**✨ Nouveauté : Le lien Canva n'est plus obligatoire !** Vous pouvez ajouter vos biens immédiatement et créer les fiches Canva plus tard.
 
 ## 🎨 Méthode 1 : Avec Canva Bulk Create (Recommandée)
 
@@ -62,15 +64,16 @@ Utilisez le script `ajouter_appartement.py` (voir Méthode 3) ou ajoutez manuell
 }
 ```
 
-## 📝 Méthode 2 : Formulaire HTML (Simple et Rapide)
+## 📝 Méthode 2 : Formulaire HTML (Simple et Rapide - Recommandée)
 
-Ouvrez le fichier `ajouter_appartement.html` dans votre navigateur :
+Ouvrez le fichier `ajouter_appartement.html` dans votre navigateur ou accédez-y en ligne :
 
 1. Remplissez le formulaire avec les informations de votre appartement
-2. Collez l'URL de votre fiche Canva dans le champ "URL Fiche Canva"
+2. **Le champ Canva est maintenant optionnel** - laissez-le vide si vous n'avez pas encore créé la fiche
 3. Cliquez sur "Générer JSON"
-4. Copiez le JSON généré
-5. Ajoutez-le dans `biens.json` (dans le tableau `properties`)
+4. Choisissez votre méthode préférée :
+   - **Option automatique** : Cliquez sur "🚀 Ajouter automatiquement (GitHub)" pour utiliser GitHub Actions
+   - **Option manuelle** : Téléchargez le fichier `biens.json` mis à jour et remplacez l'ancien
 
 ## 🐍 Méthode 3 : Script Python (Automatisé)
 
@@ -142,18 +145,30 @@ Limitez-vous à 2-3 caractéristiques principales :
 - Format paysage (horizontal)
 - Lumineuses et attrayantes
 
-### URLs Canva
-- Publiez votre fiche Canva avec le partage public
-- Utilisez l'URL complète (ex: `https://www.canva.com/design/DAFxxx/view`)
-- Vérifiez que le lien est accessible sans connexion
+### URLs Canva (Optionnel)
+- Le champ Canva est maintenant **optionnel**
+- Si vous laissez le champ vide, une URL par défaut sera utilisée
+- Vous pouvez ajouter l'URL Canva plus tard en éditant `biens.json`
+- Si vous créez une fiche Canva :
+  - Publiez votre fiche avec le partage public
+  - Utilisez l'URL complète (ex: `https://www.canva.com/design/DAFxxx/view`)
+  - Vérifiez que le lien est accessible sans connexion
 
 ## 🚀 Workflow complet recommandé
 
+### Workflow simplifié (sans Canva)
+1. **Ouvrez le formulaire** `ajouter_appartement.html`
+2. **Remplissez les informations** de votre bien
+3. **Laissez le champ Canva vide** si vous n'avez pas de fiche
+4. **Cliquez sur "🚀 Ajouter automatiquement"** pour utiliser GitHub Actions
+5. **Le bien est ajouté** automatiquement au site !
+
+### Workflow avec Canva (avancé)
 1. **Créez votre template Canva** avec variables dynamiques
 2. **Préparez vos données** dans un tableur (CSV ou Google Sheets)
 3. **Générez vos fiches** avec Canva Bulk Create
 4. **Récupérez les URLs** des fiches publiées
-5. **Ajoutez vos appartements** :
+5. **Ajoutez vos appartements** avec l'URL Canva :
    - Soit avec le formulaire HTML `ajouter_appartement.html`
    - Soit avec le script Python `ajouter_appartement.py`
    - Soit manuellement dans `biens.json`
