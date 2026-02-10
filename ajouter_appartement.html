@@ -330,6 +330,20 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="form-group">
+                    <label>Nombre de WC</label>
+                    <input type="number" id="wc" placeholder="1" min="0">
+                    <div class="help-text">Nombre de toilettes (optionnel)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact associé</label>
+                    <input type="text" id="contact" placeholder="Nom ou email du contact">
+                    <div class="help-text">Contact pour ce bien (optionnel)</div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label>Prix (€) <span class="required">*</span></label>
                 <input type="number" id="price" placeholder="850000 (vente) ou 2500 (location/mois)" required min="1">
@@ -622,6 +636,18 @@
                 const chargesValue = document.getElementById('charges').value;
                 if (chargesValue && chargesValue.trim() !== '') {
                     apartment.charges = parseInt(chargesValue);
+                }
+
+                // Add WC count if provided
+                const wcValue = document.getElementById('wc').value;
+                if (wcValue && wcValue.trim() !== '') {
+                    apartment.wc = parseInt(wcValue);
+                }
+
+                // Add contact if provided
+                const contactValue = document.getElementById('contact').value;
+                if (contactValue && contactValue.trim() !== '') {
+                    apartment.contact = contactValue.trim();
                 }
 
                 // Add additional photos if any
