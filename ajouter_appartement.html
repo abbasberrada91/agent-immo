@@ -242,6 +242,102 @@
             border-radius: 4px;
             border: 1px solid #e2e8f0;
         }
+
+        .photos-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .photo-item {
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            cursor: move;
+            transition: all 0.2s;
+        }
+
+        .photo-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .photo-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+
+        .photo-item.drag-over {
+            border-color: #667eea;
+            border-style: solid;
+            background: #ebf4ff;
+        }
+
+        .photo-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .photo-item-number {
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drag-handle {
+            cursor: move;
+            font-size: 18px;
+            color: #718096;
+        }
+
+        .photo-item-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .move-btn {
+            padding: 4px 8px;
+            background: #e2e8f0;
+            color: #2d3748;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .move-btn:hover {
+            background: #cbd5e0;
+        }
+
+        .photo-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .photo-item img {
+            max-width: 150px;
+            max-height: 120px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .multiple-files-input {
+            margin-bottom: 15px;
+        }
+
+        .files-info {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #718096;
+        }
     </style>
 </head>
 <body>
@@ -400,10 +496,14 @@
             </div>
 
             <div class="form-group">
-                <label>Photos supplémentaires</label>
-                <div id="additionalPhotos"></div>
-                <button type="button" class="add-photo-btn" onclick="addPhotoField()">➕ Ajouter une photo</button>
-                <div class="help-text">Ajoutez autant de photos que vous voulez avec leurs légendes</div>
+                <label for="multiplePhotos">Photos supplémentaires</label>
+                <div class="multiple-files-input">
+                    <input type="file" id="multiplePhotos" accept="image/png,image/jpeg,image/jpg,application/pdf" multiple aria-label="Sélectionner plusieurs photos">
+                    <div class="help-text">Sélectionnez plusieurs photos en une seule fois (maintenez Ctrl/Cmd pour sélectionner plusieurs fichiers)</div>
+                    <div class="files-info" id="filesInfo" role="status" aria-live="polite"></div>
+                </div>
+                <div id="additionalPhotos" class="photos-container"></div>
+                <div class="help-text">💡 Glissez-déposez les photos pour les réorganiser, ou utilisez les flèches ↑↓</div>
             </div>
 
             <div class="form-group">
@@ -441,52 +541,220 @@
 
     <script>
         let photoCount = 0;
+        let photosData = []; // Store photo data with order
 
-        function addPhotoField() {
+        // Handle multiple file selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const multiplePhotosInput = document.getElementById('multiplePhotos');
+            if (multiplePhotosInput) {
+                multiplePhotosInput.addEventListener('change', handleMultipleFiles);
+            }
+        });
+
+        function handleMultipleFiles(event) {
+            const files = Array.from(event.target.files);
+            const filesInfo = document.getElementById('filesInfo');
+            
+            if (files.length > 0) {
+                filesInfo.textContent = `${files.length} fichier(s) sélectionné(s)`;
+                
+                // Add each file to the photos list
+                files.forEach(file => {
+                    addPhotoFromFile(file);
+                });
+                
+                // Clear the input so the same files can be selected again if needed
+                event.target.value = '';
+            }
+        }
+
+        async function addPhotoFromFile(file) {
             photoCount++;
-            const container = document.getElementById('additionalPhotos');
-            const photoField = document.createElement('div');
-            photoField.className = 'photo-field';
-            photoField.id = `photo-field-${photoCount}`;
-            photoField.innerHTML = `
-                <label>Photo ${photoCount}</label>
-                <input type="file" class="additional-photo-file" accept="image/png,image/jpeg,image/jpg,application/pdf" data-photo-id="${photoCount}">
-                <label>Légende de la photo ${photoCount}</label>
-                <input type="text" class="additional-photo-caption" placeholder="Décrivez cette photo" data-photo-id="${photoCount}">
-                <div class="photo-preview-container" id="preview-${photoCount}"></div>
-                <button type="button" class="remove-photo-btn" onclick="removePhotoField(${photoCount})">✕ Supprimer cette photo</button>
-            `;
-            container.appendChild(photoField);
+            const photoId = photoCount;
+            
+            // Read file as base64
+            const base64Data = await fileToBase64(file);
+            
+            // Store photo data
+            photosData.push({
+                id: photoId,
+                file: file,
+                filename: file.name,
+                type: file.type,
+                size: file.size,
+                data: base64Data,
+                caption: ''
+            });
+            
+            // Render the photo item
+            renderPhotosList();
+        }
 
-            // Add preview handler for the new file input
-            const fileInput = photoField.querySelector('.additional-photo-file');
-            fileInput.addEventListener('change', function(e) {
-                previewPhoto(e.target, photoCount);
+        function renderPhotosList() {
+            const container = document.getElementById('additionalPhotos');
+            container.innerHTML = '';
+            
+            photosData.forEach((photo, index) => {
+                const photoItem = createPhotoItem(photo, index);
+                container.appendChild(photoItem);
             });
         }
 
-        function removePhotoField(id) {
-            const field = document.getElementById(`photo-field-${id}`);
-            if (field) {
-                field.remove();
+        function createPhotoItem(photo, index) {
+            const div = document.createElement('div');
+            div.className = 'photo-item';
+            div.draggable = true;
+            div.dataset.photoId = photo.id;
+            div.dataset.index = index;
+            
+            // Create preview
+            let previewHtml = '';
+            if (photo.type.startsWith('image/')) {
+                previewHtml = `<img src="${photo.data}" alt="Preview">`;
+            } else if (photo.type === 'application/pdf') {
+                previewHtml = `<p style="color: #4299e1;">📄 PDF: ${photo.filename}</p>`;
+            }
+            
+            div.innerHTML = `
+                <div class="photo-item-header">
+                    <div class="photo-item-number">
+                        <span class="drag-handle" role="img" aria-label="Poignée de glissement">⋮⋮</span>
+                        <span>Photo ${index + 1}</span>
+                    </div>
+                    <div class="photo-item-controls">
+                        <button type="button" class="move-btn" onclick="movePhoto(${index}, -1)" ${index === 0 ? 'disabled' : ''} aria-label="Déplacer la photo vers le haut">↑</button>
+                        <button type="button" class="move-btn" onclick="movePhoto(${index}, 1)" ${index === photosData.length - 1 ? 'disabled' : ''} aria-label="Déplacer la photo vers le bas">↓</button>
+                        <button type="button" class="remove-photo-btn" onclick="removePhoto(${photo.id})" aria-label="Supprimer cette photo">✕</button>
+                    </div>
+                </div>
+                <div class="photo-item-content">
+                    ${previewHtml}
+                    <label>Nom du fichier: ${photo.filename}</label>
+                    <label for="caption-${photo.id}">Légende</label>
+                    <input type="text" 
+                           id="caption-${photo.id}"
+                           class="photo-caption" 
+                           placeholder="Décrivez cette photo" 
+                           value="${photo.caption}"
+                           onchange="updatePhotoCaption(${photo.id}, this.value)"
+                           aria-label="Légende de la photo ${index + 1}">
+                </div>
+            `;
+            
+            // Add drag and drop event listeners
+            div.addEventListener('dragstart', handleDragStart);
+            div.addEventListener('dragend', handleDragEnd);
+            div.addEventListener('dragover', handleDragOver);
+            div.addEventListener('drop', handleDrop);
+            div.addEventListener('dragenter', handleDragEnter);
+            div.addEventListener('dragleave', handleDragLeave);
+            
+            return div;
+        }
+
+        function updatePhotoCaption(photoId, caption) {
+            const photo = photosData.find(p => p.id === photoId);
+            if (photo) {
+                photo.caption = caption;
             }
         }
 
-        function previewPhoto(input, id) {
-            const previewContainer = document.getElementById(`preview-${id}`);
-            if (input.files && input.files[0]) {
-                const file = input.files[0];
-                const reader = new FileReader();
-                
-                if (file.type.startsWith('image/')) {
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" class="photo-preview" alt="Preview">`;
-                    };
-                    reader.readAsDataURL(file);
-                } else if (file.type === 'application/pdf') {
-                    previewContainer.innerHTML = `<p style="color: #4299e1; margin-top: 8px;">📄 PDF: ${file.name}</p>`;
-                }
+        function removePhoto(photoId) {
+            photosData = photosData.filter(p => p.id !== photoId);
+            renderPhotosList();
+            updateFilesInfo();
+        }
+
+        function movePhoto(index, direction) {
+            if (direction === -1 && index > 0) {
+                // Move up
+                [photosData[index - 1], photosData[index]] = [photosData[index], photosData[index - 1]];
+            } else if (direction === 1 && index < photosData.length - 1) {
+                // Move down
+                [photosData[index], photosData[index + 1]] = [photosData[index + 1], photosData[index]];
             }
+            renderPhotosList();
+        }
+
+        function updateFilesInfo() {
+            const filesInfo = document.getElementById('filesInfo');
+            if (photosData.length > 0) {
+                filesInfo.textContent = `${photosData.length} photo(s) ajoutée(s)`;
+            } else {
+                filesInfo.textContent = '';
+            }
+        }
+
+        // Drag and drop handlers
+        let draggedElement = null;
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', this.dataset.index);
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            
+            // Remove drag-over class from all items
+            document.querySelectorAll('.photo-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (this !== draggedElement) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            if (draggedElement !== this) {
+                const draggedIndex = parseInt(draggedElement.dataset.index);
+                const targetIndex = parseInt(this.dataset.index);
+                
+                // Swap the photos in the array
+                const temp = photosData[draggedIndex];
+                photosData[draggedIndex] = photosData[targetIndex];
+                photosData[targetIndex] = temp;
+                
+                renderPhotosList();
+            }
+            
+            return false;
+        }
+
+        // Legacy function for backward compatibility (not used anymore)
+        function addPhotoField() {
+            // This function is replaced by handleMultipleFiles
+            alert('Veuillez utiliser le sélecteur de fichiers ci-dessus pour ajouter plusieurs photos en une fois.');
+        }
+
+        function removePhotoField(id) {
+            // Legacy function - not used anymore
+            removePhoto(id);
+        }
+
+        function previewPhoto(input, id) {
+            // Legacy function - not used anymore
         }
 
         // Add preview for main photo
@@ -599,25 +867,14 @@
                     };
                 }
 
-                // Collect additional photos with captions
-                const additionalPhotos = [];
-                const photoFiles = document.querySelectorAll('.additional-photo-file');
-                const photoCaptions = document.querySelectorAll('.additional-photo-caption');
-                
-                for (let i = 0; i < photoFiles.length; i++) {
-                    const file = photoFiles[i].files[0];
-                    const caption = photoCaptions[i].value.trim();
-                    
-                    if (file) {
-                        additionalPhotos.push({
-                            filename: file.name,
-                            type: file.type,
-                            size: file.size,
-                            data: await fileToBase64(file),
-                            caption: caption || ''
-                        });
-                    }
-                }
+                // Collect additional photos from photosData array (already in the correct order)
+                const additionalPhotos = photosData.map(photo => ({
+                    filename: photo.filename,
+                    type: photo.type,
+                    size: photo.size,
+                    data: photo.data,
+                    caption: photo.caption || ''
+                }));
 
                 const brochureUrlValue = document.getElementById('brochureUrl').value.trim();
                 
