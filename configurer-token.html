@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Token GitHub - Henri Martin Immobilier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #718096;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+
+        .dot.completed {
+            background: #48bb78;
+        }
+
+        .step-content {
+            margin: 30px 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-box.warning {
+            background: #fef5e7;
+            border-left-color: #f39c12;
+        }
+
+        .info-box.success {
+            background: #f0fdf4;
+            border-left-color: #48bb78;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2d3748;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            color: #4a5568;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .code {
+            background: #2d3748;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        .link-button {
+            display: inline-block;
+            background: #667eea;
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        .link-button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .token-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            transition: border-color 0.3s;
+        }
+
+        .token-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f7fafc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #48bb78;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 48px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🔑 Configuration du Token GitHub</h1>
+            <p class="subtitle">Guide pas à pas - 5 minutes seulement</p>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div class="step-indicator" id="stepIndicator">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step active" id="step1">
+                <div class="step-content">
+                    <div class="step-number">1</div>
+                    <h2>Bienvenue ! 👋</h2>
+                    <p>Ce guide va vous aider à configurer votre token GitHub en quelques minutes.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Pourquoi un token GitHub ?</strong>
+                        Le token permet à votre site d'ajouter automatiquement de nouveaux biens immobiliers.
+                        C'est comme une clé numérique sécurisée qui donne accès à votre projet.
+                    </div>
+
+                    <p><strong>Ce que vous allez faire :</strong></p>
+                    <ul class="checklist">
+                        <li>Créer un token GitHub</li>
+                        <li>Copier le token</li>
+                        <li>Le configurer dans votre site</li>
+                    </ul>
+
+                    <p><strong>Temps requis :</strong> 5 minutes</p>
+                    <p><strong>Prérequis :</strong> Un compte GitHub</p>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary" onclick="nextStep()">Commencer →</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" id="step2">
+                <div class="step-content">
+                    <div class="step-number">2</div>
+                    <h2>Accéder aux paramètres GitHub</h2>
+                    
+                    <p><strong>Étapes à suivre :</strong></p>
+                    <ol>
+                        <li>Connectez-vous à votre compte <a href="https://github.com" target="_blank">GitHub</a></li>
+                        <li>Cliquez sur votre <strong>photo de profil</strong> en haut à droite</li>
+                        <li>Sélectionnez <strong>Settings</strong> (Paramètres)</li>
+                        <li>En bas du menu de gauche, cliquez sur <strong>Developer settings</strong></li>
+                        <li>Cliquez sur <strong>Personal access tokens</strong></li>
+                        <li>Sélectionnez <strong>Tokens (classic)</strong></li>
+                    </ol>
+
+                    <div class="info-box success">
+                        <strong>🚀 Raccourci rapide :</strong>
+                        Cliquez sur le bouton ci-dessous pour accéder directement à la page de création de token
+                    </div>
+
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="https://github.com/settings/tokens/new" target="_blank" class="link-button">
+                            Ouvrir la page GitHub →
+                        </a>
+                    </div>
+
+                    <div class="info-box warning">
+                        <strong>⚠️ Important :</strong>
+                        Gardez cette fenêtre ouverte ! Vous en aurez besoin pour la suite.
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Retour</button>
+                    <button class="btn-primary" onclick="nextStep()">J'ai ouvert la page →</button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" id="step3">
+                <div class="step-content">
+                    <div class="step-number">3</div>
+                    <h2>Configurer le token</h2>
+                    
+                    <p>Sur la page GitHub, remplissez les champs suivants :</p>
+
+                    <div class="info-box">
+                        <strong>📝 Note (nom du token) :</strong>
+                        <div class="code">Token pour Henri Martin Immobilier</div>
+                        Ou tout autre nom descriptif pour vous rappeler à quoi sert ce token.
+                    </div>
+
+                    <div class="info-box">
+                        <strong>📅 Expiration :</strong>
+                        <p>Choisissez la durée de validité :</p>
+                        <ul>
+                            <li><strong>90 days</strong> (recommandé pour la sécurité)</li>
+                            <li><strong>No expiration</strong> (si vous ne voulez pas le renouveler)</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <strong>🔐 Permissions requises :</strong>
+                        <p>Cochez UNIQUEMENT ces deux cases :</p>
+                        <ul class="checklist">
+                            <li><strong>repo</strong> - Full control of private repositories</li>
+                            <li><strong>workflow</strong> - Update GitHub Action workflows</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Ne cochez rien d'autre !</strong> Plus de permissions = moins de sécurité.</p>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Retour</button>
+                    <button class="btn-primary" onclick="nextStep()">J'ai configuré →</button>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step" id="step4">
+                <div class="step-content">
+                    <div class="step-number">4</div>
+                    <h2>Générer et copier le token</h2>
+                    
+                    <p><strong>Maintenant, générez votre token :</strong></p>
+                    <ol>
+                        <li>Descendez tout en bas de la page GitHub</li>
+                        <li>Cliquez sur le bouton vert <strong>Generate token</strong></li>
+                        <li>Le token apparaît (il commence par <code>ghp_</code>)</li>
+                    </ol>
+
+                    <div class="info-box warning">
+                        <strong>⚠️ TRÈS IMPORTANT :</strong>
+                        <p>Vous ne pourrez voir ce token qu'UNE SEULE FOIS !</p>
+                        <p>Copiez-le immédiatement en cliquant sur l'icône de copie.</p>
+                        <p>Si vous le perdez, vous devrez en créer un nouveau.</p>
+                    </div>
+
+                    <p><strong>Le token ressemble à ceci :</strong></p>
+                    <div class="code">ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+
+                    <p style="margin-top: 20px;"><strong>Collez votre token dans le champ ci-dessous :</strong></p>
+                    <input 
+                        type="text" 
+                        class="token-input" 
+                        id="tokenInput" 
+                        placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    >
+
+                    <div class="info-box success" style="display: none;" id="tokenSuccess">
+                        <strong>✅ Token détecté !</strong>
+                        Le token semble valide. Continuez pour le sauvegarder.
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Retour</button>
+                    <button class="btn-primary" onclick="validateAndNext()">Continuer →</button>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step" id="step5">
+                <div class="step-content">
+                    <div class="emoji">🎉</div>
+                    <h2 style="text-align: center;">Configuration terminée !</h2>
+                    
+                    <div class="info-box success">
+                        <strong>✅ Votre token a été sauvegardé avec succès !</strong>
+                        Il est stocké localement dans votre navigateur et sécurisé.
+                    </div>
+
+                    <p><strong>Que faire maintenant ?</strong></p>
+                    <ul class="checklist">
+                        <li>Ajoutez vos premiers biens immobiliers</li>
+                        <li>Utilisez le formulaire automatique</li>
+                        <li>Gérez vos biens depuis l'interface admin</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <strong>🔐 Rappels de sécurité :</strong>
+                        <ul>
+                            <li>Ne partagez jamais votre token</li>
+                            <li>Si vous pensez qu'il est compromis, révoquez-le sur GitHub</li>
+                            <li>Vous pouvez le changer à tout moment</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="ajouter_appartement.html" class="link-button">
+                            ✨ Ajouter un bien maintenant
+                        </a>
+                        <a href="admin_properties.html" class="link-button" style="background: #48bb78;">
+                            📊 Interface d'administration
+                        </a>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="CONFIGURATION_TOKEN_GITHUB.md" style="color: #667eea; text-decoration: none;">
+                            📚 Consulter le guide complet
+                        </a>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-success" onclick="goToAddProperty()">🚀 Commencer à ajouter des biens</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: white; margin-top: 20px; opacity: 0.8;">
+            <a href="index.html" style="color: white;">← Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        function updateUI() {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show current step
+            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                }
+            });
+
+            // Update progress bar
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function validateAndNext() {
+            const tokenInput = document.getElementById('tokenInput');
+            const token = tokenInput.value.trim();
+
+            if (!token) {
+                alert('⚠️ Veuillez coller votre token GitHub dans le champ ci-dessus.');
+                return;
+            }
+
+            if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+                const proceed = confirm(
+                    '⚠️ Le token ne semble pas avoir le format attendu (il devrait commencer par "ghp_" ou "github_pat_").\n\n' +
+                    'Voulez-vous continuer quand même ?'
+                );
+                if (!proceed) {
+                    return;
+                }
+            }
+
+            // Save token to localStorage
+            localStorage.setItem('githubToken', token);
+            
+            // Show success message
+            document.getElementById('tokenSuccess').style.display = 'block';
+            
+            // Move to next step
+            setTimeout(() => {
+                nextStep();
+            }, 500);
+        }
+
+        function goToAddProperty() {
+            window.location.href = 'ajouter_appartement.html';
+        }
+
+        // Check if token is already configured
+        window.addEventListener('load', () => {
+            const existingToken = localStorage.getItem('githubToken');
+            if (existingToken) {
+                const reconfigure = confirm(
+                    '🔑 Un token GitHub est déjà configuré.\n\n' +
+                    'Voulez-vous le reconfigurer ?\n\n' +
+                    '• Oui - Je veux créer un nouveau token\n' +
+                    '• Non - Garder le token actuel'
+                );
+                if (!reconfigure) {
+                    window.location.href = 'ajouter_appartement.html';
+                }
+            }
+        });
+
+        // Validate token format on input
+        document.addEventListener('DOMContentLoaded', () => {
+            const tokenInput = document.getElementById('tokenInput');
+            if (tokenInput) {
+                tokenInput.addEventListener('input', (e) => {
+                    const token = e.target.value.trim();
+                    const successBox = document.getElementById('tokenSuccess');
+                    
+                    if (token.startsWith('ghp_') || token.startsWith('github_pat_')) {
+                        successBox.style.display = 'block';
+                    } else {
+                        successBox.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
