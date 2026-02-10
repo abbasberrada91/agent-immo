@@ -856,8 +856,8 @@
 
             // Populate all fields
             document.getElementById('editReference').value = property.reference;
-            document.getElementById('editTransaction').value = property.transaction || 'vente';
-            document.getElementById('editPropertyType').value = property.propertyType || 'Appartement';
+            document.getElementById('editTransaction').value = property.transaction || '';
+            document.getElementById('editPropertyType').value = property.propertyType || '';
             document.getElementById('editTitle').value = property.title;
             document.getElementById('editCity').value = property.city;
             document.getElementById('editDistrict').value = property.district;
@@ -870,7 +870,7 @@
             document.getElementById('editPrice').value = property.price;
             document.getElementById('editCharges').value = property.charges || '';
             document.getElementById('editFeatures').value = property.features ? property.features.join(', ') : '';
-            document.getElementById('editHeatingType').value = property.heatingType || 'collectif';
+            document.getElementById('editHeatingType').value = property.heatingType || '';
             document.getElementById('editElevator').checked = property.elevator || false;
             document.getElementById('editRoommate').checked = property.roommateAllowed || false;
             document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
