@@ -521,6 +521,7 @@
             <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
             <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1; margin-left: 10px;">💾 Télécharger biens.json mis à jour</button>
             <button class="copy-btn" onclick="triggerGitHubWorkflow()" style="background: #10b981; margin-left: 10px;" id="autoAddBtn">🚀 Ajouter automatiquement (GitHub)</button>
+            <button class="copy-btn" onclick="manageGitHubToken()" style="background: #6366f1; margin-left: 10px; font-size: 13px;" id="tokenBtn">⚙️ Configurer Token</button>
             <div style="margin-top: 20px; padding: 15px; background: #e0f2fe; border-radius: 6px; border-left: 4px solid #0ea5e9;">
                 <p style="color: #0c4a6e; font-size: 13px; line-height: 1.6;">
                     <strong>💡 Options d'ajout :</strong><br>
@@ -529,11 +530,12 @@
                     2. Remplacez l'ancien fichier biens.json dans votre projet<br>
                     3. Committez et poussez les changements<br>
                     <br>
-                    <strong>Option 2 (Automatique) :</strong><br>
-                    1. Cliquez sur "🚀 Ajouter automatiquement (GitHub)"<br>
-                    2. Connectez-vous à GitHub si demandé<br>
-                    3. Autorisez le workflow à mettre à jour biens.json<br>
-                    4. Le bien sera ajouté automatiquement au site !
+                    <strong>Option 2 (Automatique - Recommandé) :</strong><br>
+                    1. Cliquez sur "⚙️ Configurer Token" pour ajouter votre GitHub token (une seule fois)<br>
+                    2. Cliquez sur "🚀 Ajouter automatiquement (GitHub)"<br>
+                    3. Le workflow GitHub Actions ajoutera automatiquement le bien !<br>
+                    <br>
+                    <em>Note: Pour créer un token GitHub, allez sur GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token avec la permission "workflow"</em>
                 </p>
             </div>
         </div>
@@ -980,36 +982,186 @@
             const workflowUrl = `https://github.com/${owner}/${repo}/actions/workflows/${workflowFile}`;
             const dispatchUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
 
-            // Show instructions
-            const message = `Pour ajouter automatiquement ce bien via GitHub Actions:\n\n` +
-                `1. Cliquez sur "OK" pour copier les données\n` +
-                `2. Vous serez redirigé vers GitHub Actions\n` +
-                `3. Cliquez sur "Run workflow"\n` +
-                `4. Collez les données dans le champ "property_json"\n` +
-                `5. Cliquez sur "Run workflow" (bouton vert)\n\n` +
-                `Note: Cette fonctionnalité nécessite des permissions d'écriture sur le dépôt GitHub.\n` +
-                `Si vous n'avez pas ces permissions, demandez l'accès au propriétaire du dépôt\n` +
-                `ou utilisez la méthode manuelle (télécharger biens.json).`;
-
-            if (confirm(message)) {
-                // Copy the JSON to clipboard
-                const propertyJson = JSON.stringify(propertyForWorkflow);
-                navigator.clipboard.writeText(propertyJson).then(function() {
-                    btn.textContent = '✅ Données copiées !';
-                    btn.style.background = '#38a169';
+            // Check if GitHub token is stored
+            let githubToken = localStorage.getItem('githubToken');
+            
+            if (githubToken) {
+                // Attempt automatic workflow dispatch
+                const message = `Voulez-vous ajouter automatiquement ce bien ?\n\n` +
+                    `Le workflow GitHub Actions sera déclenché automatiquement.\n` +
+                    `Vous pourrez suivre la progression sur GitHub Actions.`;
+                
+                if (confirm(message)) {
+                    btn.textContent = '⏳ Ajout en cours...';
+                    btn.style.background = '#f59e0b';
+                    btn.disabled = true;
                     
-                    setTimeout(function() {
-                        btn.textContent = originalText;
-                        btn.style.background = originalBg;
-                    }, 3000);
+                    const propertyJson = JSON.stringify(propertyForWorkflow);
+                    
+                    // Trigger the workflow via GitHub API
+                    fetch(dispatchUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Authorization': `Bearer ${githubToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ref: 'work',  // or 'main' depending on your default branch
+                            inputs: {
+                                property_json: propertyJson
+                            }
+                        })
+                    })
+                    .then(response => {
+                        if (response.status === 204) {
+                            btn.textContent = '✅ Workflow déclenché !';
+                            btn.style.background = '#38a169';
+                            alert('✅ Le workflow a été déclenché avec succès!\n\n' +
+                                  'Le bien sera ajouté automatiquement dans quelques instants.\n' +
+                                  'Vous pouvez suivre la progression sur GitHub Actions.');
+                            
+                            setTimeout(function() {
+                                window.open(workflowUrl, '_blank');
+                            }, 1000);
+                        } else {
+                            throw new Error(`HTTP ${response.status}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error triggering workflow:', error);
+                        btn.textContent = '❌ Erreur';
+                        btn.style.background = '#ef4444';
+                        
+                        alert('❌ Erreur lors du déclenchement du workflow.\n\n' +
+                              'Vérifiez que votre token GitHub a les permissions nécessaires.\n' +
+                              'Vous pouvez réessayer ou utiliser la méthode manuelle.');
+                    })
+                    .finally(() => {
+                        setTimeout(function() {
+                            btn.textContent = originalText;
+                            btn.style.background = originalBg;
+                            btn.disabled = false;
+                        }, 3000);
+                    });
+                }
+            } else {
+                // Manual mode - show instructions for setting up token
+                const message = `Pour ajouter automatiquement ce bien, vous devez configurer un token GitHub.\n\n` +
+                    `Méthode 1: Configuration automatique (recommandé)\n` +
+                    `1. Cliquez sur "OK"\n` +
+                    `2. Entrez votre GitHub Personal Access Token\n` +
+                    `3. Le bien sera ajouté automatiquement\n\n` +
+                    `Méthode 2: Méthode manuelle\n` +
+                    `Cliquez sur "Annuler" pour copier les données et les coller manuellement dans GitHub Actions\n\n` +
+                    `Pour créer un token:\n` +
+                    `- Allez sur GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)\n` +
+                    `- Créez un token avec la permission "workflow"`;
+                
+                if (confirm(message)) {
+                    // Ask for GitHub token
+                    const token = prompt('Entrez votre GitHub Personal Access Token:\n\n' +
+                        'Ce token doit avoir la permission "workflow".\n' +
+                        'Il sera stocké localement dans votre navigateur.\n\n' +
+                        'Pour créer un token: GitHub → Settings → Developer settings → Personal access tokens');
+                    
+                    if (token && token.trim()) {
+                        localStorage.setItem('githubToken', token.trim());
+                        alert('✅ Token enregistré!\n\nVous pouvez maintenant cliquer à nouveau pour ajouter le bien automatiquement.');
+                    } else {
+                        alert('ℹ️ Pas de token fourni. Utilisez la méthode manuelle en téléchargeant biens.json.');
+                    }
+                } else {
+                    // Manual fallback - copy to clipboard and open GitHub Actions
+                    const propertyJson = JSON.stringify(propertyForWorkflow);
+                    navigator.clipboard.writeText(propertyJson).then(function() {
+                        btn.textContent = '✅ Données copiées !';
+                        btn.style.background = '#38a169';
+                        
+                        alert('✅ Données copiées dans le presse-papier!\n\n' +
+                              'Suivez ces étapes:\n' +
+                              '1. Cliquez sur "Run workflow"\n' +
+                              '2. Collez les données dans le champ "property_json"\n' +
+                              '3. Cliquez sur "Run workflow" (bouton vert)');
+                        
+                        setTimeout(function() {
+                            btn.textContent = originalText;
+                            btn.style.background = originalBg;
+                        }, 3000);
 
-                    // Open GitHub Actions page
-                    window.open(workflowUrl, '_blank');
-                }, function() {
-                    alert('❌ Erreur lors de la copie. Veuillez copier manuellement le JSON ci-dessus.');
-                });
+                        // Open GitHub Actions page
+                        window.open(workflowUrl, '_blank');
+                    }, function() {
+                        alert('❌ Erreur lors de la copie. Veuillez copier manuellement le JSON ci-dessus.');
+                    });
+                }
             }
         }
+
+        function manageGitHubToken() {
+            const currentToken = localStorage.getItem('githubToken');
+            
+            if (currentToken) {
+                const action = confirm('Un token GitHub est actuellement configuré.\n\n' +
+                    'Cliquez sur "OK" pour le supprimer\n' +
+                    'Cliquez sur "Annuler" pour le remplacer par un nouveau');
+                
+                if (action) {
+                    // Remove token
+                    localStorage.removeItem('githubToken');
+                    alert('✅ Token supprimé!\n\nVous devrez en configurer un nouveau pour utiliser l\'ajout automatique.');
+                    updateTokenButtonStatus();
+                } else {
+                    // Replace token
+                    const newToken = prompt('Entrez votre nouveau GitHub Personal Access Token:\n\n' +
+                        'Ce token doit avoir la permission "workflow".\n\n' +
+                        'Pour créer un token: GitHub → Settings → Developer settings → Personal access tokens');
+                    
+                    if (newToken && newToken.trim()) {
+                        localStorage.setItem('githubToken', newToken.trim());
+                        alert('✅ Token mis à jour!\n\nVous pouvez maintenant utiliser l\'ajout automatique.');
+                        updateTokenButtonStatus();
+                    }
+                }
+            } else {
+                // Add new token
+                const token = prompt('Entrez votre GitHub Personal Access Token:\n\n' +
+                    'Ce token doit avoir la permission "workflow".\n' +
+                    'Il sera stocké localement dans votre navigateur.\n\n' +
+                    'Pour créer un token:\n' +
+                    '1. Allez sur GitHub → Settings → Developer settings\n' +
+                    '2. Personal access tokens → Tokens (classic)\n' +
+                    '3. Generate new token (classic)\n' +
+                    '4. Cochez la permission "workflow"\n' +
+                    '5. Générez le token et copiez-le');
+                
+                if (token && token.trim()) {
+                    localStorage.setItem('githubToken', token.trim());
+                    alert('✅ Token enregistré!\n\nVous pouvez maintenant utiliser l\'ajout automatique.');
+                    updateTokenButtonStatus();
+                }
+            }
+        }
+
+        function updateTokenButtonStatus() {
+            const tokenBtn = document.getElementById('tokenBtn');
+            const hasToken = localStorage.getItem('githubToken');
+            
+            if (tokenBtn) {
+                if (hasToken) {
+                    tokenBtn.textContent = '✅ Token configuré';
+                    tokenBtn.style.background = '#10b981';
+                } else {
+                    tokenBtn.textContent = '⚙️ Configurer Token';
+                    tokenBtn.style.background = '#6366f1';
+                }
+            }
+        }
+
+        // Update token button status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTokenButtonStatus();
+        });
     </script>
 </body>
 </html>

@@ -42,10 +42,22 @@ jobs:
           # Parse new property from environment variable (safer than direct interpolation)
           new_property_json = os.environ.get('PROPERTY_JSON', '{}')
           
+          # Clean up the input - remove surrounding quotes if present
+          new_property_json = new_property_json.strip()
+          # If the entire input is wrapped in quotes, remove them
+          if (new_property_json.startswith('"') and new_property_json.endswith('"')) or \
+             (new_property_json.startswith("'") and new_property_json.endswith("'")):
+              new_property_json = new_property_json[1:-1]
+              # Unescape any escaped quotes
+              new_property_json = new_property_json.replace('\\"', '"').replace("\\'", "'")
+          
           try:
               new_property = json.loads(new_property_json)
           except json.JSONDecodeError as e:
               print(f"❌ Error: Invalid JSON input - {e}")
+              print(f"Received input: {new_property_json[:200]}...")
+              print("\nPlease ensure the input is valid JSON. Example:")
+              print('{"reference": "VT-1234", "transaction": "sale", "propertyType": "apartment", ...}')
               sys.exit(1)
           
           # Validate required fields
