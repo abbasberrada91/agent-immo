@@ -970,6 +970,7 @@
             const owner = 'abbasberrada91';
             const repo = 'agent-immo';
             const workflowFile = 'add-property.yml';
+            const branch = 'work';  // Default branch - change to 'main' or 'master' if needed
 
             // Prepare the property data
             // Note: mainPhoto and additionalPhotos are removed because they're too large for workflow input.
@@ -1007,7 +1008,7 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            ref: 'work',  // or 'main' depending on your default branch
+                            ref: branch,
                             inputs: {
                                 property_json: propertyJson
                             }
@@ -1025,7 +1026,10 @@
                                 window.open(workflowUrl, '_blank');
                             }, 1000);
                         } else {
-                            throw new Error(`HTTP ${response.status}`);
+                            // Try to get error details
+                            return response.text().then(text => {
+                                throw new Error(`HTTP ${response.status} ${response.statusText}: ${text}`);
+                            });
                         }
                     })
                     .catch(error => {
@@ -1063,11 +1067,14 @@
                     const token = prompt('Entrez votre GitHub Personal Access Token:\n\n' +
                         'Ce token doit avoir la permission "workflow".\n' +
                         'Il sera stocké localement dans votre navigateur.\n\n' +
+                        '⚠️ Note: Le token sera visible pendant la saisie.\n' +
+                        'Assurez-vous que personne ne regarde votre écran.\n\n' +
                         'Pour créer un token: GitHub → Settings → Developer settings → Personal access tokens');
                     
                     if (token && token.trim()) {
                         localStorage.setItem('githubToken', token.trim());
                         alert('✅ Token enregistré!\n\nVous pouvez maintenant cliquer à nouveau pour ajouter le bien automatiquement.');
+                        updateTokenButtonStatus();
                     } else {
                         alert('ℹ️ Pas de token fourni. Utilisez la méthode manuelle en téléchargeant biens.json.');
                     }
