@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un appartement - Henri Martin Immobilier</title>
     <script src="auth.js"></script>
+    <script src="api.js"></script>
     <script>
         // Vérifier l'authentification au chargement de la page
         checkAuthentication();
@@ -520,22 +521,25 @@
             <pre id="jsonOutput"></pre>
             <button class="copy-btn" onclick="copyToClipboard()">📋 Copier le JSON</button>
             <button class="copy-btn" onclick="downloadUpdatedBiens()" style="background: #4299e1; margin-left: 10px;">💾 Télécharger biens.json mis à jour</button>
-            <button class="copy-btn" onclick="triggerGitHubWorkflow()" style="background: #10b981; margin-left: 10px;" id="autoAddBtn">🚀 Ajouter automatiquement (GitHub)</button>
+            <button class="copy-btn" onclick="publishProperty()" style="background: #10b981; margin-left: 10px;" id="publishBtn">🚀 Publier maintenant</button>
             <button class="copy-btn" onclick="manageGitHubToken()" style="background: #6366f1; margin-left: 10px; font-size: 13px;" id="tokenBtn">⚙️ Configurer Token</button>
+            <button class="copy-btn" onclick="viewAdminPanel()" style="background: #8b5cf6; margin-left: 10px; font-size: 13px;">📊 Voir mes biens</button>
+            <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 6px; display: none;"></div>
             <div style="margin-top: 20px; padding: 15px; background: #e0f2fe; border-radius: 6px; border-left: 4px solid #0ea5e9;">
                 <p style="color: #0c4a6e; font-size: 13px; line-height: 1.6;">
-                    <strong>💡 Options d'ajout :</strong><br>
-                    <strong>Option 1 (Manuel) :</strong><br>
+                    <strong>💡 Nouvelle fonctionnalité - Ajout automatique !</strong><br>
+                    <strong>Option 1 (Automatique - Recommandé) :</strong><br>
+                    1. Cliquez sur "⚙️ Configurer Token" pour ajouter votre GitHub token (une seule fois)<br>
+                    2. Cliquez sur "🚀 Publier maintenant"<br>
+                    3. Le bien sera ajouté automatiquement à votre liste !<br>
+                    4. Vous verrez le statut "Bien ajouté avec succès" ou "Erreur"<br>
+                    <br>
+                    <strong>Option 2 (Manuel) :</strong><br>
                     1. Cliquez sur "💾 Télécharger biens.json mis à jour"<br>
                     2. Remplacez l'ancien fichier biens.json dans votre projet<br>
                     3. Committez et poussez les changements<br>
                     <br>
-                    <strong>Option 2 (Automatique - Recommandé) :</strong><br>
-                    1. Cliquez sur "⚙️ Configurer Token" pour ajouter votre GitHub token (une seule fois)<br>
-                    2. Cliquez sur "🚀 Ajouter automatiquement (GitHub)"<br>
-                    3. Le workflow GitHub Actions ajoutera automatiquement le bien !<br>
-                    <br>
-                    <em>Note: Pour créer un token GitHub, allez sur GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token avec la permission "workflow"</em>
+                    <em>Note: Pour créer un token GitHub, allez sur GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token avec les permissions "repo" et "workflow"</em>
                 </p>
             </div>
         </div>
@@ -1105,6 +1109,140 @@
             }
         }
 
+        async function publishProperty() {
+            if (!newApartmentData) {
+                alert('❌ Erreur: Aucune donnée d\'appartement disponible');
+                return;
+            }
+
+            const btn = document.getElementById('publishBtn');
+            const statusDiv = document.getElementById('statusMessage');
+            const originalText = btn.textContent;
+            const originalBg = btn.style.background;
+
+            // Check if token is configured
+            const token = localStorage.getItem('githubToken');
+            if (!token) {
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#fef3c7';
+                statusDiv.style.borderLeft = '4px solid #f59e0b';
+                statusDiv.innerHTML = `
+                    <p style="color: #92400e; font-weight: 600; margin-bottom: 8px;">⚠️ Token GitHub non configuré</p>
+                    <p style="color: #92400e; font-size: 13px;">
+                        Veuillez cliquer sur "⚙️ Configurer Token" pour configurer votre token GitHub avant de publier.
+                    </p>
+                `;
+                return;
+            }
+
+            // Show loading state
+            btn.disabled = true;
+            btn.textContent = '⏳ Publication en cours...';
+            btn.style.background = '#f59e0b';
+            
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = '#dbeafe';
+            statusDiv.style.borderLeft = '4px solid #3b82f6';
+            statusDiv.innerHTML = `
+                <p style="color: #1e40af; font-weight: 600;">⏳ Ajout du bien en cours...</p>
+                <p style="color: #1e40af; font-size: 13px;">Veuillez patienter quelques secondes.</p>
+            `;
+
+            try {
+                // Prepare property data (remove photos for now)
+                const propertyToAdd = { ...newApartmentData };
+                delete propertyToAdd.mainPhoto;
+                delete propertyToAdd.additionalPhotos;
+
+                // Call the API
+                const result = await window.propertyAPI.addProperty(propertyToAdd);
+
+                if (result.success) {
+                    // Success!
+                    btn.textContent = '✅ Bien ajouté !';
+                    btn.style.background = '#10b981';
+                    
+                    statusDiv.style.background = '#d1fae5';
+                    statusDiv.style.borderLeft = '4px solid #10b981';
+                    statusDiv.innerHTML = `
+                        <p style="color: #065f46; font-weight: 600; margin-bottom: 8px;">✅ Bien ajouté avec succès !</p>
+                        <p style="color: #065f46; font-size: 13px; margin-bottom: 10px;">
+                            Le bien <strong>${propertyToAdd.reference}</strong> a été ajouté à votre liste.
+                        </p>
+                        <p style="color: #065f46; font-size: 13px;">
+                            📅 Date d'ajout : ${new Date(result.property.dateAdded).toLocaleString('fr-FR')}<br>
+                            📊 Statut : ${result.property.status === 'published' ? 'Publié' : result.property.status}
+                        </p>
+                    `;
+
+                    // Add link to admin panel after success
+                    setTimeout(() => {
+                        const viewLink = document.createElement('a');
+                        viewLink.href = 'admin_properties.html';
+                        viewLink.textContent = '📊 Voir tous mes biens';
+                        viewLink.className = 'copy-btn';
+                        viewLink.style.background = '#8b5cf6';
+                        viewLink.style.marginTop = '15px';
+                        viewLink.style.display = 'inline-block';
+                        statusDiv.appendChild(viewLink);
+                    }, 500);
+
+                } else {
+                    // Error occurred
+                    btn.textContent = '❌ Erreur';
+                    btn.style.background = '#ef4444';
+                    
+                    let errorMessage = result.message;
+                    if (result.error === 'DUPLICATE') {
+                        statusDiv.style.background = '#fee2e2';
+                        statusDiv.style.borderLeft = '4px solid #dc2626';
+                        statusDiv.innerHTML = `
+                            <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur : Bien déjà existant</p>
+                            <p style="color: #991b1b; font-size: 13px;">
+                                ${errorMessage}<br><br>
+                                Veuillez changer la référence du bien ou modifier le bien existant depuis l'interface admin.
+                            </p>
+                        `;
+                    } else {
+                        statusDiv.style.background = '#fee2e2';
+                        statusDiv.style.borderLeft = '4px solid #dc2626';
+                        statusDiv.innerHTML = `
+                            <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur lors de l'ajout</p>
+                            <p style="color: #991b1b; font-size: 13px;">
+                                ${errorMessage}<br><br>
+                                Veuillez vérifier votre token GitHub ou utiliser l'option de téléchargement manuel.
+                            </p>
+                        `;
+                    }
+                }
+            } catch (error) {
+                // Unexpected error
+                btn.textContent = '❌ Erreur';
+                btn.style.background = '#ef4444';
+                
+                statusDiv.style.background = '#fee2e2';
+                statusDiv.style.borderLeft = '4px solid #dc2626';
+                statusDiv.innerHTML = `
+                    <p style="color: #991b1b; font-weight: 600; margin-bottom: 8px;">❌ Erreur inattendue</p>
+                    <p style="color: #991b1b; font-size: 13px;">
+                        ${error.message}<br><br>
+                        Veuillez réessayer ou utiliser l'option de téléchargement manuel.
+                    </p>
+                `;
+            }
+
+            // Reset button after delay
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = originalBg;
+                btn.disabled = false;
+            }, 3000);
+        }
+
+        function viewAdminPanel() {
+            window.open('admin_properties.html', '_blank');
+        }
+
         function manageGitHubToken() {
             const currentToken = localStorage.getItem('githubToken');
             
@@ -1121,7 +1259,7 @@
                 } else {
                     // Replace token
                     const newToken = prompt('Entrez votre nouveau GitHub Personal Access Token:\n\n' +
-                        'Ce token doit avoir la permission "workflow".\n\n' +
+                        'Ce token doit avoir les permissions "repo" et "workflow".\n\n' +
                         'Pour créer un token: GitHub → Settings → Developer settings → Personal access tokens');
                     
                     if (newToken && newToken.trim()) {
@@ -1133,13 +1271,13 @@
             } else {
                 // Add new token
                 const token = prompt('Entrez votre GitHub Personal Access Token:\n\n' +
-                    'Ce token doit avoir la permission "workflow".\n' +
+                    'Ce token doit avoir les permissions "repo" et "workflow".\n' +
                     'Il sera stocké localement dans votre navigateur.\n\n' +
                     'Pour créer un token:\n' +
                     '1. Allez sur GitHub → Settings → Developer settings\n' +
                     '2. Personal access tokens → Tokens (classic)\n' +
                     '3. Generate new token (classic)\n' +
-                    '4. Cochez la permission "workflow"\n' +
+                    '4. Cochez les permissions "repo" (Full control) et "workflow"\n' +
                     '5. Générez le token et copiez-le');
                 
                 if (token && token.trim()) {
