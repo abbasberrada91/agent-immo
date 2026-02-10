@@ -2,7 +2,7 @@
 
 Ce guide explique comment utiliser la nouvelle fonctionnalité d'ajout automatique de biens via GitHub Actions.
 
-## Problème Résolu
+## Problèmes Résolus
 
 ### 1. Erreur JSON
 **Problème**: Erreur "Invalid JSON input - Extra data: line 1 column 4 (char 3)"
@@ -11,11 +11,15 @@ Ce guide explique comment utiliser la nouvelle fonctionnalité d'ajout automatiq
 - Les JSON entourés de guillemets supplémentaires
 - Les espaces blancs en début/fin
 - Les guillemets échappés
+- Affichage limité à 100 caractères dans les logs pour protéger les données sensibles
 
 ### 2. Déclenchement Manuel
 **Problème**: Il fallait aller manuellement sur GitHub Actions pour déclencher le workflow
 
 **Solution**: Le workflow peut maintenant être déclenché automatiquement via l'interface web
+- Utilisation de l'API GitHub pour le déclenchement automatique
+- Messages d'erreur détaillés avec codes HTTP et descriptions
+- Support de plusieurs branches (work, main, master)
 
 ## Configuration (Une seule fois)
 
@@ -79,6 +83,25 @@ Le bouton "⚙️ Configurer Token" affiche :
 - Le token n'est jamais envoyé à un serveur tiers
 - Le token est utilisé uniquement pour déclencher le workflow GitHub
 - Vous pouvez révoquer le token à tout moment sur GitHub
+- ⚠️ Le token est visible pendant la saisie - assurez-vous que personne ne regarde votre écran
+- Les logs du workflow n'affichent que les 100 premiers caractères en cas d'erreur pour protéger vos données
+
+## Configuration Avancée
+
+### Changer la Branche par Défaut
+Si votre dépôt utilise `main` ou `master` au lieu de `work`, modifiez la ligne suivante dans `ajouter_appartement.html` :
+
+```javascript
+const branch = 'work';  // Changez en 'main' ou 'master' selon votre configuration
+```
+
+### Dépannage des Erreurs API
+Le système affiche maintenant des messages d'erreur détaillés incluant :
+- Le code HTTP (ex: 401, 403, 404)
+- Le statut (ex: Unauthorized, Forbidden)
+- Le message d'erreur complet de l'API GitHub
+
+Cela vous aide à identifier rapidement le problème (token invalide, permissions manquantes, etc.)
 
 ## Dépannage
 
