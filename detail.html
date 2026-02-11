@@ -1194,7 +1194,7 @@
           </div>
         `;
         
-        // Deposit (typically 1-2 months rent)
+        // Deposit (default to 1 month rent if not specified)
         const deposit = property.deposit || property.price;
         html += `
           <div class="term-item">
@@ -1249,6 +1249,8 @@
        */
       function displayRelatedProperties(property) {
         const relatedContainer = document.getElementById('related-properties');
+        const PRICE_SIMILARITY_THRESHOLD = 0.5; // Match properties within 50% price range
+        const MAX_RELATED_PROPERTIES = 3;
         
         // Load all properties to find similar ones
         fetch('biens.json', { cache: 'no-cache' })
@@ -1260,9 +1262,9 @@
                 p.reference !== property.reference &&
                 p.transaction === property.transaction &&
                 (p.city === property.city || p.propertyType === property.propertyType) &&
-                Math.abs(p.price - property.price) < property.price * 0.5 // Within 50% price range
+                Math.abs(p.price - property.price) < property.price * PRICE_SIMILARITY_THRESHOLD
               )
-              .slice(0, 3); // Show max 3 related properties
+              .slice(0, MAX_RELATED_PROPERTIES);
             
             if (similarProperties.length === 0) {
               relatedContainer.innerHTML = '<p style="text-align: center; color: var(--muted);">Aucun bien similaire disponible pour le moment.</p>';
