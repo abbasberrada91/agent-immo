@@ -1,0 +1,83 @@
+name: Cloudinary Gallery (print JSON)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Référence du bien (ex: LC01, V01) — doit correspondre au dossier Cloudinary"
+        required: true
+        type: string
+      max_results:
+        description: "Max images (1-500)"
+        required: false
+        default: "200"
+        type: string
+
+jobs:
+  gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate gallery JSON from Cloudinary folder = ref
+        env:
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          REF: ${{ inputs.ref }}
+          MAX_RESULTS: ${{ inputs.max_results }}
+        run: |
+          node - <<'NODE'
+          const cloud = process.env.CLOUDINARY_CLOUD_NAME;
+          const key = process.env.CLOUDINARY_API_KEY;
+          const secret = process.env.CLOUDINARY_API_SECRET;
+          const ref = (process.env.REF || "").trim();
+          const folder = ref; // ✅ Cloudinary folder name = LC01 / V01
+          const maxResults = Math.min(Math.max(parseInt(process.env.MAX_RESULTS || "200", 10), 1), 500);
+
+          function fail(msg) { console.error(msg); process.exit(1); }
+
+          if (!cloud || !key || !secret) fail("Missing Cloudinary secrets: set CLOUDINARY_CLOUD_NAME / CLOUDINARY_API_KEY / CLOUDINARY_API_SECRET in GitHub Secrets.");
+          if (!ref) fail("Missing input ref (ex: LC01).");
+
+          const url = `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloud)}/resources/search`;
+          const auth = Buffer.from(`${key}:${secret}`).toString("base64");
+
+          const body = {
+            expression: `folder:"${folder.replace(/"/g, '\\"')}"`,
+            sort_by: [{ public_id: "asc" }],
+            max_results: maxResults
+          };
+
+          (async () => {
+            const res = await fetch(url, {
+              method: "POST",
+              headers: { "Authorization": `Basic ${auth}`, "Content-Type": "application/json" },
+              body: JSON.stringify(body)
+            });
+
+            if (!res.ok) {
+              const text = await res.text().catch(() => "");
+              fail(`Cloudinary API error ${res.status}. ${text.slice(0, 500)}`);
+            }
+
+            const json = await res.json();
+            const resources = Array.isArray(json.resources) ? json.resources : [];
+            const urls = resources.map(r => r.secure_url).filter(Boolean);
+
+            if (!urls.length) fail(`No images found in folder: "${folder}". Check that your Cloudinary folder name is exactly "${ref}".`);
+
+            const output = { ref, folder, image: urls[0], images: urls };
+            const pretty = JSON.stringify(output, null, 2);
+
+            console.log("\n=== CLOUDINARY GALLERY JSON ===\n");
+            console.log(pretty);
+            console.log("\n==============================\n");
+
+            const fs = require("fs");
+            const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+            if (summaryPath) {
+              fs.appendFileSync(summaryPath, `## Cloudinary gallery for ref: \`${ref}\` (folder: \`${folder}\`)\n\n`);
+              fs.appendFileSync(summaryPath, "Copie-colle ce JSON dans ton `biens.json` (champs `image` + `images`).\n\n");
+              fs.appendFileSync(summaryPath, "```json\n" + pretty + "\n```\n");
+            }
+          })().catch(err => fail(err?.stack || String(err)));
+          NODE
