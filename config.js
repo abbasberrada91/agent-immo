@@ -194,7 +194,7 @@ const AppConfig = {
         encodeBase64: (content) => {
             // Encode UTF-8 to base64 properly for GitHub API
             return btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, 
-                (match, p1) => String.fromCharCode('0x' + p1)));
+                (match, p1) => String.fromCharCode(parseInt(p1, 16))));
         },
         
         // Décoder du contenu base64 de l'API GitHub
