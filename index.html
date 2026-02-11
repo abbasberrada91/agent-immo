@@ -15,11 +15,104 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="drawer.css" />
   </head>
   <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="#biens">Biens à louer</a>
+            <a href="services/estimation.html">Estimation locative</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="#biens">Biens à vendre</a>
+            <a href="services/estimation.html">Estimation vente</a>
+            <a href="ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="services/estimation.html">Estimation gratuite</a>
+            <a href="services/rentabilite.html">Calcul de rentabilité</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+            <a href="services/modes-location.html">Modes de location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="agence/histoire.html">Histoire</a>
+            <a href="agence/equipe.html">Équipe</a>
+            <a href="agence/temoignages.html">Témoignages</a>
+            <a href="agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+
+        <div class="drawer-section drawer-section-simple">
+          <a href="blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
     <header class="hero" id="top">
       <div class="overlay"></div>
       <nav class="top-nav container">
+        <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <a href="#top" class="brand">Henri Martin Immobilier</a>
         <div class="nav-links">
           <a href="#biens">Nos biens</a>
@@ -135,6 +228,7 @@
 
     <script src="auth.js"></script>
     <script src="script.js"></script>
+    <script src="drawer.js"></script>
     <script>
       // Vérifier si l'utilisateur est connecté et mettre à jour le bouton
       window.addEventListener('DOMContentLoaded', function() {

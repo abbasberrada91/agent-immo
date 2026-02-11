@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choisir le bon mode de location | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Particulier, société ou coliving : comparez les modes de location pour votre bien"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .page-header {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 3rem 0 2.5rem;
+      }
+
+      .page-header h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .page-header .intro {
+        max-width: 750px;
+        color: #d9e5f3;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+      }
+
+      .content-section h2 {
+        color: var(--brand);
+        margin: 0 0 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 0.8rem;
+      }
+
+      .content-section h3 {
+        color: var(--brand-soft);
+        margin: 1.5rem 0 1rem;
+        font-size: 1.25rem;
+      }
+
+      .content-section h4 {
+        color: var(--ink);
+        margin: 1rem 0 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      .content-section p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+      }
+
+      .content-section ul {
+        color: var(--muted);
+        line-height: 1.8;
+        margin: 0.5rem 0 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      .content-section li {
+        margin-bottom: 0.4rem;
+      }
+
+      .mode-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .mode-card {
+        background: var(--bg);
+        padding: 1.8rem;
+        border-radius: 0.8rem;
+        border: 1px solid #e5edf4;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .mode-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(16, 35, 63, 0.1);
+      }
+
+      .mode-card h3 {
+        color: var(--brand);
+        margin: 0 0 1rem;
+        font-size: 1.3rem;
+      }
+
+      .mode-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .mode-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        background: white;
+        border-radius: 0.8rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(16, 35, 63, 0.06);
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e5edf4;
+      }
+
+      .comparison-table thead {
+        background: var(--brand);
+        color: white;
+      }
+
+      .comparison-table th {
+        font-weight: 600;
+      }
+
+      .comparison-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .comparison-table tbody tr:hover {
+        background: var(--bg);
+      }
+
+      .rating {
+        display: flex;
+        gap: 0.2rem;
+      }
+
+      .rating-star {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+      }
+
+      .rating-star.filled {
+        color: #f59e0b;
+      }
+
+      .rating-star.empty {
+        color: #d1d5db;
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+        color: white;
+        border: none;
+        padding: 0;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .comparison-table {
+          font-size: 0.9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+          padding: 0.7rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="estimation.html">Estimation locative</a>
+            <a href="mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="estimation.html">Estimation gratuite</a>
+            <a href="rentabilite.html">Calcul de rentabilité</a>
+            <a href="mise-en-location.html">Mise en location</a>
+            <a href="modes-location.html">Modes de location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="../agence/histoire.html">Histoire</a>
+            <a href="../agence/equipe.html">Équipe</a>
+            <a href="../agence/temoignages.html">Témoignages</a>
+            <a href="../agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="page-header">
+      <div class="container">
+        <h1>Choisir le bon mode de location</h1>
+        <p class="intro">
+          Location à un particulier, à une société ou en coliving : chaque formule
+          présente des avantages et des spécificités. Nous vous aidons à identifier
+          le mode de location le plus adapté à votre bien et à vos objectifs.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <a href="../services.html" class="back-link">← Retour aux services</a>
+
+      <section class="content-section">
+        <h2>Les trois principaux modes de location</h2>
+        
+        <div class="mode-grid">
+          <div class="mode-card">
+            <h3>Location à un particulier</h3>
+            
+            <div class="mode-section">
+              <h4>Pour qui ?</h4>
+              <p>
+                La majorité des logements résidentiels : appartements, maisons,
+                studios. Adapté aux propriétaires souhaitant une gestion simple
+                et un locataire stable sur plusieurs années.
+              </p>
+            </div>
+
+            <div class="mode-section">
+              <h4>Avantages</h4>
+              <ul>
+                <li>Procédure classique et encadrée par la loi</li>
+                <li>Bail longue durée (3 ans vide, 1 an meublé)</li>
+                <li>Marché large, demande constante</li>
+                <li>Gestion administrative simplifiée</li>
+              </ul>
+            </div>
+
+            <div class="mode-section">
+              <h4>Points d'attention</h4>
+              <ul>
+                <li>Vérifier la solvabilité du locataire (garant ou GLI)</li>
+                <li>Respecter les plafonds de loyer si zone tendue</li>
+                <li>Prévoir une clause de résiliation propriétaire si besoin</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mode-card">
+            <h3>Location à une société</h3>
+            
+            <div class="mode-section">
+              <h4>Pour qui ?</h4>
+              <p>
+                Logements de standing adaptés aux cadres en mobilité professionnelle,
+                expatriés ou logements de fonction. Surface et prestations doivent
+                correspondre à un profil d'entreprise.
+              </p>
+            </div>
+
+            <div class="mode-section">
+              <h4>Avantages</h4>
+              <ul>
+                <li>Sécurité du loyer (locataire = entreprise)</li>
+                <li>Bail court possible (quelques mois)</li>
+                <li>Loyer potentiellement plus élevé</li>
+                <li>Moins de risques d'impayés</li>
+              </ul>
+            </div>
+
+            <div class="mode-section">
+              <h4>Points d'attention</h4>
+              <ul>
+                <li>Nécessite un bien bien situé et de qualité</li>
+                <li>Marché plus restreint et saisonnier</li>
+                <li>Turnover plus fréquent (vacance à anticiper)</li>
+                <li>Bail spécifique mobilité ou société à rédiger</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mode-card">
+            <h3>Coliving / Logement partagé</h3>
+            
+            <div class="mode-section">
+              <h4>Pour qui ?</h4>
+              <p>
+                Grandes surfaces (T4+), maisons avec plusieurs chambres, biens
+                bien desservis par les transports. Particulièrement adapté aux zones
+                avec forte demande étudiante ou jeunes actifs.
+              </p>
+            </div>
+
+            <div class="mode-section">
+              <h4>Avantages</h4>
+              <ul>
+                <li>Rentabilité supérieure (loyer par chambre)</li>
+                <li>Mutualisation du risque (plusieurs locataires)</li>
+                <li>Demande forte dans certaines zones</li>
+                <li>Valorisation de grandes surfaces</li>
+              </ul>
+            </div>
+
+            <div class="mode-section">
+              <h4>Points d'attention</h4>
+              <ul>
+                <li>Gestion plus intensive (turnover, entretien)</li>
+                <li>Nécessite aménagement et équipement adapté</li>
+                <li>Bail solidaire ou baux individuels à définir</li>
+                <li>Usure du logement plus rapide</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Tableau comparatif</h2>
+        
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Particulier</th>
+              <th>Société</th>
+              <th>Coliving</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sécurité du loyer</strong></td>
+              <td>⭐⭐⭐ Moyenne</td>
+              <td>⭐⭐⭐⭐⭐ Excellente</td>
+              <td>⭐⭐⭐⭐ Bonne</td>
+            </tr>
+            <tr>
+              <td><strong>Rentabilité</strong></td>
+              <td>⭐⭐⭐ Standard</td>
+              <td>⭐⭐⭐⭐ Élevée</td>
+              <td>⭐⭐⭐⭐⭐ Très élevée</td>
+            </tr>
+            <tr>
+              <td><strong>Simplicité de gestion</strong></td>
+              <td>⭐⭐⭐⭐⭐ Très simple</td>
+              <td>⭐⭐⭐⭐ Simple</td>
+              <td>⭐⭐ Complexe</td>
+            </tr>
+            <tr>
+              <td><strong>Flexibilité</strong></td>
+              <td>⭐⭐⭐ Moyenne</td>
+              <td>⭐⭐⭐⭐⭐ Excellente</td>
+              <td>⭐⭐⭐ Moyenne</td>
+            </tr>
+            <tr>
+              <td><strong>Marché</strong></td>
+              <td>Large et stable</td>
+              <td>Restreint et saisonnier</td>
+              <td>Croissant dans certaines zones</td>
+            </tr>
+            <tr>
+              <td><strong>Durée de bail</strong></td>
+              <td>3 ans (vide) / 1 an (meublé)</td>
+              <td>Quelques mois à 1 an</td>
+              <td>1 an (meublé)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          Ce tableau comparatif est une vue d'ensemble. Chaque situation est unique
+          et mérite une analyse personnalisée en fonction de votre bien, votre objectif
+          (rendement, sécurité, simplicité) et de l'état du marché local.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Comment choisir ?</h2>
+        
+        <h3>Analysez votre bien</h3>
+        <p>
+          La surface, la localisation, le standing et l'agencement orientent naturellement
+          vers certains modes. Un studio ou T2 bien placé convient à un particulier,
+          un T3/T4 haut de gamme à une société, une grande maison au coliving.
+        </p>
+
+        <h3>Définissez vos priorités</h3>
+        <p>
+          Cherchez-vous la rentabilité maximale, la sécurité du loyer, la simplicité
+          de gestion ou la flexibilité ? Chaque mode répond à des objectifs différents.
+        </p>
+
+        <h3>Évaluez le marché local</h3>
+        <p>
+          La tension locative, la demande par profil (étudiant, jeune actif, cadre,
+          famille) et l'offre concurrente influencent directement la pertinence
+          de chaque formule. Nous analysons le marché pour vous orienter.
+        </p>
+      </section>
+
+      <section class="cta-section">
+        <h2>Besoin de conseils personnalisés ?</h2>
+        <p>
+          Contactez-nous pour identifier ensemble le mode de location le plus adapté
+          à votre bien et à vos objectifs patrimoniaux.
+        </p>
+        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>

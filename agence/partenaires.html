@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nos Partenaires | Henri Martin Immobilier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .placeholder-container {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .placeholder-content {
+        max-width: 600px;
+      }
+
+      .placeholder-content h1 {
+        color: var(--brand);
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+      }
+
+      .placeholder-content p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .placeholder-link {
+        display: inline-block;
+        background: var(--brand);
+        color: white;
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .placeholder-link:hover {
+        background: var(--brand-soft);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="../services/estimation.html">Estimation locative</a>
+            <a href="../services/mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="../services/estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="../services/estimation.html">Estimation gratuite</a>
+            <a href="../services/rentabilite.html">Calcul de rentabilité</a>
+            <a href="../services/mise-en-location.html">Mise en location</a>
+            <a href="../services/modes-location.html">Modes de location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="histoire.html">Histoire</a>
+            <a href="equipe.html">Équipe</a>
+            <a href="temoignages.html">Témoignages</a>
+            <a href="partenaires.html">Partenaires</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <main class="placeholder-container">
+      <div class="placeholder-content">
+        <h1>Nos Partenaires</h1>
+        <p>
+          Cette page est en cours de construction. Découvrez prochainement
+          notre réseau de partenaires de confiance.
+        </p>
+        <a href="../index.html" class="placeholder-link">Retour à l'accueil</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>

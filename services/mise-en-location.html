@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mise en location : accompagnement sur mesure | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Un accompagnement complet pour la location de votre bien immobilier"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .page-header {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 3rem 0 2.5rem;
+      }
+
+      .page-header h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .page-header .intro {
+        max-width: 750px;
+        color: #d9e5f3;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+      }
+
+      .content-section h2 {
+        color: var(--brand);
+        margin: 0 0 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 0.8rem;
+      }
+
+      .content-section h3 {
+        color: var(--brand-soft);
+        margin: 1.5rem 0 1rem;
+        font-size: 1.25rem;
+      }
+
+      .content-section p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+      }
+
+      .content-section ul, .content-section ol {
+        color: var(--muted);
+        line-height: 1.8;
+        margin: 1rem 0 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      .content-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      .step-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .step-card {
+        background: var(--bg);
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+        border: 1px solid #e5edf4;
+        position: relative;
+      }
+
+      .step-number {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: var(--brand);
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 32px;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+      }
+
+      .step-card h4 {
+        color: var(--brand);
+        margin: 0 0 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      .step-card p {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .target-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .target-card {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 1.8rem;
+        border-radius: 0.8rem;
+        box-shadow: 0 4px 12px rgba(22, 58, 95, 0.2);
+      }
+
+      .target-card h4 {
+        margin: 0 0 1rem;
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      .target-card p {
+        margin: 0;
+        color: #d9e5f3;
+        line-height: 1.6;
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+        color: white;
+        border: none;
+        padding: 0;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="estimation.html">Estimation locative</a>
+            <a href="mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="estimation.html">Estimation gratuite</a>
+            <a href="rentabilite.html">Calcul de rentabilité</a>
+            <a href="mise-en-location.html">Mise en location</a>
+            <a href="modes-location.html">Modes de location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="../agence/histoire.html">Histoire</a>
+            <a href="../agence/equipe.html">Équipe</a>
+            <a href="../agence/temoignages.html">Témoignages</a>
+            <a href="../agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="page-header">
+      <div class="container">
+        <h1>Mise en location : un accompagnement sur mesure</h1>
+        <p class="intro">
+          De la préparation de votre bien à la signature du bail, nous vous accompagnons
+          à chaque étape pour sécuriser et optimiser la mise en location de votre propriété.
+          Un processus structuré pour trouver rapidement un locataire de qualité.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <a href="../services.html" class="back-link">← Retour aux services</a>
+
+      <section class="content-section">
+        <h2>Notre parcours de mise en location</h2>
+        
+        <div class="step-grid">
+          <div class="step-card">
+            <span class="step-number">1</span>
+            <h4>Cadrage du projet</h4>
+            <p>
+              Analyse de votre bien, de vos objectifs et contraintes. Estimation du
+              loyer de marché, choix du mode de location et du type de locataire recherché.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">2</span>
+            <h4>Constitution du dossier</h4>
+            <p>
+              Préparation du dossier de présentation (photos, descriptif, plans),
+              rédaction de l'annonce et diffusion sur les canaux adaptés à votre cible.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">3</span>
+            <h4>Sélection des locataires</h4>
+            <p>
+              Organisation des visites, collecte et analyse des dossiers de candidature,
+              vérifications (solvabilité, références) et présentation des meilleurs profils.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">4</span>
+            <h4>Signature du bail</h4>
+            <p>
+              Rédaction du contrat de location conforme à la réglementation en vigueur,
+              signature avec le locataire retenu et remise des clés.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">5</span>
+            <h4>État des lieux</h4>
+            <p>
+              Réalisation de l'état des lieux d'entrée détaillé et contradictoire,
+              sécurisant les deux parties et facilitant la sortie du locataire.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Ce que nous gérons pour vous</h2>
+        
+        <ul>
+          <li>
+            <strong>Estimation du loyer de marché</strong> : analyse des comparables
+            et recommandation d'un loyer adapté pour une location rapide.
+          </li>
+          <li>
+            <strong>Préparation du bien</strong> : conseils sur les travaux et
+            aménagements pour maximiser l'attractivité et le loyer.
+          </li>
+          <li>
+            <strong>Photos et visuel</strong> : prise de photos professionnelles
+            ou conseils pour valoriser votre bien dans l'annonce.
+          </li>
+          <li>
+            <strong>Diffusion ciblée</strong> : publication sur les plateformes
+            adaptées à votre type de bien et à votre cible (particulier, société, coliving).
+          </li>
+          <li>
+            <strong>Gestion des visites</strong> : organisation, présentation du bien
+            et réponse aux questions des candidats locataires.
+          </li>
+          <li>
+            <strong>Vérification des dossiers</strong> : contrôle des documents,
+            calcul du taux d'effort, vérification des références employeur et précédents
+            bailleurs.
+          </li>
+          <li>
+            <strong>Conseil juridique</strong> : rédaction d'un bail conforme à la loi,
+            respect des plafonds de loyer (si applicable), clauses adaptées.
+          </li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>Nos cibles de location</h2>
+        
+        <div class="target-grid">
+          <div class="target-card">
+            <h4>Location à un particulier</h4>
+            <p>
+              Le mode classique, adapté à la majorité des biens résidentiels. Bail
+              de 3 ans minimum (vide) ou 1 an (meublé), locataire unique ou en colocation.
+              Nous vérifions la solvabilité et les garanties (garant physique ou GLI).
+            </p>
+          </div>
+
+          <div class="target-card">
+            <h4>Location à une société</h4>
+            <p>
+              Pour les logements de fonction, expatriés ou mobilité professionnelle.
+              Le locataire est l'entreprise, ce qui renforce la sécurité du loyer.
+              Nécessite un bail spécifique et une surface adaptée aux cadres.
+            </p>
+          </div>
+
+          <div class="target-card">
+            <h4>Coliving / Logement partagé</h4>
+            <p>
+              Formule en développement, particulièrement pour les grandes surfaces
+              ou maisons avec plusieurs chambres. Plusieurs locataires signent un bail
+              unique (bail commun) ou individuel. Rentabilité supérieure mais gestion
+              plus intensive.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <h2>Lancer votre mise en location</h2>
+        <p>
+          Contactez-nous pour démarrer l'accompagnement de votre projet de location
+          et trouver rapidement un locataire fiable.
+        </p>
+        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>
