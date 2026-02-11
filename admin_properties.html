@@ -393,6 +393,125 @@
                 min-width: 800px;
             }
         }
+
+        /* Photo Management Styles */
+        .help-text {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        .files-info {
+            padding: 8px;
+            margin-top: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .photos-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .photo-item {
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            cursor: move;
+            transition: all 0.2s;
+        }
+
+        .photo-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .photo-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+
+        .photo-item.drag-over {
+            border-color: #667eea;
+            border-style: solid;
+            background: #ebf4ff;
+        }
+
+        .photo-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .photo-item-number {
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drag-handle {
+            cursor: move;
+            font-size: 18px;
+            color: #718096;
+        }
+
+        .photo-item-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .move-btn {
+            padding: 4px 12px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .move-btn:hover {
+            background: #cbd5e0;
+        }
+
+        .photo-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .photo-item img {
+            max-width: 150px;
+            max-height: 120px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .remove-photo-btn {
+            padding: 4px 12px;
+            background: #fc8181;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .remove-photo-btn:hover {
+            background: #f56565;
+        }
+
+        .photo-caption {
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -625,6 +744,15 @@
                     <input type="text" id="editAlt" placeholder="Appartement moderne avec balcon">
                     <div style="font-size: 12px; color: #718096; margin-top: 4px;">Décrivez la photo pour l'accessibilité</div>
                 </div>
+
+                <div class="form-group">
+                    <label>Photos supplémentaires</label>
+                    <input type="file" id="editMultiplePhotos" multiple accept="image/*,application/pdf" style="margin-bottom: 10px;">
+                    <div class="help-text">Sélectionnez plusieurs photos en une seule fois</div>
+                    <div class="files-info" id="editFilesInfo" role="status" aria-live="polite"></div>
+                </div>
+                <div id="editAdditionalPhotos" class="photos-container"></div>
+                <div class="help-text">💡 Glissez-déposez les photos pour les réorganiser, ou utilisez les flèches ↑↓</div>
 
                 <div class="form-group">
                     <label>URL Fiche Canva</label>
@@ -890,11 +1018,228 @@
             document.getElementById('editAlt').value = property.alt || '';
             document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
 
+            // Load existing additional photos
+            editPhotosData = [];
+            if (property.additionalPhotos && Array.isArray(property.additionalPhotos)) {
+                editPhotosData = property.additionalPhotos.map((photo, index) => ({
+                    id: Date.now() + index,
+                    filename: photo.filename,
+                    caption: photo.caption || '',
+                    type: photo.type || 'image/jpeg',
+                    size: photo.size || 0,
+                    data: photo.data || photo.preview || '',
+                    isExisting: true
+                }));
+            }
+            renderEditPhotosList();
+
             document.getElementById('editModal').classList.add('show');
+        }
+
+        // Photo management variables for edit modal
+        let editPhotoCount = 0;
+        let editPhotosData = [];
+        let editDraggedIndex = null;
+
+        // Handle multiple file selection for edit
+        document.addEventListener('DOMContentLoaded', function() {
+            const editInput = document.getElementById('editMultiplePhotos');
+            if (editInput) {
+                editInput.addEventListener('change', async function(e) {
+                    const files = Array.from(e.target.files);
+                    for (const file of files) {
+                        await addEditPhotoFromFile(file);
+                    }
+                    updateEditFilesInfo();
+                    e.target.value = ''; // Reset input to allow selecting the same file again
+                });
+            }
+        });
+
+        async function addEditPhotoFromFile(file) {
+            editPhotoCount++;
+            const photoId = Date.now() + editPhotoCount;
+            
+            const base64Data = await fileToBase64(file);
+            
+            // Store photo data
+            editPhotosData.push({
+                id: photoId,
+                file: file,
+                filename: file.name,
+                caption: '',
+                type: file.type,
+                size: file.size,
+                data: base64Data,
+                isExisting: false
+            });
+            
+            renderEditPhotosList();
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderEditPhotosList() {
+            const container = document.getElementById('editAdditionalPhotos');
+            container.innerHTML = '';
+            
+            editPhotosData.forEach((photo, index) => {
+                const photoItem = createEditPhotoItem(photo, index);
+                container.appendChild(photoItem);
+            });
+            
+            updateEditFilesInfo();
+        }
+
+        function createEditPhotoItem(photo, index) {
+            const div = document.createElement('div');
+            div.className = 'photo-item';
+            div.draggable = true;
+            div.dataset.photoId = photo.id;
+            div.dataset.index = index;
+            
+            // Create preview
+            let previewHtml = '';
+            if (photo.type.startsWith('image/')) {
+                previewHtml = `<img src="${photo.data}" alt="Preview">`;
+            } else if (photo.type === 'application/pdf') {
+                previewHtml = `<p style="color: #4299e1;">📄 PDF: ${photo.filename}</p>`;
+            }
+            
+            div.innerHTML = `
+                <div class="photo-item-header">
+                    <div class="photo-item-number">
+                        <span class="drag-handle" role="img" aria-label="Poignée de glissement">⋮⋮</span>
+                        <span>Photo ${index + 1}</span>
+                    </div>
+                    <div class="photo-item-controls">
+                        <button type="button" class="move-btn" onclick="moveEditPhoto(${index}, -1)" ${index === 0 ? 'disabled' : ''} aria-label="Déplacer la photo vers le haut">↑</button>
+                        <button type="button" class="move-btn" onclick="moveEditPhoto(${index}, 1)" ${index === editPhotosData.length - 1 ? 'disabled' : ''} aria-label="Déplacer la photo vers le bas">↓</button>
+                        <button type="button" class="remove-photo-btn" onclick="removeEditPhoto(${photo.id})" aria-label="Supprimer cette photo">✕</button>
+                    </div>
+                </div>
+                <div class="photo-item-content">
+                    ${previewHtml}
+                    <label>Nom du fichier: ${photo.filename}</label>
+                    <label for="edit-caption-${photo.id}">Légende</label>
+                    <input type="text" 
+                           id="edit-caption-${photo.id}"
+                           class="photo-caption" 
+                           placeholder="Décrivez cette photo" 
+                           value="${photo.caption}"
+                           onchange="updateEditPhotoCaption(${photo.id}, this.value)"
+                           aria-label="Légende de la photo ${index + 1}">
+                </div>
+            `;
+            
+            // Add drag and drop event listeners
+            div.addEventListener('dragstart', handleEditDragStart);
+            div.addEventListener('dragend', handleEditDragEnd);
+            div.addEventListener('dragover', handleEditDragOver);
+            div.addEventListener('drop', handleEditDrop);
+            div.addEventListener('dragenter', handleEditDragEnter);
+            div.addEventListener('dragleave', handleEditDragLeave);
+            
+            return div;
+        }
+
+        function updateEditPhotoCaption(photoId, caption) {
+            const photo = editPhotosData.find(p => p.id === photoId);
+            if (photo) {
+                photo.caption = caption;
+            }
+        }
+
+        function removeEditPhoto(photoId) {
+            editPhotosData = editPhotosData.filter(p => p.id !== photoId);
+            renderEditPhotosList();
+            updateEditFilesInfo();
+        }
+
+        function moveEditPhoto(index, direction) {
+            if (direction === -1 && index > 0) {
+                // Move up
+                [editPhotosData[index - 1], editPhotosData[index]] = [editPhotosData[index], editPhotosData[index - 1]];
+            } else if (direction === 1 && index < editPhotosData.length - 1) {
+                // Move down
+                [editPhotosData[index], editPhotosData[index + 1]] = [editPhotosData[index + 1], editPhotosData[index]];
+            }
+            renderEditPhotosList();
+        }
+
+        function updateEditFilesInfo() {
+            const filesInfo = document.getElementById('editFilesInfo');
+            if (editPhotosData.length > 0) {
+                filesInfo.textContent = `${editPhotosData.length} photo(s) ajoutée(s)`;
+            } else {
+                filesInfo.textContent = '';
+            }
+        }
+
+        // Drag and drop handlers for edit modal
+        function handleEditDragStart(e) {
+            this.classList.add('dragging');
+            editDraggedIndex = parseInt(this.dataset.index);
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleEditDragEnd(e) {
+            this.classList.remove('dragging');
+            
+            // Remove drag-over class from all items
+            document.querySelectorAll('.photo-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function handleEditDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleEditDragEnter(e) {
+            this.classList.add('drag-over');
+        }
+
+        function handleEditDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleEditDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            if (editDraggedIndex !== null) {
+                const targetIndex = parseInt(this.dataset.index);
+                
+                // Swap the photos in the array
+                const temp = editPhotosData[editDraggedIndex];
+                editPhotosData[editDraggedIndex] = editPhotosData[targetIndex];
+                editPhotosData[targetIndex] = temp;
+                
+                renderEditPhotosList();
+            }
+            
+            return false;
         }
 
         function closeEditModal() {
             document.getElementById('editModal').classList.remove('show');
+            // Clean up photos data
+            editPhotosData = [];
+            editPhotoCount = 0;
         }
 
         document.getElementById('editForm').addEventListener('submit', async function(e) {
@@ -948,6 +1293,20 @@
             const altValue = document.getElementById('editAlt').value;
             if (altValue && altValue.trim() !== '') {
                 updates.alt = altValue.trim();
+            }
+
+            // Add additional photos if any
+            if (editPhotosData.length > 0) {
+                updates.additionalPhotos = editPhotosData.map(photo => ({
+                    filename: photo.filename,
+                    type: photo.type,
+                    size: photo.size,
+                    caption: photo.caption,
+                    data: photo.data
+                }));
+            } else {
+                // If no photos, clear the additionalPhotos field
+                updates.additionalPhotos = [];
             }
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
