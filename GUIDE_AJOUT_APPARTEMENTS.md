@@ -64,7 +64,102 @@ Utilisez le script `ajouter_appartement.py` (voir Méthode 3) ou ajoutez manuell
 }
 ```
 
-## 📝 Méthode 2 : Formulaire HTML (Simple et Rapide - Recommandée)
+## ☁️ Méthode 0 : Cloudinary - Automatisation complète (NOUVEAU ⭐)
+
+**La méthode la plus rapide et moderne !** Stockez vos photos sur Cloudinary et créez automatiquement les fiches.
+
+### Comment ça marche ?
+
+1. **Organisez vos photos** dans des dossiers Cloudinary avec la convention de nommage :
+   - **VXX** pour les **ventes** (ex: V01, V02, V15)
+   - **LCXX** pour les **locations** (ex: LC01, LC08, LC20)
+   - Le numéro (XX) devient automatiquement le rang de la propriété
+
+2. **Déclenchez la synchronisation** de 2 façons :
+   
+   **Option A : Depuis l'interface admin** (Recommandé)
+   - Ouvrez `admin_properties.html`
+   - Modifiez une propriété ou créez-en une nouvelle
+   - Remplissez le champ "Dossier Cloudinary" (ex: V01, LC08)
+   - Cliquez sur "▶️ Créer/Mettre à jour fiche depuis Cloudinary"
+   - Attendez 1-2 minutes et rechargez la page
+   
+   **Option B : Depuis GitHub Actions**
+   - Allez sur https://github.com/abbasberrada91/agent-immo/actions
+   - Sélectionnez "Cloudinary Gallery - Create/Update Fiche"
+   - Cliquez "Run workflow"
+   - Entrez le nom du dossier (ex: V01, LC08)
+   - Cliquez "Run workflow"
+
+3. **Le workflow automatique va** :
+   - ✅ Récupérer toutes les photos du dossier Cloudinary
+   - ✅ Déterminer automatiquement le type (vente/location) selon le préfixe
+   - ✅ Définir le rang selon le numéro dans le nom du dossier
+   - ✅ Créer ou mettre à jour la propriété dans `biens.json`
+   - ✅ Committer et pousser les changements automatiquement
+
+### Configuration requise (une seule fois)
+
+**1. Créer un compte Cloudinary** (gratuit)
+   - Allez sur https://cloudinary.com/
+   - Créez un compte gratuit
+   - Notez vos identifiants : Cloud Name, API Key, API Secret
+
+**2. Configurer les secrets GitHub**
+   - Allez sur https://github.com/abbasberrada91/agent-immo/settings/secrets/actions
+   - Ajoutez 3 secrets :
+     - `CLOUDINARY_CLOUD_NAME` : votre cloud name
+     - `CLOUDINARY_API_KEY` : votre API key
+     - `CLOUDINARY_API_SECRET` : votre API secret
+
+**3. Organiser vos photos sur Cloudinary**
+   - Créez des dossiers pour chaque propriété
+   - Nommez-les selon la convention : V01, V02, LC01, LC08, etc.
+   - Uploadez toutes les photos de la propriété dans le dossier correspondant
+
+### Avantages de cette méthode
+
+- ✅ **Automatisation complète** : Pas besoin de modifier `biens.json` manuellement
+- ✅ **Gestion centralisée** : Toutes vos photos au même endroit
+- ✅ **Mises à jour faciles** : Ajoutez/supprimez des photos, relancez le workflow
+- ✅ **Métadonnées** : Chaque photo inclut URL, format, dimensions
+- ✅ **Performance** : URLs optimisées par Cloudinary
+- ✅ **Convention claire** : V = vente, LC = location, automatiquement détecté
+
+### Exemple complet
+
+```
+Dossiers Cloudinary :
+├── V01/         → Crée une vente, rang 1
+│   ├── photo1.jpg
+│   ├── photo2.jpg
+│   └── photo3.jpg
+├── V02/         → Crée une vente, rang 2
+│   └── ...
+├── LC01/        → Crée une location, rang 1
+│   ├── img1.jpg
+│   └── img2.jpg
+└── LC08/        → Crée une location, rang 8
+    └── ...
+```
+
+Après le workflow, `biens.json` contiendra automatiquement :
+- `reference`: "V01" ou "LC01"
+- `transaction`: "vente" ou "location" (auto-détecté)
+- `rank`: 1, 2, 8... (auto-parsé)
+- `image`: URL de la première photo
+- `images`: Tableau de toutes les URLs
+- `photos`: Tableau avec métadonnées complètes
+- `cloudinaryFolder`: Référence du dossier
+
+Vous devrez ensuite compléter manuellement :
+- `title`, `city`, `district` (initialement "À compléter")
+- `surface`, `rooms`, `price` (valeurs par défaut à ajuster)
+- `features` (vide par défaut)
+
+---
+
+## 🎨 Méthode 1 : Avec Canva Bulk Create (Recommandée)
 
 Ouvrez le fichier `ajouter_appartement.html` dans votre navigateur ou accédez-y en ligne :
 
