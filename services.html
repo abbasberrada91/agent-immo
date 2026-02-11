@@ -14,8 +14,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="../drawer.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="drawer.css" />
     <style>
       .services-hero {
         background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
@@ -159,7 +159,7 @@
             </svg>
           </button>
           <div id="drawer-locations" class="drawer-section-content">
-            <a href="../index.html#biens">Biens à louer</a>
+            <a href="index.html#biens">Biens à louer</a>
             <a href="services/estimation.html">Estimation locative</a>
             <a href="services/mise-en-location.html">Mise en location</a>
           </div>
@@ -173,9 +173,9 @@
             </svg>
           </button>
           <div id="drawer-ventes" class="drawer-section-content">
-            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="index.html#biens">Biens à vendre</a>
             <a href="services/estimation.html">Estimation vente</a>
-            <a href="../ventes/off-market.html">Vendre en off-market</a>
+            <a href="ventes/off-market.html">Vendre en off-market</a>
           </div>
         </div>
 
@@ -202,25 +202,45 @@
             </svg>
           </button>
           <div id="drawer-agence" class="drawer-section-content">
-            <a href="../agence/histoire.html">Histoire</a>
-            <a href="../agence/equipe.html">Équipe</a>
-            <a href="../agence/temoignages.html">Témoignages</a>
-            <a href="../agence/partenaires.html">Partenaires</a>
+            <a href="agence/histoire.html">Histoire</a>
+            <a href="agence/equipe.html">Équipe</a>
+            <a href="agence/temoignages.html">Témoignages</a>
+            <a href="agence/partenaires.html">Partenaires</a>
           </div>
         </div>
 
         <div class="drawer-section drawer-section-simple">
-          <a href="../blog.html" class="drawer-link">Blog</a>
+          <a href="blog.html" class="drawer-link">Blog</a>
         </div>
       </nav>
 
       <div class="drawer-footer">
-        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
-        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
       </div>
     </aside>
 
     <header class="services-hero">
+      <nav class="top-nav">
+        <div class="container">
+          <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <a href="index.html" class="brand">Henri Martin Immobilier</a>
+          <div class="nav-links">
+            <a href="index.html#biens">Nos biens</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
+            <a class="partner-btn" href="admin_properties.html" id="adminBtn" style="display: none; background: #10b981;">📊 Gérer mes biens</a>
+            <a class="partner-btn" href="index.html#contact">Accès partenaire</a>
+          </div>
+        </div>
+      </nav>
       <div class="container">
         <p class="eyebrow">Expertise immobilière</p>
         <h1>Conseil, estimation et performance locative</h1>
@@ -232,7 +252,7 @@
     </header>
 
     <main class="container">
-      <a href="../index.html" class="back-link">← Retour à l'accueil</a>
+      <a href="index.html" class="back-link">← Retour à l'accueil</a>
 
       <section class="services-grid">
         <article class="service-card">
@@ -282,7 +302,7 @@
           Contactez-nous pour bénéficier d'un accompagnement personnalisé
           et d'une expertise adaptée à vos besoins.
         </p>
-        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+        <a href="index.html#contact" class="cta-btn">Nous contacter</a>
       </section>
     </main>
 
@@ -290,6 +310,6 @@
       <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
     </footer>
 
-    <script src="../drawer.js"></script>
+    <script src="drawer.js"></script>
   </body>
 </html>
