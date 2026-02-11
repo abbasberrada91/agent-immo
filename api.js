@@ -108,9 +108,15 @@ class PropertyAPI {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 60000);
                     
+                    // Add cache-busting parameter to ensure fresh content
+                    const cacheBuster = `?t=${Date.now()}`;
+                    
                     rawResponse = await fetch(
-                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`,
-                        { signal: controller.signal }
+                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}${cacheBuster}`,
+                        { 
+                            signal: controller.signal,
+                            cache: 'no-store' // Disable browser cache
+                        }
                     );
                     
                     clearTimeout(timeoutId);
