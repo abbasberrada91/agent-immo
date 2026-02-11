@@ -14,6 +14,9 @@ class PropertyAPI {
         this.MAX_RETRIES = 3;
         this.RETRY_DELAY_MS = 500;
         this.SHA_MISMATCH_ERROR = 'does not match';
+        
+        // Timeout configuration for large file downloads
+        this.LARGE_FILE_TIMEOUT_MS = 60000; // 60 seconds
     }
 
     /**
@@ -58,19 +61,19 @@ class PropertyAPI {
             throw new Error('Empty content received');
         }
         
-        // Log first few characters to help debug
+        // Log first few characters to help debug (limit to 50 chars for performance)
         console.log('Content starts with:', content.substring(0, 50));
-        console.log('Content ends with:', content.substring(content.length - 50));
+        console.log('Content length:', content.length, 'characters');
         
         try {
             return JSON.parse(content);
         } catch (parseError) {
             console.error('JSON parse error:', parseError);
             console.error('Content length:', content.length);
-            // Show a snippet of problematic content
-            const snippet = content.substring(0, 200);
+            // Log a small snippet for debugging (not included in user-facing error)
+            const snippet = content.substring(0, 50);
             console.error('Content snippet:', snippet);
-            throw new Error(`Invalid JSON in biens.json: ${parseError.message}. Content starts with: ${snippet}`);
+            throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
         }
     }
 
@@ -104,9 +107,9 @@ class PropertyAPI {
                 
                 let rawResponse;
                 try {
-                    // Add a longer timeout for large files (60 seconds)
+                    // Add a longer timeout for large files
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 60000);
+                    const timeoutId = setTimeout(() => controller.abort(), this.LARGE_FILE_TIMEOUT_MS);
                     
                     // Add cache-busting parameter to ensure fresh content
                     const cacheBuster = `?t=${Date.now()}`;
@@ -123,7 +126,8 @@ class PropertyAPI {
                 } catch (fetchError) {
                     console.error('Network error fetching from raw URL:', fetchError);
                     if (fetchError.name === 'AbortError') {
-                        throw new Error('Request timed out after 60 seconds. The file may be too large or your connection too slow. Please try again with a faster connection.');
+                        const timeoutSeconds = this.LARGE_FILE_TIMEOUT_MS / 1000;
+                        throw new Error(`Request timed out after ${timeoutSeconds} seconds. The file may be too large. Please try refreshing the page or contact support if the issue persists.`);
                     }
                     throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
                 }
@@ -151,7 +155,8 @@ class PropertyAPI {
                 try {
                     console.log('Attempting to parse JSON directly from response...');
                     
-                    // First, try to clone the response to be able to read it as text if JSON parsing fails
+                    // Clone the response first to allow fallback to text parsing if needed
+                    // The original response will be consumed by .json(), the clone allows us to retry with .text()
                     const responseClone = rawResponse.clone();
                     
                     try {
@@ -167,9 +172,10 @@ class PropertyAPI {
                             throw new Error('Response body is empty');
                         }
                         
-                        // Check if it looks like JSON
+                        // Check if it looks like JSON (log small preview for debugging)
+                        const preview = textContent.substring(0, 50);
                         if (!textContent.trim().startsWith('{') && !textContent.trim().startsWith('[')) {
-                            console.error('Content does not look like JSON. First 200 chars:', textContent.substring(0, 200));
+                            console.error('Content does not look like JSON. Preview:', preview);
                             throw new Error('Response is not valid JSON format');
                         }
                         
