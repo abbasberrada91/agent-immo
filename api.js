@@ -78,6 +78,130 @@ class PropertyAPI {
     }
 
     /**
+     * Fetch content from raw GitHub URL with retry logic for empty responses
+     * @param {string} sha - The SHA of the file
+     * @param {number} retryCount - Current retry attempt (default: 0)
+     * @returns {Object} Parsed data and SHA
+     */
+    async fetchFromRawURL(sha, retryCount = 0) {
+        const MAX_RAW_RETRIES = 3;
+        const RAW_RETRY_DELAY_MS = 1000;
+        
+        let rawResponse;
+        try {
+            // Add a longer timeout for large files
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), this.LARGE_FILE_TIMEOUT_MS);
+            
+            // Add cache-busting parameter to ensure fresh content
+            const cacheBuster = `?t=${Date.now()}`;
+            
+            rawResponse = await fetch(
+                `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}${cacheBuster}`,
+                { 
+                    signal: controller.signal,
+                    cache: 'no-store' // Disable browser cache
+                }
+            );
+            
+            clearTimeout(timeoutId);
+        } catch (fetchError) {
+            console.error('Network error fetching from raw URL:', fetchError);
+            if (fetchError.name === 'AbortError') {
+                const timeoutSeconds = this.LARGE_FILE_TIMEOUT_MS / 1000;
+                throw new Error(`Request timed out after ${timeoutSeconds} seconds. The file may be too large. Please try refreshing the page or contact support if the issue persists.`);
+            }
+            throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
+        }
+        
+        if (!rawResponse.ok) {
+            console.error('Raw URL fetch failed with status:', rawResponse.status, rawResponse.statusText);
+            throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.status} ${rawResponse.statusText}`);
+        }
+        
+        // Check content-type
+        const contentType = rawResponse.headers.get('content-type');
+        console.log('Raw response content-type:', contentType);
+        console.log('Raw response status:', rawResponse.status);
+        
+        // Check if we got HTML instead of JSON (error page)
+        if (contentType && contentType.includes('text/html')) {
+            console.error('Received HTML instead of JSON');
+            const htmlContent = await rawResponse.text();
+            console.error('HTML content preview:', htmlContent.substring(0, 200));
+            throw new Error('Received HTML error page instead of JSON. The file may not be accessible.');
+        }
+        
+        // For large JSON files, read as text first to avoid memory issues with .json()
+        let parsedData;
+        try {
+            console.log('Reading large file as text...');
+            const textContent = await rawResponse.text();
+            console.log('Text content length:', textContent.length);
+            
+            // Check for empty content and retry if needed
+            if (!textContent || textContent.trim().length === 0) {
+                if (retryCount < MAX_RAW_RETRIES) {
+                    const delay = RAW_RETRY_DELAY_MS * (retryCount + 1);
+                    const retryNumber = retryCount + 1;
+                    console.warn(`Empty content received, retrying in ${delay}ms... (retry ${retryNumber}/${MAX_RAW_RETRIES})`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return this.fetchFromRawURL(sha, retryCount + 1);
+                }
+                throw new Error('Response body is empty after multiple retries. Please try refreshing the page.');
+            }
+            
+            // Check if it looks like JSON (log small preview for debugging)
+            const preview = textContent.substring(0, 50);
+            if (!textContent.trim().startsWith('{') && !textContent.trim().startsWith('[')) {
+                console.error('Content does not look like JSON. Preview:', preview);
+                throw new Error('Response is not valid JSON format');
+            }
+            
+            console.log('Parsing JSON from text...');
+            // Try parsing the text as JSON
+            parsedData = JSON.parse(textContent);
+            console.log('Successfully parsed JSON');
+        } catch (jsonError) {
+            // If this is an empty content error and we can retry, do so
+            if (jsonError.message.includes('empty') && retryCount < MAX_RAW_RETRIES) {
+                const delay = RAW_RETRY_DELAY_MS * (retryCount + 1);
+                const retryNumber = retryCount + 1;
+                console.warn(`Empty content error, retrying in ${delay}ms... (retry ${retryNumber}/${MAX_RAW_RETRIES})`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return this.fetchFromRawURL(sha, retryCount + 1);
+            }
+            
+            console.error('JSON parsing failed:', jsonError);
+            console.error('Error name:', jsonError.name);
+            console.error('Error message:', jsonError.message);
+            
+            // Provide more specific error message
+            if (jsonError.message.includes('Unexpected end') || jsonError.message.includes('empty')) {
+                throw new Error('JSON parsing failed: The response was incomplete or empty. This may happen if the file is too large or the connection was interrupted. Please try refreshing the page.');
+            } else {
+                throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}`);
+            }
+        }
+        
+        // Validate the structure of the parsed data
+        if (!parsedData || typeof parsedData !== 'object') {
+            throw new Error('Parsed data is not an object');
+        }
+        
+        if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
+            throw new Error('Invalid data structure: missing or invalid properties array');
+        }
+        
+        console.log('Successfully loaded', parsedData.properties.length, 'properties');
+        
+        return {
+            data: parsedData,
+            sha: sha
+        };
+    }
+
+    /**
      * Fetch current biens.json content from GitHub
      */
     async fetchProperties() {
@@ -105,101 +229,7 @@ class PropertyAPI {
                 console.log('File too large for Contents API, fetching from raw URL...');
                 console.log('File size:', data.size, 'bytes');
                 
-                let rawResponse;
-                try {
-                    // Add a longer timeout for large files
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), this.LARGE_FILE_TIMEOUT_MS);
-                    
-                    // Add cache-busting parameter to ensure fresh content
-                    const cacheBuster = `?t=${Date.now()}`;
-                    
-                    rawResponse = await fetch(
-                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}${cacheBuster}`,
-                        { 
-                            signal: controller.signal,
-                            cache: 'no-store' // Disable browser cache
-                        }
-                    );
-                    
-                    clearTimeout(timeoutId);
-                } catch (fetchError) {
-                    console.error('Network error fetching from raw URL:', fetchError);
-                    if (fetchError.name === 'AbortError') {
-                        const timeoutSeconds = this.LARGE_FILE_TIMEOUT_MS / 1000;
-                        throw new Error(`Request timed out after ${timeoutSeconds} seconds. The file may be too large. Please try refreshing the page or contact support if the issue persists.`);
-                    }
-                    throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
-                }
-                
-                if (!rawResponse.ok) {
-                    console.error('Raw URL fetch failed with status:', rawResponse.status, rawResponse.statusText);
-                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.status} ${rawResponse.statusText}`);
-                }
-                
-                // Check content-type
-                const contentType = rawResponse.headers.get('content-type');
-                console.log('Raw response content-type:', contentType);
-                console.log('Raw response status:', rawResponse.status);
-                
-                // Check if we got HTML instead of JSON (error page)
-                if (contentType && contentType.includes('text/html')) {
-                    console.error('Received HTML instead of JSON');
-                    const htmlContent = await rawResponse.text();
-                    console.error('HTML content preview:', htmlContent.substring(0, 200));
-                    throw new Error('Received HTML error page instead of JSON. The file may not be accessible.');
-                }
-                
-                // For large JSON files, read as text first to avoid memory issues with .json()
-                let parsedData;
-                try {
-                    console.log('Reading large file as text...');
-                    const textContent = await rawResponse.text();
-                    console.log('Text content length:', textContent.length);
-                    
-                    if (!textContent || textContent.trim().length === 0) {
-                        throw new Error('Response body is empty');
-                    }
-                    
-                    // Check if it looks like JSON (log small preview for debugging)
-                    const preview = textContent.substring(0, 50);
-                    if (!textContent.trim().startsWith('{') && !textContent.trim().startsWith('[')) {
-                        console.error('Content does not look like JSON. Preview:', preview);
-                        throw new Error('Response is not valid JSON format');
-                    }
-                    
-                    console.log('Parsing JSON from text...');
-                    // Try parsing the text as JSON
-                    parsedData = JSON.parse(textContent);
-                    console.log('Successfully parsed JSON');
-                } catch (jsonError) {
-                    console.error('JSON parsing failed:', jsonError);
-                    console.error('Error name:', jsonError.name);
-                    console.error('Error message:', jsonError.message);
-                    
-                    // Provide more specific error message
-                    if (jsonError.message.includes('Unexpected end') || jsonError.message.includes('empty')) {
-                        throw new Error('JSON parsing failed: The response was incomplete or empty. This may happen if the file is too large or the connection was interrupted. Please try refreshing the page.');
-                    } else {
-                        throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}`);
-                    }
-                }
-                
-                // Validate the structure of the parsed data
-                if (!parsedData || typeof parsedData !== 'object') {
-                    throw new Error('Parsed data is not an object');
-                }
-                
-                if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
-                    throw new Error('Invalid data structure: missing or invalid properties array');
-                }
-                
-                console.log('Successfully loaded', parsedData.properties.length, 'properties');
-                
-                return {
-                    data: parsedData,
-                    sha: data.sha // SHA is guaranteed to be present (validated at line 84)
-                };
+                return await this.fetchFromRawURL(data.sha);
             }
             
             // For files under 1MB, content is base64-encoded in the response
