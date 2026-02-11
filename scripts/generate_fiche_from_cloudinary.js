@@ -99,6 +99,17 @@ function parseRank(folderName) {
 }
 
 /**
+ * Sanitize folder name for Cloudinary search expression
+ * @param {string} folderName - Folder name to sanitize
+ * @returns {string} - Sanitized folder name
+ */
+function sanitizeFolderName(folderName) {
+  // Escape special characters for Cloudinary search expression
+  // Escape backslashes first, then double quotes
+  return folderName.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+/**
  * Fetch images from Cloudinary
  * @returns {Promise<Array>} - Array of image resources
  */
@@ -109,7 +120,7 @@ async function fetchCloudinaryImages() {
   const auth = Buffer.from(`${key}:${secret}`).toString('base64');
   
   const body = {
-    expression: `folder:"${folder.replace(/"/g, '\\"')}"`,
+    expression: `folder:"${sanitizeFolderName(folder)}"`,
     sort_by: [{ public_id: 'asc' }],
     max_results: 200
   };
