@@ -46,9 +46,10 @@ class PropertyAPI {
     /**
      * Add a new property to biens.json
      * @param {Object} property - Property data
+     * @param {number} retryCount - Internal retry counter (default: 0)
      * @returns {Object} Result with success status and message
      */
-    async addProperty(property) {
+    async addProperty(property, retryCount = 0) {
         const token = this.getToken();
         
         if (!token) {
@@ -107,6 +108,15 @@ class PropertyAPI {
             
             if (!response.ok) {
                 const errorData = await response.json();
+                
+                // Check for SHA mismatch error and retry with fresh data
+                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                    // Wait a bit before retrying to avoid race conditions
+                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    return this.addProperty(property, retryCount + 1);
+                }
+                
                 throw new Error(errorData.message || response.statusText);
             }
             
@@ -130,9 +140,10 @@ class PropertyAPI {
      * Update an existing property
      * @param {string} reference - Property reference to update
      * @param {Object} updates - Fields to update
+     * @param {number} retryCount - Internal retry counter (default: 0)
      * @returns {Object} Result with success status and message
      */
-    async updateProperty(reference, updates) {
+    async updateProperty(reference, updates, retryCount = 0) {
         const token = this.getToken();
         
         if (!token) {
@@ -188,6 +199,15 @@ class PropertyAPI {
             
             if (!response.ok) {
                 const errorData = await response.json();
+                
+                // Check for SHA mismatch error and retry with fresh data
+                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                    // Wait a bit before retrying to avoid race conditions
+                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    return this.updateProperty(reference, updates, retryCount + 1);
+                }
+                
                 throw new Error(errorData.message || response.statusText);
             }
             
@@ -210,9 +230,10 @@ class PropertyAPI {
     /**
      * Delete a property
      * @param {string} reference - Property reference to delete
+     * @param {number} retryCount - Internal retry counter (default: 0)
      * @returns {Object} Result with success status and message
      */
-    async deleteProperty(reference) {
+    async deleteProperty(reference, retryCount = 0) {
         const token = this.getToken();
         
         if (!token) {
@@ -263,6 +284,15 @@ class PropertyAPI {
             
             if (!response.ok) {
                 const errorData = await response.json();
+                
+                // Check for SHA mismatch error and retry with fresh data
+                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                    // Wait a bit before retrying to avoid race conditions
+                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    return this.deleteProperty(reference, retryCount + 1);
+                }
+                
                 throw new Error(errorData.message || response.statusText);
             }
             
