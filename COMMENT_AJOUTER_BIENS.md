@@ -1,5 +1,100 @@
 # 🏠 COMMENT AJOUTER VOS BIENS - GUIDE PRATIQUE
 
+## 🚀 MÉTHODE 0 : CLOUDINARY - AUTOMATISATION COMPLÈTE (NOUVEAU ⭐)
+
+**La méthode la plus rapide !** Stockez vos photos sur Cloudinary et créez les fiches automatiquement.
+
+### 🎯 Démarrage rapide (5 minutes)
+
+**1. Configuration initiale** (une seule fois)
+
+Allez sur : https://github.com/abbasberrada91/agent-immo/settings/secrets/actions
+
+Ajoutez ces 3 secrets (obtenus depuis votre compte Cloudinary) :
+- `CLOUDINARY_CLOUD_NAME` 
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+
+**2. Organiser vos photos**
+
+Sur Cloudinary, créez des dossiers avec cette convention :
+- **VXX** pour vente : `V01`, `V02`, `V15`...
+- **LCXX** pour location : `LC01`, `LC08`, `LC20`...
+
+Le préfixe (V ou LC) détermine automatiquement le type de transaction.
+Le numéro (01, 08, 15) devient le rang de la propriété.
+
+**3. Déclencher la création automatique**
+
+**Option A : Depuis l'admin (recommandé)**
+1. Ouvrez `admin_properties.html`
+2. Éditez ou créez une propriété
+3. Renseignez "Dossier Cloudinary" (ex: V01)
+4. Cliquez "▶️ Créer/Mettre à jour fiche depuis Cloudinary"
+5. Attendez 1-2 minutes
+
+**Option B : Depuis GitHub Actions**
+1. Allez sur https://github.com/abbasberrada91/agent-immo/actions
+2. Cliquez "Cloudinary Gallery - Create/Update Fiche"
+3. Cliquez "Run workflow"
+4. Entrez le dossier (ex: V01, LC08)
+5. Lancez !
+
+**4. Finaliser les détails**
+
+Le workflow crée la fiche avec des valeurs par défaut.
+Éditez ensuite dans l'admin pour compléter :
+- Titre, ville, quartier ("À compléter" par défaut)
+- Surface, pièces, prix (valeurs minimales par défaut)
+- Caractéristiques (vide par défaut)
+
+### ✅ Ce que fait le workflow automatiquement
+
+- ✅ Récupère toutes les photos du dossier Cloudinary
+- ✅ Détermine le type : V→vente, LC→location
+- ✅ Parse le rang depuis le numéro (V15→15, LC03→3)
+- ✅ Définit l'image principale (première photo)
+- ✅ Crée le tableau `images` (URLs)
+- ✅ Crée le tableau `photos` (avec métadonnées)
+- ✅ Crée/met à jour la propriété dans biens.json
+- ✅ Commit et push automatiquement
+
+### 📋 Exemple complet
+
+```
+Cloudinary :
+└── V01/
+    ├── salon.jpg
+    ├── cuisine.jpg
+    └── chambre.jpg
+
+→ Lance le workflow avec "V01"
+
+→ Résultat dans biens.json :
+{
+  "reference": "V01",
+  "transaction": "vente",
+  "rank": 1,
+  "propertyType": "Appartement",
+  "title": "À compléter",
+  "city": "À compléter",
+  "district": "À compléter",
+  "surface": 50,
+  "rooms": 2,
+  "price": 100000,
+  "image": "https://res.cloudinary.com/.../salon.jpg",
+  "images": [...],
+  "photos": [
+    {"url": "...", "format": "jpg", "width": 1920, ...},
+    ...
+  ],
+  "cloudinaryFolder": "V01",
+  "status": "published"
+}
+```
+
+---
+
 ## 🚀 MÉTHODE 1 : Formulaire HTML (LA PLUS SIMPLE)
 
 ### Étape 1 : Ouvrir le formulaire
