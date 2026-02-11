@@ -512,6 +512,10 @@
             border-radius: 4px;
             font-size: 14px;
         }
+
+        .photo-file-input {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -747,7 +751,7 @@
 
                 <div class="form-group">
                     <label>Photos supplémentaires</label>
-                    <input type="file" id="editMultiplePhotos" multiple accept="image/*,application/pdf" style="margin-bottom: 10px;">
+                    <input type="file" id="editMultiplePhotos" multiple accept="image/*,application/pdf" class="photo-file-input">
                     <div class="help-text">Sélectionnez plusieurs photos en une seule fois</div>
                     <div class="files-info" id="editFilesInfo" role="status" aria-live="polite"></div>
                 </div>
@@ -1022,7 +1026,7 @@
             editPhotosData = [];
             if (property.additionalPhotos && Array.isArray(property.additionalPhotos)) {
                 editPhotosData = property.additionalPhotos.map((photo, index) => ({
-                    id: Date.now() + index,
+                    id: Date.now() + '-' + index + '-' + Math.random().toString(36).substr(2, 9),
                     filename: photo.filename,
                     caption: photo.caption || '',
                     type: photo.type || 'image/jpeg',
@@ -1058,7 +1062,7 @@
 
         async function addEditPhotoFromFile(file) {
             editPhotoCount++;
-            const photoId = Date.now() + editPhotoCount;
+            const photoId = Date.now() + '-' + editPhotoCount + '-' + Math.random().toString(36).substr(2, 9);
             
             const base64Data = await fileToBase64(file);
             
@@ -1224,10 +1228,8 @@
             if (editDraggedIndex !== null) {
                 const targetIndex = parseInt(this.dataset.index);
                 
-                // Swap the photos in the array
-                const temp = editPhotosData[editDraggedIndex];
-                editPhotosData[editDraggedIndex] = editPhotosData[targetIndex];
-                editPhotosData[targetIndex] = temp;
+                // Swap the photos in the array using destructuring
+                [editPhotosData[editDraggedIndex], editPhotosData[targetIndex]] = [editPhotosData[targetIndex], editPhotosData[editDraggedIndex]];
                 
                 renderEditPhotosList();
             }
