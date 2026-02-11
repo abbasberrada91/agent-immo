@@ -58,10 +58,19 @@ class PropertyAPI {
             throw new Error('Empty content received');
         }
         
+        // Log first few characters to help debug
+        console.log('Content starts with:', content.substring(0, 50));
+        console.log('Content ends with:', content.substring(content.length - 50));
+        
         try {
             return JSON.parse(content);
         } catch (parseError) {
-            throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
+            console.error('JSON parse error:', parseError);
+            console.error('Content length:', content.length);
+            // Show a snippet of problematic content
+            const snippet = content.substring(0, 200);
+            console.error('Content snippet:', snippet);
+            throw new Error(`Invalid JSON in biens.json: ${parseError.message}. Content starts with: ${snippet}`);
         }
     }
 
@@ -91,6 +100,8 @@ class PropertyAPI {
             // Reference: https://docs.github.com/en/rest/repos/contents
             if (!('content' in data) || data.content === null) {
                 console.log('File too large for Contents API, fetching from raw URL...');
+                console.log('File size:', data.size, 'bytes');
+                
                 const rawResponse = await fetch(
                     `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
                 );
@@ -99,8 +110,31 @@ class PropertyAPI {
                     throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.statusText}`);
                 }
                 
-                const rawContent = await rawResponse.text();
-                const parsedData = this.parseAndValidateJSON(rawContent);
+                // Check content-type
+                const contentType = rawResponse.headers.get('content-type');
+                console.log('Raw response content-type:', contentType);
+                
+                // For large JSON files, use .json() which is more efficient than .text() + JSON.parse()
+                let parsedData;
+                try {
+                    console.log('Attempting to parse JSON directly from response...');
+                    parsedData = await rawResponse.json();
+                    console.log('Successfully parsed JSON directly');
+                } catch (jsonError) {
+                    console.error('Direct JSON parsing failed:', jsonError);
+                    throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}. This may indicate the file is corrupted or too large for the browser to handle.`);
+                }
+                
+                // Validate the structure of the parsed data
+                if (!parsedData || typeof parsedData !== 'object') {
+                    throw new Error('Parsed data is not an object');
+                }
+                
+                if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
+                    throw new Error('Invalid data structure: missing or invalid properties array');
+                }
+                
+                console.log('Successfully loaded', parsedData.properties.length, 'properties');
                 
                 return {
                     data: parsedData,
@@ -109,8 +143,22 @@ class PropertyAPI {
             }
             
             // For files under 1MB, content is base64-encoded in the response
+            console.log('File under 1MB, decoding base64 content...');
             const content = atob(data.content); // Decode base64
+            console.log('Decoded content length:', content.length);
+            
             const parsedData = this.parseAndValidateJSON(content);
+            
+            // Validate the structure of the parsed data
+            if (!parsedData || typeof parsedData !== 'object') {
+                throw new Error('Parsed data is not an object');
+            }
+            
+            if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
+                throw new Error('Invalid data structure: missing or invalid properties array');
+            }
+            
+            console.log('Successfully loaded', parsedData.properties.length, 'properties');
             
             return {
                 data: parsedData,
