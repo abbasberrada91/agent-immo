@@ -538,6 +538,9 @@
               <a href="#" id="brochure-link" class="brochure-link" target="_blank" rel="noopener noreferrer">
                 Dossier complet Canva →
               </a>
+              <div class="cloudinary-ref-section" style="display: none; margin-top: 12px; padding: 8px 12px; background: #f0f9ff; border-radius: 6px; font-size: 13px; color: #1e40af;">
+                📁 Dossier Cloudinary: <code id="cloudinary-folder-info" style="font-family: monospace; background: white; padding: 2px 6px; border-radius: 3px; font-weight: 600;"></code>
+              </div>
             </div>
           </div>
         </div>
@@ -839,6 +842,17 @@
           brochureLink.href = property.brochureUrl;
         } else {
           brochureLink.style.display = 'none';
+        }
+
+        // Display cloudinaryFolder reference if available
+        const cloudinaryFolderInfo = document.getElementById('cloudinary-folder-info');
+        if (cloudinaryFolderInfo && property.cloudinaryFolder) {
+          cloudinaryFolderInfo.textContent = property.cloudinaryFolder;
+          cloudinaryFolderInfo.style.display = 'inline';
+          const cloudinarySection = cloudinaryFolderInfo.closest('.cloudinary-ref-section');
+          if (cloudinarySection) {
+            cloudinarySection.style.display = 'block';
+          }
         }
       }
 

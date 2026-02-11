@@ -717,13 +717,15 @@
                     <tr>
                         <th>Référence</th>
                         <th>Transaction</th>
-                        <th>Type</th>
+                        <th>Type Bien</th>
+                        <th title="Type Cloudinary (vente/location)">Type Cloudinary</th>
+                        <th title="Rang Cloudinary">Rang</th>
+                        <th title="Dossier Cloudinary (ex: V01, LC05)">Dossier Cloudinary</th>
                         <th>Titre</th>
                         <th>Ville</th>
                         <th>Prix</th>
                         <th>Surface</th>
                         <th>Date d'ajout</th>
-                        <th>Statut</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -903,6 +905,42 @@
                     <label>URL Fiche Canva</label>
                     <input type="url" id="editBrochureUrl">
                     <div style="font-size: 12px; color: #718096; margin-top: 4px;">URL publique de votre fiche Canva (optionnel)</div>
+                </div>
+
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Type Cloudinary</label>
+                        <select id="editType">
+                            <option value="">-- Non défini --</option>
+                            <option value="vente">Vente</option>
+                            <option value="location">Location</option>
+                        </select>
+                        <div style="font-size: 12px; color: #718096; margin-top: 4px;">Pour génération dossier Cloudinary</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rang Cloudinary</label>
+                        <input type="number" id="editRank" placeholder="Non défini" min="1">
+                        <div style="font-size: 12px; color: #718096; margin-top: 4px;">⚠️ Attention: La modification nécessite confirmation</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Dossier Cloudinary 📁</label>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="text" id="editCloudinaryFolder" placeholder="Non défini (ex: V01, LC05)" readonly style="flex: 1; background: #f7fafc; cursor: not-allowed;">
+                        <button type="button" onclick="toggleCloudinaryFolderEdit()" id="cloudinaryFolderEditBtn" style="padding: 10px 16px; background: #64748b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; white-space: nowrap;">
+                            🔓 Modifier
+                        </button>
+                    </div>
+                    <div style="font-size: 12px; color: #718096; margin-top: 4px;">
+                        🔒 Le dossier Cloudinary est <strong>gelé</strong> une fois défini. Modification avancée uniquement.
+                    </div>
+                    <div id="cloudinaryFolderWorkflowHint" style="display: none; margin-top: 8px; padding: 10px; background: #f0f9ff; border-left: 3px solid #3b82f6; border-radius: 4px;">
+                        <a id="cloudinaryWorkflowLink" href="#" target="_blank" style="color: #2563eb; font-size: 13px; text-decoration: none; font-weight: 500;">
+                            ▶️ Déclencher GitHub Actions: Cloudinary Gallery
+                        </a>
+                    </div>
                 </div>
 
                 <div class="modal-actions">
@@ -1109,16 +1147,24 @@
                     `${property.price.toLocaleString('fr-FR')} €` :
                     `${property.price.toLocaleString('fr-FR')} €/mois`;
 
+                const cloudinaryTypeDisplay = property.type ? property.type : '-';
+                const rankDisplay = property.rank ? property.rank : '-';
+                const cloudinaryFolderDisplay = property.cloudinaryFolder ? 
+                    `<span style="font-family: monospace; background: #f0f9ff; padding: 2px 6px; border-radius: 4px;">${property.cloudinaryFolder}</span>` : 
+                    '-';
+
                 tr.innerHTML = `
                     <td><strong>${property.reference}</strong></td>
                     <td>${transactionBadge}</td>
                     <td>${property.propertyType}</td>
+                    <td>${cloudinaryTypeDisplay}</td>
+                    <td>${rankDisplay}</td>
+                    <td>${cloudinaryFolderDisplay}</td>
                     <td>${property.title}</td>
                     <td>${property.city} - ${property.district}</td>
                     <td>${priceFormatted}</td>
                     <td>${property.surface} m²</td>
                     <td>${dateAdded}</td>
-                    <td>${statusBadge}</td>
                     <td>
                         <div class="actions">
                             <button class="action-btn action-btn-edit" onclick='editProperty("${property.reference}")'>✏️ Modifier</button>
@@ -1132,7 +1178,8 @@
 
             if (filtered.length === 0 && allProperties.length > 0) {
                 const tr = document.createElement('tr');
-                tr.innerHTML = '<td colspan="10" style="text-align: center; padding: 40px; color: #718096;">Aucun bien ne correspond à vos critères de recherche</td>';
+                // Note: Colspan must match total number of table columns (currently 12)
+                tr.innerHTML = '<td colspan="12" style="text-align: center; padding: 40px; color: #718096;">Aucun bien ne correspond à vos critères de recherche</td>';
                 tbody.appendChild(tr);
             }
         }
@@ -1195,6 +1242,34 @@
             document.getElementById('editImage').value = property.image || '';
             document.getElementById('editAlt').value = property.alt || '';
             document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
+
+            // Populate Cloudinary fields
+            document.getElementById('editType').value = property.type || '';
+            document.getElementById('editRank').value = property.rank || '';
+            document.getElementById('editCloudinaryFolder').value = property.cloudinaryFolder || '';
+            
+            // Store original values for comparison
+            window.originalRank = property.rank;
+            window.originalCloudinaryFolder = property.cloudinaryFolder;
+            
+            // Reset cloudinaryFolder edit state
+            const folderInput = document.getElementById('editCloudinaryFolder');
+            folderInput.readOnly = true;
+            folderInput.style.background = '#f7fafc';
+            folderInput.style.cursor = 'not-allowed';
+            document.getElementById('cloudinaryFolderEditBtn').textContent = '🔓 Modifier';
+            
+            // Show workflow link if cloudinaryFolder exists
+            if (property.cloudinaryFolder) {
+                const workflowUrl = window.AppConfig?.cloudinary?.getWorkflowUrl 
+                    ? window.AppConfig.cloudinary.getWorkflowUrl(property.cloudinaryFolder)
+                    : `https://github.com/abbasberrada91/agent-immo/actions/workflows/cloudinary-gallery.yml`;
+                
+                document.getElementById('cloudinaryWorkflowLink').href = workflowUrl;
+                document.getElementById('cloudinaryFolderWorkflowHint').style.display = 'block';
+            } else {
+                document.getElementById('cloudinaryFolderWorkflowHint').style.display = 'none';
+            }
 
             // Display main photo preview if exists
             updateMainPhotoPreview(property.image || '');
@@ -1637,6 +1712,69 @@
                 updates.brochureUrl = brochureUrlValue.trim();
             }
 
+            // Handle Cloudinary fields with safeguards
+            const typeValue = document.getElementById('editType').value;
+            if (typeValue) {
+                updates.type = typeValue;
+            }
+
+            // Get submit button reference once for better performance
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            const rankValue = document.getElementById('editRank').value;
+            if (rankValue && rankValue.trim() !== '') {
+                const newRank = parseInt(rankValue, 10);
+                // Check if rank changed and needs confirmation
+                if (window.originalRank !== undefined && window.originalRank !== newRank) {
+                    const confirmRank = confirm(
+                        `⚠️ ATTENTION: Modification du rang\n\n` +
+                        `Ancien rang: ${window.originalRank}\n` +
+                        `Nouveau rang: ${newRank}\n\n` +
+                        `Le rang est normalement calculé automatiquement à la création.\n` +
+                        `Êtes-vous sûr de vouloir modifier ce rang manuellement?\n\n` +
+                        `Note: Cette modification ne changera PAS le dossier Cloudinary (gelé).`
+                    );
+                    
+                    if (!confirmRank) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '💾 Enregistrer';
+                        return; // Abort submission
+                    }
+                    updates._confirmRankChange = true;
+                }
+                updates.rank = newRank;
+            }
+
+            const cloudinaryFolderValue = document.getElementById('editCloudinaryFolder').value;
+            if (cloudinaryFolderValue && cloudinaryFolderValue.trim() !== '' && cloudinaryFolderValue !== window.originalCloudinaryFolder) {
+                // CloudinaryFolder changed - check if override is allowed
+                const folderInput = document.getElementById('editCloudinaryFolder');
+                if (folderInput.readOnly) {
+                    // Should not happen in normal flow, but handle gracefully
+                    alert('⚠️ Le dossier Cloudinary est gelé. Utilisez le bouton "🔓 Modifier" pour le débloquer.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '💾 Enregistrer';
+                    return;
+                }
+                
+                const confirmFolder = confirm(
+                    `🔴 AVERTISSEMENT IMPORTANT: Modification du dossier Cloudinary\n\n` +
+                    `Ancien dossier: ${window.originalCloudinaryFolder || '(vide)'}\n` +
+                    `Nouveau dossier: ${cloudinaryFolderValue}\n\n` +
+                    `⚠️ Le dossier Cloudinary est un identifiant externe qui doit rester stable.\n` +
+                    `⚠️ Cette modification est IRRÉVERSIBLE et peut casser les références aux images.\n\n` +
+                    `Êtes-vous absolument certain de vouloir continuer?`
+                );
+                
+                if (!confirmFolder) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '💾 Enregistrer';
+                    return; // Abort submission
+                }
+                updates.cloudinaryFolder = cloudinaryFolderValue.trim();
+                updates._allowCloudinaryFolderOverride = true;
+            }
+
             // Add photo fields if they have values
             // Note: Base64 images are not supported - only URLs are allowed
             const imageValue = document.getElementById('editImage').value;
@@ -1653,7 +1791,7 @@
             // The validation in api.js will reject any base64 images.
             // Only URL-based images are allowed in the image and images fields.
 
-            const submitBtn = e.target.querySelector('button[type="submit"]');
+            // Set loading state on submit button
             submitBtn.disabled = true;
             submitBtn.textContent = '⏳ Enregistrement...';
 
@@ -1663,6 +1801,14 @@
                 alert('✅ ' + result.message);
                 closeEditModal();
                 await loadProperties(); // Reload to show changes
+            } else if (result.error === 'RANK_CHANGE_NEEDS_CONFIRMATION') {
+                // Special handling for rank change confirmation
+                alert(
+                    `⚠️ ${result.message}\n\n` +
+                    `Ancien rang: ${result.oldRank}\n` +
+                    `Nouveau rang: ${result.newRank}\n\n` +
+                    `Veuillez confirmer ce changement en cliquant à nouveau sur "Enregistrer".`
+                );
             } else {
                 alert('❌ ' + result.message);
             }
@@ -1701,6 +1847,38 @@
                 closeEditModal();
             }
         });
+
+        // Toggle cloudinaryFolder edit mode
+        function toggleCloudinaryFolderEdit() {
+            const folderInput = document.getElementById('editCloudinaryFolder');
+            const btn = document.getElementById('cloudinaryFolderEditBtn');
+            
+            if (folderInput.readOnly) {
+                // Enable editing
+                const confirmed = confirm(
+                    `⚠️ AVERTISSEMENT: Modifier le dossier Cloudinary\n\n` +
+                    `Le dossier Cloudinary est un identifiant externe qui doit normalement rester stable.\n` +
+                    `Une fois défini, il ne doit PAS être modifié car il sert de référence pour les images.\n\n` +
+                    `Modifier ce dossier peut casser les références aux images existantes.\n\n` +
+                    `Voulez-vous vraiment activer la modification de ce champ?`
+                );
+                
+                if (confirmed) {
+                    folderInput.readOnly = false;
+                    folderInput.style.background = '#fff';
+                    folderInput.style.cursor = 'text';
+                    btn.textContent = '🔒 Verrouiller';
+                    btn.style.background = '#ef4444';
+                }
+            } else {
+                // Disable editing
+                folderInput.readOnly = true;
+                folderInput.style.background = '#f7fafc';
+                folderInput.style.cursor = 'not-allowed';
+                btn.textContent = '🔓 Modifier';
+                btn.style.background = '#64748b';
+            }
+        }
     </script>
     <script src="drawer.js"></script>
 </body>

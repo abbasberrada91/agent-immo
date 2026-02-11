@@ -541,6 +541,24 @@
 
             <div class="row">
                 <div class="form-group">
+                    <label>Type Cloudinary</label>
+                    <select id="type">
+                        <option value="">-- Sélectionner (optionnel) --</option>
+                        <option value="vente">Vente</option>
+                        <option value="location">Location</option>
+                    </select>
+                    <div class="help-text">Pour génération automatique du dossier Cloudinary (V01, LC01...)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Rang Cloudinary</label>
+                    <input type="number" id="rank" placeholder="Laissez vide pour auto-calcul" min="1">
+                    <div class="help-text">Calculé automatiquement si vide. Exemple: 1, 2, 3...</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
                     <label>Type de bien <span class="required">*</span></label>
                     <select id="propertyType" required>
                         <option value="">-- Sélectionner --</option>
@@ -1166,6 +1184,17 @@
                     roommateAllowed: document.getElementById('roommate').checked
                 };
 
+                // Add Cloudinary type and rank if provided
+                const typeValue = document.getElementById('type').value;
+                if (typeValue) {
+                    apartment.type = typeValue;
+                }
+
+                const rankValue = document.getElementById('rank').value;
+                if (rankValue && rankValue.trim() !== '') {
+                    apartment.rank = parseInt(rankValue, 10);
+                }
+
                 // Add charges if provided
                 const chargesValue = document.getElementById('charges').value;
                 if (chargesValue && chargesValue.trim() !== '') {
@@ -1459,11 +1488,29 @@
                         ? 'Publié' 
                         : (result.property?.status || 'Inconnu');
                     
+                    // Show cloudinaryFolder if it was generated
+                    let cloudinaryInfo = '';
+                    if (result.property && result.property.cloudinaryFolder) {
+                        const workflowUrl = window.AppConfig?.cloudinary?.getWorkflowUrl 
+                            ? window.AppConfig.cloudinary.getWorkflowUrl(result.property.cloudinaryFolder)
+                            : `https://github.com/abbasberrada91/agent-immo/actions/workflows/cloudinary-gallery.yml`;
+                        
+                        cloudinaryInfo = `
+                            <p style="color: #065f46; font-size: 13px; margin-bottom: 10px; padding: 10px; background: #f0fdf4; border-radius: 4px;">
+                                📁 Dossier Cloudinary: <strong>${result.property.cloudinaryFolder}</strong><br>
+                                <a href="${workflowUrl}" target="_blank" style="color: #059669; text-decoration: underline;">
+                                    ▶️ Déclencher workflow Cloudinary Gallery
+                                </a>
+                            </p>
+                        `;
+                    }
+                    
                     statusDiv.innerHTML = `
                         <p style="color: #065f46; font-weight: 600; margin-bottom: 8px;">✅ Bien publié avec succès !</p>
                         <p style="color: #065f46; font-size: 13px; margin-bottom: 10px;">
                             Le bien <strong>${propertyToAdd.reference}</strong> a été publié sur votre site.
                         </p>
+                        ${cloudinaryInfo}
                         <p style="color: #065f46; font-size: 13px; margin-bottom: 15px;">
                             📅 Date d'ajout : ${dateAdded}<br>
                             📊 Statut : ${status}
