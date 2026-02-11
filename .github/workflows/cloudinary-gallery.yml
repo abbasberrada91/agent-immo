@@ -13,6 +13,9 @@ on:
         default: "200"
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   gallery:
     runs-on: ubuntu-latest
