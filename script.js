@@ -78,6 +78,16 @@ const renderProperties = () => {
       link.style.display = 'none';
     }
 
+    // Make card clickable to open detail page
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      // Don't navigate if clicking on the brochure link
+      if (e.target.tagName === 'A') {
+        return;
+      }
+      window.location.href = `detail.html?ref=${encodeURIComponent(property.reference)}`;
+    });
+
     listingGrid.appendChild(fragment);
   });
 
