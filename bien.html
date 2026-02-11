@@ -796,8 +796,14 @@
           priceTypeElement.textContent = '';
         }
 
-        // Display photos
-        photos = property.images || [property.image];
+        // Display photos - ensure we have valid images
+        if (property.images && Array.isArray(property.images) && property.images.length > 0) {
+          photos = property.images;
+        } else if (property.image) {
+          photos = [property.image];
+        } else {
+          photos = [];
+        }
         displayPhotoGallery(photos);
 
         // Display details
@@ -829,7 +835,7 @@
 
         // Set brochure link
         const brochureLink = document.getElementById('brochure-link');
-        if (property.brochureUrl && property.brochureUrl !== 'null') {
+        if (property.brochureUrl && property.brochureUrl !== null && property.brochureUrl !== '' && property.brochureUrl !== 'null') {
           brochureLink.href = property.brochureUrl;
         } else {
           brochureLink.style.display = 'none';
