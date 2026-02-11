@@ -800,7 +800,12 @@
         }
 
         // Display photos - ensure we have valid images
-        if (property.images && Array.isArray(property.images) && property.images.length > 0) {
+        // Support both the new 'photos' array (with metadata) and legacy 'images' array (URLs only)
+        if (property.photos && Array.isArray(property.photos) && property.photos.length > 0) {
+          // New format: photos array with metadata (url, public_id, format, etc.)
+          photos = property.photos.map(p => typeof p === 'string' ? p : p.url);
+        } else if (property.images && Array.isArray(property.images) && property.images.length > 0) {
+          // Legacy format: simple array of URLs
           photos = property.images;
         } else if (property.image) {
           photos = [property.image];
