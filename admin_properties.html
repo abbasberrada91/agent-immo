@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Gestion des biens - Henri Martin Immobilier</title>
+    <link rel="stylesheet" href="drawer.css">
     <script src="config.js"></script>
     <script src="auth.js"></script>
     <script src="api.js"></script>
@@ -516,9 +517,131 @@
         .photo-file-input {
             margin-bottom: 10px;
         }
+
+        .top-bar-admin {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 999;
+            background: transparent;
+        }
+
+        .burger-menu {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .burger-menu {
+                display: flex;
+            }
+
+            body {
+                padding-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="index.html#biens">Biens à louer</a>
+            <a href="services/estimation.html">Estimation locative</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="index.html#biens">Biens à vendre</a>
+            <a href="services/estimation.html">Estimation vente</a>
+            <a href="ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="services/estimation.html">Estimation gratuite</a>
+            <a href="services/rentabilite.html">Calcul de rentabilité</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+            <a href="services/modes-location.html">Modes de location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="agence/histoire.html">Histoire</a>
+            <a href="agence/equipe.html">Équipe</a>
+            <a href="agence/temoignages.html">Témoignages</a>
+            <a href="agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+
+        <div class="drawer-section drawer-section-simple">
+          <a href="blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <div class="top-bar-admin">
+        <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+    </div>
+
     <div class="container">
         <header>
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1578,5 +1701,6 @@
             }
         });
     </script>
+    <script src="drawer.js"></script>
 </body>
 </html>
