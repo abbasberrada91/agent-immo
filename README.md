@@ -6,7 +6,23 @@
 > 
 > **⚡ Pour les pressés → [GUIDE RAPIDE TOKEN](GUIDE_RAPIDE_TOKEN.md)** - Configuration en 2 minutes !
 > 
+> **📋 Configuration Complète → [CONFIGURATION_COMPLETE.md](CONFIGURATION_COMPLETE.md)** - Tous les détails de configuration !
+> 
 > Vous voulez ajouter vos appartements ? Consultez le [Guide de démarrage rapide](DEMARRAGE_RAPIDE.md) !
+
+## 📖 Documentation de Configuration
+
+### Guides de Configuration du Token
+
+1. **[Guide Interactif](https://abbasberrada91.github.io/agent-immo/configurer-token.html)** ⭐ - Interface pas à pas (5 min)
+2. **[Guide Rapide](GUIDE_RAPIDE_TOKEN.md)** - Version express (2 min)
+3. **[Guide Détaillé](CONFIGURATION_TOKEN_GITHUB.md)** - Documentation complète
+
+### Configuration Avancée
+
+- **[Configuration Complète](CONFIGURATION_COMPLETE.md)** - Guide exhaustif de toutes les configurations
+- **[Fichier de configuration](config.js)** - Configuration centralisée de l'application
+- **[Template .env](.env.template)** - Template de configuration (référence uniquement)
 
 Oui, ce site peut être mis en ligne facilement car c'est une application statique (HTML/CSS/JS + `biens.json`).
 
