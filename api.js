@@ -144,10 +144,34 @@ class PropertyAPI {
                 let parsedData;
                 try {
                     console.log('Attempting to parse JSON directly from response...');
-                    parsedData = await rawResponse.json();
-                    console.log('Successfully parsed JSON directly');
+                    
+                    // First, try to clone the response to be able to read it as text if JSON parsing fails
+                    const responseClone = rawResponse.clone();
+                    
+                    try {
+                        parsedData = await rawResponse.json();
+                        console.log('Successfully parsed JSON directly');
+                    } catch (jsonError) {
+                        // If direct JSON parsing fails, try reading as text first
+                        console.warn('Direct JSON parsing failed, trying text approach:', jsonError.message);
+                        const textContent = await responseClone.text();
+                        console.log('Text content length:', textContent.length);
+                        
+                        if (!textContent || textContent.trim().length === 0) {
+                            throw new Error('Response body is empty');
+                        }
+                        
+                        // Check if it looks like JSON
+                        if (!textContent.trim().startsWith('{') && !textContent.trim().startsWith('[')) {
+                            console.error('Content does not look like JSON. First 200 chars:', textContent.substring(0, 200));
+                            throw new Error('Response is not valid JSON format');
+                        }
+                        
+                        // Try parsing the text as JSON
+                        parsedData = this.parseAndValidateJSON(textContent);
+                    }
                 } catch (jsonError) {
-                    console.error('Direct JSON parsing failed:', jsonError);
+                    console.error('JSON parsing failed:', jsonError);
                     console.error('Error name:', jsonError.name);
                     console.error('Error message:', jsonError.message);
                     
