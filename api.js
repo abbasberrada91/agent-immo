@@ -75,17 +75,37 @@ class PropertyAPI {
                 }
                 
                 const rawContent = await rawResponse.text();
-                return {
-                    data: JSON.parse(rawContent),
-                    sha: data.sha // Still return SHA for updating
-                };
+                
+                // Validate that we got actual content
+                if (!rawContent || rawContent.trim().length === 0) {
+                    throw new Error('Empty response from raw URL');
+                }
+                
+                try {
+                    return {
+                        data: JSON.parse(rawContent),
+                        sha: data.sha // Still return SHA for updating
+                    };
+                } catch (parseError) {
+                    throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
+                }
             }
             
             const content = atob(data.content); // Decode base64
-            return {
-                data: JSON.parse(content),
-                sha: data.sha // Need this for updating
-            };
+            
+            // Validate decoded content
+            if (!content || content.trim().length === 0) {
+                throw new Error('Empty content after base64 decoding');
+            }
+            
+            try {
+                return {
+                    data: JSON.parse(content),
+                    sha: data.sha // Need this for updating
+                };
+            } catch (parseError) {
+                throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
+            }
         } catch (error) {
             console.error('Error fetching properties:', error);
             throw error;
