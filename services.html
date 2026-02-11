@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nos Services | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Conseil, estimation et performance locative - Découvrez nos services d'expertise immobilière"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .services-hero {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 4rem 0 3rem;
+        text-align: center;
+      }
+
+      .services-hero h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+      }
+
+      .services-hero p {
+        max-width: 700px;
+        margin: 0 auto;
+        color: #d9e5f3;
+        font-size: 1.1rem;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.8rem;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(16, 35, 63, 0.12);
+      }
+
+      .service-card h3 {
+        margin: 0 0 0.8rem;
+        color: var(--brand);
+        font-size: 1.3rem;
+      }
+
+      .service-card p {
+        color: var(--muted);
+        margin: 0 0 1.2rem;
+        line-height: 1.6;
+      }
+
+      .service-card-link {
+        display: inline-block;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      .service-card-link:hover {
+        color: var(--brand);
+      }
+
+      .service-card-link::after {
+        content: ' →';
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="estimation.html">Estimation locative</a>
+            <a href="mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="estimation.html">Estimation gratuite</a>
+            <a href="rentabilite.html">Calcul de rentabilité</a>
+            <a href="mise-en-location.html">Mise en location</a>
+            <a href="modes-location.html">Modes de location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="../agence/histoire.html">Histoire</a>
+            <a href="../agence/equipe.html">Équipe</a>
+            <a href="../agence/temoignages.html">Témoignages</a>
+            <a href="../agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="services-hero">
+      <div class="container">
+        <p class="eyebrow">Expertise immobilière</p>
+        <h1>Conseil, estimation et performance locative</h1>
+        <p>
+          Nous vous accompagnons dans toutes les étapes de votre projet immobilier,
+          de l'estimation de votre bien à l'optimisation de sa rentabilité locative.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <a href="../index.html" class="back-link">← Retour à l'accueil</a>
+
+      <section class="services-grid">
+        <article class="service-card">
+          <h3>Estimation gratuite</h3>
+          <p>
+            Obtenez une estimation précise de votre bien, que ce soit pour une vente
+            ou une mise en location. Notre analyse tient compte des comparables récents,
+            des spécificités de votre bien et de l'état du marché.
+          </p>
+          <a href="estimation.html" class="service-card-link">En savoir plus</a>
+        </article>
+
+        <article class="service-card">
+          <h3>Calcul de rentabilité</h3>
+          <p>
+            Évaluez précisément la rentabilité de votre investissement locatif.
+            Nous calculons pour vous la rentabilité brute, nette et le cash-flow
+            prévisionnel en tenant compte de toutes les charges.
+          </p>
+          <a href="rentabilite.html" class="service-card-link">En savoir plus</a>
+        </article>
+
+        <article class="service-card">
+          <h3>Mise en location</h3>
+          <p>
+            Un accompagnement complet pour la location de votre bien : cadrage du
+            projet, constitution du dossier de présentation, sélection des locataires,
+            rédaction du bail et état des lieux.
+          </p>
+          <a href="mise-en-location.html" class="service-card-link">En savoir plus</a>
+        </article>
+
+        <article class="service-card">
+          <h3>Modes de location</h3>
+          <p>
+            Particulier, société ou coliving : chaque mode de location a ses avantages
+            et ses spécificités. Nous vous aidons à choisir la formule la plus adaptée
+            à votre situation et vos objectifs.
+          </p>
+          <a href="modes-location.html" class="service-card-link">En savoir plus</a>
+        </article>
+      </section>
+
+      <section class="cta-section">
+        <h2>Un projet immobilier ?</h2>
+        <p>
+          Contactez-nous pour bénéficier d'un accompagnement personnalisé
+          et d'une expertise adaptée à vos besoins.
+        </p>
+        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>

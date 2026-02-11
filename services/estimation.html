@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estimation gratuite de votre bien | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Obtenez une estimation précise de votre bien immobilier pour la vente ou la location"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .page-header {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 3rem 0 2.5rem;
+      }
+
+      .page-header h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .page-header .intro {
+        max-width: 750px;
+        color: #d9e5f3;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+      }
+
+      .content-section h2 {
+        color: var(--brand);
+        margin: 0 0 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 0.8rem;
+      }
+
+      .content-section h3 {
+        color: var(--brand-soft);
+        margin: 1.5rem 0 1rem;
+        font-size: 1.25rem;
+      }
+
+      .content-section p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+      }
+
+      .content-section ul {
+        color: var(--muted);
+        line-height: 1.8;
+        margin: 1rem 0 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      .content-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      .two-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 1.5rem 0;
+      }
+
+      .column-card {
+        background: var(--bg);
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+        border: 1px solid #e5edf4;
+      }
+
+      .column-card h4 {
+        color: var(--brand);
+        margin: 0 0 1rem;
+        font-size: 1.1rem;
+      }
+
+      .column-card p {
+        margin: 0 0 0.8rem;
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+        color: white;
+        border: none;
+        padding: 0;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu (same as services.html) -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="estimation.html">Estimation locative</a>
+            <a href="mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="estimation.html">Estimation gratuite</a>
+            <a href="rentabilite.html">Calcul de rentabilité</a>
+            <a href="mise-en-location.html">Mise en location</a>
+            <a href="modes-location.html">Modes de location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="../agence/histoire.html">Histoire</a>
+            <a href="../agence/equipe.html">Équipe</a>
+            <a href="../agence/temoignages.html">Témoignages</a>
+            <a href="../agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="page-header">
+      <div class="container">
+        <h1>Estimation gratuite de votre bien</h1>
+        <p class="intro">
+          Obtenez une estimation précise et argumentée de la valeur de votre bien,
+          que ce soit pour une vente ou une mise en location. Notre analyse approfondie
+          vous permet de fixer le bon prix et d'optimiser votre stratégie.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <a href="../services.html" class="back-link">← Retour aux services</a>
+
+      <section class="content-section">
+        <h2>Deux types d'estimation</h2>
+        
+        <div class="two-columns">
+          <div class="column-card">
+            <h4>Estimation vente</h4>
+            <p>
+              Déterminez le prix de vente optimal de votre bien en fonction du marché actuel,
+              des transactions récentes dans votre secteur et des caractéristiques spécifiques
+              de votre propriété.
+            </p>
+            <p>
+              Une estimation juste vous permet de vendre dans les meilleures conditions
+              et dans des délais raisonnables.
+            </p>
+          </div>
+
+          <div class="column-card">
+            <h4>Estimation locative</h4>
+            <p>
+              Évaluez le loyer de marché pour votre bien en location. Notre analyse
+              tient compte de la tension locative du secteur, des loyers pratiqués
+              pour des biens comparables et de la qualité de votre bien.
+            </p>
+            <p>
+              Un loyer adapté assure une mise en location rapide et limite
+              la vacance locative.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Notre méthode d'estimation</h2>
+        
+        <h3>Analyse des comparables</h3>
+        <p>
+          Nous étudions les transactions récentes (ventes ou locations) dans votre
+          immeuble et votre quartier pour identifier des biens similaires au vôtre.
+          Cette approche par comparaison est la plus fiable pour déterminer la valeur
+          de marché.
+        </p>
+
+        <h3>Caractéristiques de l'immeuble</h3>
+        <p>
+          L'adresse, le standing de l'immeuble, l'étage, l'ascenseur, le gardien,
+          l'état général de la copropriété : tous ces éléments influencent la valeur
+          de votre bien et sont pris en compte dans notre évaluation.
+        </p>
+
+        <h3>Prestations et état du bien</h3>
+        <p>
+          La surface, l'agencement, l'exposition, la luminosité, les prestations
+          (parquet, cheminée, moulures), l'état général et les travaux éventuels
+          à prévoir sont autant de critères qui affinent l'estimation.
+        </p>
+
+        <h3>Tension locative et délai (pour la location)</h3>
+        <p>
+          Pour une estimation locative, nous analysons le rapport entre l'offre
+          et la demande dans votre secteur. Une forte tension locative peut justifier
+          un loyer plus élevé, tandis qu'un marché détendu nécessite un positionnement
+          plus prudent pour éviter la vacance.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Ce que vous recevez</h2>
+        
+        <ul>
+          <li>
+            <strong>Une fourchette de valeur</strong> : un prix bas (vente rapide
+            ou mise en location immédiate) et un prix haut (attente de l'acquéreur
+            ou locataire idéal).
+          </li>
+          <li>
+            <strong>Une recommandation de prix</strong> : le prix optimal compte tenu
+            de vos objectifs (délai, conditions du marché, qualité du bien).
+          </li>
+          <li>
+            <strong>Une stratégie argumentée</strong> : nos conseils pour positionner
+            votre bien de manière attractive, réaliste et compétitive.
+          </li>
+          <li>
+            <strong>Un échange personnalisé</strong> : nous répondons à toutes vos
+            questions et adaptons notre conseil à votre situation et vos contraintes.
+          </li>
+        </ul>
+      </section>
+
+      <section class="cta-section">
+        <h2>Demander une estimation</h2>
+        <p>
+          Contactez-nous pour obtenir une estimation gratuite et sans engagement
+          de votre bien, que ce soit pour une vente ou une mise en location.
+        </p>
+        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>
