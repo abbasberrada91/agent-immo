@@ -117,6 +117,8 @@ form.addEventListener('submit', (event) => {
 // Helper function to detect network errors
 const isNetworkError = (error) => {
   // Network errors are typically TypeError with specific messages
+  // Note: Checks are intentionally broad to catch various network error scenarios
+  // from the Fetch API (e.g., "Failed to fetch", "NetworkError", "Network request failed")
   if (!(error instanceof TypeError)) {
     return false;
   }
@@ -211,6 +213,8 @@ const loadProperties = async (retryCount = 0) => {
     let userMessage = '❌ ' + error.message;
     
     // Add actionable suggestions based on error type
+    // Note: Error message checks are intentionally broad to catch related error scenarios
+    // Our error messages include "Format JSON invalide" and "JSON" keywords
     if (isNetworkError(error)) {
       userMessage += '\n\n💡 Actions à essayer:\n';
       userMessage += '• Vérifiez votre connexion internet\n';
