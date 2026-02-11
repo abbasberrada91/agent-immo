@@ -3,6 +3,7 @@ name: Deploy Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,10 +21,51 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Detect publication folder
+        id: detect-folder
+        run: |
+          if [ -d "docs" ] && [ -f "docs/index.html" ]; then
+            echo "publish_dir=docs" >> $GITHUB_OUTPUT
+            echo "Publishing from /docs folder"
+          else
+            echo "publish_dir=." >> $GITHUB_OUTPUT
+            echo "Publishing from root folder"
+          fi
+      
+      - name: Add .nojekyll file
+        run: |
+          touch ${{ steps.detect-folder.outputs.publish_dir }}/.nojekyll
+          echo "Created .nojekyll file in ${{ steps.detect-folder.outputs.publish_dir }}"
+      
+      - name: Add build version to HTML files
+        run: |
+          BUILD_VERSION="${{ github.sha }}"
+          BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          PUBLISH_DIR="${{ steps.detect-folder.outputs.publish_dir }}"
+          
+          # Add version to index.html if it exists
+          if [ -f "$PUBLISH_DIR/index.html" ]; then
+            sed -i "s|</footer>|</footer>\n    <div style=\"text-align: center; padding: 0.5rem; font-size: 0.75rem; color: #999;\">Build: ${BUILD_DATE} (${BUILD_VERSION:0:7})</div>|" "$PUBLISH_DIR/index.html"
+            echo "Added build version to index.html"
+          fi
+          
+          # Add version to detail.html if it exists
+          if [ -f "$PUBLISH_DIR/detail.html" ]; then
+            sed -i "s|</footer>|</footer>\n    <div style=\"text-align: center; padding: 0.5rem; font-size: 0.75rem; color: #999;\">Build: ${BUILD_DATE} (${BUILD_VERSION:0:7})</div>|" "$PUBLISH_DIR/detail.html"
+            echo "Added build version to detail.html"
+          fi
+      
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: .
-      - id: deployment
+          path: ${{ steps.detect-folder.outputs.publish_dir }}
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
