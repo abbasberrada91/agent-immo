@@ -319,6 +319,11 @@ async function main() {
   // Build photos array
   const photos = buildPhotosArray(resources);
   
+  // Verify we have at least one photo
+  if (!photos || photos.length === 0) {
+    fail('No valid photos found to create property fiche.');
+  }
+  
   // Load biens.json
   const data = loadBiensJson();
   

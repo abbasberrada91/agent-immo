@@ -970,6 +970,11 @@
     </div>
 
     <script>
+        // Configuration constants
+        const GITHUB_OWNER = 'abbasberrada91';
+        const GITHUB_REPO = 'agent-immo';
+        const CLOUDINARY_FOLDER_PATTERN = /^(V\d+|LC\d+)$/;
+        
         let allProperties = [];
         let currentFilter = 'all';
 
@@ -1281,7 +1286,7 @@
             if (property.cloudinaryFolder) {
                 const workflowUrl = window.AppConfig?.cloudinary?.getWorkflowUrl 
                     ? window.AppConfig.cloudinary.getWorkflowUrl(property.cloudinaryFolder)
-                    : `https://github.com/abbasberrada91/agent-immo/actions/workflows/cloudinary-gallery.yml`;
+                    : `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/cloudinary-gallery.yml`;
                 
                 document.getElementById('cloudinaryWorkflowLink').href = workflowUrl;
                 document.getElementById('cloudinaryFolderWorkflowHint').style.display = 'block';
@@ -1923,7 +1928,7 @@
             
             // Validate folder naming convention
             const folderUpper = folder.toUpperCase();
-            if (!folderUpper.match(/^(V\d+|LC\d+)$/)) {
+            if (!folderUpper.match(CLOUDINARY_FOLDER_PATTERN)) {
                 const useAnyway = confirm(
                     `⚠️ Avertissement: Le dossier "${folder}" ne suit pas la convention de nommage standard.\n\n` +
                     `Convention attendue:\n` +
@@ -1957,7 +1962,7 @@
             try {
                 // Dispatch workflow via GitHub API
                 const response = await fetch(
-                    `https://api.github.com/repos/abbasberrada91/agent-immo/actions/workflows/cloudinary-gallery.yml/dispatches`,
+                    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/cloudinary-gallery.yml/dispatches`,
                     {
                         method: 'POST',
                         headers: {
@@ -1980,7 +1985,7 @@
                     statusDiv.innerHTML = `✅ Workflow déclenché avec succès!<br>` +
                         `Dossier: <strong>${folder}</strong><br>` +
                         `Le workflow va créer/mettre à jour la fiche dans 1-2 minutes.<br>` +
-                        `<a href="https://github.com/abbasberrada91/agent-immo/actions" target="_blank" style="color: #2563eb;">Voir le statut sur GitHub Actions</a>`;
+                        `<a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank" style="color: #2563eb;">Voir le statut sur GitHub Actions</a>`;
                     
                     // Show success message
                     alert(
