@@ -1194,7 +1194,7 @@
             const base64Data = await compressImage(file);
             
             // Calculate compressed size
-            const compressedSize = Math.round((base64Data.length * 3) / 4); // Rough estimate of base64 size
+            const compressedSize = Math.round((base64Data.length * 3) / 4); // Estimate binary size from base64 string
             
             // Store photo data
             editPhotosData.push({
