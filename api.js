@@ -104,11 +104,21 @@ class PropertyAPI {
                 
                 let rawResponse;
                 try {
+                    // Add a longer timeout for large files (60 seconds)
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 60000);
+                    
                     rawResponse = await fetch(
-                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
+                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`,
+                        { signal: controller.signal }
                     );
+                    
+                    clearTimeout(timeoutId);
                 } catch (fetchError) {
                     console.error('Network error fetching from raw URL:', fetchError);
+                    if (fetchError.name === 'AbortError') {
+                        throw new Error('Request timed out after 60 seconds. The file may be too large or your connection too slow. Please try again with a faster connection.');
+                    }
                     throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
                 }
                 
