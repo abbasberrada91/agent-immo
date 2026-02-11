@@ -537,28 +537,123 @@
       let currentPhotoIndex = 0;
       let photos = [];
 
-      // Load property data
-      async function loadPropertyDetails() {
+      // Load property data with retry logic and better error handling
+      async function loadPropertyDetails(retryCount = 0) {
+        const MAX_RETRIES = 3;
+        const RETRY_DELAY_MS = 1000;
+
         try {
-          const response = await fetch('biens.json');
+          const response = await fetch('biens.json', {
+            cache: 'no-cache', // Ensure we get fresh data
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+          
           if (!response.ok) {
-            throw new Error('Failed to load properties');
+            // Provide specific error messages based on status code
+            let errorMessage = `Erreur HTTP ${response.status}: `;
+            switch (response.status) {
+              case 404:
+                errorMessage += 'Le fichier biens.json est introuvable.';
+                break;
+              case 403:
+                errorMessage += 'Accès refusé au fichier biens.json.';
+                break;
+              case 500:
+              case 502:
+              case 503:
+              case 504:
+                errorMessage += 'Le serveur rencontre des difficultés.';
+                break;
+              default:
+                errorMessage += 'Impossible de charger les données.';
+            }
+            throw new Error(errorMessage);
           }
 
-          const data = await response.json();
+          // Validate content type
+          const contentType = response.headers.get('content-type');
+          if (contentType && !contentType.includes('application/json')) {
+            throw new Error(`Type de contenu invalide: ${contentType}. Le fichier doit être au format JSON.`);
+          }
+
+          let data;
+          try {
+            data = await response.json();
+          } catch (jsonError) {
+            throw new Error(`Format JSON invalide: ${jsonError.message}`);
+          }
+
+          // Validate data structure
+          if (!data || typeof data !== 'object') {
+            throw new Error('Le fichier biens.json ne contient pas un objet JSON valide.');
+          }
+
+          if (!data.properties || !Array.isArray(data.properties)) {
+            throw new Error('Le fichier biens.json doit contenir un tableau "properties".');
+          }
+
           currentProperty = data.properties.find(p => p.reference === propertyRef);
 
           if (!currentProperty) {
             document.querySelector('.detail-container').innerHTML = 
-              '<p style="text-align: center; padding: 3rem;">Bien non trouvé</p>';
+              '<div style="text-align: center; padding: 3rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin: 2rem 0;">' +
+              '<h2 style="color: #856404; margin-bottom: 1rem;">⚠️ Bien non trouvé</h2>' +
+              '<p style="color: #856404; margin-bottom: 1rem;">Aucun bien trouvé avec la référence: <strong>' + (propertyRef || 'non spécifiée') + '</strong></p>' +
+              '<p style="color: #856404;">💡 Vérifiez que la référence est correcte ou <a href="index.html" style="color: #007bff;">retournez à la liste des biens</a>.</p>' +
+              '</div>';
             return;
           }
 
           displayProperty(currentProperty);
         } catch (error) {
           console.error('Error loading property:', error);
-          document.querySelector('.detail-container').innerHTML = 
-            '<p style="text-align: center; padding: 3rem;">Erreur de chargement</p>';
+          
+          // Handle network errors with retry logic
+          if (error.name === 'TypeError' && error.message.includes('fetch') && retryCount < MAX_RETRIES) {
+            console.warn(`Network error, retrying in ${RETRY_DELAY_MS}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+            setTimeout(() => loadPropertyDetails(retryCount + 1), RETRY_DELAY_MS);
+            return;
+          }
+          
+          // Build actionable error message for users
+          let errorHTML = '<div style="text-align: center; padding: 3rem; background: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; margin: 2rem 0;">';
+          errorHTML += '<h2 style="color: #e53e3e; margin-bottom: 1rem;">❌ Erreur de chargement</h2>';
+          errorHTML += '<p style="color: #c53030; margin-bottom: 1rem;">' + error.message + '</p>';
+          
+          // Add actionable suggestions based on error type
+          if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
+            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
+            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
+            errorHTML += '<li>Vérifiez votre connexion internet</li>';
+            errorHTML += '<li>Rechargez la page (F5 ou Ctrl+R)</li>';
+            errorHTML += '<li>Vérifiez que le fichier biens.json existe</li>';
+            errorHTML += '</ul>';
+            errorHTML += '</div>';
+          } else if (error.message.includes('JSON')) {
+            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
+            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
+            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
+            errorHTML += '<li>Vérifiez la syntaxe JSON du fichier biens.json</li>';
+            errorHTML += '<li>Utilisez un validateur JSON en ligne</li>';
+            errorHTML += '</ul>';
+            errorHTML += '</div>';
+          } else if (error.message.includes('404')) {
+            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
+            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
+            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
+            errorHTML += '<li>Vérifiez que biens.json existe à la racine</li>';
+            errorHTML += '<li>Assurez-vous que le fichier a été commit sur GitHub</li>';
+            errorHTML += '</ul>';
+            errorHTML += '</div>';
+          }
+          
+          errorHTML += '<p style="margin-top: 1rem;"><a href="index.html" style="color: #007bff; text-decoration: underline;">← Retour à l\'accueil</a></p>';
+          errorHTML += '</div>';
+          
+          document.querySelector('.detail-container').innerHTML = errorHTML;
         }
       }
 
