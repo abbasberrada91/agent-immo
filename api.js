@@ -80,10 +80,15 @@ class PropertyAPI {
             
             const data = await response.json();
             
+            // Validate that we got required fields
+            if (!data.sha) {
+                throw new Error('Invalid response from GitHub API: missing SHA field');
+            }
+            
             // If file is too large (> 1MB), GitHub API doesn't include content field
             // In this case, fetch from raw URL instead
             // Note: data.sha is still available even for large files
-            if (!data.content) {
+            if (data.content === undefined) {
                 console.log('File too large for Contents API, fetching from raw URL...');
                 const rawResponse = await fetch(
                     `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
