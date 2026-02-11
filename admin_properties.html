@@ -615,6 +615,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label>URL de la photo principale</label>
+                    <input type="url" id="editImage" placeholder="https://example.com/photo.jpg">
+                    <div style="font-size: 12px; color: #718096; margin-top: 4px;">URL publique de l'image principale du bien</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description de la photo (alt text)</label>
+                    <input type="text" id="editAlt" placeholder="Appartement moderne avec balcon">
+                    <div style="font-size: 12px; color: #718096; margin-top: 4px;">Décrivez la photo pour l'accessibilité</div>
+                </div>
+
+                <div class="form-group">
                     <label>URL Fiche Canva</label>
                     <input type="url" id="editBrochureUrl">
                     <div style="font-size: 12px; color: #718096; margin-top: 4px;">URL publique de votre fiche Canva (optionnel)</div>
@@ -874,6 +886,8 @@
             document.getElementById('editHeatingType').value = property.heatingType || 'collectif';
             document.getElementById('editElevator').checked = property.elevator || false;
             document.getElementById('editRoommate').checked = property.roommateAllowed || false;
+            document.getElementById('editImage').value = property.image || '';
+            document.getElementById('editAlt').value = property.alt || '';
             document.getElementById('editBrochureUrl').value = property.brochureUrl || '';
 
             document.getElementById('editModal').classList.add('show');
@@ -923,6 +937,17 @@
             const brochureUrlValue = document.getElementById('editBrochureUrl').value;
             if (brochureUrlValue && brochureUrlValue.trim() !== '') {
                 updates.brochureUrl = brochureUrlValue.trim();
+            }
+
+            // Add photo fields if they have values
+            const imageValue = document.getElementById('editImage').value;
+            if (imageValue && imageValue.trim() !== '') {
+                updates.image = imageValue.trim();
+            }
+
+            const altValue = document.getElementById('editAlt').value;
+            if (altValue && altValue.trim() !== '') {
+                updates.alt = altValue.trim();
             }
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
