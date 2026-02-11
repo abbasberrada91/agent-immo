@@ -48,6 +48,24 @@ class PropertyAPI {
     }
 
     /**
+     * Parse and validate JSON content
+     * @param {string} content - JSON string to parse
+     * @returns {Object} Parsed JSON object
+     * @throws {Error} If content is empty or JSON is invalid
+     */
+    parseAndValidateJSON(content) {
+        if (!content || content.trim().length === 0) {
+            throw new Error('Empty content received');
+        }
+        
+        try {
+            return JSON.parse(content);
+        } catch (parseError) {
+            throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
+        }
+    }
+
+    /**
      * Fetch current biens.json content from GitHub
      */
     async fetchProperties() {
@@ -61,10 +79,42 @@ class PropertyAPI {
             }
             
             const data = await response.json();
+            
+            // Validate that we got required fields
+            if (!data.sha) {
+                throw new Error('Invalid response from GitHub API: missing SHA field');
+            }
+            
+            // If file is too large (> 1MB), GitHub API doesn't include content field
+            // In this case, fetch from raw URL instead
+            // Note: GitHub API still returns the SHA field even for large files
+            // Reference: https://docs.github.com/en/rest/repos/contents
+            if (!('content' in data) || data.content === null) {
+                console.log('File too large for Contents API, fetching from raw URL...');
+                const rawResponse = await fetch(
+                    `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
+                );
+                
+                if (!rawResponse.ok) {
+                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.statusText}`);
+                }
+                
+                const rawContent = await rawResponse.text();
+                const parsedData = this.parseAndValidateJSON(rawContent);
+                
+                return {
+                    data: parsedData,
+                    sha: data.sha // SHA is guaranteed to be present (validated at line 84)
+                };
+            }
+            
+            // For files under 1MB, content is base64-encoded in the response
             const content = atob(data.content); // Decode base64
+            const parsedData = this.parseAndValidateJSON(content);
+            
             return {
-                data: JSON.parse(content),
-                sha: data.sha // Need this for updating
+                data: parsedData,
+                sha: data.sha
             };
         } catch (error) {
             console.error('Error fetching properties:', error);
