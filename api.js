@@ -104,7 +104,7 @@ class PropertyAPI {
                 
                 return {
                     data: parsedData,
-                    sha: data.sha // SHA is guaranteed to be present (validated above)
+                    sha: data.sha // SHA is guaranteed to be present (validated at line 84)
                 };
             }
             
