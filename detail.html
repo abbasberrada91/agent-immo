@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="drawer.css" />
     <style>
+      /* Extended color palette for detail page */
+      :root {
+        --detail-border-light: var(--detail-border-light);
+        --detail-bg-gradient-start: var(--detail-bg-gradient-start);
+        --detail-bg-gradient-end: var(--detail-bg-gradient-end);
+        --detail-overlay: rgba(22, 58, 95, 0.92);
+      }
+
       .detail-header {
         background: var(--white);
         border-bottom: 1px solid var(--line);
@@ -137,7 +145,7 @@
         position: absolute;
         bottom: 1.5rem;
         right: 1.5rem;
-        background: rgba(22, 58, 95, 0.92);
+        background: var(--detail-overlay);
         color: white;
         padding: 0.6rem 1.2rem;
         border-radius: 999px;
@@ -179,7 +187,7 @@
         padding: 1.2rem;
         background: linear-gradient(135deg, var(--bg) 0%, #f8fafc 100%);
         border-radius: 0.75rem;
-        border: 1px solid #e8f0f8;
+        border: 1px solid var(--detail-border-light);
         transition: all 0.2s ease;
       }
 
@@ -214,7 +222,7 @@
 
       .features-list li {
         padding: 0.85rem 1.2rem;
-        background: linear-gradient(135deg, #f0f7ff 0%, var(--bg) 100%);
+        background: linear-gradient(135deg, var(--detail-bg-gradient-start) 0%, var(--bg) 100%);
         border-radius: 0.75rem;
         font-weight: 500;
         color: var(--ink);
@@ -228,7 +236,7 @@
       .features-list li:hover {
         transform: translateX(3px);
         border-color: var(--brand);
-        background: linear-gradient(135deg, #e6f2ff 0%, var(--bg) 100%);
+        background: linear-gradient(135deg, var(--detail-bg-gradient-end) 0%, var(--bg) 100%);
       }
 
       .features-list li::before {
@@ -298,7 +306,7 @@
         padding: 1rem 1.2rem;
         background: linear-gradient(135deg, var(--bg) 0%, #f8fafc 100%);
         border-radius: 0.75rem;
-        border: 1px solid #e8f0f8;
+        border: 1px solid var(--detail-border-light);
         transition: all 0.2s ease;
       }
 
@@ -317,7 +325,7 @@
       .map-placeholder {
         width: 100%;
         height: 350px;
-        background: linear-gradient(135deg, #f0f7ff 0%, var(--bg) 100%);
+        background: linear-gradient(135deg, var(--detail-bg-gradient-start) 0%, var(--bg) 100%);
         border-radius: 0.75rem;
         display: flex;
         align-items: center;
@@ -354,7 +362,7 @@
         padding: 1.2rem;
         background: linear-gradient(135deg, var(--bg) 0%, #f8fafc 100%);
         border-radius: 0.75rem;
-        border: 1px solid #e8f0f8;
+        border: 1px solid var(--detail-border-light);
         transition: all 0.2s ease;
       }
 
