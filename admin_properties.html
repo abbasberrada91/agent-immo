@@ -718,9 +718,9 @@
                         <th>Référence</th>
                         <th>Transaction</th>
                         <th>Type Bien</th>
-                        <th>Type CL</th>
-                        <th>Rang</th>
-                        <th>Dossier CL</th>
+                        <th title="Type Cloudinary (vente/location)">Type Cloudinary</th>
+                        <th title="Rang Cloudinary">Rang</th>
+                        <th title="Dossier Cloudinary (ex: V01, LC05)">Dossier Cloudinary</th>
                         <th>Titre</th>
                         <th>Ville</th>
                         <th>Prix</th>
@@ -1147,7 +1147,7 @@
                     `${property.price.toLocaleString('fr-FR')} €` :
                     `${property.price.toLocaleString('fr-FR')} €/mois`;
 
-                const typeCLDisplay = property.type ? property.type : '-';
+                const cloudinaryTypeDisplay = property.type ? property.type : '-';
                 const rankDisplay = property.rank ? property.rank : '-';
                 const cloudinaryFolderDisplay = property.cloudinaryFolder ? 
                     `<span style="font-family: monospace; background: #f0f9ff; padding: 2px 6px; border-radius: 4px;">${property.cloudinaryFolder}</span>` : 
@@ -1157,7 +1157,7 @@
                     <td><strong>${property.reference}</strong></td>
                     <td>${transactionBadge}</td>
                     <td>${property.propertyType}</td>
-                    <td>${typeCLDisplay}</td>
+                    <td>${cloudinaryTypeDisplay}</td>
                     <td>${rankDisplay}</td>
                     <td>${cloudinaryFolderDisplay}</td>
                     <td>${property.title}</td>
@@ -1178,6 +1178,7 @@
 
             if (filtered.length === 0 && allProperties.length > 0) {
                 const tr = document.createElement('tr');
+                // Note: Colspan must match total number of table columns (currently 12)
                 tr.innerHTML = '<td colspan="12" style="text-align: center; padding: 40px; color: #718096;">Aucun bien ne correspond à vos critères de recherche</td>';
                 tbody.appendChild(tr);
             }
@@ -1717,9 +1718,12 @@
                 updates.type = typeValue;
             }
 
+            // Get submit button reference once for better performance
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
             const rankValue = document.getElementById('editRank').value;
             if (rankValue && rankValue.trim() !== '') {
-                const newRank = parseInt(rankValue);
+                const newRank = parseInt(rankValue, 10);
                 // Check if rank changed and needs confirmation
                 if (window.originalRank !== undefined && window.originalRank !== newRank) {
                     const confirmRank = confirm(
@@ -1732,7 +1736,6 @@
                     );
                     
                     if (!confirmRank) {
-                        const submitBtn = e.target.querySelector('button[type="submit"]');
                         submitBtn.disabled = false;
                         submitBtn.textContent = '💾 Enregistrer';
                         return; // Abort submission
@@ -1749,7 +1752,6 @@
                 if (folderInput.readOnly) {
                     // Should not happen in normal flow, but handle gracefully
                     alert('⚠️ Le dossier Cloudinary est gelé. Utilisez le bouton "🔓 Modifier" pour le débloquer.');
-                    const submitBtn = e.target.querySelector('button[type="submit"]');
                     submitBtn.disabled = false;
                     submitBtn.textContent = '💾 Enregistrer';
                     return;
@@ -1765,7 +1767,6 @@
                 );
                 
                 if (!confirmFolder) {
-                    const submitBtn = e.target.querySelector('button[type="submit"]');
                     submitBtn.disabled = false;
                     submitBtn.textContent = '💾 Enregistrer';
                     return; // Abort submission
@@ -1790,7 +1791,7 @@
             // The validation in api.js will reject any base64 images.
             // Only URL-based images are allowed in the image and images fields.
 
-            const submitBtn = e.target.querySelector('button[type="submit"]');
+            // Set loading state on submit button
             submitBtn.disabled = true;
             submitBtn.textContent = '⏳ Enregistrement...';
 

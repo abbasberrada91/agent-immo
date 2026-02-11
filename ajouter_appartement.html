@@ -1192,7 +1192,7 @@
 
                 const rankValue = document.getElementById('rank').value;
                 if (rankValue && rankValue.trim() !== '') {
-                    apartment.rank = parseInt(rankValue);
+                    apartment.rank = parseInt(rankValue, 10);
                 }
 
                 // Add charges if provided
