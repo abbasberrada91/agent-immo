@@ -116,7 +116,25 @@ form.addEventListener('submit', (event) => {
 
 // Helper function to detect network errors
 const isNetworkError = (error) => {
-  return error.name === 'TypeError' && error.message.includes('fetch');
+  // Network errors are typically TypeError with specific messages
+  if (!(error instanceof TypeError)) {
+    return false;
+  }
+  const message = error.message.toLowerCase();
+  return message.includes('fetch') || 
+         message.includes('network') || 
+         message.includes('failed to fetch') ||
+         message.includes('networkerror');
+};
+
+// Helper function to apply error styling to an element
+const applyErrorStyling = (element) => {
+  element.style.whiteSpace = 'pre-line';
+  element.style.color = '#e53e3e';
+  element.style.padding = '1rem';
+  element.style.background = '#fff5f5';
+  element.style.border = '1px solid #fc8181';
+  element.style.borderRadius = '8px';
 };
 
 const loadProperties = async (retryCount = 0) => {
@@ -213,12 +231,7 @@ const loadProperties = async (retryCount = 0) => {
     }
     
     listingSummary.textContent = userMessage;
-    listingSummary.style.whiteSpace = 'pre-line'; // Allow line breaks
-    listingSummary.style.color = '#e53e3e'; // Red color for errors
-    listingSummary.style.padding = '1rem';
-    listingSummary.style.background = '#fff5f5';
-    listingSummary.style.border = '1px solid #fc8181';
-    listingSummary.style.borderRadius = '8px';
+    applyErrorStyling(listingSummary);
   }
 };
 

@@ -539,7 +539,15 @@
 
       // Helper function to detect network errors
       function isNetworkError(error) {
-        return error.name === 'TypeError' && error.message.includes('fetch');
+        // Network errors are typically TypeError with specific messages
+        if (!(error instanceof TypeError)) {
+          return false;
+        }
+        const message = error.message.toLowerCase();
+        return message.includes('fetch') || 
+               message.includes('network') || 
+               message.includes('failed to fetch') ||
+               message.includes('networkerror');
       }
 
       // Helper function to escape HTML to prevent XSS
@@ -547,6 +555,30 @@
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+      }
+
+      // Helper function to create a suggestion box with list items
+      function createSuggestionBox(suggestions) {
+        const div = document.createElement('div');
+        div.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
+        
+        const title = document.createElement('p');
+        title.style.cssText = 'color: #2d3748; margin-bottom: 0.5rem;';
+        const strong = document.createElement('strong');
+        strong.textContent = '💡 Actions à essayer:';
+        title.appendChild(strong);
+        div.appendChild(title);
+        
+        const ul = document.createElement('ul');
+        ul.style.cssText = 'color: #4a5568; margin-left: 1.5rem;';
+        suggestions.forEach(suggestion => {
+          const li = document.createElement('li');
+          li.textContent = suggestion;
+          ul.appendChild(li);
+        });
+        div.appendChild(ul);
+        
+        return div;
       }
 
       // Load property data with retry logic and better error handling
@@ -673,33 +705,24 @@
           
           // Add actionable suggestions based on error type
           if (isNetworkError(error)) {
-            const suggestionsDiv = document.createElement('div');
-            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
-            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
-              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
-              '<li>Vérifiez votre connexion internet</li>' +
-              '<li>Rechargez la page (F5 ou Ctrl+R)</li>' +
-              '<li>Vérifiez que le fichier biens.json existe</li>' +
-              '</ul>';
-            mainDiv.appendChild(suggestionsDiv);
+            const suggestions = [
+              'Vérifiez votre connexion internet',
+              'Rechargez la page (F5 ou Ctrl+R)',
+              'Vérifiez que le fichier biens.json existe'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
           } else if (error.message.includes('JSON')) {
-            const suggestionsDiv = document.createElement('div');
-            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
-            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
-              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
-              '<li>Vérifiez la syntaxe JSON du fichier biens.json</li>' +
-              '<li>Utilisez un validateur JSON en ligne</li>' +
-              '</ul>';
-            mainDiv.appendChild(suggestionsDiv);
+            const suggestions = [
+              'Vérifiez la syntaxe JSON du fichier biens.json',
+              'Utilisez un validateur JSON en ligne'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
           } else if (error.message.includes('404')) {
-            const suggestionsDiv = document.createElement('div');
-            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
-            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
-              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
-              '<li>Vérifiez que biens.json existe à la racine</li>' +
-              '<li>Assurez-vous que le fichier a été commit sur GitHub</li>' +
-              '</ul>';
-            mainDiv.appendChild(suggestionsDiv);
+            const suggestions = [
+              'Vérifiez que biens.json existe à la racine',
+              'Assurez-vous que le fichier a été commit sur GitHub'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
           }
           
           const returnP = document.createElement('p');
