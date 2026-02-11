@@ -89,7 +89,7 @@ class PropertyAPI {
             // In this case, fetch from raw URL instead
             // Note: GitHub API still returns the SHA field even for large files
             // Reference: https://docs.github.com/en/rest/repos/contents
-            if (!('content' in data) || data.content == null) {
+            if (!('content' in data) || data.content === null) {
                 console.log('File too large for Contents API, fetching from raw URL...');
                 const rawResponse = await fetch(
                     `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
