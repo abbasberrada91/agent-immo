@@ -61,6 +61,26 @@ class PropertyAPI {
             }
             
             const data = await response.json();
+            
+            // If file is too large (> 1MB), GitHub API doesn't include content field
+            // In this case, fetch from raw URL instead
+            if (!data.content) {
+                console.log('File too large for Contents API, fetching from raw URL...');
+                const rawResponse = await fetch(
+                    `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
+                );
+                
+                if (!rawResponse.ok) {
+                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.statusText}`);
+                }
+                
+                const rawContent = await rawResponse.text();
+                return {
+                    data: JSON.parse(rawContent),
+                    sha: data.sha // Still return SHA for updating
+                };
+            }
+            
             const content = atob(data.content); // Decode base64
             return {
                 data: JSON.parse(content),
