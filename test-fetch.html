@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Fetch</title>
+</head>
+<body>
+    <h1>Testing GitHub API</h1>
+    <div id="output"></div>
+    <script>
+        const output = document.getElementById('output');
+        
+        async function testFetch() {
+            try {
+                output.innerHTML += '<p>Testing GitHub Contents API...</p>';
+                const response1 = await fetch('https://api.github.com/repos/abbasberrada91/agent-immo/contents/biens.json?ref=main');
+                const data1 = await response1.json();
+                
+                output.innerHTML += '<p>Response from Contents API:</p>';
+                output.innerHTML += '<pre>' + JSON.stringify({
+                    sha: data1.sha ? 'present' : 'missing',
+                    content: data1.content ? 'present (length: ' + data1.content.length + ')' : 'missing or null',
+                    size: data1.size
+                }, null, 2) + '</pre>';
+                
+                if (!data1.content) {
+                    output.innerHTML += '<p>Content is null/missing, trying raw URL...</p>';
+                    
+                    const cacheBuster = `?t=${Date.now()}`;
+                    const response2 = await fetch(
+                        `https://raw.githubusercontent.com/abbasberrada91/agent-immo/main/biens.json${cacheBuster}`,
+                        { cache: 'no-store' }
+                    );
+                    
+                    output.innerHTML += '<p>Raw URL response:</p>';
+                    output.innerHTML += '<pre>Status: ' + response2.status + '\n';
+                    output.innerHTML += 'Content-Type: ' + response2.headers.get('content-type') + '</pre>';
+                    
+                    // Try to read as text first
+                    const text = await response2.text();
+                    output.innerHTML += '<p>Text length: ' + text.length + '</p>';
+                    output.innerHTML += '<p>First 100 chars: ' + text.substring(0, 100) + '</p>';
+                    
+                    if (text && text.length > 0) {
+                        try {
+                            const parsed = JSON.parse(text);
+                            output.innerHTML += '<p>✅ Successfully parsed JSON!</p>';
+                            output.innerHTML += '<p>Properties count: ' + (parsed.properties ? parsed.properties.length : 'N/A') + '</p>';
+                        } catch (e) {
+                            output.innerHTML += '<p>❌ Failed to parse JSON: ' + e.message + '</p>';
+                        }
+                    } else {
+                        output.innerHTML += '<p>❌ Text is empty!</p>';
+                    }
+                }
+                
+            } catch (error) {
+                output.innerHTML += '<p style="color: red;">Error: ' + error.message + '</p>';
+                console.error(error);
+            }
+        }
+        
+        testFetch();
+    </script>
+</body>
+</html>
