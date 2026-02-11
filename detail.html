@@ -544,17 +544,7 @@
           return false;
         }
         const message = error.message.toLowerCase();
-        return message.includes('fetch') || 
-               message.includes('network') || 
-               message.includes('failed to fetch') ||
-               message.includes('networkerror');
-      }
-
-      // Helper function to escape HTML to prevent XSS
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+        return message.includes('fetch') || message.includes('network');
       }
 
       // Helper function to create a suggestion box with list items

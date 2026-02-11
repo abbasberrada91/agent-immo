@@ -121,10 +121,7 @@ const isNetworkError = (error) => {
     return false;
   }
   const message = error.message.toLowerCase();
-  return message.includes('fetch') || 
-         message.includes('network') || 
-         message.includes('failed to fetch') ||
-         message.includes('networkerror');
+  return message.includes('fetch') || message.includes('network');
 };
 
 // Helper function to apply error styling to an element
