@@ -12,7 +12,7 @@
       "price": 2150000,
       "features": [
         "Vue mer",
-        "Piscine chauffée"
+        "Piscine chauffÃ©e"
       ],
       "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
       "alt": "Villa contemporaine avec piscine",
@@ -30,7 +30,7 @@
       "price": 4600,
       "features": [
         "Balcon filant",
-        "Meublé"
+        "MeublÃ©"
       ],
       "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement haussmannien lumineux",
@@ -47,7 +47,7 @@
       "rooms": 6,
       "price": 895000,
       "features": [
-        "Jardin arboré",
+        "Jardin arborÃ©",
         "Garage"
       ],
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
@@ -60,12 +60,12 @@
       "propertyType": "Loft",
       "title": "Loft design",
       "city": "Lyon",
-      "district": "Presqu'île",
+      "district": "Presqu'Ã®le",
       "surface": 96,
       "rooms": 3,
       "price": 2250,
       "features": [
-        "Dernier étage",
+        "Dernier Ã©tage",
         "Terrasse"
       ],
       "image": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
@@ -83,7 +83,7 @@
       "rooms": 4,
       "price": 1430000,
       "features": [
-        "Rooftop 80 m²",
+        "Rooftop 80 mÂ²",
         "Parking"
       ],
       "image": "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1200&q=80",
@@ -101,11 +101,11 @@
       "rooms": 1,
       "price": 1050,
       "features": [
-        "Rénové",
+        "RÃ©novÃ©",
         "Services inclus"
       ],
       "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
-      "alt": "Studio rénové moderne",
+      "alt": "Studio rÃ©novÃ© moderne",
       "brochureUrl": "https://www.canva.com/"
     },
     {
@@ -120,7 +120,7 @@
       "price": 1250000,
       "features": [
         "Parquet d'origine",
-        "Cheminée"
+        "CheminÃ©e"
       ],
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement parisien avec parquet",
@@ -137,11 +137,11 @@
       "rooms": 3,
       "price": 1850,
       "features": [
-        "Cuisine équipée",
+        "Cuisine Ã©quipÃ©e",
         "Parking"
       ],
       "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
-      "alt": "Appartement moderne avec cuisine équipée",
+      "alt": "Appartement moderne avec cuisine Ã©quipÃ©e",
       "brochureUrl": "https://www.canva.com/"
     },
     {
@@ -155,7 +155,7 @@
       "rooms": 4,
       "price": 485000,
       "features": [
-        "Terrasse 25 m²",
+        "Terrasse 25 mÂ²",
         "Vue mer"
       ],
       "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
@@ -202,9 +202,9 @@
       "reference": "LC-5467",
       "transaction": "location",
       "propertyType": "Appartement",
-      "title": "Appartement rénové",
+      "title": "Appartement rÃ©novÃ©",
       "city": "Nice",
-      "district": "Libération",
+      "district": "LibÃ©ration",
       "surface": 68,
       "rooms": 2,
       "price": 1450,
@@ -213,7 +213,7 @@
         "Proche commerces"
       ],
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
-      "alt": "Appartement rénové climatisé",
+      "alt": "Appartement rÃ©novÃ© climatisÃ©",
       "brochureUrl": "https://www.canva.com/"
     },
     {
@@ -231,7 +231,7 @@
         "Poutres apparentes"
       ],
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      "alt": "Appartement duplex avec caractère",
+      "alt": "Appartement duplex avec caractÃ¨re",
       "brochureUrl": "https://www.canva.com/"
     },
     {
@@ -281,11 +281,11 @@
       "rooms": 2,
       "price": 980,
       "features": [
-        "Meublé",
+        "MeublÃ©",
         "Fibre optique"
       ],
       "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
-      "alt": "Appartement cosy meublé",
+      "alt": "Appartement cosy meublÃ©",
       "brochureUrl": "https://www.canva.com/"
     },
     {
@@ -301,7 +301,7 @@
       "features": [
         "Balcon",
         "Parking",
-        "Rénové"
+        "RÃ©novÃ©"
       ],
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
       "alt": "Appartement lumineux avec balcon",
@@ -321,12 +321,12 @@
       "price": 18000,
       "features": [
         "Balcon",
-        "rénové",
-        "parfait état",
+        "rÃ©novÃ©",
+        "parfait Ã©tat",
         "master avec salle d'eau WC et Dressing",
         "deux balcons filants rue et cour",
         "Parking",
-        "dernier étage",
+        "dernier Ã©tage",
         "ascenceur et gardien"
       ],
       "brochureUrl": null,
@@ -334,7 +334,8 @@
       "elevator": true,
       "roommateAllowed": false,
       "wc": 4,
-      "contact": "Abbas BERRADA"
+      "contact": "Abbas BERRADA",
+      "dateModified": "2026-02-11T10:52:05.839Z"
     }
   ]
 }
