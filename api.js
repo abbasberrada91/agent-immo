@@ -27,6 +27,46 @@ class PropertyAPI {
     }
 
     /**
+     * Validate property data to prevent base64-encoded images
+     * @param {Object} property - Property data to validate
+     * @returns {Object} Validation result with success status and message
+     */
+    validatePropertyData(property) {
+        // Check image field
+        if (property.image && typeof property.image === 'string' && property.image.startsWith('data:')) {
+            return {
+                success: false,
+                error: 'BASE64_IMAGE',
+                message: 'Les images base64 ne sont pas autorisées dans le champ "image". Veuillez utiliser une URL d\'image externe (ex: https://...).'
+            };
+        }
+
+        // Check images array
+        if (property.images && Array.isArray(property.images)) {
+            for (let i = 0; i < property.images.length; i++) {
+                if (typeof property.images[i] === 'string' && property.images[i].startsWith('data:')) {
+                    return {
+                        success: false,
+                        error: 'BASE64_IMAGE',
+                        message: `Les images base64 ne sont pas autorisées dans le tableau "images" (index ${i}). Veuillez utiliser des URLs d\'images externes.`
+                    };
+                }
+            }
+        }
+
+        // Check additionalPhotos array
+        if (property.additionalPhotos && Array.isArray(property.additionalPhotos)) {
+            return {
+                success: false,
+                error: 'BASE64_IMAGE',
+                message: 'Les images base64 ne sont pas autorisées dans "additionalPhotos". Ce champ contient trop de données et dépasse la limite de 1MB de GitHub API. Veuillez supprimer ce champ et utiliser uniquement des URLs dans "image" et "images".'
+            };
+        }
+
+        return { success: true };
+    }
+
+    /**
      * Check if error is a SHA mismatch error and should be retried
      * @param {Object} errorData - Error response from GitHub API
      * @param {number} retryCount - Current retry count
@@ -277,6 +317,12 @@ class PropertyAPI {
             };
         }
 
+        // Validate property data
+        const validation = this.validatePropertyData(property);
+        if (!validation.success) {
+            return validation;
+        }
+
         try {
             // 1. Fetch current file
             const { data: biens, sha } = await this.fetchProperties();
@@ -367,6 +413,12 @@ class PropertyAPI {
                 error: 'NO_TOKEN',
                 message: 'GitHub token non configuré.'
             };
+        }
+
+        // Validate updates data
+        const validation = this.validatePropertyData(updates);
+        if (!validation.success) {
+            return validation;
         }
 
         try {

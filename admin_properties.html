@@ -1638,14 +1638,10 @@
             }
 
             // Add photo fields if they have values
-            // Prioritize uploaded file over URL
-            if (editMainPhotoData) {
-                updates.image = editMainPhotoData;
-            } else {
-                const imageValue = document.getElementById('editImage').value;
-                if (imageValue && imageValue.trim() !== '') {
-                    updates.image = imageValue.trim();
-                }
+            // Note: Base64 images are not supported - only URLs are allowed
+            const imageValue = document.getElementById('editImage').value;
+            if (imageValue && imageValue.trim() !== '') {
+                updates.image = imageValue.trim();
             }
 
             const altValue = document.getElementById('editAlt').value;
@@ -1653,19 +1649,9 @@
                 updates.alt = altValue.trim();
             }
 
-            // Add additional photos if any
-            if (editPhotosData.length > 0) {
-                updates.additionalPhotos = editPhotosData.map(photo => ({
-                    filename: photo.filename,
-                    type: photo.type,
-                    size: photo.size,
-                    caption: photo.caption,
-                    data: photo.data
-                }));
-            } else {
-                // If no photos, clear the additionalPhotos field
-                updates.additionalPhotos = [];
-            }
+            // Note: additionalPhotos with base64 data is not supported as it exceeds GitHub API limits.
+            // The validation in api.js will reject any base64 images.
+            // Only URL-based images are allowed in the image and images fields.
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
