@@ -147,7 +147,10 @@ const AppConfig = {
                 'ghgClass',
                 'dateAdded',
                 'dateModified',
-                'status'
+                'status',
+                'type',
+                'rank',
+                'cloudinaryFolder'
             ]
         },
         
@@ -175,10 +178,77 @@ const AppConfig = {
                 errors.push('Le prix doit être un nombre positif');
             }
             
+            // Validations pour les nouveaux champs optionnels
+            if (property.type && !['vente', 'location'].includes(property.type)) {
+                errors.push('Le type doit être "vente" ou "location"');
+            }
+            
+            if (property.rank !== undefined && property.rank !== null) {
+                if (isNaN(property.rank) || property.rank < 1 || !Number.isInteger(Number(property.rank))) {
+                    errors.push('Le rang doit être un nombre entier >= 1');
+                }
+            }
+            
+            if (property.cloudinaryFolder && typeof property.cloudinaryFolder !== 'string') {
+                errors.push('Le dossier Cloudinary doit être une chaîne de caractères');
+            }
+            
             return {
                 valid: errors.length === 0,
                 errors: errors
             };
+        }
+    },
+    
+    // Configuration Cloudinary
+    cloudinary: {
+        cloudName: '',  // Optional: set your Cloudinary cloud name
+        clientFolderBaseUrl: '',  // Optional: public URL convention for folders
+        
+        /**
+         * Generate Cloudinary folder name based on type and rank
+         * @param {string} type - Property type ('vente' or 'location')
+         * @param {number} rank - Property rank (>= 1)
+         * @returns {string} Folder name (e.g., 'V01', 'LC01')
+         */
+        generateFolderName: (type, rank) => {
+            if (!type || !rank) {
+                return null;
+            }
+            
+            const prefix = type === 'vente' ? 'V' : 'LC';
+            const paddedRank = String(rank).padStart(2, '0');
+            return `${prefix}${paddedRank}`;
+        },
+        
+        /**
+         * Build Cloudinary image URL if cloudName and folder are set
+         * @param {string} folder - Cloudinary folder name
+         * @param {string} publicId - Image public ID (optional)
+         * @returns {string|null} Full Cloudinary URL or null
+         */
+        buildImageUrl: (folder, publicId = null) => {
+            const { cloudName } = AppConfig.cloudinary;
+            if (!cloudName || !folder) {
+                return null;
+            }
+            
+            const baseUrl = `https://res.cloudinary.com/${cloudName}/image/upload`;
+            if (publicId) {
+                return `${baseUrl}/${folder}/${publicId}`;
+            }
+            return `${baseUrl}/${folder}`;
+        },
+        
+        /**
+         * Get the GitHub Actions workflow URL for Cloudinary gallery
+         * @param {string} ref - Property reference/folder name
+         * @returns {string} Workflow dispatch URL
+         */
+        getWorkflowUrl: (ref) => {
+            const { owner, repo } = AppConfig.github;
+            const workflowPath = 'cloudinary-gallery.yml';
+            return `https://github.com/${owner}/${repo}/actions/workflows/${workflowPath}?ref=${ref || ''}`;
         }
     },
     

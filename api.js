@@ -301,6 +301,47 @@ class PropertyAPI {
     }
 
     /**
+     * Calculate the next available rank for a property type
+     * @param {Array} properties - Existing properties
+     * @param {string} type - Property type ('vente' or 'location')
+     * @returns {number} Next available rank
+     */
+    calculateNextRank(properties, type) {
+        if (!type || !['vente', 'location'].includes(type)) {
+            return 1;
+        }
+        
+        // Find all properties of the same type with a rank
+        const ranksInUse = properties
+            .filter(p => p.type === type && p.rank)
+            .map(p => parseInt(p.rank, 10))
+            .filter(rank => !isNaN(rank) && rank > 0);
+        
+        if (ranksInUse.length === 0) {
+            return 1;
+        }
+        
+        // Return the max rank + 1
+        return Math.max(...ranksInUse) + 1;
+    }
+
+    /**
+     * Generate cloudinaryFolder from type and rank
+     * Uses AppConfig.cloudinary.generateFolderName utility
+     * @param {string} type - Property type ('vente' or 'location')
+     * @param {number} rank - Property rank
+     * @returns {string|null} Generated folder name or null
+     */
+    generateCloudinaryFolder(type, rank) {
+        if (!window.AppConfig || !window.AppConfig.cloudinary) {
+            console.warn('AppConfig.cloudinary not available');
+            return null;
+        }
+        
+        return window.AppConfig.cloudinary.generateFolderName(type, rank);
+    }
+
+    /**
      * Add a new property to biens.json
      * @param {Object} property - Property data
      * @param {number} retryCount - Internal retry counter (default: 0)
@@ -337,17 +378,42 @@ class PropertyAPI {
                 };
             }
             
-            // 3. Add metadata
+            // 3. Auto-calculate rank if type is provided but rank is not
+            let autoCalculatedRank = null;
+            if (property.type && !property.rank) {
+                autoCalculatedRank = this.calculateNextRank(biens.properties, property.type);
+                console.log(`Auto-calculated rank for type '${property.type}': ${autoCalculatedRank}`);
+            }
+            
+            // 4. Generate cloudinaryFolder if not provided and type/rank are available
+            let generatedFolder = null;
+            const effectiveRank = property.rank || autoCalculatedRank;
+            if (property.type && effectiveRank && !property.cloudinaryFolder) {
+                generatedFolder = this.generateCloudinaryFolder(property.type, effectiveRank);
+                if (generatedFolder) {
+                    console.log(`Generated cloudinaryFolder: ${generatedFolder}`);
+                }
+            }
+            
+            // 5. Add metadata and calculated fields
             const newProperty = {
                 ...property,
                 dateAdded: new Date().toISOString(),
                 status: 'published'
             };
             
-            // 4. Add to properties array
+            // Add auto-calculated fields only if they were calculated
+            if (autoCalculatedRank) {
+                newProperty.rank = autoCalculatedRank;
+            }
+            if (generatedFolder) {
+                newProperty.cloudinaryFolder = generatedFolder;
+            }
+            
+            // 6. Add to properties array
             biens.properties.push(newProperty);
             
-            // 5. Update file on GitHub
+            // 7. Update file on GitHub
             // Properly encode UTF-8 to base64 for GitHub API
             const content = btoa(encodeURIComponent(JSON.stringify(biens, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
             
@@ -435,14 +501,54 @@ class PropertyAPI {
                 };
             }
             
-            // 3. Update property
+            const existingProperty = biens.properties[index];
+            
+            // 3. Apply safeguards before updating
+            
+            // Safeguard 1: Freeze cloudinaryFolder - never overwrite it
+            // If cloudinaryFolder exists in original property, preserve it
+            if (existingProperty.cloudinaryFolder && updates.cloudinaryFolder !== undefined) {
+                // Only allow explicit override if special flag is set
+                if (!updates._allowCloudinaryFolderOverride) {
+                    console.warn('cloudinaryFolder is frozen and cannot be changed without explicit confirmation');
+                    delete updates.cloudinaryFolder;
+                } else {
+                    console.log('cloudinaryFolder override explicitly allowed');
+                    delete updates._allowCloudinaryFolderOverride; // Remove flag before saving
+                }
+            }
+            
+            // Safeguard 2: Never auto-recalculate rank on edit
+            // If rank changed but no confirmation flag, warn the caller
+            if (updates.rank !== undefined && existingProperty.rank !== undefined) {
+                if (updates.rank !== existingProperty.rank && !updates._confirmRankChange) {
+                    return {
+                        success: false,
+                        error: 'RANK_CHANGE_NEEDS_CONFIRMATION',
+                        message: 'Le changement de rang nécessite une confirmation explicite.',
+                        oldRank: existingProperty.rank,
+                        newRank: updates.rank
+                    };
+                }
+                // Remove confirmation flag before saving
+                if (updates._confirmRankChange) {
+                    delete updates._confirmRankChange;
+                }
+            }
+            
+            // 4. Update property
             biens.properties[index] = {
-                ...biens.properties[index],
+                ...existingProperty,
                 ...updates,
                 dateModified: new Date().toISOString()
             };
             
-            // 4. Update file on GitHub
+            // Ensure cloudinaryFolder is preserved if it existed
+            if (existingProperty.cloudinaryFolder) {
+                biens.properties[index].cloudinaryFolder = existingProperty.cloudinaryFolder;
+            }
+            
+            // 5. Update file on GitHub
             // Properly encode UTF-8 to base64 for GitHub API
             const content = btoa(encodeURIComponent(JSON.stringify(biens, null, 2)).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
             
