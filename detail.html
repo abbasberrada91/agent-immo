@@ -537,6 +537,18 @@
       let currentPhotoIndex = 0;
       let photos = [];
 
+      // Helper function to detect network errors
+      function isNetworkError(error) {
+        return error.name === 'TypeError' && error.message.includes('fetch');
+      }
+
+      // Helper function to escape HTML to prevent XSS
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
       // Load property data with retry logic and better error handling
       async function loadPropertyDetails(retryCount = 0) {
         const MAX_RETRIES = 3;
@@ -544,7 +556,7 @@
 
         try {
           const response = await fetch('biens.json', {
-            cache: 'no-cache', // Ensure we get fresh data
+            cache: 'no-cache', // Ensure we get fresh data for real-time property listings
             headers: {
               'Accept': 'application/json'
             }
@@ -597,12 +609,37 @@
           currentProperty = data.properties.find(p => p.reference === propertyRef);
 
           if (!currentProperty) {
-            document.querySelector('.detail-container').innerHTML = 
-              '<div style="text-align: center; padding: 3rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin: 2rem 0;">' +
-              '<h2 style="color: #856404; margin-bottom: 1rem;">⚠️ Bien non trouvé</h2>' +
-              '<p style="color: #856404; margin-bottom: 1rem;">Aucun bien trouvé avec la référence: <strong>' + (propertyRef || 'non spécifiée') + '</strong></p>' +
-              '<p style="color: #856404;">💡 Vérifiez que la référence est correcte ou <a href="index.html" style="color: #007bff;">retournez à la liste des biens</a>.</p>' +
-              '</div>';
+            const container = document.querySelector('.detail-container');
+            container.innerHTML = '';
+            
+            const div = document.createElement('div');
+            div.style.cssText = 'text-align: center; padding: 3rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin: 2rem 0;';
+            
+            const h2 = document.createElement('h2');
+            h2.style.cssText = 'color: #856404; margin-bottom: 1rem;';
+            h2.textContent = '⚠️ Bien non trouvé';
+            
+            const p1 = document.createElement('p');
+            p1.style.cssText = 'color: #856404; margin-bottom: 1rem;';
+            p1.textContent = 'Aucun bien trouvé avec la référence: ';
+            const strong = document.createElement('strong');
+            strong.textContent = propertyRef || 'non spécifiée';
+            p1.appendChild(strong);
+            
+            const p2 = document.createElement('p');
+            p2.style.cssText = 'color: #856404;';
+            p2.textContent = '💡 Vérifiez que la référence est correcte ou ';
+            const link = document.createElement('a');
+            link.href = 'index.html';
+            link.style.color = '#007bff';
+            link.textContent = 'retournez à la liste des biens';
+            p2.appendChild(link);
+            p2.appendChild(document.createTextNode('.'));
+            
+            div.appendChild(h2);
+            div.appendChild(p1);
+            div.appendChild(p2);
+            container.appendChild(div);
             return;
           }
 
@@ -611,49 +648,70 @@
           console.error('Error loading property:', error);
           
           // Handle network errors with retry logic
-          if (error.name === 'TypeError' && error.message.includes('fetch') && retryCount < MAX_RETRIES) {
+          if (isNetworkError(error) && retryCount < MAX_RETRIES) {
             console.warn(`Network error, retrying in ${RETRY_DELAY_MS}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
             setTimeout(() => loadPropertyDetails(retryCount + 1), RETRY_DELAY_MS);
             return;
           }
           
-          // Build actionable error message for users
-          let errorHTML = '<div style="text-align: center; padding: 3rem; background: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; margin: 2rem 0;">';
-          errorHTML += '<h2 style="color: #e53e3e; margin-bottom: 1rem;">❌ Erreur de chargement</h2>';
-          errorHTML += '<p style="color: #c53030; margin-bottom: 1rem;">' + error.message + '</p>';
+          // Build actionable error message for users using DOM methods to prevent XSS
+          const container = document.querySelector('.detail-container');
+          container.innerHTML = '';
+          
+          const mainDiv = document.createElement('div');
+          mainDiv.style.cssText = 'text-align: center; padding: 3rem; background: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; margin: 2rem 0;';
+          
+          const h2 = document.createElement('h2');
+          h2.style.cssText = 'color: #e53e3e; margin-bottom: 1rem;';
+          h2.textContent = '❌ Erreur de chargement';
+          mainDiv.appendChild(h2);
+          
+          const errorP = document.createElement('p');
+          errorP.style.cssText = 'color: #c53030; margin-bottom: 1rem;';
+          errorP.textContent = error.message;
+          mainDiv.appendChild(errorP);
           
           // Add actionable suggestions based on error type
-          if (error.name === 'TypeError' && error.message.includes('fetch')) {
-            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
-            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
-            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
-            errorHTML += '<li>Vérifiez votre connexion internet</li>';
-            errorHTML += '<li>Rechargez la page (F5 ou Ctrl+R)</li>';
-            errorHTML += '<li>Vérifiez que le fichier biens.json existe</li>';
-            errorHTML += '</ul>';
-            errorHTML += '</div>';
+          if (isNetworkError(error)) {
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
+            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
+              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
+              '<li>Vérifiez votre connexion internet</li>' +
+              '<li>Rechargez la page (F5 ou Ctrl+R)</li>' +
+              '<li>Vérifiez que le fichier biens.json existe</li>' +
+              '</ul>';
+            mainDiv.appendChild(suggestionsDiv);
           } else if (error.message.includes('JSON')) {
-            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
-            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
-            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
-            errorHTML += '<li>Vérifiez la syntaxe JSON du fichier biens.json</li>';
-            errorHTML += '<li>Utilisez un validateur JSON en ligne</li>';
-            errorHTML += '</ul>';
-            errorHTML += '</div>';
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
+            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
+              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
+              '<li>Vérifiez la syntaxe JSON du fichier biens.json</li>' +
+              '<li>Utilisez un validateur JSON en ligne</li>' +
+              '</ul>';
+            mainDiv.appendChild(suggestionsDiv);
           } else if (error.message.includes('404')) {
-            errorHTML += '<div style="text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;">';
-            errorHTML += '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>';
-            errorHTML += '<ul style="color: #4a5568; margin-left: 1.5rem;">';
-            errorHTML += '<li>Vérifiez que biens.json existe à la racine</li>';
-            errorHTML += '<li>Assurez-vous que le fichier a été commit sur GitHub</li>';
-            errorHTML += '</ul>';
-            errorHTML += '</div>';
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
+            suggestionsDiv.innerHTML = '<p style="color: #2d3748; margin-bottom: 0.5rem;"><strong>💡 Actions à essayer:</strong></p>' +
+              '<ul style="color: #4a5568; margin-left: 1.5rem;">' +
+              '<li>Vérifiez que biens.json existe à la racine</li>' +
+              '<li>Assurez-vous que le fichier a été commit sur GitHub</li>' +
+              '</ul>';
+            mainDiv.appendChild(suggestionsDiv);
           }
           
-          errorHTML += '<p style="margin-top: 1rem;"><a href="index.html" style="color: #007bff; text-decoration: underline;">← Retour à l\'accueil</a></p>';
-          errorHTML += '</div>';
+          const returnP = document.createElement('p');
+          returnP.style.marginTop = '1rem';
+          const returnLink = document.createElement('a');
+          returnLink.href = 'index.html';
+          returnLink.style.cssText = 'color: #007bff; text-decoration: underline;';
+          returnLink.textContent = '← Retour à l\'accueil';
+          returnP.appendChild(returnLink);
+          mainDiv.appendChild(returnP);
           
-          document.querySelector('.detail-container').innerHTML = errorHTML;
+          container.appendChild(mainDiv);
         }
       }
 
