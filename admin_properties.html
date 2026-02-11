@@ -742,8 +742,8 @@
                     
                     <!-- Preview of current main photo -->
                     <div id="editMainPhotoPreview" style="margin-bottom: 10px; display: none;">
-                        <img id="editMainPhotoImg" src="" alt="Aperçu photo principale" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 2px solid #e2e8f0; display: block; margin-bottom: 8px;">
-                        <button type="button" onclick="removeMainPhotoPreview()" style="padding: 4px 12px; background: #fc8181; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">✕ Supprimer la photo</button>
+                        <img id="editMainPhotoImg" src="" alt="" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 2px solid #e2e8f0; display: block; margin-bottom: 8px;">
+                        <button type="button" onclick="removeMainPhotoPreview()" style="padding: 4px 12px; background: #fc8181; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;" aria-label="Supprimer la photo principale">✕ Supprimer la photo</button>
                     </div>
                     
                     <!-- File upload option -->
@@ -1070,6 +1070,16 @@
             
             if (imageUrl) {
                 previewImg.src = imageUrl;
+                // Set alt text based on property title if available
+                const titleField = document.getElementById('editTitle');
+                const altField = document.getElementById('editAlt');
+                if (altField && altField.value) {
+                    previewImg.alt = altField.value;
+                } else if (titleField && titleField.value) {
+                    previewImg.alt = 'Aperçu: ' + titleField.value;
+                } else {
+                    previewImg.alt = 'Aperçu de la photo principale';
+                }
                 previewDiv.style.display = 'block';
             } else {
                 previewDiv.style.display = 'none';
@@ -1079,15 +1089,28 @@
         async function handleMainPhotoUpload(input) {
             const file = input.files[0];
             if (file) {
-                // Convert to base64
-                const base64Data = await fileToBase64(file);
-                editMainPhotoData = base64Data;
-                
-                // Update preview
-                updateMainPhotoPreview(base64Data);
-                
-                // Clear URL input since we're using uploaded file
-                document.getElementById('editImage').value = '';
+                try {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('❌ Erreur: Le fichier doit être une image.');
+                        input.value = '';
+                        return;
+                    }
+                    
+                    // Convert to base64
+                    const base64Data = await fileToBase64(file);
+                    editMainPhotoData = base64Data;
+                    
+                    // Update preview
+                    updateMainPhotoPreview(base64Data);
+                    
+                    // Clear URL input since we're using uploaded file
+                    document.getElementById('editImage').value = '';
+                } catch (error) {
+                    console.error('Error uploading photo:', error);
+                    alert('❌ Erreur lors du chargement de la photo. Veuillez réessayer.');
+                    input.value = '';
+                }
             }
         }
 
@@ -1097,8 +1120,19 @@
                 document.getElementById('editMainPhotoFile').value = '';
                 editMainPhotoData = null;
                 
-                // Update preview
-                updateMainPhotoPreview(url);
+                // Validate URL by attempting to load it
+                const img = new Image();
+                img.onload = function() {
+                    // Image loaded successfully
+                    updateMainPhotoPreview(url);
+                };
+                img.onerror = function() {
+                    // Image failed to load
+                    console.warn('Failed to load image from URL:', url);
+                    // Still show the URL for manual verification, but don't hide preview
+                    updateMainPhotoPreview(url);
+                };
+                img.src = url;
             } else {
                 // If URL is cleared and no file uploaded, hide preview
                 if (!editMainPhotoData) {
