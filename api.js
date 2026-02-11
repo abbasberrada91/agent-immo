@@ -48,6 +48,24 @@ class PropertyAPI {
     }
 
     /**
+     * Parse and validate JSON content
+     * @param {string} content - JSON string to parse
+     * @returns {Object} Parsed JSON object
+     * @throws {Error} If content is empty or JSON is invalid
+     */
+    parseAndValidateJSON(content) {
+        if (!content || content.trim().length === 0) {
+            throw new Error('Empty content received');
+        }
+        
+        try {
+            return JSON.parse(content);
+        } catch (parseError) {
+            throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
+        }
+    }
+
+    /**
      * Fetch current biens.json content from GitHub
      */
     async fetchProperties() {
@@ -64,6 +82,7 @@ class PropertyAPI {
             
             // If file is too large (> 1MB), GitHub API doesn't include content field
             // In this case, fetch from raw URL instead
+            // Note: data.sha is still available even for large files
             if (!data.content) {
                 console.log('File too large for Contents API, fetching from raw URL...');
                 const rawResponse = await fetch(
@@ -75,37 +94,22 @@ class PropertyAPI {
                 }
                 
                 const rawContent = await rawResponse.text();
+                const parsedData = this.parseAndValidateJSON(rawContent);
                 
-                // Validate that we got actual content
-                if (!rawContent || rawContent.trim().length === 0) {
-                    throw new Error('Empty response from raw URL');
-                }
-                
-                try {
-                    return {
-                        data: JSON.parse(rawContent),
-                        sha: data.sha // Still return SHA for updating
-                    };
-                } catch (parseError) {
-                    throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
-                }
-            }
-            
-            const content = atob(data.content); // Decode base64
-            
-            // Validate decoded content
-            if (!content || content.trim().length === 0) {
-                throw new Error('Empty content after base64 decoding');
-            }
-            
-            try {
                 return {
-                    data: JSON.parse(content),
-                    sha: data.sha // Need this for updating
+                    data: parsedData,
+                    sha: data.sha // SHA is still present in Contents API response for large files
                 };
-            } catch (parseError) {
-                throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
             }
+            
+            // For files under 1MB, content is base64-encoded in the response
+            const content = atob(data.content); // Decode base64
+            const parsedData = this.parseAndValidateJSON(content);
+            
+            return {
+                data: parsedData,
+                sha: data.sha
+            };
         } catch (error) {
             console.error('Error fetching properties:', error);
             throw error;
