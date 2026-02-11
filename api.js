@@ -9,6 +9,11 @@ class PropertyAPI {
         this.repo = 'agent-immo';
         this.branch = 'main';
         this.filePath = 'biens.json';
+        
+        // Retry configuration for handling concurrent updates
+        this.MAX_RETRIES = 3;
+        this.RETRY_DELAY_MS = 500;
+        this.SHA_MISMATCH_ERROR = 'does not match';
     }
 
     /**
@@ -110,10 +115,10 @@ class PropertyAPI {
                 const errorData = await response.json();
                 
                 // Check for SHA mismatch error and retry with fresh data
-                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
-                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                if (errorData.message && errorData.message.includes(this.SHA_MISMATCH_ERROR) && retryCount < this.MAX_RETRIES) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/${this.MAX_RETRIES})`);
                     // Wait a bit before retrying to avoid race conditions
-                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    await new Promise(resolve => setTimeout(resolve, this.RETRY_DELAY_MS * (retryCount + 1)));
                     return this.addProperty(property, retryCount + 1);
                 }
                 
@@ -201,10 +206,10 @@ class PropertyAPI {
                 const errorData = await response.json();
                 
                 // Check for SHA mismatch error and retry with fresh data
-                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
-                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                if (errorData.message && errorData.message.includes(this.SHA_MISMATCH_ERROR) && retryCount < this.MAX_RETRIES) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/${this.MAX_RETRIES})`);
                     // Wait a bit before retrying to avoid race conditions
-                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    await new Promise(resolve => setTimeout(resolve, this.RETRY_DELAY_MS * (retryCount + 1)));
                     return this.updateProperty(reference, updates, retryCount + 1);
                 }
                 
@@ -286,10 +291,10 @@ class PropertyAPI {
                 const errorData = await response.json();
                 
                 // Check for SHA mismatch error and retry with fresh data
-                if (errorData.message && errorData.message.includes('does not match') && retryCount < 3) {
-                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/3)`);
+                if (errorData.message && errorData.message.includes(this.SHA_MISMATCH_ERROR) && retryCount < this.MAX_RETRIES) {
+                    console.log(`SHA mismatch detected, retrying... (attempt ${retryCount + 1}/${this.MAX_RETRIES})`);
                     // Wait a bit before retrying to avoid race conditions
-                    await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
+                    await new Promise(resolve => setTimeout(resolve, this.RETRY_DELAY_MS * (retryCount + 1)));
                     return this.deleteProperty(reference, retryCount + 1);
                 }
                 
