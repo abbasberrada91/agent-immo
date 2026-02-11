@@ -37,10 +37,10 @@ jobs:
       
       - name: Commit and push changes
         run: |
-          if git diff --quiet; then
+          git add -A
+          if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git add -A
             git commit -m "Auto: create/update fiche from Cloudinary folder '${{ inputs.folder }}'"
             git push
             echo "✓ Changes committed and pushed successfully"

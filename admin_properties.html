@@ -1927,8 +1927,8 @@
             }
             
             // Validate folder naming convention
-            const folderUpper = folder.toUpperCase();
-            if (!folderUpper.match(CLOUDINARY_FOLDER_PATTERN)) {
+            const normalizedFolder = folder.toUpperCase();
+            if (!normalizedFolder.match(CLOUDINARY_FOLDER_PATTERN)) {
                 const useAnyway = confirm(
                     `⚠️ Avertissement: Le dossier "${folder}" ne suit pas la convention de nommage standard.\n\n` +
                     `Convention attendue:\n` +
@@ -1985,7 +1985,7 @@
                     statusDiv.innerHTML = `✅ Workflow déclenché avec succès!<br>` +
                         `Dossier: <strong>${folder}</strong><br>` +
                         `Le workflow va créer/mettre à jour la fiche dans 1-2 minutes.<br>` +
-                        `<a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank" style="color: #2563eb;">Voir le statut sur GitHub Actions</a>`;
+                        `<a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank" rel="noopener noreferrer" style="color: #2563eb;">Voir le statut sur GitHub Actions</a>`;
                     
                     // Show success message
                     alert(
