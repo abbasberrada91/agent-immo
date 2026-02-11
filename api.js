@@ -30,18 +30,20 @@ class PropertyAPI {
      * @returns {boolean} True if should retry
      */
     shouldRetryOperation(errorData, retryCount) {
-        return errorData.message && 
+        return errorData && 
+               errorData.message && 
                errorData.message.includes(this.SHA_MISMATCH_ERROR) && 
                retryCount < this.MAX_RETRIES;
     }
 
     /**
      * Wait before retrying with exponential backoff
-     * @param {number} retryCount - Current retry count
+     * @param {number} retryCount - Current retry count (0-based)
      */
     async waitBeforeRetry(retryCount) {
         const delay = this.RETRY_DELAY_MS * (retryCount + 1);
-        console.warn(`SHA mismatch detected, retrying in ${delay}ms... (attempt ${retryCount + 1}/${this.MAX_RETRIES})`);
+        const retryNumber = retryCount + 1;
+        console.warn(`SHA mismatch detected, retrying in ${delay}ms... (retry ${retryNumber}/${this.MAX_RETRIES})`);
         await new Promise(resolve => setTimeout(resolve, delay));
     }
 
