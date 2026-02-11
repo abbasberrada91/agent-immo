@@ -14,6 +14,9 @@ class PropertyAPI {
         this.MAX_RETRIES = 3;
         this.RETRY_DELAY_MS = 500;
         this.SHA_MISMATCH_ERROR = 'does not match';
+        
+        // Timeout configuration for large file downloads
+        this.LARGE_FILE_TIMEOUT_MS = 60000; // 60 seconds
     }
 
     /**
@@ -58,9 +61,18 @@ class PropertyAPI {
             throw new Error('Empty content received');
         }
         
+        // Log first few characters to help debug (limit to 50 chars for performance)
+        console.log('Content starts with:', content.substring(0, 50));
+        console.log('Content length:', content.length, 'characters');
+        
         try {
             return JSON.parse(content);
         } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            console.error('Content length:', content.length);
+            // Log a small snippet for debugging (not included in user-facing error)
+            const snippet = content.substring(0, 50);
+            console.error('Content snippet:', snippet);
             throw new Error(`Invalid JSON in biens.json: ${parseError.message}`);
         }
     }
@@ -91,16 +103,108 @@ class PropertyAPI {
             // Reference: https://docs.github.com/en/rest/repos/contents
             if (!('content' in data) || data.content === null) {
                 console.log('File too large for Contents API, fetching from raw URL...');
-                const rawResponse = await fetch(
-                    `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
-                );
+                console.log('File size:', data.size, 'bytes');
                 
-                if (!rawResponse.ok) {
-                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.statusText}`);
+                let rawResponse;
+                try {
+                    // Add a longer timeout for large files
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), this.LARGE_FILE_TIMEOUT_MS);
+                    
+                    // Add cache-busting parameter to ensure fresh content
+                    const cacheBuster = `?t=${Date.now()}`;
+                    
+                    rawResponse = await fetch(
+                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}${cacheBuster}`,
+                        { 
+                            signal: controller.signal,
+                            cache: 'no-store' // Disable browser cache
+                        }
+                    );
+                    
+                    clearTimeout(timeoutId);
+                } catch (fetchError) {
+                    console.error('Network error fetching from raw URL:', fetchError);
+                    if (fetchError.name === 'AbortError') {
+                        const timeoutSeconds = this.LARGE_FILE_TIMEOUT_MS / 1000;
+                        throw new Error(`Request timed out after ${timeoutSeconds} seconds. The file may be too large. Please try refreshing the page or contact support if the issue persists.`);
+                    }
+                    throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
                 }
                 
-                const rawContent = await rawResponse.text();
-                const parsedData = this.parseAndValidateJSON(rawContent);
+                if (!rawResponse.ok) {
+                    console.error('Raw URL fetch failed with status:', rawResponse.status, rawResponse.statusText);
+                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.status} ${rawResponse.statusText}`);
+                }
+                
+                // Check content-type
+                const contentType = rawResponse.headers.get('content-type');
+                console.log('Raw response content-type:', contentType);
+                console.log('Raw response status:', rawResponse.status);
+                
+                // Check if we got HTML instead of JSON (error page)
+                if (contentType && contentType.includes('text/html')) {
+                    console.error('Received HTML instead of JSON');
+                    const htmlContent = await rawResponse.text();
+                    console.error('HTML content preview:', htmlContent.substring(0, 200));
+                    throw new Error('Received HTML error page instead of JSON. The file may not be accessible.');
+                }
+                
+                // For large JSON files, use .json() which is more efficient
+                let parsedData;
+                try {
+                    console.log('Attempting to parse JSON directly from response...');
+                    
+                    // Clone the response first to allow fallback to text parsing if needed
+                    // The original response will be consumed by .json(), the clone allows us to retry with .text()
+                    const responseClone = rawResponse.clone();
+                    
+                    try {
+                        parsedData = await rawResponse.json();
+                        console.log('Successfully parsed JSON directly');
+                    } catch (jsonError) {
+                        // If direct JSON parsing fails, try reading as text first
+                        console.warn('Direct JSON parsing failed, trying text approach:', jsonError.message);
+                        const textContent = await responseClone.text();
+                        console.log('Text content length:', textContent.length);
+                        
+                        if (!textContent || textContent.trim().length === 0) {
+                            throw new Error('Response body is empty');
+                        }
+                        
+                        // Check if it looks like JSON (log small preview for debugging)
+                        const preview = textContent.substring(0, 50);
+                        if (!textContent.trim().startsWith('{') && !textContent.trim().startsWith('[')) {
+                            console.error('Content does not look like JSON. Preview:', preview);
+                            throw new Error('Response is not valid JSON format');
+                        }
+                        
+                        // Try parsing the text as JSON
+                        parsedData = this.parseAndValidateJSON(textContent);
+                    }
+                } catch (jsonError) {
+                    console.error('JSON parsing failed:', jsonError);
+                    console.error('Error name:', jsonError.name);
+                    console.error('Error message:', jsonError.message);
+                    
+                    // Provide more specific error message
+                    if (jsonError.message.includes('Unexpected end')) {
+                        throw new Error('JSON parsing failed: The response was incomplete or empty. This may happen if the file is too large or the connection was interrupted. Please try refreshing the page.');
+                    } else {
+                        throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}`);
+                    }
+                }
+                
+                // Validate the structure of the parsed data
+                if (!parsedData || typeof parsedData !== 'object') {
+                    throw new Error('Parsed data is not an object');
+                }
+                
+                if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
+                    throw new Error('Invalid data structure: missing or invalid properties array');
+                }
+                
+                console.log('Successfully loaded', parsedData.properties.length, 'properties');
                 
                 return {
                     data: parsedData,
@@ -109,8 +213,22 @@ class PropertyAPI {
             }
             
             // For files under 1MB, content is base64-encoded in the response
+            console.log('File under 1MB, decoding base64 content...');
             const content = atob(data.content); // Decode base64
+            console.log('Decoded content length:', content.length);
+            
             const parsedData = this.parseAndValidateJSON(content);
+            
+            // Validate the structure of the parsed data
+            if (!parsedData || typeof parsedData !== 'object') {
+                throw new Error('Parsed data is not an object');
+            }
+            
+            if (!parsedData.properties || !Array.isArray(parsedData.properties)) {
+                throw new Error('Invalid data structure: missing or invalid properties array');
+            }
+            
+            console.log('Successfully loaded', parsedData.properties.length, 'properties');
             
             return {
                 data: parsedData,
