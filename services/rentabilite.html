@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcul de rentabilité locative | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Évaluez la rentabilité de votre investissement locatif avec précision"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../drawer.css" />
+    <style>
+      .page-header {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 3rem 0 2.5rem;
+      }
+
+      .page-header h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .page-header .intro {
+        max-width: 750px;
+        color: #d9e5f3;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .content-section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+      }
+
+      .content-section h2 {
+        color: var(--brand);
+        margin: 0 0 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 0.8rem;
+      }
+
+      .content-section h3 {
+        color: var(--brand-soft);
+        margin: 1.5rem 0 1rem;
+        font-size: 1.25rem;
+      }
+
+      .content-section p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0 0 1rem;
+      }
+
+      .content-section ul {
+        color: var(--muted);
+        line-height: 1.8;
+        margin: 1rem 0 1.5rem;
+        padding-left: 1.5rem;
+      }
+
+      .content-section li {
+        margin-bottom: 0.5rem;
+      }
+
+      .indicator-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .indicator-card {
+        background: var(--bg);
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+        border: 1px solid #e5edf4;
+      }
+
+      .indicator-card h4 {
+        color: var(--brand);
+        margin: 0 0 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      .indicator-card p {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .note-box {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+        border-radius: 0.5rem;
+      }
+
+      .note-box p {
+        margin: 0;
+        color: #78350f;
+        font-size: 0.95rem;
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+        color: white;
+        border: none;
+        padding: 0;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à louer</a>
+            <a href="estimation.html">Estimation locative</a>
+            <a href="mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="../index.html#biens">Biens à vendre</a>
+            <a href="estimation.html">Estimation vente</a>
+            <a href="../ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="estimation.html">Estimation gratuite</a>
+            <a href="rentabilite.html">Calcul de rentabilité</a>
+            <a href="mise-en-location.html">Mise en location</a>
+            <a href="modes-location.html">Modes de location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="../agence/histoire.html">Histoire</a>
+            <a href="../agence/equipe.html">Équipe</a>
+            <a href="../agence/temoignages.html">Témoignages</a>
+            <a href="../agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="../blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+      <div class="drawer-footer">
+        <a href="../login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="../index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="page-header">
+      <div class="container">
+        <h1>Calcul de rentabilité locative</h1>
+        <p class="intro">
+          Évaluez précisément la performance financière de votre investissement locatif
+          grâce à une analyse détaillée de vos revenus, charges et fiscalité. Comprenez
+          si votre bien est rentable et comment optimiser son rendement.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <a href="../services.html" class="back-link">← Retour aux services</a>
+
+      <section class="content-section">
+        <h2>Les indicateurs de rentabilité</h2>
+        
+        <div class="indicator-grid">
+          <div class="indicator-card">
+            <h4>Rentabilité brute</h4>
+            <p>
+              Le rendement brut rapporte les loyers annuels au prix d'acquisition
+              (hors frais de notaire et travaux). C'est un premier indicateur simple
+              et rapide, mais qui ne tient pas compte des charges.
+            </p>
+          </div>
+
+          <div class="indicator-card">
+            <h4>Rentabilité nette</h4>
+            <p>
+              La rentabilité nette prend en compte les charges non récupérables
+              (taxe foncière, charges de copropriété, assurances, entretien) et donne
+              une vision plus réaliste de la performance du bien.
+            </p>
+          </div>
+
+          <div class="indicator-card">
+            <h4>Cash-flow</h4>
+            <p>
+              Le cash-flow mesure la trésorerie générée chaque mois ou chaque année
+              après paiement de toutes les charges et du crédit éventuel. Un cash-flow
+              positif signifie que l'investissement s'autofinance.
+            </p>
+          </div>
+        </div>
+
+        <h3>Charges à intégrer dans le calcul</h3>
+        <ul>
+          <li>
+            <strong>Taxe foncière</strong> : impôt annuel sur la propriété, non récupérable
+            auprès du locataire.
+          </li>
+          <li>
+            <strong>Charges de copropriété</strong> : provision pour charges communes
+            (parties communes, travaux), hors charges récupérables.
+          </li>
+          <li>
+            <strong>Assurances</strong> : propriétaire non occupant (PNO), garantie
+            loyers impayés (GLI) si souscrite.
+          </li>
+          <li>
+            <strong>Gestion locative</strong> : honoraires d'agence ou de gestion si
+            vous déléguez.
+          </li>
+          <li>
+            <strong>Entretien et travaux</strong> : provision annuelle pour anticiper
+            les réparations et mises aux normes.
+          </li>
+          <li>
+            <strong>Vacance locative</strong> : période sans locataire entre deux baux
+            (en moyenne 1 mois tous les 3 ans).
+          </li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>Fiscalité et optimisation</h2>
+        
+        <p>
+          Les revenus locatifs sont imposables. Le choix du régime fiscal (micro-foncier,
+          régime réel, LMNP) a un impact direct sur la rentabilité nette après impôts.
+          Nous vous aidons à comprendre ces mécanismes, sans donner de conseil fiscal
+          (qui relève de votre comptable ou expert).
+        </p>
+
+        <div class="note-box">
+          <p>
+            <strong>Important :</strong> L'étude de rentabilité que nous réalisons
+            est une simulation financière. Elle ne remplace pas un conseil fiscal
+            ou juridique personnalisé, qui doit être obtenu auprès de professionnels
+            compétents.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Cas d'usage du calcul de rentabilité</h2>
+        
+        <h3>Arbitrer entre vendre et louer</h3>
+        <p>
+          Vous hésitez entre vendre un bien hérité ou le mettre en location ? Le calcul
+          de rentabilité vous aide à comparer le rendement locatif avec le rendement
+          d'un placement alternatif (produit du capital de vente).
+        </p>
+
+        <h3>Comparer différents modes de location</h3>
+        <p>
+          Location meublée ou vide, courte ou longue durée, particulier ou société :
+          chaque formule a un impact sur les loyers, les charges et la fiscalité.
+          Nous calculons la rentabilité de chaque option pour éclairer votre choix.
+        </p>
+
+        <h3>Valider un achat avant signature</h3>
+        <p>
+          Avant d'acquérir un bien locatif, vérifiez que le loyer prévisionnel permet
+          de couvrir les charges et le crédit, et que la rentabilité est conforme
+          à vos objectifs. Cette étude sécurise votre décision d'investissement.
+        </p>
+      </section>
+
+      <section class="cta-section">
+        <h2>Demander une étude de rentabilité</h2>
+        <p>
+          Contactez-nous pour obtenir un calcul détaillé et personnalisé de la
+          rentabilité de votre bien ou de votre projet d'investissement locatif.
+        </p>
+        <a href="../index.html#contact" class="cta-btn">Nous contacter</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="../drawer.js"></script>
+  </body>
+</html>
