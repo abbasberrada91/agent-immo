@@ -102,19 +102,35 @@ class PropertyAPI {
                 console.log('File too large for Contents API, fetching from raw URL...');
                 console.log('File size:', data.size, 'bytes');
                 
-                const rawResponse = await fetch(
-                    `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
-                );
+                let rawResponse;
+                try {
+                    rawResponse = await fetch(
+                        `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.filePath}`
+                    );
+                } catch (fetchError) {
+                    console.error('Network error fetching from raw URL:', fetchError);
+                    throw new Error(`Network error: ${fetchError.message}. Please check your internet connection.`);
+                }
                 
                 if (!rawResponse.ok) {
-                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.statusText}`);
+                    console.error('Raw URL fetch failed with status:', rawResponse.status, rawResponse.statusText);
+                    throw new Error(`Failed to fetch properties from raw URL: ${rawResponse.status} ${rawResponse.statusText}`);
                 }
                 
                 // Check content-type
                 const contentType = rawResponse.headers.get('content-type');
                 console.log('Raw response content-type:', contentType);
+                console.log('Raw response status:', rawResponse.status);
                 
-                // For large JSON files, use .json() which is more efficient than .text() + JSON.parse()
+                // Check if we got HTML instead of JSON (error page)
+                if (contentType && contentType.includes('text/html')) {
+                    console.error('Received HTML instead of JSON');
+                    const htmlContent = await rawResponse.text();
+                    console.error('HTML content preview:', htmlContent.substring(0, 200));
+                    throw new Error('Received HTML error page instead of JSON. The file may not be accessible.');
+                }
+                
+                // For large JSON files, use .json() which is more efficient
                 let parsedData;
                 try {
                     console.log('Attempting to parse JSON directly from response...');
@@ -122,7 +138,15 @@ class PropertyAPI {
                     console.log('Successfully parsed JSON directly');
                 } catch (jsonError) {
                     console.error('Direct JSON parsing failed:', jsonError);
-                    throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}. This may indicate the file is corrupted or too large for the browser to handle.`);
+                    console.error('Error name:', jsonError.name);
+                    console.error('Error message:', jsonError.message);
+                    
+                    // Provide more specific error message
+                    if (jsonError.message.includes('Unexpected end')) {
+                        throw new Error('JSON parsing failed: The response was incomplete or empty. This may happen if the file is too large or the connection was interrupted. Please try refreshing the page.');
+                    } else {
+                        throw new Error(`Failed to parse JSON from raw URL: ${jsonError.message}`);
+                    }
                 }
                 
                 // Validate the structure of the parsed data
