@@ -193,6 +193,12 @@ const AppConfig = {
         // Encoder du contenu en base64 pour l'API GitHub
         encodeBase64: (content) => {
             // Encode UTF-8 to base64 properly for GitHub API
+            // The GitHub API expects content to be base64-encoded
+            // This method properly handles UTF-8 characters (like é, à, ç) by:
+            // 1. encodeURIComponent: Convert UTF-8 to percent-encoded format (e.g., é -> %C3%A9)
+            // 2. replace: Convert percent-encoded bytes to actual characters
+            // 3. btoa: Encode the result to base64
+            // Without this, accented characters would be corrupted
             return btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, 
                 (match, p1) => String.fromCharCode(parseInt(p1, 16))));
         },
