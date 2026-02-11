@@ -537,28 +537,198 @@
       let currentPhotoIndex = 0;
       let photos = [];
 
-      // Load property data
-      async function loadPropertyDetails() {
+      // Helper function to detect network errors
+      function isNetworkError(error) {
+        // Network errors are typically TypeError with specific messages
+        // Note: Checks are intentionally broad to catch various network error scenarios
+        // from the Fetch API (e.g., "Failed to fetch", "NetworkError", "Network request failed")
+        if (!(error instanceof TypeError)) {
+          return false;
+        }
+        const message = error.message.toLowerCase();
+        return message.includes('fetch') || message.includes('network');
+      }
+
+      // Helper function to create a suggestion box with list items
+      function createSuggestionBox(suggestions) {
+        const div = document.createElement('div');
+        div.style.cssText = 'text-align: left; max-width: 500px; margin: 0 auto; background: white; padding: 1rem; border-radius: 4px;';
+        
+        const title = document.createElement('p');
+        title.style.cssText = 'color: #2d3748; margin-bottom: 0.5rem;';
+        const strong = document.createElement('strong');
+        strong.textContent = '💡 Actions à essayer:';
+        title.appendChild(strong);
+        div.appendChild(title);
+        
+        const ul = document.createElement('ul');
+        ul.style.cssText = 'color: #4a5568; margin-left: 1.5rem;';
+        suggestions.forEach(suggestion => {
+          const li = document.createElement('li');
+          li.textContent = suggestion;
+          ul.appendChild(li);
+        });
+        div.appendChild(ul);
+        
+        return div;
+      }
+
+      // Load property data with retry logic and better error handling
+      async function loadPropertyDetails(retryCount = 0) {
+        const MAX_RETRIES = 3;
+        const RETRY_DELAY_MS = 1000;
+
         try {
-          const response = await fetch('biens.json');
+          const response = await fetch('biens.json', {
+            cache: 'no-cache', // Ensure we get fresh data for real-time property listings
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+          
           if (!response.ok) {
-            throw new Error('Failed to load properties');
+            // Provide specific error messages based on status code
+            let errorMessage = `Erreur HTTP ${response.status}: `;
+            switch (response.status) {
+              case 404:
+                errorMessage += 'Le fichier biens.json est introuvable.';
+                break;
+              case 403:
+                errorMessage += 'Accès refusé au fichier biens.json.';
+                break;
+              case 500:
+              case 502:
+              case 503:
+              case 504:
+                errorMessage += 'Le serveur rencontre des difficultés.';
+                break;
+              default:
+                errorMessage += 'Impossible de charger les données.';
+            }
+            throw new Error(errorMessage);
           }
 
-          const data = await response.json();
+          // Validate content type
+          const contentType = response.headers.get('content-type');
+          if (contentType && !contentType.includes('application/json')) {
+            throw new Error(`Type de contenu invalide: ${contentType}. Le fichier doit être au format JSON.`);
+          }
+
+          let data;
+          try {
+            data = await response.json();
+          } catch (jsonError) {
+            throw new Error(`Format JSON invalide: ${jsonError.message}`);
+          }
+
+          // Validate data structure
+          if (!data || typeof data !== 'object') {
+            throw new Error('Le fichier biens.json ne contient pas un objet JSON valide.');
+          }
+
+          if (!data.properties || !Array.isArray(data.properties)) {
+            throw new Error('Le fichier biens.json doit contenir un tableau "properties".');
+          }
+
           currentProperty = data.properties.find(p => p.reference === propertyRef);
 
           if (!currentProperty) {
-            document.querySelector('.detail-container').innerHTML = 
-              '<p style="text-align: center; padding: 3rem;">Bien non trouvé</p>';
+            const container = document.querySelector('.detail-container');
+            container.innerHTML = '';
+            
+            const div = document.createElement('div');
+            div.style.cssText = 'text-align: center; padding: 3rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin: 2rem 0;';
+            
+            const h2 = document.createElement('h2');
+            h2.style.cssText = 'color: #856404; margin-bottom: 1rem;';
+            h2.textContent = '⚠️ Bien non trouvé';
+            
+            const p1 = document.createElement('p');
+            p1.style.cssText = 'color: #856404; margin-bottom: 1rem;';
+            p1.textContent = 'Aucun bien trouvé avec la référence: ';
+            const strong = document.createElement('strong');
+            strong.textContent = propertyRef || 'non spécifiée';
+            p1.appendChild(strong);
+            
+            const p2 = document.createElement('p');
+            p2.style.cssText = 'color: #856404;';
+            p2.textContent = '💡 Vérifiez que la référence est correcte ou ';
+            const link = document.createElement('a');
+            link.href = 'index.html';
+            link.style.color = '#007bff';
+            link.textContent = 'retournez à la liste des biens';
+            p2.appendChild(link);
+            p2.appendChild(document.createTextNode('.'));
+            
+            div.appendChild(h2);
+            div.appendChild(p1);
+            div.appendChild(p2);
+            container.appendChild(div);
             return;
           }
 
           displayProperty(currentProperty);
         } catch (error) {
           console.error('Error loading property:', error);
-          document.querySelector('.detail-container').innerHTML = 
-            '<p style="text-align: center; padding: 3rem;">Erreur de chargement</p>';
+          
+          // Handle network errors with retry logic
+          if (isNetworkError(error) && retryCount < MAX_RETRIES) {
+            console.warn(`Network error, retrying in ${RETRY_DELAY_MS}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+            setTimeout(() => loadPropertyDetails(retryCount + 1), RETRY_DELAY_MS);
+            return;
+          }
+          
+          // Build actionable error message for users using DOM methods to prevent XSS
+          const container = document.querySelector('.detail-container');
+          container.innerHTML = '';
+          
+          const mainDiv = document.createElement('div');
+          mainDiv.style.cssText = 'text-align: center; padding: 3rem; background: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; margin: 2rem 0;';
+          
+          const h2 = document.createElement('h2');
+          h2.style.cssText = 'color: #e53e3e; margin-bottom: 1rem;';
+          h2.textContent = '❌ Erreur de chargement';
+          mainDiv.appendChild(h2);
+          
+          const errorP = document.createElement('p');
+          errorP.style.cssText = 'color: #c53030; margin-bottom: 1rem;';
+          errorP.textContent = error.message;
+          mainDiv.appendChild(errorP);
+          
+          // Add actionable suggestions based on error type
+          // Note: Error message checks are intentionally broad to catch related error scenarios
+          // Our error messages include "Format JSON invalide" and "JSON" keywords
+          if (isNetworkError(error)) {
+            const suggestions = [
+              'Vérifiez votre connexion internet',
+              'Rechargez la page (F5 ou Ctrl+R)',
+              'Vérifiez que le fichier biens.json existe'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
+          } else if (error.message.includes('JSON')) {
+            const suggestions = [
+              'Vérifiez la syntaxe JSON du fichier biens.json',
+              'Utilisez un validateur JSON en ligne'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
+          } else if (error.message.includes('404')) {
+            const suggestions = [
+              'Vérifiez que biens.json existe à la racine',
+              'Assurez-vous que le fichier a été commit sur GitHub'
+            ];
+            mainDiv.appendChild(createSuggestionBox(suggestions));
+          }
+          
+          const returnP = document.createElement('p');
+          returnP.style.marginTop = '1rem';
+          const returnLink = document.createElement('a');
+          returnLink.href = 'index.html';
+          returnLink.style.cssText = 'color: #007bff; text-decoration: underline;';
+          returnLink.textContent = '← Retour à l\'accueil';
+          returnP.appendChild(returnLink);
+          mainDiv.appendChild(returnP);
+          
+          container.appendChild(mainDiv);
         }
       }
 

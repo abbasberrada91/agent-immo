@@ -1018,16 +1018,31 @@
                 let errorMessage = '❌ Erreur lors du chargement des biens:\n\n' + error.message;
                 
                 // Add helpful suggestions based on error type
-                if (error.message.includes('Unexpected end')) {
+                if (error.message.includes('Unexpected end of JSON') || error.message.includes('incomplete or empty')) {
                     errorMessage += '\n\n💡 Suggestions:\n';
                     errorMessage += '• Vérifiez votre connexion internet\n';
                     errorMessage += '• Rechargez la page (F5 ou Ctrl+R)\n';
                     errorMessage += '• Videz le cache du navigateur\n';
                     errorMessage += '• Le fichier biens.json est peut-être trop volumineux pour votre navigateur';
-                } else if (error.message.includes('Network error')) {
-                    errorMessage += '\n\n💡 Vérifiez que vous êtes bien connecté à internet.';
-                } else if (error.message.includes('Failed to fetch')) {
-                    errorMessage += '\n\n💡 Le serveur GitHub n\'est peut-être pas accessible. Réessayez dans quelques instants.';
+                } else if (error.message.includes('JSON') || error.message.includes('parse')) {
+                    errorMessage += '\n\n💡 Suggestions:\n';
+                    errorMessage += '• Vérifiez la syntaxe JSON du fichier biens.json\n';
+                    errorMessage += '• Utilisez un validateur JSON en ligne (jsonlint.com)\n';
+                    errorMessage += '• Assurez-vous qu\'il n\'y a pas de virgules en trop';
+                } else if (error.message.includes('Network error') || error.message.includes('Failed to fetch')) {
+                    errorMessage += '\n\n💡 Suggestions:\n';
+                    errorMessage += '• Vérifiez que vous êtes bien connecté à internet\n';
+                    errorMessage += '• Le serveur GitHub n\'est peut-être pas accessible\n';
+                    errorMessage += '• Réessayez dans quelques instants';
+                } else if (error.message.includes('404')) {
+                    errorMessage += '\n\n💡 Suggestions:\n';
+                    errorMessage += '• Vérifiez que biens.json existe à la racine du projet\n';
+                    errorMessage += '• Assurez-vous que le fichier a été commit et push sur GitHub';
+                } else if (error.message.includes('timed out') || error.message.includes('timeout')) {
+                    errorMessage += '\n\n💡 Suggestions:\n';
+                    errorMessage += '• Le fichier est peut-être trop volumineux\n';
+                    errorMessage += '• Vérifiez votre connexion internet\n';
+                    errorMessage += '• Réessayez dans quelques instants';
                 }
                 
                 alert(errorMessage);
