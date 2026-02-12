@@ -13,45 +13,113 @@
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../drawer.css" />
     <style>
-      .placeholder-container {
-        min-height: 70vh;
+      .page-header {
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-soft) 100%);
+        color: white;
+        padding: 3rem 0 2.5rem;
+        margin-top: 72px;
+      }
+
+      .page-header h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .page-header .intro {
+        max-width: 750px;
+        color: #d9e5f3;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      main {
+        padding: 3rem 0;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 0;
+      }
+
+      .member-card {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .member-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(16, 35, 63, 0.12);
+      }
+
+      .member-photo {
+        width: 100%;
+        aspect-ratio: 4/5;
+        overflow: hidden;
+        background: var(--bg);
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
-        padding: 2rem;
       }
 
-      .placeholder-content {
-        max-width: 600px;
+      .member-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
-      .placeholder-content h1 {
-        color: var(--brand);
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-      }
-
-      .placeholder-content p {
+      .member-photo.photo-coming {
+        background: linear-gradient(135deg, #e5edf4 0%, #d7e0ea 100%);
         color: var(--muted);
         font-size: 1.1rem;
-        margin-bottom: 2rem;
-        line-height: 1.6;
+        font-weight: 500;
       }
 
-      .placeholder-link {
+      .member-name {
+        margin: 1.5rem 1.5rem 0.5rem;
+        color: var(--brand);
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .member-role {
+        margin: 0 1.5rem 0.5rem;
+        color: var(--muted);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .member-contact {
         display: inline-block;
-        background: var(--brand);
-        color: white;
+        margin: 0.5rem 1.5rem 1.5rem;
+        color: var(--brand);
         text-decoration: none;
-        padding: 0.9rem 2rem;
-        border-radius: 999px;
         font-weight: 600;
+        padding: 0.6rem 1.2rem;
+        background: rgba(22, 58, 95, 0.05);
+        border-radius: 999px;
         transition: background 0.2s;
       }
 
-      .placeholder-link:hover {
-        background: var(--brand-soft);
+      .member-contact:hover {
+        background: rgba(22, 58, 95, 0.12);
+      }
+
+      @media (max-width: 768px) {
+        .page-header {
+          padding: 2rem 0 1.5rem;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
       }
     </style>
   </head>
@@ -157,15 +225,59 @@
       </div>
     </nav>
 
-    <main class="placeholder-container">
-      <div class="placeholder-content">
-        <h1>Notre Équipe</h1>
-        <p>
-          Cette page est en cours de construction. Découvrez prochainement
-          les professionnels qui composent l'équipe Henri Martin Immobilier.
+    <!-- Header de page -->
+    <header class="page-header">
+      <div class="container">
+        <h1>L'équipe Henri Martin Immobilier</h1>
+        <p class="intro">
+          Découvrez les professionnels qui vous accompagnent au quotidien.
         </p>
-        <a href="../index.html" class="placeholder-link">Retour à l'accueil</a>
       </div>
+    </header>
+
+    <!-- Présentation de l'équipe -->
+    <main class="container">
+      <section class="team-grid">
+        <!-- Abbas -->
+        <article class="member-card">
+          <div class="member-photo">
+            <!-- Remplacer par une photo locale si disponible -->
+            <img src="https://via.placeholder.com/320x420?text=Photo" alt="Portrait de Abbas BERRADA">
+          </div>
+          <h3 class="member-name">Abbas BERRADA</h3>
+          <p class="member-role">Conseiller</p>
+          <a class="member-contact" href="tel:+336625226194">+33 6 25 22 61 94</a>
+        </article>
+
+        <!-- Clément -->
+        <article class="member-card">
+          <div class="member-photo">
+            <img src="https://via.placeholder.com/320x420?text=Photo" alt="Portrait de Clément SMITH">
+          </div>
+          <h3 class="member-name">Clément SMITH</h3>
+          <p class="member-role">Conseiller</p>
+          <a class="member-contact" href="tel:+33744446045">+33 7 44 44 60 45</a>
+        </article>
+
+        <!-- Camille (photo à venir) -->
+        <article class="member-card">
+          <div class="member-photo photo-coming">
+            <span>Photo à venir</span>
+          </div>
+          <h3 class="member-name">Camille LAMY</h3>
+          <p class="member-role">À venir</p>
+        </article>
+
+        <!-- Salma -->
+        <article class="member-card">
+          <div class="member-photo">
+            <img src="https://via.placeholder.com/320x420?text=Photo" alt="Portrait de Salma BRIOUEL">
+          </div>
+          <h3 class="member-name">Salma BRIOUEL</h3>
+          <p class="member-role">Conseillère</p>
+          <a class="member-contact" href="tel:+33644290040">+33 6 44 29 00 40</a>
+        </article>
+      </section>
     </main>
 
     <footer>
