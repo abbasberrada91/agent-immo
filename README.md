@@ -141,3 +141,17 @@ Exemple :
   "brochureUrl": "https://www.canva.com/design/VOTRE-ID/view"
 }
 ```
+
+
+---
+
+## 👥 Collaboration
+
+Pour inviter un collaborateur à travailler sur ce projet :
+
+1. Aller dans **Paramètres → Collaborateurs** du dépôt GitHub
+2. Cliquer sur **Ajouter des personnes**
+3. Saisir le nom d'utilisateur GitHub du collaborateur
+4. Choisir le niveau d'accès approprié
+
+Consultez le **[Guide de contribution](CONTRIBUTING.md)** pour toutes les informations sur la collaboration, le flux de travail Git et les bonnes pratiques.
