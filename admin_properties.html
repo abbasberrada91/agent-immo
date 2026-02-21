@@ -220,6 +220,33 @@
             background: #fecaca;
         }
 
+        .action-btn-publish {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .action-btn-publish:hover {
+            background: #a7f3d0;
+        }
+
+        .action-btn-unpublish {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .action-btn-unpublish:hover {
+            background: #fde68a;
+        }
+
+        .action-btn-view {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .action-btn-view:hover {
+            background: #ddd6fe;
+        }
+
         .loading {
             text-align: center;
             padding: 60px 20px;
@@ -740,6 +767,7 @@
                         <th>Prix</th>
                         <th>Surface</th>
                         <th>Date d'ajout</th>
+                        <th>Statut</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -1174,7 +1202,10 @@
                     '<span class="badge badge-vente">Vente</span>' :
                     '<span class="badge badge-location">Location</span>';
 
-                const statusBadge = '<span class="badge badge-published">Publié</span>';
+                const isPublished = property.isPublished !== false;
+                const statusBadge = isPublished ?
+                    '<span class="badge badge-published">Publié</span>' :
+                    '<span class="badge badge-draft">Brouillon</span>';
                 
                 const dateAdded = property.dateAdded ? 
                     new Date(property.dateAdded).toLocaleDateString('fr-FR') : 
@@ -1202,9 +1233,12 @@
                     <td>${priceFormatted}</td>
                     <td>${property.surface} m²</td>
                     <td>${dateAdded}</td>
+                    <td>${statusBadge}</td>
                     <td>
                         <div class="actions">
                             <button class="action-btn action-btn-edit" onclick='editProperty("${property.reference}")'>✏️ Modifier</button>
+                            <button class="action-btn ${isPublished ? 'action-btn-unpublish' : 'action-btn-publish'}" onclick='togglePublishStatus("${property.reference}")'>${isPublished ? '🌐 Dépublier' : '🌐 Publier'}</button>
+                            <button class="action-btn action-btn-view" onclick='viewProperty("${property.reference}")'>👁️ Voir</button>
                             <button class="action-btn action-btn-delete" onclick='deleteProperty("${property.reference}")'>🗑️ Supprimer</button>
                         </div>
                     </td>
@@ -1215,8 +1249,8 @@
 
             if (filtered.length === 0 && allProperties.length > 0) {
                 const tr = document.createElement('tr');
-                // Note: Colspan must match total number of table columns (currently 12)
-                tr.innerHTML = '<td colspan="12" style="text-align: center; padding: 40px; color: #718096;">Aucun bien ne correspond à vos critères de recherche</td>';
+                // Note: Colspan must match total number of table columns (currently 13)
+                tr.innerHTML = '<td colspan="13" style="text-align: center; padding: 40px; color: #718096;">Aucun bien ne correspond à vos critères de recherche</td>';
                 tbody.appendChild(tr);
             }
         }
@@ -1853,6 +1887,35 @@
             submitBtn.disabled = false;
             submitBtn.textContent = '💾 Enregistrer';
         });
+
+        async function togglePublishStatus(reference) {
+            const property = allProperties.find(p => p.reference === reference);
+            if (!property) return;
+
+            const isPublished = property.isPublished !== false;
+            const action = isPublished ? 'dépublier' : 'publier';
+
+            const confirmed = confirm(
+                `Voulez-vous ${action} ce bien ?\n\n` +
+                `Référence: ${reference}\n` +
+                `Titre: ${property.title}`
+            );
+
+            if (!confirmed) return;
+
+            const result = await window.propertyAPI.togglePropertyStatus(reference);
+
+            if (result.success) {
+                alert('✅ ' + result.message);
+                await loadProperties(); // Reload to show changes
+            } else {
+                alert('❌ ' + result.message);
+            }
+        }
+
+        function viewProperty(reference) {
+            window.open(`detail.html?ref=${encodeURIComponent(reference)}`, '_blank');
+        }
 
         async function deleteProperty(reference) {
             const property = allProperties.find(p => p.reference === reference);
