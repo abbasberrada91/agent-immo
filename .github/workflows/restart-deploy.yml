@@ -1,0 +1,59 @@
+name: Restart / Redeploy Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for restart (optional)'
+        required: false
+        default: 'Manual restart'
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log restart reason
+        run: |
+          echo "🔄 Restart triggered: ${{ github.event.inputs.reason }}"
+          echo "👤 Triggered by: ${{ github.actor }}"
+          echo "📅 Date: $(date -u)"
+
+      - name: Detect publication folder
+        id: detect-folder
+        run: |
+          if [ -d "docs" ] && [ -f "docs/index.html" ]; then
+            echo "publish_dir=docs" >> $GITHUB_OUTPUT
+          else
+            echo "publish_dir=." >> $GITHUB_OUTPUT
+          fi
+
+      - name: Add .nojekyll file
+        run: touch ${{ steps.detect-folder.outputs.publish_dir }}/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.detect-folder.outputs.publish_dir }}
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
