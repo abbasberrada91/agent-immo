@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conciergerie & Gestion Airbnb Paris | Henri Martin Immobilier</title>
+    <meta
+      name="description"
+      content="Gestion Airbnb complète à Paris : annonce, accueil voyageurs, ménage, optimisation des revenus. +35% vs location classique. Conciergerie premium haut de gamme."
+    />
+    <link rel="canonical" href="https://henrimartinimmobilier.com/conciergerie.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="drawer.css" />
+    <style>
+      .conciergerie-hero {
+        background: linear-gradient(135deg, var(--brand) 0%, #0f3a5c 50%, #163a5f 100%);
+        color: white;
+        padding: 4rem 0 3rem;
+        text-align: center;
+      }
+
+      .conciergerie-hero h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+      }
+
+      .conciergerie-hero p {
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: #d9e5f3;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      }
+
+      .stats-band {
+        background: var(--brand-soft);
+        color: white;
+        padding: 2rem 0;
+      }
+
+      .stats-band .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .stat-item strong {
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .stat-item span {
+        font-size: 0.88rem;
+        color: #d9e5f3;
+        margin-top: 0.3rem;
+        display: block;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.8rem;
+        border: 1px solid #e5edf4;
+        box-shadow: 0 4px 16px rgba(16, 35, 63, 0.06);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(16, 35, 63, 0.12);
+      }
+
+      .service-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .service-card h3 {
+        margin: 0 0 0.8rem;
+        color: var(--brand);
+        font-size: 1.2rem;
+      }
+
+      .service-card p {
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .testimonial-section {
+        background: #f3f6fa;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        margin: 2rem 0;
+        text-align: center;
+      }
+
+      .testimonial-section blockquote {
+        font-size: 1.15rem;
+        color: var(--ink);
+        font-style: italic;
+        line-height: 1.7;
+        margin: 0 0 1rem;
+        max-width: 680px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .testimonial-section cite {
+        color: var(--muted);
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .pourquoi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 2rem 0;
+        align-items: center;
+      }
+
+      .pourquoi-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .pourquoi-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #e5edf4;
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .pourquoi-list li:last-child {
+        border-bottom: none;
+      }
+
+      .check {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #dceaff;
+        color: var(--brand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .expertise-card {
+        background: linear-gradient(135deg, #f0f4fa, #e8eef8);
+        border: 1px solid #d0dcea;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .expertise-card .emoji {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      .expertise-card h3 {
+        color: var(--brand);
+        margin: 0 0 0.8rem;
+      }
+
+      .expertise-card p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .cta-section {
+        background: linear-gradient(110deg, #133356, #234f7d);
+        color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+      }
+
+      .cta-section h2 {
+        margin: 0 0 1rem;
+        font-size: 1.8rem;
+      }
+
+      .cta-section p {
+        color: #d9e5f3;
+        margin: 0 0 2rem;
+        font-size: 1.05rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-btn-primary {
+        display: inline-block;
+        background: white;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn-primary:hover {
+        transform: translateY(-2px);
+      }
+
+      .cta-btn-secondary {
+        display: inline-block;
+        border: 1px solid rgba(255,255,255,0.6);
+        color: white;
+        text-decoration: none;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .cta-btn-secondary:hover {
+        background: rgba(255,255,255,0.1);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin: 2rem 0 1rem;
+        color: var(--brand-soft);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover { text-decoration: underline; }
+
+      .section-title {
+        font-size: 1.6rem;
+        color: var(--ink);
+        margin: 2.5rem 0 0.5rem;
+      }
+
+      .section-subtitle {
+        color: var(--muted);
+        margin: 0 0 1.5rem;
+        max-width: 600px;
+      }
+
+      @media (max-width: 760px) {
+        .stats-band .container { grid-template-columns: 1fr; gap: 1.5rem; }
+        .pourquoi-grid { grid-template-columns: 1fr; }
+        .cta-buttons { flex-direction: column; align-items: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="index.html#biens">Biens à louer</a>
+            <a href="services/estimation.html">Estimation locative</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="index.html#biens">Biens à vendre</a>
+            <a href="services/estimation.html">Estimation vente</a>
+          </div>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="services.html" class="drawer-link">Services</a>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="conciergerie.html" class="drawer-link" style="color: var(--brand); font-weight: 700;">Conciergerie Airbnb</a>
+        </div>
+        <div class="drawer-section drawer-section-simple">
+          <a href="blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="index.html#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="conciergerie-hero">
+      <nav class="top-nav">
+        <div class="container">
+          <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <a href="index.html" class="brand">Henri Martin Immobilier</a>
+          <div class="nav-links">
+            <a href="index.html#biens">Nos biens</a>
+            <a href="services.html">Services</a>
+            <a href="conciergerie.html" style="font-weight:700; color:#fff;">Conciergerie</a>
+            <a href="index.html#contact">Contact</a>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
+            <a class="partner-btn" href="index.html#contact">Accès partenaire</a>
+          </div>
+        </div>
+      </nav>
+      <div class="container" style="padding-top: 1.5rem;">
+        <p class="eyebrow">Conciergerie &amp; Gestion Airbnb Paris</p>
+        <h1>Maximisez vos revenus locatifs<br>avec un service tout compris</h1>
+        <p>
+          Henri Martin Immobilier gère votre bien Airbnb de A à Z — de la création de
+          l'annonce à l'accueil des voyageurs — pour vous offrir sérénité et performance.
+        </p>
+        <a href="mailto:contact@henrimartinimmobilier.com?subject=Estimation%20revenus%20Airbnb" class="hero-cta">
+          Estimer mes revenus →
+        </a>
+      </div>
+    </header>
+
+    <!-- Chiffres clés -->
+    <section class="stats-band">
+      <div class="container">
+        <div class="stat-item">
+          <strong>+35%</strong>
+          <span>de revenus vs location classique</span>
+        </div>
+        <div class="stat-item">
+          <strong>4,9/5</strong>
+          <span>note moyenne voyageurs</span>
+        </div>
+        <div class="stat-item">
+          <strong>100%</strong>
+          <span>sans contrainte pour le propriétaire</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="container">
+      <a href="index.html" class="back-link">← Retour à l'accueil</a>
+
+      <!-- Services -->
+      <h2 class="section-title">Ce que nous gérons pour vous</h2>
+      <p class="section-subtitle">
+        Un service complet, de la mise en ligne de votre annonce jusqu'au versement mensuel de vos revenus.
+      </p>
+
+      <section class="services-grid">
+        <article class="service-card">
+          <span class="service-icon">🏡</span>
+          <h3>Gestion Airbnb complète</h3>
+          <p>
+            Création et optimisation de l'annonce, photos professionnelles,
+            tarification dynamique selon la saison, communication voyageurs 24h/24.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">🛎</span>
+          <h3>Conciergerie premium</h3>
+          <p>
+            Accueil personnalisé des voyageurs, remise des clés, linge hôtelier
+            haut de gamme, ménage entre chaque séjour, panier de bienvenue.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">📈</span>
+          <h3>Optimisation des revenus</h3>
+          <p>
+            Analyse du marché, yield management, calendrier optimisé, rapport
+            mensuel détaillé de vos revenus et performances.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">⚖️</span>
+          <h3>Conformité &amp; tranquillité d'esprit</h3>
+          <p>
+            Déclaration en mairie, numéro de déclaration, assurance spécifique
+            location courte durée, gestion administrative complète.
+          </p>
+        </article>
+      </section>
+
+      <!-- Témoignage -->
+      <section class="testimonial-section">
+        <span style="font-size:2.5rem; display:block; margin-bottom:1rem;">💬</span>
+        <blockquote>
+          « Grâce à Henri Martin Immobilier, mon appartement du 8e génère 40% de
+          revenus supplémentaires par rapport à ma location longue durée précédente.
+          Je n'ai rien à faire, tout est géré. »
+        </blockquote>
+        <cite>— Marie-Claire D., propriétaire Paris 8e</cite>
+      </section>
+
+      <!-- Pourquoi nous -->
+      <h2 class="section-title">Pourquoi nous choisir ?</h2>
+      <div class="pourquoi-grid">
+        <ul class="pourquoi-list">
+          <li>
+            <span class="check">✓</span>
+            Expertise du marché parisien haut de gamme
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Réseau de voyageurs business et familles premium
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Reporting mensuel transparent
+          </li>
+          <li>
+            <span class="check">✓</span>
+            Disponibilité 7j/7
+          </li>
+        </ul>
+        <div class="expertise-card">
+          <span class="emoji">🏆</span>
+          <h3>Spécialiste Airbnb Paris depuis 2018</h3>
+          <p>
+            Plus de 6 ans d'expérience dans la gestion de locations courtes durées
+            dans les arrondissements haut de gamme de Paris.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA final -->
+      <section class="cta-section">
+        <h2>Confier votre bien à des experts</h2>
+        <p>
+          Contactez-nous pour une estimation gratuite de vos revenus Airbnb
+          et une présentation de nos services.
+        </p>
+        <div class="cta-buttons">
+          <a href="mailto:contact@henrimartinimmobilier.com?subject=Estimation%20revenus%20Airbnb" class="cta-btn-primary">
+            ✉ Estimation gratuite
+          </a>
+          <a href="tel:+33625226194" class="cta-btn-secondary">
+            📞 Appeler le 06 25 22 61 94
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+
+    <script src="drawer.js"></script>
+  </body>
+</html>
