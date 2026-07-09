@@ -22,9 +22,6 @@
   .ico{width:24px;height:24px;stroke:var(--gold-2);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
   /* ---- demo chrome ---- */
-  .demo-tag{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--ink);color:var(--cream);
-    font-size:12px;letter-spacing:.03em;text-align:center;padding:6px 16px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-  .demo-tag b{color:var(--gold-3);font-weight:700}
   body{padding-top:31px}
 
   /* ---- top trust bar ---- */
@@ -33,7 +30,7 @@
   .trust b{color:#cdd2dc;font-weight:600}
 
   /* ---- header ---- */
-  header{position:sticky;top:31px;z-index:40;background:rgba(11,18,32,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,.18)}
+  header{position:absolute;top:0;left:0;right:0;z-index:40;background:linear-gradient(180deg,rgba(7,11,20,.55),transparent);border-bottom:0}
   nav{display:flex;align-items:center;justify-content:space-between;padding:15px 24px;max-width:1160px;margin:0 auto}
   .brand{color:var(--cream);font-weight:700;letter-spacing:.16em;font-size:15px;text-transform:uppercase;line-height:1}
   .brand span{display:block;color:var(--gold-2);font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0;text-transform:none;margin-top:3px}
@@ -219,14 +216,38 @@
   footer a{color:var(--gold-2)}
   footer .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:22px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Hero plein écran façon Junot / Daniel Féau ===== */
+.hero-photo{position:relative;min-height:92vh;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-top{padding-top:168px;padding-bottom:40px;max-width:760px}
+.hero-top .eyebrow{color:#f1ecdd}
+.hero-top h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.12;color:#fff;margin:14px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-top h1 i{color:var(--gold-2);font-style:italic}
+.hero-top .lede{color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(0,0,0,.3)}
+.hero-top .sig{color:rgba(255,255,255,.75)}
+.hero-search{padding-bottom:34px}
+.hs-tabs{display:flex;gap:2px}
+.hs-tabs .hs-tab{background:rgba(7,11,20,.55);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:700 12px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
+.hs-tabs .hs-tab.on{background:var(--cream,#f4f2ec);color:#14161a;border-bottom-color:var(--gold-2)}
+.hs-row{display:flex;align-items:stretch;background:var(--cream,#f4f2ec);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.hs-field{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 22px;border-right:1px solid rgba(20,20,18,.1);text-decoration:none;color:inherit;min-width:0}
+.hs-field:last-of-type{border-right:0}
+.hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778}
+.hs-v{font:400 14.5px/1.3 system-ui;color:#14161a;margin-top:2px}
+.hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#14161a;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
+.hs-go:hover{background:var(--gold-2,#b9401f)}
+@media (max-width:860px){
+  .hero-top{padding-top:128px}
+  .hero-top h1{font-size:32px}
+  .hs-row{flex-direction:column}
+  .hs-field{border-right:0;border-bottom:1px solid rgba(20,20,18,.1)}
+  .hs-go{padding:16px;justify-content:center}
+}
 </style>
 
-<div class="demo-tag">🎬 <b></b> </div>
+<!-- demo-tag retiré (résidu artifact) -->
 
-<div class="trust"><div class="wrap">
-  <span><b>HM Immobilier</b> — Carte T CPI 7501 2026 000 000 160 · 58 rue de Monceau, 75008 Paris</span>
-  <span>Estimation confidentielle immédiate · <b>06 67 68 37 43</b></span>
-</div></div>
+<!-- bandeau legal retiré du haut : voir footer -->
 
 <header><nav>
   <div class="brand">HM Immobilier<span>Vente · Location · Investissement</span></div>
@@ -235,44 +256,34 @@
     <a href="#acheter">Acheter</a>
     <a href="#reseau">Le réseau pro</a>
     <a href="#investir">Investir</a><a href="conciergerie.html">Conciergerie</a><a href="nos-biens.html">Nos biens</a>
+    <a href="#vendre">Estimer</a>
     <a class="nav-cta" href="#vendre">Estimer mon bien</a>
   </div>
 </nav></header>
 
-<div class="hero"><div class="wrap">
-  <div class="eyebrow">Agence immobilière carte T · Paris & Ouest</div>
-  <h1>Vendre, louer, <i>investir</i> — au prix juste.</h1>
-  <p class="lede">Estimation gratuite et immédiate, fondée sur les ventes réellement signées de votre rue. Vente, location, investissement locatif et conciergerie — et pour les biens qui exigent la discrétion, notre réseau off-market L'Off Market Parisien.</p>
-  <p class="sig">A. Berrada · HM Immobilier</p>
-
-  <div class="proof">
-    <div class="p"><div class="v num">7 799</div><div class="l">biens suivis en continu</div></div>
-    <div class="p"><div class="v num">134</div><div class="l">acquéreurs qualifiés · médiane 1,2 M€</div></div>
-    <div class="p"><div class="v num">91</div><div class="l">recherches actives dans le 16ᵉ</div></div>
-    <div class="p"><div class="v">24 h</div><div class="l">→ estimation immédiate en ligne</div></div>
+<div class="hero-photo" style="background-image:linear-gradient(180deg,rgba(7,11,20,.15) 0%,rgba(7,11,20,.05) 40%,rgba(7,11,20,.85) 100%),url(https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1920&q=80)">
+  <div class="hero-top wrap">
+    <div class="eyebrow">Agence immobilière carte T · Paris &amp; Ouest</div>
+    <h1>Vendre, louer, <i>investir</i>, estimer — au prix juste.</h1>
+    <p class="lede">Estimation gratuite et immédiate, fondée sur les ventes réellement signées de votre rue. Vente, location, investissement locatif et conciergerie — et pour les biens qui exigent la discrétion, notre réseau off-market L'Off Market Parisien.</p>
+    <p class="sig">A. Berrada · HM Immobilier</p>
   </div>
 
-  <div class="doors">
-    <a class="door primary" href="#vendre">
-      <svg class="ico" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8"/><path d="M17 6l2 2"/><path d="M14 9l2 2"/></svg>
-      <h3>Je vends</h3>
-      <p>Votre fourchette de prix en direct, sans laisser vos coordonnées. Puis le rapport détaillé si vous le souhaitez.</p>
-      <span class="go">ESTIMER EN 15 SECONDES →</span>
-    </a>
-    <a class="door" href="#acheter">
-      <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <h3>Je cherche</h3>
-      <p>Voyez ce qui se cache dans votre secteur avant sa mise sur le marché, puis activez votre alerte.</p>
-      <span class="go">VOIR L'OFF-MARKET →</span>
-    </a>
-    <a class="door" href="#reseau">
-      <svg class="ico" viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 5-5s5 2 5 5"/><path d="M12 20c0-3 2.5-5 5-5s5 2 5 5"/></svg>
-      <h3>Je suis un pro</h3>
-      <p>Agent, chasseur, apporteur : collaborez sous pseudonyme, honoraires connus d'avance.</p>
-      <span class="go">REJOINDRE LE RÉSEAU →</span>
-    </a>
+  <div class="hero-search wrap">
+    <div class="hs-tabs">
+      <button class="hs-tab on" data-t="vend">Vendre</button>
+      <button class="hs-tab" data-t="ach">Acheter</button>
+      <button class="hs-tab" data-t="lou">Louer</button>
+      <button class="hs-tab" data-t="est">Estimer</button>
+    </div>
+    <div class="hs-row">
+      <a class="hs-field" href="#vendre"><span class="hs-k">Je vends</span><span class="hs-v">Estimer mon bien en 15 secondes →</span></a>
+      <a class="hs-field" href="#acheter"><span class="hs-k">Je cherche</span><span class="hs-v">Voir le off-market par secteur →</span></a>
+      <a class="hs-field" href="#reseau"><span class="hs-k">Je suis un pro</span><span class="hs-v">Rejoindre le réseau →</span></a>
+      <a class="hs-go" href="#vendre">RECHERCHER</a>
+    </div>
   </div>
-</div></div>
+</div>
 
 <!-- ============ ESTIMATION — pièce maîtresse ============ -->
 <section class="estimate" id="vendre"><div class="wrap">
@@ -344,53 +355,7 @@
 </div></section>
 
 <!-- ============ SIMULATION / MÉTHODE ============ -->
-<section class="sim" id="methode"><div class="wrap">
-  <div class="sec-head"><div class="eyebrow">La méthode derrière cette refonte</div><h2 class="serif">200 acheteurs &amp; vendeurs, simulés.</h2><p>Avant de dessiner, nous avons fait passer 200 profils — 84 vendeurs, 70 acheteurs, 24 locataires, 14 investisseurs, 8 pros, 60 % sur mobile — à travers le site actuel puis la refonte. Voici ce qu'ils nous ont appris.</p></div>
-
-  <div class="headline">
-    <div class="big num">12 % <span class="arrow">→</span> <span class="up">42 %</span></div>
-    <div class="cap">taux de conversion global · <b>+246 %</b> de contacts qualifiés à trafic égal</div>
-  </div>
-
-  <div class="sim-cols">
-    <div class="fcard" data-funnel="vendeur">
-      <h4>Parcours vendeur · estimation</h4>
-      <div class="fsub">84 vendeurs simulés — là où fuit le tunnel actuel</div>
-      <div id="fVend"></div>
-    </div>
-    <div class="fcard" data-funnel="acheteur">
-      <h4>Parcours acheteur · dépôt de recherche</h4>
-      <div class="fsub">108 acheteurs / locataires / investisseurs simulés</div>
-      <div id="fAch"></div>
-    </div>
-  </div>
-  <div class="legend">
-    <span><span class="sw cur"></span> Site actuel</span>
-    <span><span class="sw red"></span> Refonte</span>
-    <span style="color:var(--mut)">· parcours par étape, nombre de profils restants</span>
-  </div>
-
-  <div class="insights">
-    <div class="ins">
-      <div class="n serif">01</div>
-      <h4>Le mur du téléphone</h4>
-      <p>Aujourd'hui, seuls <b>5 vendeurs sur 84</b> voient une estimation : il faut donner son numéro <i>avant</i> toute valeur. 26 abandonnent à cette étape précise.</p>
-      <span class="fix">→ Estimation en direct, contact ensuite : 43 leads.</span>
-    </div>
-    <div class="ins">
-      <div class="n serif">02</div>
-      <h4>L'acheteur veut voir avant de donner</h4>
-      <p>Le bloc « déposez secteur + budget + email » d'un coup ne convertit que <b>15 acheteurs</b>. Montrer 2-3 biens anonymes d'abord double l'engagement.</p>
-      <span class="fix">→ Aperçu off-market puis alerte : 34 recherches.</span>
-    </div>
-    <div class="ins">
-      <div class="n serif">03</div>
-      <h4>Mobile d'abord</h4>
-      <p><b>60 % du trafic est mobile</b>, or les formulaires à 4-6 champs y perdent le plus. Curseur, choix par pastilles et étapes courtes rendent le tunnel tactile.</p>
-      <span class="fix">→ Friction mobile quasi supprimée.</span>
-    </div>
-  </div>
-</div></section>
+<!-- section démo/méthode interne retirée du site public -->
 
 <!-- ============ RÉSEAU ============ -->
 
