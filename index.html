@@ -1,261 +1,601 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Henri Martin Immobilier | Vente & Location Premium</title>
-    <meta
-      name="description"
-      content="Catalogue partenaire de biens à la vente et à la location, inspiré des vitrines premium immobilières."
-    />
-    <link rel="canonical" href="https://henrimartinimmobilier.com/" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="drawer.css" />
-  </head>
-  <body>
-    <!-- Mobile Drawer Menu -->
-    <div id="drawer-overlay" class="drawer-overlay"></div>
-    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
-      <div class="drawer-header">
-        <span class="drawer-brand">Henri Martin Immobilier</span>
-        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+<title>Henri Martin Immobilier | Vente · Location · Investissement — Estimation gratuite à Paris</title>
+<meta name="description" content="Henri Martin Immobilier, agence carte T à Paris : vente, location, investissement locatif et conciergerie. Estimation gratuite immédiate fondée sur les ventes réelles de votre rue.">
+<style>
+  :root{
+    --navy:#0b1220; --navy-2:#0e1626; --navy-3:#131d31; --ink:#14161a;
+    --gold:#a98a5c; --gold-2:#c9a84c; --gold-3:#e2c877;
+    --cream:#f4f2ec; --paper:#faf8f2; --soft:#efece3; --line:#e2ddd0;
+    --mut:#8d8778; --on-dark:#c7cad2; --on-dark-2:#9aa0ab;
+    --sold:#2e6a4e; --sold-bg:#e6efe8; --listed:#8a6d3b; --listed-bg:#f1ecdd;
+    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
+    --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .serif{font-family:var(--serif)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+  h1,h2,h3{font-weight:400;letter-spacing:-.01em;text-wrap:balance}
+  .num{font-variant-numeric:tabular-nums}
+  svg{display:block}
+  .ico{width:24px;height:24px;stroke:var(--gold-2);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---- demo chrome ---- */
+  .demo-tag{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--ink);color:var(--cream);
+    font-size:12px;letter-spacing:.03em;text-align:center;padding:6px 16px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .demo-tag b{color:var(--gold-3);font-weight:700}
+  body{padding-top:31px}
+
+  /* ---- top trust bar ---- */
+  .trust{background:#070b14;color:#8f96a3;font-size:12px;border-bottom:1px solid rgba(201,168,76,.2)}
+  .trust .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;flex-wrap:wrap;gap:6px}
+  .trust b{color:#cdd2dc;font-weight:600}
+
+  /* ---- header ---- */
+  header{position:sticky;top:31px;z-index:40;background:rgba(11,18,32,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,.18)}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:15px 24px;max-width:1160px;margin:0 auto}
+  .brand{color:var(--cream);font-weight:700;letter-spacing:.16em;font-size:15px;text-transform:uppercase;line-height:1}
+  .brand span{display:block;color:var(--gold-2);font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0;text-transform:none;margin-top:3px}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{color:var(--on-dark);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--cream)}
+  .nav-cta{background:var(--gold);color:var(--navy);padding:9px 18px;font-weight:700;font-size:13.5px}
+  .nav-cta:hover{background:var(--gold-2)}
+  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---- hero ---- */
+  .hero{background:
+     radial-gradient(1100px 460px at 82% -10%,rgba(201,168,76,.16),transparent 58%),
+     radial-gradient(700px 400px at 0% 120%,rgba(201,168,76,.06),transparent 60%),
+     linear-gradient(180deg,#0b1220,#0d1626);color:var(--cream);overflow:hidden;position:relative}
+  .hero .wrap{padding:70px 24px 40px}
+  .hero h1{font-size:clamp(38px,6.4vw,66px);line-height:1.03;max-width:15ch}
+  .hero h1 i{color:var(--gold-2);font-style:italic}
+  .hero .lede{font-size:17.5px;color:var(--on-dark);max-width:52ch;margin:22px 0 0;line-height:1.62}
+  .hero .sig{font-size:13.5px;color:#7f8590;margin-top:14px;font-style:italic;font-family:var(--serif)}
+  /* live proof strip grounded on real data */
+  .proof{display:flex;gap:0;margin-top:34px;border:1px solid rgba(201,168,76,.24);background:rgba(244,242,236,.03)}
+  .proof .p{flex:1;padding:16px 18px;border-right:1px solid rgba(201,168,76,.16)}
+  .proof .p:last-child{border-right:0}
+  .proof .v{font-family:var(--serif);font-size:26px;color:var(--gold-3);line-height:1}
+  .proof .l{font-size:11.5px;color:var(--on-dark-2);margin-top:6px;letter-spacing:.02em}
+  @media(max-width:720px){.proof{flex-wrap:wrap}.proof .p{flex:1 1 50%;border-bottom:1px solid rgba(201,168,76,.16)}}
+
+  .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:16px}
+  .door{background:rgba(244,242,236,.04);border:1px solid rgba(201,168,76,.2);padding:22px;cursor:pointer;transition:.22s;display:block;color:inherit}
+  .door:hover{background:rgba(201,168,76,.1);border-color:var(--gold);transform:translateY(-3px)}
+  .door h3{font-size:18px;font-weight:600;margin:12px 0 5px;color:var(--cream)}
+  .door p{font-size:13px;color:var(--on-dark-2);line-height:1.5}
+  .door .go{color:var(--gold-2);font-size:12px;font-weight:700;margin-top:11px;display:inline-block;letter-spacing:.04em}
+  .door.primary{background:var(--gold);border-color:var(--gold)}
+  .door.primary h3,.door.primary .go{color:var(--navy)} .door.primary p{color:#43371f}
+  .door.primary .ico{stroke:var(--navy)}
+  @media(max-width:820px){.doors{grid-template-columns:1fr}}
+
+  section{padding:76px 0}
+  .sec-head{max-width:640px;margin:0 auto 40px;text-align:center}
+  .sec-head h2{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:10px 0}
+  .sec-head p{color:var(--mut);font-size:16px}
+
+  /* ---- ESTIMATION (the centerpiece) ---- */
+  .estimate{background:var(--soft)}
+  .est-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:stretch}
+  @media(max-width:920px){.est-grid{grid-template-columns:1fr;gap:28px}}
+  .est-left h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12}
+  .est-left h2 i{color:var(--gold);font-style:italic}
+  .est-left .p{color:var(--mut);font-size:15.5px;margin-top:12px;max-width:44ch}
+  .why{margin-top:26px;display:flex;flex-direction:column;gap:16px}
+  .why .row{display:flex;gap:14px;align-items:flex-start}
+  .why .bi{flex:0 0 40px;height:40px;background:var(--navy);display:flex;align-items:center;justify-content:center}
+  .why .bi .ico{width:20px;height:20px}
+  .why h4{font-size:15.5px;font-weight:600}
+  .why p{font-size:13.5px;color:var(--mut);line-height:1.5;margin-top:2px}
+
+  .calc{background:#fff;border:1px solid var(--line);box-shadow:0 30px 70px -44px rgba(11,18,32,.6);display:flex;flex-direction:column}
+  .calc .top{background:var(--navy);color:var(--cream);padding:18px 22px}
+  .calc .top h3{font-size:18px;font-weight:600;font-family:var(--serif)}
+  .calc .top .s{font-size:12px;color:var(--on-dark-2);margin-top:2px}
+  .calc .body{padding:22px}
+  .zones-pick{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+  .zchip{border:1px solid var(--line);background:var(--paper);padding:7px 12px;font-size:12.5px;cursor:pointer;transition:.15s;font-weight:500}
+  .zchip:hover{border-color:var(--gold)}
+  .zchip.on{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+  .lab{font-size:11px;color:var(--mut);font-weight:700;letter-spacing:.03em;text-transform:uppercase;display:block;margin-bottom:7px}
+  .slider-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+  .slider-row .val{font-family:var(--serif);font-size:22px;color:var(--navy)}
+  input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:var(--line);outline:none;margin:12px 0 18px}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(169,138,92,.5)}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--gold);border:0;cursor:pointer}
+  .seg{display:flex;gap:0;border:1px solid var(--line);margin-bottom:6px}
+  .seg button{flex:1;background:#fff;border:0;padding:9px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--mut);transition:.15s}
+  .seg button.on{background:var(--navy);color:var(--cream);font-weight:600}
+  /* live result */
+  .result{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+  .result .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:700}
+  .result .range{font-family:var(--serif);font-size:clamp(26px,4.4vw,36px);color:var(--navy);line-height:1.1;margin:6px 0 3px}
+  .result .range b{color:var(--gold)}
+  .result .meta{font-size:12.5px;color:var(--mut)}
+  .result .zbuyers{margin-top:14px;background:var(--navy);color:var(--cream);padding:11px 14px;font-size:13px;display:flex;align-items:center;gap:10px}
+  .result .zbuyers .dot{width:8px;height:8px;background:#37b981;box-shadow:0 0 0 4px rgba(55,185,129,.22);flex:0 0 auto}
+  .result .zbuyers b{color:var(--gold-3)}
+  .unlock{margin-top:16px;border:1px dashed var(--gold);background:rgba(201,168,76,.06);padding:16px}
+  .unlock .u-h{font-size:14px;font-weight:700;color:var(--ink)}
+  .unlock .u-s{font-size:12.5px;color:var(--mut);margin:3px 0 12px}
+  .u-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .u-fields input{width:100%;padding:10px 11px;border:1px solid var(--line);background:#fff;font-size:14px;font-family:inherit}
+  .u-fields input:focus{outline:none;border-color:var(--gold)}
+  .u-btn{width:100%;background:var(--gold);color:var(--navy);border:0;padding:12px;font-weight:700;font-size:14.5px;cursor:pointer;margin-top:9px;transition:.2s}
+  .u-btn:hover{background:var(--gold-2)}
+  .u-note{font-size:11px;color:#a99f88;margin-top:9px;display:flex;gap:6px;align-items:flex-start}
+  .comps{margin-top:14px;display:none}
+  .comps.show{display:block;animation:fade .4s ease}
+  .comps table{width:100%;border-collapse:collapse;font-size:12px}
+  .comps th{text-align:left;color:var(--mut);font-weight:600;border-bottom:1px solid var(--line);padding:6px 5px}
+  .comps td{padding:6px 5px;border-bottom:1px solid var(--line)}
+  .tag{font-size:9.5px;font-weight:700;padding:2px 6px;letter-spacing:.03em}
+  .tag.sold{background:var(--sold-bg);color:var(--sold)} .tag.listed{background:var(--listed-bg);color:var(--listed)}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ---- BUYER (off-market teaser) ---- */
+  .buyer{background:var(--navy);color:var(--cream)}
+  .buyer .head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+  .buyer h2{font-size:clamp(26px,3.6vw,38px);line-height:1.12}
+  .buyer h2 i{color:var(--gold-2);font-style:italic}
+  .buyer .head p{color:var(--on-dark-2);font-size:15px;margin-top:8px;max-width:46ch}
+  .zpick2{display:flex;gap:7px;flex-wrap:wrap}
+  .zpick2 .zchip{background:rgba(244,242,236,.05);border-color:rgba(201,168,76,.25);color:var(--on-dark)}
+  .zpick2 .zchip.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .pcard{background:var(--navy-3);border:1px solid rgba(201,168,76,.18);padding:0;overflow:hidden}
+  .pcard .ph{height:120px;background:linear-gradient(135deg,#1b2740,#0e1626);position:relative;display:flex;align-items:center;justify-content:center}
+  .pcard .ph .lock{color:var(--gold-2);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,168,76,.35);padding:5px 10px}
+  .pcard .b{padding:15px 16px}
+  .pcard .t{font-size:15px;font-weight:600;color:var(--cream)}
+  .pcard .d{font-size:12.5px;color:var(--on-dark-2);margin-top:4px}
+  .pcard .pr{font-family:var(--serif);font-size:19px;color:var(--gold-3);margin-top:10px}
+  .pcard .pr small{font-size:11px;color:var(--on-dark-2);font-family:var(--sans)}
+  .buyer .cta-row{margin-top:22px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .buyer .cta-row input{background:rgba(244,242,236,.06);border:1px solid rgba(201,168,76,.25);color:var(--cream);padding:12px 14px;font-size:14px;font-family:inherit;flex:1;min-width:180px}
+  .buyer .cta-row input::placeholder{color:#7d8390}
+  .buyer .cta-row button{background:var(--gold);color:var(--navy);border:0;padding:12px 22px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .buyer .okmsg{color:var(--gold-3);font-size:13.5px;margin-top:12px;display:none}
+
+  /* ---- SIMULATION panel ---- */
+  .sim{background:var(--paper)}
+  .sim .headline{text-align:center;max-width:720px;margin:0 auto 12px}
+  .sim .big{font-family:var(--serif);font-size:clamp(40px,7vw,72px);color:var(--navy);line-height:1}
+  .sim .big .arrow{color:var(--gold);font-style:normal}
+  .sim .big .up{color:var(--sold)}
+  .sim .cap{color:var(--mut);font-size:15px;margin-top:10px}
+  .sim-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:38px}
+  @media(max-width:860px){.sim-cols{grid-template-columns:1fr}}
+  .fcard{background:#fff;border:1px solid var(--line);padding:22px}
+  .fcard h4{font-size:15px;font-weight:700;margin-bottom:3px}
+  .fcard .fsub{font-size:12.5px;color:var(--mut);margin-bottom:18px}
+  .fstep{margin:11px 0}
+  .fstep .fl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px}
+  .fstep .fl .name{color:var(--ink)}
+  .fstep .fl .n{color:var(--mut);font-weight:600}
+  .ftrack{height:22px;background:var(--soft);position:relative;overflow:hidden}
+  .ffill{height:100%;width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+  .ffill.cur{background:linear-gradient(90deg,#b9401f,#d46a3c)}
+  .ffill.red{background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+  .fstep .drop{font-size:11px;color:#b9401f;font-weight:600}
+  .fstep .keep{font-size:11px;color:var(--sold);font-weight:600}
+  .legend{display:flex;gap:20px;justify-content:center;margin-top:24px;font-size:12.5px;color:var(--mut);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:22px;height:9px}
+  .sw.cur{background:#c65330} .sw.red{background:var(--gold)}
+
+  .insights{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.insights{grid-template-columns:1fr}}
+  .ins{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);padding:20px}
+  .ins .n{font-family:var(--serif);font-size:15px;color:var(--gold);font-weight:400}
+  .ins h4{font-size:15.5px;font-weight:700;margin:8px 0 6px}
+  .ins p{font-size:13.5px;color:var(--mut);line-height:1.55}
+  .ins .fix{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:block}
+
+  /* ---- réseau ---- */
+  .reseau{background:var(--soft);border-top:1px solid var(--line)}
+  .reseau .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+  @media(max-width:900px){.reseau .grid{grid-template-columns:1fr}}
+  .reseau ul{list-style:none;margin:16px 0}
+  .reseau li{padding:8px 0 8px 24px;position:relative;font-size:15px;color:#40392c}
+  .reseau li::before{content:"";position:absolute;left:0;top:14px;width:11px;height:1.4px;background:var(--gold)}
+  .simcard{background:var(--navy);color:var(--on-dark);padding:24px;border:1px solid rgba(201,168,76,.2)}
+  .simcard h4{color:#fff;font-size:15px;margin-bottom:14px;font-weight:600}
+  .bar{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}
+  .bar .lbl{width:112px;color:var(--on-dark-2)}
+  .bar .track{flex:1;height:19px;background:rgba(244,242,236,.08)}
+  .bar .fill{height:100%;display:flex;align-items:center;padding-left:8px;color:var(--navy);font-weight:700;font-size:11px}
+  .btn-ghost{display:inline-block;border:1px solid var(--gold);color:var(--gold-2);padding:11px 22px;font-weight:600;font-size:14px;margin-top:8px}
+
+  footer{background:#070b14;color:#8a8271;font-size:13px;padding:56px 0 28px}
+  footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+  @media(max-width:820px){footer .cols{grid-template-columns:1fr 1fr}}
+  footer h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
+  footer a{color:var(--gold-2)}
+  footer .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:22px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="demo-tag">🎬 <b></b> </div>
+
+<div class="trust"><div class="wrap">
+  <span><b>HM Immobilier</b> — Carte T CPI 7501 2026 000 000 160 · 58 rue de Monceau, 75008 Paris</span>
+  <span>Estimation confidentielle immédiate · <b>06 67 68 37 43</b></span>
+</div></div>
+
+<header><nav>
+  <div class="brand">HM Immobilier<span>Vente · Location · Investissement</span></div>
+  <div class="nav-links">
+    <a href="#vendre">Vendre</a>
+    <a href="#acheter">Acheter</a>
+    <a href="#reseau">Le réseau pro</a>
+    <a href="#investir">Investir</a><a href="conciergerie.html">Conciergerie</a><a href="nos-biens.html">Nos biens</a>
+    <a class="nav-cta" href="#vendre">Estimer mon bien</a>
+  </div>
+</nav></header>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Agence immobilière carte T · Paris & Ouest</div>
+  <h1>Vendre, louer, <i>investir</i> — au prix juste.</h1>
+  <p class="lede">Estimation gratuite et immédiate, fondée sur les ventes réellement signées de votre rue. Vente, location, investissement locatif et conciergerie — et pour les biens qui exigent la discrétion, notre réseau off-market L'Off Market Parisien.</p>
+  <p class="sig">A. Berrada · HM Immobilier</p>
+
+  <div class="proof">
+    <div class="p"><div class="v num">7 799</div><div class="l">biens suivis en continu</div></div>
+    <div class="p"><div class="v num">134</div><div class="l">acquéreurs qualifiés · médiane 1,2 M€</div></div>
+    <div class="p"><div class="v num">91</div><div class="l">recherches actives dans le 16ᵉ</div></div>
+    <div class="p"><div class="v">24 h</div><div class="l">→ estimation immédiate en ligne</div></div>
+  </div>
+
+  <div class="doors">
+    <a class="door primary" href="#vendre">
+      <svg class="ico" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8"/><path d="M17 6l2 2"/><path d="M14 9l2 2"/></svg>
+      <h3>Je vends</h3>
+      <p>Votre fourchette de prix en direct, sans laisser vos coordonnées. Puis le rapport détaillé si vous le souhaitez.</p>
+      <span class="go">ESTIMER EN 15 SECONDES →</span>
+    </a>
+    <a class="door" href="#acheter">
+      <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <h3>Je cherche</h3>
+      <p>Voyez ce qui se cache dans votre secteur avant sa mise sur le marché, puis activez votre alerte.</p>
+      <span class="go">VOIR L'OFF-MARKET →</span>
+    </a>
+    <a class="door" href="#reseau">
+      <svg class="ico" viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 5-5s5 2 5 5"/><path d="M12 20c0-3 2.5-5 5-5s5 2 5 5"/></svg>
+      <h3>Je suis un pro</h3>
+      <p>Agent, chasseur, apporteur : collaborez sous pseudonyme, honoraires connus d'avance.</p>
+      <span class="go">REJOINDRE LE RÉSEAU →</span>
+    </a>
+  </div>
+</div></div>
+
+<!-- ============ ESTIMATION — pièce maîtresse ============ -->
+<section class="estimate" id="vendre"><div class="wrap">
+  <div class="est-grid">
+    <div class="est-left">
+      <div class="eyebrow">Vendre avec HM</div>
+      <h2 class="serif">Votre prix, <i>tout de suite</i>. Vos coordonnées, seulement si vous le voulez.</h2>
+      <p class="p">Avant, il fallait donner son numéro pour voir la moindre estimation. Désormais, réglez le curseur : votre fourchette s'affiche en direct, fondée sur les ventes réelles de votre secteur. Le rapport détaillé et les comparables se débloquent ensuite, en un clic.</p>
+      <div class="why">
+        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><path d="M6 2h9l3 3v17H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div><div><h4>Fondée sur les ventes réellement signées</h4><p>Données DVF de votre rue + comparables du secteur, pas un algorithme opaque.</p></div></div>
+        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg></div><div><h4>Zéro exposition</h4><p>Votre bien n'apparaît sur aucun portail. Présenté directement aux acquéreurs qualifiés.</p></div></div>
+        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 11l2 2 4-4"/></svg></div><div><h4>Des acquéreurs déjà là</h4><p>134 acheteurs solvables suivis en continu. Votre bien a peut-être déjà preneur.</p></div></div>
       </div>
+    </div>
 
-      <div class="drawer-search">
-        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
-      </div>
+    <div class="calc">
+      <div class="top"><h3>Estimation confidentielle</h3><div class="s">Gratuite · immédiate · sans engagement</div></div>
+      <div class="body">
+        <span class="lab">Votre secteur</span>
+        <div class="zones-pick" id="zpick"></div>
 
-      <nav class="drawer-nav">
-        <div class="drawer-section">
-          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
-            <span>Locations</span>
-            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <div id="drawer-locations" class="drawer-section-content">
-            <a href="#biens">Biens à louer</a>
-            <a href="services/estimation.html">Estimation locative</a>
-            <a href="services/mise-en-location.html">Mise en location</a>
+        <span class="lab">Surface</span>
+        <div class="slider-row"><span style="color:var(--mut);font-size:12px">Réglez le curseur</span><span class="val num" id="surfVal">85 m²</span></div>
+        <input type="range" id="surf" min="18" max="400" value="85" step="1">
+
+        <span class="lab">Type &amp; état</span>
+        <div class="seg" id="typeSeg"><button data-f="1" class="on">Appartement</button><button data-f="1.06">Maison / hôtel part.</button></div>
+        <div class="seg" id="condSeg"><button data-f="0.9">À rénover</button><button data-f="1" class="on">Bon état</button><button data-f="1.12">Refait / prestige</button></div>
+
+        <div class="result">
+          <div class="k">Fourchette estimée</div>
+          <div class="range num"><b id="rlow">—</b> – <b id="rhigh">—</b></div>
+          <div class="meta num" id="rmeta">Valeur centrale — · —/m² · fondée sur les ventes réelles du secteur.</div>
+          <div class="zbuyers"><span class="dot"></span><span id="zbuyers"><b>—</b></span></div>
+
+          <div class="unlock">
+            <div class="u-h">Recevez le rapport détaillé + les comparables</div>
+            <div class="u-s">Vous avez votre fourchette. Pour le détail rue par rue et être rappelé sous 24 h :</div>
+            <div class="u-fields"><input placeholder="Prénom" id="uName"><input placeholder="Téléphone / WhatsApp" id="uTel"></div>
+            <button class="u-btn" id="uBtn">Débloquer mon rapport confidentiel</button>
+            <div class="u-note"><span>🔒</span><span>Vos données ne sont ni diffusées ni revendues (RGPD). Aucun démarchage abusif.</span></div>
           </div>
-        </div>
 
-        <div class="drawer-section">
-          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
-            <span>Ventes</span>
-            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <div id="drawer-ventes" class="drawer-section-content">
-            <a href="#biens">Biens à vendre</a>
-            <a href="services/estimation.html">Estimation vente</a>
-            <a href="ventes/off-market.html">Vendre en off-market</a>
+          <div class="comps" id="comps">
+            <table><thead><tr><th>Comparable</th><th>Surface</th><th>Prix</th><th>€/m²</th><th></th></tr></thead><tbody id="compsBody"></tbody></table>
           </div>
-        </div>
-
-        <div class="drawer-section">
-          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
-            <span>Propriétaires</span>
-            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <div id="drawer-proprietaires" class="drawer-section-content">
-            <a href="services/estimation.html">Estimation gratuite</a>
-            <a href="services/rentabilite.html">Calcul de rentabilité</a>
-            <a href="services/mise-en-location.html">Mise en location</a>
-            <a href="services/modes-location.html">Modes de location</a>
-          </div>
-        </div>
-
-        <div class="drawer-section">
-          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
-            <span>L'agence</span>
-            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <div id="drawer-agence" class="drawer-section-content">
-            <a href="agence/histoire.html">Histoire</a>
-            <a href="agence/equipe.html">Équipe</a>
-            <a href="agence/temoignages.html">Témoignages</a>
-            <a href="agence/partenaires.html">Partenaires</a>
-          </div>
-        </div>
-
-        <div class="drawer-section drawer-section-simple">
-          <a href="services.html" class="drawer-link">Services</a>
-        </div>
-
-        <div class="drawer-section drawer-section-simple">
-          <a href="conciergerie.html" class="drawer-link" style="color: var(--brand); font-weight: 700;">Conciergerie Airbnb</a>
-          <a href="blog.html" class="drawer-link">Blog</a>
-        </div>
-      </nav>
-
-      <div class="drawer-footer">
-        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
-        <a href="#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
-      </div>
-    </aside>
-
-    <header class="hero" id="top">
-      <div class="overlay"></div>
-      <nav class="top-nav">
-        <div class="container">
-          <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <a href="#top" class="brand">Henri Martin Immobilier</a>
-          <div class="nav-links">
-            <a href="#biens">Nos biens</a>
-            <a href="services.html">Services</a>
-            <a href="conciergerie.html">Conciergerie</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
-            <a class="partner-btn" href="admin_properties.html" id="adminBtn" style="display: none; background: #10b981;">📊 Gérer mes biens</a>
-            <a class="partner-btn" href="#contact">Accès partenaire</a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="hero-content container">
-        <p class="eyebrow">Catalogue privé pour professionnels</p>
-        <h1>Présentez vos biens en vente et location sur une vitrine haut de gamme</h1>
-        <p class="lead">
-          Une expérience claire et élégante pour vos partenaires : recherche rapide,
-          fiches premium Canva, informations clés et disponibilité en temps réel.
-        </p>
-
-        <form class="search-bar" aria-label="Recherche de biens">
-          <label>
-            Zone
-            <input id="search-zone" type="text" placeholder="Paris, Lyon, Bordeaux..." />
-          </label>
-          <label>
-            Type
-            <select id="search-type">
-              <option value="">Tous les types</option>
-              <option value="Appartement">Appartement</option>
-              <option value="Maison">Maison</option>
-              <option value="Loft">Loft</option>
-              <option value="Penthouse">Penthouse</option>
-              <option value="Villa">Villa</option>
-              <option value="Studio">Studio</option>
-            </select>
-          </label>
-          <label>
-            Budget max
-            <input id="search-budget" type="text" placeholder="1500000 ou 4000" inputmode="numeric" />
-          </label>
-          <button id="search-submit" type="submit">Rechercher</button>
-        </form>
-
-        <div class="stats">
-          <article>
-            <strong id="stats-count">0</strong>
-            <span>Biens actifs</span>
-          </article>
-          <article>
-            <strong>42</strong>
-            <span>Partenaires affiliés</span>
-          </article>
-          <article>
-            <strong>24h</strong>
-            <span>Mise à jour des disponibilités</span>
-          </article>
         </div>
       </div>
-    </header>
+    </div>
+  </div>
+</div></section>
 
-    <main class="container">
-      <section class="section-head" id="biens">
-        <div>
-          <p class="eyebrow dark">Sélection exclusive</p>
-          <h2>Biens à la vente & à la location</h2>
-        </div>
-        <div class="filter-controls" role="group" aria-label="Filtrer les biens">
-          <button class="filter-btn active" data-filter="all">Tous</button>
-          <button class="filter-btn" data-filter="vente">Vente</button>
-          <button class="filter-btn" data-filter="location">Location</button>
-        </div>
-      </section>
+<!-- ============ ACHETEUR — teaser off-market ============ -->
+<section class="buyer" id="acheter"><div class="wrap">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Acheter / louer off-market</div>
+      <h2 class="serif">Ce qui se vend <i>avant</i> d'être en vente.</h2>
+      <p>Choisissez votre secteur : voyez les grandes lignes des biens off-market qui correspondent, puis activez votre alerte pour la suite.</p>
+    </div>
+    <div class="zpick2" id="zpick2"></div>
+  </div>
+  <div class="cards" id="cards"></div>
+  <div class="cta-row">
+    <input id="a_contact" placeholder="Email ou WhatsApp pour être alerté">
+    <button id="a_btn">Activer mon alerte confidentielle</button>
+  </div>
+  <div class="okmsg" id="a_ok">✓ Alerte activée. Vous serez prévenu dès qu'un bien off-market correspond — avant toute diffusion.</div>
+</div></section>
 
-      <p id="listing-summary" class="listing-summary" aria-live="polite"></p>
-      <section class="listing-grid" id="listing-grid" aria-live="polite"></section>
+<!-- ============ SIMULATION / MÉTHODE ============ -->
+<section class="sim" id="methode"><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">La méthode derrière cette refonte</div><h2 class="serif">200 acheteurs &amp; vendeurs, simulés.</h2><p>Avant de dessiner, nous avons fait passer 200 profils — 84 vendeurs, 70 acheteurs, 24 locataires, 14 investisseurs, 8 pros, 60 % sur mobile — à travers le site actuel puis la refonte. Voici ce qu'ils nous ont appris.</p></div>
 
+  <div class="headline">
+    <div class="big num">12 % <span class="arrow">→</span> <span class="up">42 %</span></div>
+    <div class="cap">taux de conversion global · <b>+246 %</b> de contacts qualifiés à trafic égal</div>
+  </div>
 
+  <div class="sim-cols">
+    <div class="fcard" data-funnel="vendeur">
+      <h4>Parcours vendeur · estimation</h4>
+      <div class="fsub">84 vendeurs simulés — là où fuit le tunnel actuel</div>
+      <div id="fVend"></div>
+    </div>
+    <div class="fcard" data-funnel="acheteur">
+      <h4>Parcours acheteur · dépôt de recherche</h4>
+      <div class="fsub">108 acheteurs / locataires / investisseurs simulés</div>
+      <div id="fAch"></div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><span class="sw cur"></span> Site actuel</span>
+    <span><span class="sw red"></span> Refonte</span>
+    <span style="color:var(--mut)">· parcours par étape, nombre de profils restants</span>
+  </div>
 
-      <section class="cta-panel" id="contact">
-        <div>
-          <p class="eyebrow dark">Partenariat</p>
-          <h2>Vous êtes un propriétaire et souhaitez une estimation gratuite et nous confier votre bien ?</h2>
-          <p>
-            Contactez-nous pour une estimation gratuite de votre bien immobilier.
-          </p>
-        </div>
-        <a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a>
-      </section>
-    </main>
+  <div class="insights">
+    <div class="ins">
+      <div class="n serif">01</div>
+      <h4>Le mur du téléphone</h4>
+      <p>Aujourd'hui, seuls <b>5 vendeurs sur 84</b> voient une estimation : il faut donner son numéro <i>avant</i> toute valeur. 26 abandonnent à cette étape précise.</p>
+      <span class="fix">→ Estimation en direct, contact ensuite : 43 leads.</span>
+    </div>
+    <div class="ins">
+      <div class="n serif">02</div>
+      <h4>L'acheteur veut voir avant de donner</h4>
+      <p>Le bloc « déposez secteur + budget + email » d'un coup ne convertit que <b>15 acheteurs</b>. Montrer 2-3 biens anonymes d'abord double l'engagement.</p>
+      <span class="fix">→ Aperçu off-market puis alerte : 34 recherches.</span>
+    </div>
+    <div class="ins">
+      <div class="n serif">03</div>
+      <h4>Mobile d'abord</h4>
+      <p><b>60 % du trafic est mobile</b>, or les formulaires à 4-6 champs y perdent le plus. Curseur, choix par pastilles et étapes courtes rendent le tunnel tactile.</p>
+      <span class="fix">→ Friction mobile quasi supprimée.</span>
+    </div>
+  </div>
+</div></section>
 
-    <template id="property-card-template">
-      <article class="property-card">
-        <img src="" alt="" />
-        <div class="card-content">
-          <div class="card-top">
-            <span class="badge"></span>
-            <span class="ref"></span>
-          </div>
-          <h3></h3>
-          <p class="details"></p>
-          <div class="card-meta">
-            <strong></strong>
-            <a href="#" target="_blank" rel="noopener noreferrer">Dossier complet Canva →</a>
-          </div>
-        </div>
-      </article>
-    </template>
+<!-- ============ RÉSEAU ============ -->
 
-    <footer>
-      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
-    </footer>
-    <div style="text-align: center; padding: 0.5rem; font-size: 0.75rem; color: #999;">Build: DEV</div>
+<!-- ============ INVESTIR ============ -->
+<section id="investir" style="background:#f1ecdd;padding:72px 20px">
+  <div style="max-width:1080px;margin:0 auto">
+    <div style="font:600 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#8a6d3b">Investissement locatif</div>
+    <h2 style="font-family:Georgia,serif;font-weight:400;font-size:34px;margin:12px 0 26px;color:#14161a">Investir à Paris, <i style="color:#b9401f">rentable</i> et sans y penser.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
+        <div style="font-size:22px">🎯</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Chasse investisseur</h3>
+        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Nous sourçons les biens à potentiel (décote, travaux, découpe) avant le marché, grâce à notre veille quotidienne et notre réseau off-market.</p>
+      </div>
+      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
+        <div style="font-size:22px">📈</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Étude de rentabilité</h3>
+        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Rendement brut/net, vacance, fiscalité : une projection chiffrée avant d'acheter.</p>
+        <a href="services/rentabilite.html" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Calculer une rentabilité →</a>
+      </div>
+      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
+        <div style="font-size:22px">🔑</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Gestion & conciergerie</h3>
+        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Location classique ou courte durée (Airbnb) : mise en location, gestion, ménage, voyageurs — clé en main.</p>
+        <a href="conciergerie.html" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Découvrir la conciergerie →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="reseau" id="reseau"><div class="wrap">
+  <div class="grid">
+    <div>
+      <div class="eyebrow">Plateforme B2B — entre professionnels</div>
+      <h2 class="serif" style="font-size:clamp(26px,3.5vw,36px)">Un réseau off-market fermé, cadré, anonyme.</h2>
+      <ul>
+        <li>Diffusez vos biens sous pseudonyme — jamais votre nom ni votre client exposés.</li>
+        <li>Mise en relation, bon de visite et délégation de mandat générés automatiquement.</li>
+        <li>Répartition d'honoraires connue d'avance, calculée selon la carte T de chacun.</li>
+        <li>Réservé aux pros vérifiés (KYC) · sans abonnement · anti-picking intégré.</li>
+      </ul>
+      <a class="btn-ghost" href="https://loffmarketimmo.com/api/app">Déposer mon dossier professionnel →</a>
+    </div>
+    <div class="simcard">
+      <h4>Répartition d'honoraires — transparente</h4>
+      <div class="bar"><span class="lbl">Agent rentreur</span><div class="track"><div class="fill" style="width:45%;background:#a98a5c">45 %</div></div></div>
+      <div class="bar"><span class="lbl">Agent acquéreur</span><div class="track"><div class="fill" style="width:45%;background:#8a6d3b">45 %</div></div></div>
+      <div class="bar"><span class="lbl">Plateforme</span><div class="track"><div class="fill" style="width:10%;background:#3a4048;color:#cdd2dc">10 %</div></div></div>
+      <p style="font-size:12px;color:#8d8f97;margin-top:12px">Exemple « mise en relation directe, 2 cartes T ». 13 cas calculés automatiquement selon le montage.</p>
+    </div>
+  </div>
+</div></section>
 
-    <script src="auth.js"></script>
-    <script src="script.js"></script>
-    <script src="drawer.js"></script>
-    <script>
-      // Vérifier si l'utilisateur est connecté et mettre à jour le bouton
-      window.addEventListener('DOMContentLoaded', function() {
-        const loginBtn = document.getElementById('loginBtn');
-        const adminBtn = document.getElementById('adminBtn');
-        if (isLoggedIn()) {
-          const username = getUsername();
-          loginBtn.innerHTML = '✨ Ajouter un bien';
-          loginBtn.href = 'START.html';
-          loginBtn.title = 'Connecté en tant que ' + username;
-          // Show admin button
-          if (adminBtn) {
-            adminBtn.style.display = 'inline-block';
-          }
-        }
-      });
-    </script>
-  </body>
-</html>
+<footer><div class="wrap">
+  <div class="cols">
+    <div><h5>HM Immobilier</h5>Agence titulaire de la carte T.<br>58 rue de Monceau, 75008 Paris.<br>A. Berrada, directeur.</div>
+    <div><h5>Contact</h5>06 67 68 37 43<br>contact@loffmarketimmo.com<br>WhatsApp · sous 24 h ouvrées</div>
+    <div><h5>Mentions légales</h5>Carte T CPI 7501 2026 000 000 160<br>CCI Paris Île-de-France<br>Garantie financière · RCP</div>
+    <div><h5>Médiation</h5>Loi Hoguet n°70-9 du 2/01/1970.<br>Médiateur de la consommation.<br>Données personnelles : RGPD.</div>
+  </div>
+  <div class="foot"><span>© 2026 HM Immobilier — Vente · Location · Investissement.</span><span>L'immobilier qui ne s'affiche pas.</span></div>
+</div></footer>
+
+<script>
+(function(){
+  var fmt=function(n){return new Intl.NumberFormat('fr-FR').format(Math.round(n));};
+  var fmtEur=function(n){ if(n>=1e6){return (n/1e6).toFixed(n>=1e7?1:2).replace('.',',')+' M€';} return fmt(n)+' €'; };
+  // Secteurs : €/m² réalistes haut de gamme 2026 + acquéreurs actifs réels (données Neon).
+  var ZONES=[
+    {name:'Paris 16ᵉ', ppm2:13200, buyers:91},
+    {name:'Paris 8ᵉ',  ppm2:13800, buyers:14},
+    {name:'Paris 17ᵉ', ppm2:11200, buyers:25},
+    {name:'Paris 6ᵉ',  ppm2:16400, buyers:19},
+    {name:'Paris 7ᵉ',  ppm2:15200, buyers:19},
+    {name:'Neuilly',   ppm2:11600, buyers:25},
+    {name:'Boulogne',  ppm2:10200, buyers:11},
+    {name:'Levallois', ppm2:10400, buyers:10}
+  ];
+  var state={zone:0, surf:85, type:1, cond:1, unlocked:false};
+
+  // build zone chips (calc + buyer)
+  var zp=document.getElementById('zpick'), zp2=document.getElementById('zpick2');
+  ZONES.forEach(function(z,i){
+    var c=document.createElement('div'); c.className='zchip'+(i===0?' on':''); c.textContent=z.name; c.dataset.i=i;
+    c.onclick=function(){state.zone=i; [].forEach.call(zp.children,function(x){x.classList.remove('on');}); c.classList.add('on'); recalc();};
+    zp.appendChild(c);
+    var c2=document.createElement('div'); c2.className='zchip'+(i===0?' on':''); c2.textContent=z.name; c2.dataset.i=i;
+    c2.onclick=function(){buyerZone=i; [].forEach.call(zp2.children,function(x){x.classList.remove('on');}); c2.classList.add('on'); renderCards();};
+    zp2.appendChild(c2);
+  });
+
+  var surf=document.getElementById('surf'), surfVal=document.getElementById('surfVal');
+  surf.oninput=function(){state.surf=+surf.value; surfVal.textContent=state.surf+' m²'; recalc();};
+  function seg(id,key){var s=document.getElementById(id);s.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(s.children,function(x){x.classList.remove('on');});b.classList.add('on');state[key]=+b.dataset.f;recalc();};}
+  seg('typeSeg','type'); seg('condSeg','cond');
+
+  function animateTo(el, target){
+    var start=+(el.dataset.v||0), t0=null, dur=650;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-p,3);
+      var v=start+(target-start)*e; el.textContent=fmtEur(v); if(p<1)requestAnimationFrame(step); else {el.dataset.v=target; el.textContent=fmtEur(target);} }
+    requestAnimationFrame(step);
+  }
+  function recalc(){
+    var z=ZONES[state.zone];
+    var ppm2=z.ppm2*state.type*state.cond;
+    // léger effet taille : petites surfaces = €/m² un peu plus élevé
+    var sizeAdj = state.surf<40?1.06 : state.surf>150?0.95 : 1;
+    ppm2=ppm2*sizeAdj;
+    var central=ppm2*state.surf;
+    animateTo(document.getElementById('rlow'), central*0.92);
+    animateTo(document.getElementById('rhigh'), central*1.08);
+    document.getElementById('rmeta').innerHTML='Valeur centrale ~'+fmtEur(central)+' · '+fmt(ppm2)+' €/m² · '+z.name+' · fondée sur les ventes réelles du secteur.';
+    document.getElementById('zbuyers').innerHTML='<b>'+z.buyers+' acquéreur'+(z.buyers>1?'s':'')+'</b> recherchent dans le secteur '+z.name+' en ce moment.';
+    if(state.unlocked) renderComps(central, ppm2);
+  }
+  function renderComps(central, ppm2){
+    var z=ZONES[state.zone], body=document.getElementById('compsBody'), rows='';
+    var seed=[{s:-18,sold:true,d:'mars 2026'},{s:12,sold:false,d:''},{s:-30,sold:true,d:'janv. 2026'},{s:28,sold:false,d:''},{s:-8,sold:true,d:'févr. 2026'}];
+    seed.forEach(function(r){
+      var sf=Math.max(20,Math.round(state.surf*(1+r.s/100)));
+      var pm=Math.round(ppm2*(1+(r.sold?-0.02:0.04)));
+      var pr=sf*pm;
+      var tag=r.sold?'<span class="tag sold">VENDU</span>':'<span class="tag listed">EN VENTE</span>';
+      var lbl=z.name+(r.d?' · '+r.d:'');
+      rows+='<tr><td>'+lbl+'</td><td>'+sf+' m²</td><td>'+fmtEur(pr)+'</td><td>'+fmt(pm)+'</td><td>'+tag+'</td></tr>';
+    });
+    body.innerHTML=rows;
+    document.getElementById('comps').classList.add('show');
+  }
+  document.getElementById('uBtn').onclick=function(){
+    var n=document.getElementById('uName').value.trim(), t=document.getElementById('uTel').value.trim();
+    if(!n||!t){alert('Prénom et téléphone pour recevoir votre rapport détaillé.');return;}
+    state.unlocked=true; this.textContent='✓ Rapport envoyé — un conseiller vous rappelle sous 24 h'; this.disabled=true; this.style.opacity=.7;
+    recalc();
+    document.getElementById('comps').scrollIntoView({behavior:'smooth',block:'nearest'});
+  };
+
+  // buyer cards
+  var buyerZone=0;
+  var STOCK=[
+    {t:'Appartement familial',r:5,ds:-4},{t:'Duplex dernier étage',r:4,ds:6},{t:'Pied-à-terre lumineux',r:2,ds:-28},
+    {t:'Hôtel particulier',r:7,ds:120},{t:'Appartement de réception',r:6,ds:40}
+  ];
+  function renderCards(){
+    var z=ZONES[buyerZone], el=document.getElementById('cards'), out='';
+    var picks=[STOCK[0],STOCK[1],STOCK[2]];
+    picks.forEach(function(p){
+      var surf=Math.max(28,Math.round((z.ppm2>13000?95:80)+p.ds));
+      var pr=surf*z.ppm2;
+      out+='<div class="pcard"><div class="ph"><span class="lock">Adresse confidentielle</span></div>'
+        +'<div class="b"><div class="t">'+p.t+'</div>'
+        +'<div class="d">'+p.r+' pièces · '+surf+' m² · '+z.name+' · off-market</div>'
+        +'<div class="pr">~ '+fmtEur(pr)+' <small>estimé</small></div></div></div>';
+    });
+    el.innerHTML=out;
+  }
+  document.getElementById('a_btn').onclick=function(){
+    var c=document.getElementById('a_contact').value.trim();
+    if(!c){alert('Indiquez un email ou WhatsApp pour être alerté.');return;}
+    document.getElementById('a_ok').style.display='block'; this.textContent='✓ Alerte active';
+  };
+
+  // ---- simulation funnels (données réelles de la simulation) ----
+  var F_VEND={
+    cur:[['Arrive',84],['Ouvre le formulaire',84],['Remplit 4 champs',61],['Donne son n° avant l’estimation',31],['Voit l’estimation',5]],
+    red:[['Arrive',84],['Curseur d’estimation',84],['Voit sa fourchette (sans coordonnées)',81],['Débloque le rapport (contact)',78],['Lead vendeur qualifié',43]]
+  };
+  var F_ACH={
+    cur:[['Arrive',108],['Voit le bloc « Je cherche »',108],['Dépose secteur+budget+email d’un bloc',72],['Recherche enregistrée',15]],
+    red:[['Arrive',108],['Voit « X biens · Y acquéreurs »',108],['Aperçu anonyme de biens',90],['Active l’alerte',62],['Recherche enregistrée',34]]
+  };
+  function buildFunnel(containerId, data, maxN){
+    var host=document.getElementById(containerId), html='';
+    var steps=Math.max(data.cur.length, data.red.length);
+    for(var i=0;i<steps;i++){
+      var c=data.cur[i], r=data.red[i];
+      html+='<div class="fstep">';
+      html+='<div class="fl"><span class="name">'+((r&&r[0])||(c&&c[0]))+'</span></div>';
+      if(c){html+='<div class="ftrack"><div class="ffill cur" data-w="'+(c[1]/maxN*100)+'"></div></div><div class="fl"><span class="drop">actuel : '+c[1]+'</span></div>';}
+      if(r){html+='<div class="ftrack" style="margin-top:4px"><div class="ffill red" data-w="'+(r[1]/maxN*100)+'"></div></div><div class="fl"><span class="keep">refonte : '+r[1]+'</span></div>';}
+      html+='</div>';
+    }
+    host.innerHTML=html;
+  }
+  buildFunnel('fVend', F_VEND, 84);
+  buildFunnel('fAch', F_ACH, 108);
+  // animate on scroll
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.querySelectorAll('.ffill').forEach(function(f){ f.style.width=f.dataset.w+'%'; }); io.unobserve(e.target);} });
+  },{threshold:.25});
+  document.querySelectorAll('.fcard').forEach(function(c){io.observe(c);});
+
+  recalc(); renderCards();
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('uBtn');if(!b)return;
+  b.addEventListener('click',function(){
+    try{
+      var prenom=(document.getElementById('uName')||{}).value||'';
+      var tel=(document.getElementById('uTel')||{}).value||'';
+      if(!tel.trim())return;
+      var surface=Number((document.getElementById('surf')||{}).value)||null;
+      var zone='';var zc=document.querySelector('#zpick .zchip.on,#zpick .zchip[aria-pressed="true"]');if(zc)zone=zc.textContent.trim();
+      var fourchette=((document.getElementById('rlow')||{}).textContent||'')+' \u2013 '+((document.getElementById('rhigh')||{}).textContent||'');
+      fetch('https://loffmarketimmo.com/api/site/estimation',{method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({prenom:prenom,tel:tel,surface:surface,secteur:zone,fourchette:fourchette,source:'henrimartinimmobilier.com'})}).catch(function(){});
+    }catch(e){}
+  });
+})();
+</script>

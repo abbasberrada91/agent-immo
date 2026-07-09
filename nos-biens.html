@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Henri Martin Immobilier | Vente & Location Premium</title>
+    <meta
+      name="description"
+      content="Catalogue partenaire de biens à la vente et à la location, inspiré des vitrines premium immobilières."
+    />
+    <link rel="canonical" href="https://henrimartinimmobilier.com/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="drawer.css" />
+  </head>
+  <body>
+    <!-- Mobile Drawer Menu -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <span class="drawer-brand">Henri Martin Immobilier</span>
+        <button id="drawer-close" class="drawer-close" aria-label="Fermer le menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-search">
+        <input type="search" placeholder="Rechercher sur le site..." aria-label="Rechercher sur le site" />
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-locations">
+            <span>Locations</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-locations" class="drawer-section-content">
+            <a href="#biens">Biens à louer</a>
+            <a href="services/estimation.html">Estimation locative</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-ventes">
+            <span>Ventes</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-ventes" class="drawer-section-content">
+            <a href="#biens">Biens à vendre</a>
+            <a href="services/estimation.html">Estimation vente</a>
+            <a href="ventes/off-market.html">Vendre en off-market</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-proprietaires">
+            <span>Propriétaires</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-proprietaires" class="drawer-section-content">
+            <a href="services/estimation.html">Estimation gratuite</a>
+            <a href="services/rentabilite.html">Calcul de rentabilité</a>
+            <a href="services/mise-en-location.html">Mise en location</a>
+            <a href="services/modes-location.html">Modes de location</a>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <button class="drawer-section-btn" aria-expanded="false" aria-controls="drawer-agence">
+            <span>L'agence</span>
+            <svg class="drawer-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="drawer-agence" class="drawer-section-content">
+            <a href="agence/histoire.html">Histoire</a>
+            <a href="agence/equipe.html">Équipe</a>
+            <a href="agence/temoignages.html">Témoignages</a>
+            <a href="agence/partenaires.html">Partenaires</a>
+          </div>
+        </div>
+
+        <div class="drawer-section drawer-section-simple">
+          <a href="services.html" class="drawer-link">Services</a>
+        </div>
+
+        <div class="drawer-section drawer-section-simple">
+          <a href="conciergerie.html" class="drawer-link" style="color: var(--brand); font-weight: 700;">Conciergerie Airbnb</a>
+          <a href="blog.html" class="drawer-link">Blog</a>
+        </div>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="drawer-btn drawer-btn-primary">Se connecter</a>
+        <a href="#contact" class="drawer-btn drawer-btn-secondary">Contact</a>
+      </div>
+    </aside>
+
+    <header class="hero" id="top">
+      <div class="overlay"></div>
+      <nav class="top-nav">
+        <div class="container">
+          <button id="burger-menu" class="burger-menu" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <a href="#top" class="brand">Henri Martin Immobilier</a>
+          <div class="nav-links">
+            <a href="#biens">Nos biens</a>
+            <a href="services.html">Services</a>
+            <a href="conciergerie.html">Conciergerie</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a class="login-btn" href="login.html" id="loginBtn">🔐 Se connecter</a>
+            <a class="partner-btn" href="admin_properties.html" id="adminBtn" style="display: none; background: #10b981;">📊 Gérer mes biens</a>
+            <a class="partner-btn" href="#contact">Accès partenaire</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hero-content container">
+        <p class="eyebrow">Catalogue privé pour professionnels</p>
+        <h1>Présentez vos biens en vente et location sur une vitrine haut de gamme</h1>
+        <p class="lead">
+          Une expérience claire et élégante pour vos partenaires : recherche rapide,
+          fiches premium Canva, informations clés et disponibilité en temps réel.
+        </p>
+
+        <form class="search-bar" aria-label="Recherche de biens">
+          <label>
+            Zone
+            <input id="search-zone" type="text" placeholder="Paris, Lyon, Bordeaux..." />
+          </label>
+          <label>
+            Type
+            <select id="search-type">
+              <option value="">Tous les types</option>
+              <option value="Appartement">Appartement</option>
+              <option value="Maison">Maison</option>
+              <option value="Loft">Loft</option>
+              <option value="Penthouse">Penthouse</option>
+              <option value="Villa">Villa</option>
+              <option value="Studio">Studio</option>
+            </select>
+          </label>
+          <label>
+            Budget max
+            <input id="search-budget" type="text" placeholder="1500000 ou 4000" inputmode="numeric" />
+          </label>
+          <button id="search-submit" type="submit">Rechercher</button>
+        </form>
+
+        <div class="stats">
+          <article>
+            <strong id="stats-count">0</strong>
+            <span>Biens actifs</span>
+          </article>
+          <article>
+            <strong>42</strong>
+            <span>Partenaires affiliés</span>
+          </article>
+          <article>
+            <strong>24h</strong>
+            <span>Mise à jour des disponibilités</span>
+          </article>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section-head" id="biens">
+        <div>
+          <p class="eyebrow dark">Sélection exclusive</p>
+          <h2>Biens à la vente & à la location</h2>
+        </div>
+        <div class="filter-controls" role="group" aria-label="Filtrer les biens">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="vente">Vente</button>
+          <button class="filter-btn" data-filter="location">Location</button>
+        </div>
+      </section>
+
+      <p id="listing-summary" class="listing-summary" aria-live="polite"></p>
+      <section class="listing-grid" id="listing-grid" aria-live="polite"></section>
+
+
+
+      <section class="cta-panel" id="contact">
+        <div>
+          <p class="eyebrow dark">Partenariat</p>
+          <h2>Vous êtes un propriétaire et souhaitez une estimation gratuite et nous confier votre bien ?</h2>
+          <p>
+            Contactez-nous pour une estimation gratuite de votre bien immobilier.
+          </p>
+        </div>
+        <a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a>
+      </section>
+    </main>
+
+    <template id="property-card-template">
+      <article class="property-card">
+        <img src="" alt="" />
+        <div class="card-content">
+          <div class="card-top">
+            <span class="badge"></span>
+            <span class="ref"></span>
+          </div>
+          <h3></h3>
+          <p class="details"></p>
+          <div class="card-meta">
+            <strong></strong>
+            <a href="#" target="_blank" rel="noopener noreferrer">Dossier complet Canva →</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <footer>
+      <p>© 2026 Henri Martin Immobilier — Plateforme partenaire immobilière</p>
+    </footer>
+    <div style="text-align: center; padding: 0.5rem; font-size: 0.75rem; color: #999;">Build: DEV</div>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="drawer.js"></script>
+    <script>
+      // Vérifier si l'utilisateur est connecté et mettre à jour le bouton
+      window.addEventListener('DOMContentLoaded', function() {
+        const loginBtn = document.getElementById('loginBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        if (isLoggedIn()) {
+          const username = getUsername();
+          loginBtn.innerHTML = '✨ Ajouter un bien';
+          loginBtn.href = 'START.html';
+          loginBtn.title = 'Connecté en tant que ' + username;
+          // Show admin button
+          if (adminBtn) {
+            adminBtn.style.display = 'inline-block';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
