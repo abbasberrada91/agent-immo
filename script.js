@@ -65,6 +65,12 @@ const renderProperties = () => {
 
     badge.textContent = property.transaction === 'vente' ? 'Vente' : 'Location';
     badge.classList.add(property.transaction === 'vente' ? 'sale' : 'rent');
+    // Bien déjà loué/vendu par l'agence : affiché comme référence, marqué indisponible.
+    if (property.status === 'loue') {
+      badge.textContent = 'Loué';
+      badge.classList.add('loue');
+      card.classList.add('is-loue');
+    }
 
     ref.textContent = `Réf. ${property.reference}`;
     title.textContent = `${property.title} — ${property.city} ${property.district}`;

@@ -1,6 +1,33 @@
 {
   "properties": [
     {
+      "reference": "HM-DT06",
+      "transaction": "location",
+      "propertyType": "Studio",
+      "title": "Studio meublé",
+      "city": "Paris 6e",
+      "district": "Luxembourg — Duguay-Trouin",
+      "surface": 27,
+      "rooms": 1,
+      "price": 1350,
+      "status": "loue",
+      "features": [
+        "Meublé",
+        "2e étage",
+        "Douche italienne",
+        "Loué par HM Immobilier — juin 2026"
+      ],
+      "image": "images/duguay-trouin-1.jpg",
+      "alt": "Séjour du studio meublé rue Duguay-Trouin, Paris 6e",
+      "brochureUrl": null,
+      "images": [
+        "images/duguay-trouin-1.jpg",
+        "images/duguay-trouin-2.jpg",
+        "images/duguay-trouin-3.jpg",
+        "images/duguay-trouin-4.jpg"
+      ]
+    },
+    {
       "reference": "VT-4012",
       "transaction": "vente",
       "propertyType": "Villa",

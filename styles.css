@@ -452,3 +452,24 @@ footer {
 .login-btn:active {
   transform: translateY(0);
 }
+
+
+/* ── Bien loué (référence : mandat conclu par l'agence) ── */
+.badge.loue { background: #8a6a3c; color: #fff; }
+.property-card.is-loue { position: relative; overflow: hidden; }
+.property-card.is-loue img { filter: saturate(0.75) brightness(0.96); }
+.property-card.is-loue::after {
+  content: "LOUÉ";
+  position: absolute;
+  top: 18px;
+  right: -36px;
+  transform: rotate(45deg);
+  background: #8a6a3c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  padding: 6px 44px;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
