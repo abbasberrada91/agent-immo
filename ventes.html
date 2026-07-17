@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Henri Martin Immobilier | Appartements à louer — off-market</title>
-<meta name="description" content="Nos appartements à louer en off-market à Paris & Ouest — secteur, loyer, surface. Photos et adresse communiquées en privé, sur demande." />
-<link rel="canonical" href="https://henrimartinimmobilier.com/location.html" />
+<title>Henri Martin Immobilier | Appartements à vendre — mandats directs</title>
+<meta name="description" content="Nos biens à la vente en mandat direct à Paris & Ouest — secteur, prix, surface. Photos, adresse et visite communiquées en privé, sur demande." />
+<link rel="canonical" href="https://henrimartinimmobilier.com/ventes.html" />
 <style>
   :root{
     --ink:#14161a; --gold:#a98a5c; --gold-2:#c9a84c; --cream:#f4f2ec; --paper:#faf8f2;
@@ -67,9 +67,8 @@
     <a class="brand" href="index.html">Henri Martin Immobilier<small>Vente · Location · Investissement</small></a>
     <nav class="nav-links">
       <a href="index.html">Accueil</a>
-      <a href="ventes.html">À vendre</a>
-      <a href="location.html" class="on">À louer</a>
-      <a href="index.html#acheter">Acheter</a>
+      <a href="ventes.html" class="on">À vendre</a>
+      <a href="location.html">À louer</a>
       <a href="index.html#reseau">Le réseau</a>
       <a href="index.html#vendre">Vendre</a>
     </nav>
@@ -79,12 +78,12 @@
 
 <section class="intro">
   <div class="wrap">
-    <p class="eyebrow">Sélection off-market · Paris &amp; Ouest</p>
-    <h1 class="serif">Nos appartements <i>à louer</i>, hors des vitrines.</h1>
-    <p class="lede">Des biens proposés à un réseau restreint, jamais publiés publiquement. Secteur, loyer et surface ci-dessous — <b>photos, adresse et visite communiquées en privé</b>, aux dossiers qualifiés.</p>
+    <p class="eyebrow">Mandats directs · Paris &amp; Ouest</p>
+    <h1 class="serif">Nos appartements <i>à vendre</i>, en mandat direct.</h1>
+    <p class="lede">Des biens que nous représentons directement, sélectionnés pour leur adresse et leur qualité. Secteur, prix et surface ci-dessous — <b>photos, adresse exacte et visite communiquées en privé</b>, aux acquéreurs qualifiés.</p>
     <div class="meta">
-      <div><b id="kpi-count">—</b>appartements disponibles</div>
-      <div><b>Off-market</b>sans diffusion publique</div>
+      <div><b id="kpi-count">—</b>biens à la vente</div>
+      <div><b>Mandat direct</b>HM Immobilier</div>
       <div><b>24 h</b>mise à jour des disponibilités</div>
     </div>
   </div>
@@ -104,9 +103,9 @@
   <div class="wrap">
     <div>
       <h3 class="serif">Un de ces biens vous intéresse ?</h3>
-      <p>Dites-nous votre recherche (secteur, budget, date) — nous vous envoyons les photos, l'adresse et un créneau de visite en privé, avant toute diffusion.</p>
+      <p>Dites-nous votre recherche (secteur, budget, projet) — nous vous envoyons les photos, l'adresse et un créneau de visite en privé.</p>
     </div>
-    <a href="mailto:contact@henrimartinimmobilier.com?subject=Recherche%20location%20off-market">Demander l'accès</a>
+    <a href="mailto:contact@henrimartinimmobilier.com?subject=Recherche%20achat%20-%20mandat%20direct">Demander l'accès</a>
   </div>
 </section>
 
@@ -114,7 +113,7 @@
 
 <script>
 (function(){
-  var API = "https://loffmarketimmo.com/api/public/locations";
+  var API = "https://loffmarketimmo.com/api/public/sales";
   var euro = function(n){ return new Intl.NumberFormat("fr-FR").format(n); };
   var grid = document.getElementById("grid");
   function card(x){
@@ -122,11 +121,10 @@
     if(x.surface) facts.push('<span><b>'+x.surface+'</b> m²</span>');
     if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> p.</span>');
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
-    if(x.meuble===true) facts.push('<span>meublé</span>');
     return '<article class="card">'
       + '<div class="type">'+(x.type||"Appartement")+'</div>'
       + '<div class="sect serif">'+(x.secteur||"Paris")+'</div>'
-      + (x.prix!=null ? '<div class="price">'+euro(x.prix)+' € <span>/ mois</span></div>' : '')
+      + (x.prix!=null ? '<div class="price">'+euro(x.prix)+' €</div>' : '')
       + (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : '')
       + '<span class="tag">Photos &amp; adresse sur demande</span>'
       + '</article>';
@@ -135,8 +133,7 @@
     var items = (j && j.items) || [];
     document.getElementById("kpi-count").textContent = items.length;
     document.getElementById("count").textContent = items.length + " bien" + (items.length>1?"s":"");
-    if(!items.length){ grid.innerHTML = '<div class="empty">Aucune location disponible pour le moment — écrivez-nous, nous vous alertons dès qu\'un bien correspond.</div>'; return; }
-    // Tri par loyer décroissant (plus beaux biens en tête)
+    if(!items.length){ grid.innerHTML = '<div class="empty">Aucun bien à la vente pour le moment — écrivez-nous, nous vous alertons dès qu\'un bien correspond.</div>'; return; }
     items.sort(function(a,b){ return (b.prix||0)-(a.prix||0); });
     grid.innerHTML = items.map(card).join("");
   }).catch(function(){
