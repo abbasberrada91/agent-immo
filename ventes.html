@@ -44,6 +44,8 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   .card{background:#fff;border:1px solid var(--line);padding:20px 20px 18px;display:flex;flex-direction:column;gap:2px;transition:border-color .15s}
   .card:hover{border-color:var(--gold)}
+  .card.has-photo{padding-top:0}
+  .card .photo{width:calc(100% + 40px);margin:0 -20px 14px;height:170px;object-fit:cover;display:block}
   .card .sect{font-family:var(--serif);font-size:21px}
   .card .type{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
   .card .price{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:10px}
@@ -51,6 +53,7 @@
   .card .facts{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:#5c564a;font-size:13.5px}
   .card .facts b{color:var(--ink);font-variant-numeric:tabular-nums}
   .card .tag{display:inline-block;margin-top:14px;font-size:11px;color:var(--mut);border-top:1px dashed var(--line);padding-top:12px}
+  .card .tag.pub{color:var(--ink);font-weight:600}
   .empty{color:var(--mut);text-align:center;padding:50px 12px;grid-column:1/-1}
   /* cta */
   .cta{background:var(--ink);color:var(--cream);margin-top:44px;padding:40px 0}
@@ -116,17 +119,24 @@
   var API = "https://loffmarketimmo.com/api/public/sales";
   var euro = function(n){ return new Intl.NumberFormat("fr-FR").format(n); };
   var grid = document.getElementById("grid");
+  var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
   function card(x){
     var facts = [];
     if(x.surface) facts.push('<span><b>'+x.surface+'</b> m²</span>');
     if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> p.</span>');
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
-    return '<article class="card">'
+    var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
+    var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="" loading="lazy">' : '';
+    var tag = hasPhotos
+      ? '<span class="tag pub">'+(x.adresse ? esc(x.adresse) : "Adresse sur demande")+'</span>'
+      : '<span class="tag">Photos &amp; adresse sur demande</span>';
+    return '<article class="card'+(hasPhotos?' has-photo':'')+'">'
+      + photo
       + '<div class="type">'+(x.type||"Appartement")+'</div>'
       + '<div class="sect serif">'+(x.secteur||"Paris")+'</div>'
       + (x.prix!=null ? '<div class="price">'+euro(x.prix)+' €</div>' : '')
       + (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : '')
-      + '<span class="tag">Photos &amp; adresse sur demande</span>'
+      + tag
       + '</article>';
   }
   fetch(API).then(function(r){ return r.json(); }).then(function(j){
@@ -134,7 +144,8 @@
     document.getElementById("kpi-count").textContent = items.length;
     document.getElementById("count").textContent = items.length + " bien" + (items.length>1?"s":"");
     if(!items.length){ grid.innerHTML = '<div class="empty">Aucun bien à la vente pour le moment — écrivez-nous, nous vous alertons dès qu\'un bien correspond.</div>'; return; }
-    items.sort(function(a,b){ return (b.prix||0)-(a.prix||0); });
+    // Tri par prix croissant (moins cher en tête)
+    items.sort(function(a,b){ return (a.prix||0)-(b.prix||0); });
     grid.innerHTML = items.map(card).join("");
   }).catch(function(){
     grid.innerHTML = '<div class="empty">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div>';
