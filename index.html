@@ -573,24 +573,58 @@
     document.getElementById('comps').scrollIntoView({behavior:'smooth',block:'nearest'});
   };
 
-  // buyer cards
+  // buyer cards — alimentées par la vraie base (plus de données fictives/formule, 24/07).
   var buyerZone=0;
-  var STOCK=[
-    {t:'Appartement familial',r:5,ds:-4},{t:'Duplex dernier étage',r:4,ds:6},{t:'Pied-à-terre lumineux',r:2,ds:-28},
-    {t:'Hôtel particulier',r:7,ds:120},{t:'Appartement de réception',r:6,ds:40}
-  ];
+  var ALL_BIENS=[]; // rempli par loadRealBiens() ; chaque item : {secteur,prix,surface,pieces,chambres,type,photos?}
+  // "Neuilly" doit matcher "Neuilly-sur-Seine" etc. (le secteur vient de Listing.city, pas normalisé).
+  function zoneMatches(secteur, zoneName){
+    var s=(secteur||'').toLowerCase(), z=zoneName.toLowerCase().replace(/[ᵉe]$/,'');
+    return s.indexOf(z)===0 || s.indexOf(z)>-1;
+  }
   function renderCards(){
-    var z=ZONES[buyerZone], el=document.getElementById('cards'), out='';
-    var picks=[STOCK[0],STOCK[1],STOCK[2]];
-    picks.forEach(function(p){
-      var surf=Math.max(28,Math.round((z.ppm2>13000?95:80)+p.ds));
-      var pr=surf*z.ppm2;
-      out+='<div class="pcard"><div class="ph"><span class="lock">Adresse confidentielle</span></div>'
-        +'<div class="b"><div class="t">'+p.t+'</div>'
-        +'<div class="d">'+p.r+' pièces · '+surf+' m² · '+z.name+' · off-market</div>'
-        +'<div class="pr">~ '+fmtEur(pr)+' <small>estimé</small></div></div></div>';
+    var z=ZONES[buyerZone], el=document.getElementById('cards');
+    if(!el) return;
+    if(!ALL_BIENS.length){ el.innerHTML='<div style="color:var(--on-dark-2);font-size:13.5px;padding:10px 0">Chargement de la sélection…</div>'; return; }
+    var picks=ALL_BIENS.filter(function(x){ return zoneMatches(x.secteur, z.name) && x.prix!=null; }).slice(0,3);
+    if(!picks.length){ el.innerHTML='<div style="color:var(--on-dark-2);font-size:13.5px;padding:10px 0">Aucun bien off-market en ce moment sur '+z.name+' — activez une alerte ci-dessous.</div>'; return; }
+    el.innerHTML = picks.map(function(p){
+      var facts=[p.surface?p.surface+' m²':null, p.pieces?p.pieces+' p.':null, p.type].filter(Boolean).join(' · ');
+      return '<div class="pcard"><div class="ph"><span class="lock">Adresse confidentielle</span></div>'
+        +'<div class="b"><div class="t">'+(p.type||'Appartement')+'</div>'
+        +'<div class="d">'+facts+' · '+(p.secteur||z.name)+' · off-market</div>'
+        +'<div class="pr">'+fmtEur(p.prix)+(p.prix<20000?'<small> / mois</small>':'')+'</div></div></div>';
+    }).join('');
+  }
+  function loadRealBiens(){
+    var euro=fmt;
+    Promise.all([
+      fetch('https://loffmarketimmo.com/api/public/locations').then(function(r){return r.json();}).catch(function(){return {items:[]};}),
+      fetch('https://loffmarketimmo.com/api/public/sales').then(function(r){return r.json();}).catch(function(){return {items:[]};})
+    ]).then(function(res){
+      var loc=(res[0]&&res[0].items||[]).map(function(x){return Object.assign({},x,{unit:' / mois'});});
+      var ven=(res[1]&&res[1].items||[]).map(function(x){return Object.assign({},x,{unit:''});});
+      ALL_BIENS = loc.concat(ven);
+      renderCards();
+      var pub=ALL_BIENS.filter(function(x){return Array.isArray(x.photos)&&x.photos.length;});
+      var off=ALL_BIENS.filter(function(x){return !(Array.isArray(x.photos)&&x.photos.length);});
+      var pubHost=document.getElementById('pubScroll'), offHost=document.getElementById('offScroll');
+      function pubCard(x){
+        return '<div class="hscard"><div class="ph" style="background-image:url(\''+x.photos[0]+'\')"></div>'
+          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
+          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--mut);font-weight:400">'+x.unit+'</span></div></div></div>';
+      }
+      function offCard(x){
+        return '<div class="hscard" style="background:var(--navy-3);border-color:rgba(201,168,76,.18)"><div class="ph lockph"><span>Adresse confidentielle</span></div>'
+          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif" style="color:#fff">'+(x.secteur||'Paris')+'</div>'
+          +'<div class="p" style="color:var(--gold-3)">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
+      }
+      if(pubHost) pubHost.innerHTML = pub.length ? pub.map(pubCard).join('') : '<div style="color:var(--mut);padding:20px">Aucun bien en publicité pour le moment — écrivez-nous.</div>';
+      if(offHost) offHost.innerHTML = off.length ? off.map(offCard).join('') : '<div style="color:var(--on-dark-2);padding:20px">Aucun bien off-market pour le moment.</div>';
+    }).catch(function(){
+      var pubHost=document.getElementById('pubScroll'), offHost=document.getElementById('offScroll');
+      if(pubHost) pubHost.innerHTML='<div style="color:var(--mut);padding:20px">Sélection momentanément indisponible.</div>';
+      if(offHost) offHost.innerHTML='<div style="color:var(--on-dark-2);padding:20px">Sélection momentanément indisponible.</div>';
     });
-    el.innerHTML=out;
   }
   document.getElementById('a_btn').onclick=function(){
     var c=document.getElementById('a_contact').value.trim();
@@ -628,7 +662,7 @@
   },{threshold:.25});
   document.querySelectorAll('.fcard').forEach(function(c){io.observe(c);});
 
-  recalc(); renderCards();
+  recalc(); renderCards(); loadRealBiens();
 })();
 </script>
 <script>
@@ -649,41 +683,6 @@
       var fn = ACTIONS[btn.dataset.t];
       if (fn) fn();
     });
-  });
-})();
-</script>
-<script>
-(function(){
-  // Deux galeries défilantes alimentées par les vraies données (pas de placeholder) :
-  // "publicité" = biens avec photos (mandatPub côté MandatRegistre), "off-market" = le reste,
-  // en vignette anonymisée (même logique de confidentialité que location.html/ventes.html).
-  var euro = function(n){ return new Intl.NumberFormat('fr-FR').format(n); };
-  Promise.all([
-    fetch('https://loffmarketimmo.com/api/public/locations').then(function(r){ return r.json(); }).catch(function(){ return {items:[]}; }),
-    fetch('https://loffmarketimmo.com/api/public/sales').then(function(r){ return r.json(); }).catch(function(){ return {items:[]}; })
-  ]).then(function(res){
-    var loc = (res[0] && res[0].items || []).map(function(x){ return Object.assign({}, x, {unit: ' / mois'}); });
-    var ven = (res[1] && res[1].items || []).map(function(x){ return Object.assign({}, x, {unit: ''}); });
-    var all = loc.concat(ven);
-    var pub = all.filter(function(x){ return Array.isArray(x.photos) && x.photos.length; });
-    var off = all.filter(function(x){ return !(Array.isArray(x.photos) && x.photos.length); });
-    var pubHost = document.getElementById('pubScroll'), offHost = document.getElementById('offScroll');
-    function pubCard(x){
-      return '<div class="hscard"><div class="ph" style="background-image:url(\''+x.photos[0]+'\')"></div>'
-        + '<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
-        + '<div class="p">'+(x.prix!=null?euro(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--mut);font-weight:400">'+x.unit+'</span></div></div></div>';
-    }
-    function offCard(x){
-      return '<div class="hscard" style="background:var(--navy-3);border-color:rgba(201,168,76,.18)"><div class="ph lockph"><span>Adresse confidentielle</span></div>'
-        + '<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif" style="color:#fff">'+(x.secteur||'Paris')+'</div>'
-        + '<div class="p" style="color:var(--gold-3)">'+(x.prix!=null?euro(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
-    }
-    if (pubHost) pubHost.innerHTML = pub.length ? pub.map(pubCard).join('') : '<div style="color:var(--mut);padding:20px">Aucun bien en publicité pour le moment — écrivez-nous.</div>';
-    if (offHost) offHost.innerHTML = off.length ? off.map(offCard).join('') : '<div style="color:var(--on-dark-2);padding:20px">Aucun bien off-market pour le moment.</div>';
-  }).catch(function(){
-    var pubHost = document.getElementById('pubScroll'), offHost = document.getElementById('offScroll');
-    if (pubHost) pubHost.innerHTML = '<div style="color:var(--mut);padding:20px">Sélection momentanément indisponible.</div>';
-    if (offHost) offHost.innerHTML = '<div style="color:var(--on-dark-2);padding:20px">Sélection momentanément indisponible.</div>';
   });
 })();
 </script>
