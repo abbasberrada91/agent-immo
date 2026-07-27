@@ -50,6 +50,7 @@
   .bar h2{font-family:var(--serif);font-weight:400;font-size:20px}
   .count{color:var(--mut);font-size:13px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card-link{display:block;text-decoration:none;color:inherit}
   .card{background:#fff;border:1px solid var(--line);padding:20px 20px 18px;display:flex;flex-direction:column;gap:2px;transition:border-color .15s}
   .card:hover{border-color:var(--gold)}
   .card.has-photo{padding-top:0}
@@ -141,7 +142,7 @@
     var tag = hasPhotos
       ? '<span class="tag pub">'+(x.adresse ? esc(x.adresse) : "Adresse sur demande")+'</span>'
       : '<span class="tag">Photos &amp; adresse sur demande</span>';
-    return '<article class="card'+(hasPhotos?' has-photo':'')+'">'
+    var body = '<article class="card'+(hasPhotos?' has-photo':'')+'">'
       + photo
       + '<div class="type">'+(x.type||"Appartement")+'</div>'
       + '<div class="sect serif">'+(x.secteur||"Paris")+'</div>'
@@ -149,6 +150,9 @@
       + (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : '')
       + tag
       + '</article>';
+    return hasPhotos && x.id
+      ? '<a class="card-link" href="https://loffmarketimmo.com/bien/'+encodeURIComponent(x.id)+'">'+body+'</a>'
+      : body;
   }
   function fetchWithTimeout(url, ms){
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
