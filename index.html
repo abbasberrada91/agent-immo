@@ -651,7 +651,14 @@
     red:[['Arrive',108],['Voit « X biens · Y acquéreurs »',108],['Aperçu anonyme de biens',90],['Active l’alerte',62],['Recherche enregistrée',34]]
   };
   function buildFunnel(containerId, data, maxN){
-    var host=document.getElementById(containerId), html='';
+    var host=document.getElementById(containerId);
+    // Conteneur absent de la page (ex. #fVend/#fAch jamais ajoutés au HTML) → sortie
+    // silencieuse au lieu de planter : une exception non attrapée ici arrêtait TOUT le
+    // script restant, empêchant loadRealBiens() de s'exécuter — donc "Chargement…" figé
+    // pour toujours sur toute la page, sans rapport avec le réseau (remonté 27/07, trouvé
+    // via la console : "Cannot set properties of null (setting 'innerHTML') at buildFunnel").
+    if(!host)return;
+    var html='';
     var steps=Math.max(data.cur.length, data.red.length);
     for(var i=0;i<steps;i++){
       var c=data.cur[i], r=data.red[i];
