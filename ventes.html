@@ -139,7 +139,12 @@
       + tag
       + '</article>';
   }
-  fetch(API).then(function(r){ return r.json(); }).then(function(j){
+  function fetchWithTimeout(url, ms){
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
+    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
+  }
+  fetchWithTimeout(API,8000).then(function(r){ return r.json(); }).then(function(j){
     var items = (j && j.items) || [];
     document.getElementById("kpi-count").textContent = items.length;
     document.getElementById("count").textContent = items.length + " bien" + (items.length>1?"s":"");

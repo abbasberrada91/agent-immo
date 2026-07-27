@@ -595,11 +595,20 @@
         +'<div class="pr">'+fmtEur(p.prix)+(p.prix<20000?'<small> / mois</small>':'')+'</div></div></div>';
     }).join('');
   }
+  // fetch() n'a pas de timeout natif — sur un réseau qui bloque/ignore silencieusement la
+  // requête (proxy d'entreprise, wifi capricieux...), la promesse ne se règle JAMAIS, donc
+  // Promise.all ci-dessous restait bloqué indéfiniment et les sections gardaient "Chargement…"
+  // pour toujours, sans jamais atteindre le .catch() (remonté 27/07 : "je ne vois rien").
+  function fetchWithTimeout(url, ms){
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
+    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
+  }
   function loadRealBiens(){
     var euro=fmt;
     Promise.all([
-      fetch('https://loffmarketimmo.com/api/public/locations').then(function(r){return r.json();}).catch(function(){return {items:[]};}),
-      fetch('https://loffmarketimmo.com/api/public/sales').then(function(r){return r.json();}).catch(function(){return {items:[]};})
+      fetchWithTimeout('https://loffmarketimmo.com/api/public/locations',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
+      fetchWithTimeout('https://loffmarketimmo.com/api/public/sales',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
     ]).then(function(res){
       var loc=(res[0]&&res[0].items||[]).map(function(x){return Object.assign({},x,{unit:' / mois'});});
       var ven=(res[1]&&res[1].items||[]).map(function(x){return Object.assign({},x,{unit:''});});
