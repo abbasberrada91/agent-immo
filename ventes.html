@@ -6,6 +6,14 @@
 <title>Henri Martin Immobilier | Appartements à vendre — mandats directs</title>
 <meta name="description" content="Nos biens à la vente en mandat direct à Paris & Ouest — secteur, prix, surface. Photos, adresse et visite communiquées en privé, sur demande." />
 <link rel="canonical" href="https://henrimartinimmobilier.com/ventes.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Henri Martin Immobilier | Appartements à vendre — mandats directs" />
+<meta property="og:description" content="Nos biens à la vente en mandat direct à Paris & Ouest — secteur, prix, surface. Photos, adresse et visite communiquées en privé, sur demande." />
+<meta property="og:url" content="https://henrimartinimmobilier.com/ventes.html" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Henri Martin Immobilier | Appartements à vendre — mandats directs" />
+<meta name="twitter:description" content="Nos biens à la vente en mandat direct à Paris & Ouest — secteur, prix, surface." />
 <style>
   :root{
     --ink:#14161a; --gold:#a98a5c; --gold-2:#c9a84c; --cream:#f4f2ec; --paper:#faf8f2;
@@ -126,7 +134,8 @@
     if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> p.</span>');
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
     var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
-    var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="" loading="lazy">' : '';
+    var altTxt = esc((x.adresse || (x.secteur||"Paris")) + " — " + (x.type||"Appartement") + " à vendre" + (x.surface?(" "+x.surface+" m²"):""));
+    var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">' : '';
     var tag = hasPhotos
       ? '<span class="tag pub">'+(x.adresse ? esc(x.adresse) : "Adresse sur demande")+'</span>'
       : '<span class="tag">Photos &amp; adresse sur demande</span>';

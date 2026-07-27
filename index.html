@@ -1,5 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Henri Martin Immobilier | Vente · Location · Investissement — Estimation gratuite à Paris</title>
 <meta name="description" content="Henri Martin Immobilier, agence carte T à Paris : vente, location, investissement locatif et conciergerie. Estimation gratuite immédiate fondée sur les ventes réelles de votre rue.">
+<link rel="canonical" href="https://henrimartinimmobilier.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Henri Martin Immobilier | Vente · Location · Investissement — Estimation gratuite à Paris">
+<meta property="og:description" content="Agence carte T à Paris : vente, location, investissement locatif et conciergerie. Estimation gratuite immédiate fondée sur les ventes réelles de votre rue.">
+<meta property="og:url" content="https://henrimartinimmobilier.com/">
+<meta property="og:image" content="https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1200">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Henri Martin Immobilier | Vente · Location · Investissement">
+<meta name="twitter:description" content="Estimation gratuite et immédiate, vente, location, investissement locatif et conciergerie à Paris.">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1200">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Henri Martin Immobilier",
+  "url": "https://henrimartinimmobilier.com/",
+  "telephone": "+33667683743",
+  "email": "contact@henrimartinimmobilier.com",
+  "areaServed": {"@type": "City", "name": "Paris"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR"},
+  "makesOffer": [
+    {"@type": "Offer", "name": "Vente immobilière"},
+    {"@type": "Offer", "name": "Location immobilière"},
+    {"@type": "Offer", "name": "Investissement locatif"},
+    {"@type": "Offer", "name": "Conciergerie"}
+  ]
+}
+</script>
 <style>
   :root{
     --navy:#0b1220; --navy-2:#0e1626; --navy-3:#131d31; --ink:#14161a;
@@ -287,6 +321,8 @@
   .hs-go{padding:16px;justify-content:center}
 }
 </style>
+</head>
+<body>
 
 <!-- demo-tag retiré (résidu artifact) -->
 
@@ -544,10 +580,11 @@
   var body=document.getElementById('bModalBody');
   var closeBtn=document.getElementById('bModalClose');
   if(!modal||!body)return;
-  var curPhotos=[], curIdx=0;
+  var curPhotos=[], curIdx=0, curLabel='';
   function fmtN(n){ try{return Number(n).toLocaleString('fr-FR');}catch(e){return n;} }
+  function escAttr(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
   function renderGallery(){
-    var imgs=curPhotos.map(function(u,i){return '<img src="'+u+'" class="'+(i===curIdx?'on':'')+'" alt="">';}).join('');
+    var imgs=curPhotos.map(function(u,i){return '<img src="'+u+'" class="'+(i===curIdx?'on':'')+'" alt="'+escAttr((curLabel||'Bien')+' — photo '+(i+1)+'/'+curPhotos.length)+'">';}).join('');
     var nav = curPhotos.length>1 ? '<button class="gnav prev" id="gPrev" aria-label="Précédent">‹</button><button class="gnav next" id="gNext" aria-label="Suivant">›</button><div class="gcount">'+(curIdx+1)+'/'+curPhotos.length+'</div>' : '';
     return '<div class="gallery">'+imgs+nav+'</div>';
   }
@@ -578,7 +615,7 @@
     document.body.style.overflow='hidden';
     fetch('https://loffmarketimmo.com/api/public/bien/'+encodeURIComponent(id)).then(function(r){return r.json();}).then(function(d){
       if(!d||!d.ok||!Array.isArray(d.photos)||!d.photos.length){body.innerHTML='<div class="load">Fiche indisponible.</div>';return;}
-      curPhotos=d.photos; curIdx=0;
+      curPhotos=d.photos; curIdx=0; curLabel=d.adresse||d.secteur||'Bien Henri Martin Immobilier';
       body.innerHTML=renderGallery()+renderInfo(d);
       bindGalleryNav();
     }).catch(function(){body.innerHTML='<div class="load">Fiche indisponible.</div>';});
@@ -812,3 +849,5 @@
   });
 })();
 </script>
+</body>
+</html>
