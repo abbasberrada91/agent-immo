@@ -212,14 +212,19 @@
   .hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .hscroll::-webkit-scrollbar{height:8px}
   .hscroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,.4)}
-  .hscard{flex:0 0 230px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);overflow:hidden}
-  .hscard .ph{height:150px;background-size:cover;background-position:center}
-  .hscard .ph.lockph{background:linear-gradient(135deg,#1b2740,#0e1626);display:flex;align-items:center;justify-content:center}
+  /* "Plein Écran" (validé Abbas 27/07, piste 2 de la maquette) : la photo EST la carte,
+     légende en surimpression sur un voile sombre — remplace l'ancien format photo+bandeau. */
+  .hscard{flex:0 0 240px;scroll-snap-align:start;position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;background:var(--navy-3)}
+  .hscard .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .hscard:hover .ph{transform:scale(1.06)}
+  .hscard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,18,32,.92) 0%,rgba(11,18,32,0) 55%);pointer-events:none}
+  .hscard .ph.lockph{position:absolute;inset:0;background:linear-gradient(135deg,#1b2740,#0e1626);display:flex;align-items:center;justify-content:center}
   .hscard .ph.lockph span{color:var(--gold-2);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,168,76,.4);padding:5px 9px}
-  .hscard .b{padding:13px 14px}
-  .hscard .t{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:700}
-  .hscard .s{font-family:var(--serif);font-size:17px;margin-top:3px}
-  .hscard .p{font-weight:700;margin-top:6px;font-size:15px}
+  .hscard .corner{position:absolute;top:14px;left:14px;z-index:2;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--cream);border:1px solid rgba(244,242,236,.5);padding:4px 9px}
+  .hscard .b{position:absolute;left:15px;right:15px;bottom:15px;z-index:2}
+  .hscard .t{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-3);font-weight:700}
+  .hscard .s{font-family:var(--serif);font-size:18px;margin-top:3px;color:var(--cream)}
+  .hscard .p{font-weight:700;margin-top:6px;font-size:16px;color:var(--cream)}
 
   footer{background:#070b14;color:#8a8271;font-size:13px;padding:56px 0 28px}
   footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
@@ -619,13 +624,15 @@
       var pubHost=document.getElementById('pubScroll'), offHost=document.getElementById('offScroll');
       function pubCard(x){
         return '<div class="hscard"><div class="ph" style="background-image:url(\''+x.photos[0]+'\')"></div>'
+          +'<div class="corner">'+(x.unit?'Location':'Vente')+'</div>'
           +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
-          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--mut);font-weight:400">'+x.unit+'</span></div></div></div>';
+          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
       }
       function offCard(x){
-        return '<div class="hscard" style="background:var(--navy-3);border-color:rgba(201,168,76,.18)"><div class="ph lockph"><span>Adresse confidentielle</span></div>'
-          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif" style="color:#fff">'+(x.secteur||'Paris')+'</div>'
-          +'<div class="p" style="color:var(--gold-3)">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
+        return '<div class="hscard"><div class="ph lockph"><span>Adresse confidentielle</span></div>'
+          +'<div class="corner">'+(x.unit?'Location':'Vente')+'</div>'
+          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
+          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
       }
       if(pubHost) pubHost.innerHTML = pub.length ? pub.map(pubCard).join('') : '<div style="color:var(--mut);padding:20px">Aucun bien en publicité pour le moment — écrivez-nous.</div>';
       if(offHost) offHost.innerHTML = off.length ? off.map(offCard).join('') : '<div style="color:var(--on-dark-2);padding:20px">Aucun bien off-market pour le moment.</div>';
