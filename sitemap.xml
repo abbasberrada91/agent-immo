@@ -6,13 +6,53 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://henrimartinimmobilier.com/location.html</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://henrimartinimmobilier.com/vendre.html</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://henrimartinimmobilier.com/ventes.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/location.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/quartiers.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/quartier-auteuil.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/quartier-passy.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/quartier-monceau.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/quartier-quinzieme.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/agence.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://henrimartinimmobilier.com/investir.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

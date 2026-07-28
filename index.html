@@ -22,10 +22,10 @@
   "@type": "RealEstateAgent",
   "name": "Henri Martin Immobilier",
   "url": "https://henrimartinimmobilier.com/",
-  "telephone": "+33667683743",
+  "telephone": "+33625226194",
   "email": "contact@henrimartinimmobilier.com",
   "areaServed": {"@type": "City", "name": "Paris"},
-  "address": {"@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR"},
+  "address": {"@type": "PostalAddress", "streetAddress": "58 rue de Monceau", "postalCode": "75008", "addressLocality": "Paris", "addressCountry": "FR"},
   "makesOffer": [
     {"@type": "Offer", "name": "Vente immobilière"},
     {"@type": "Offer", "name": "Location immobilière"},
@@ -40,7 +40,6 @@
     --gold:#a98a5c; --gold-2:#c9a84c; --gold-3:#e2c877;
     --cream:#f4f2ec; --paper:#faf8f2; --soft:#efece3; --line:#e2ddd0;
     --mut:#8d8778; --on-dark:#c7cad2; --on-dark-2:#9aa0ab;
-    --sold:#2e6a4e; --sold-bg:#e6efe8; --listed:#8a6d3b; --listed-bg:#f1ecdd;
     --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
     --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -53,292 +52,98 @@
   h1,h2,h3{font-weight:400;letter-spacing:-.01em;text-wrap:balance}
   .num{font-variant-numeric:tabular-nums}
   svg{display:block}
-  .ico{width:24px;height:24px;stroke:var(--gold-2);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-
-  /* ---- demo chrome ---- */
-  body{padding-top:31px}
-
-  /* ---- top trust bar ---- */
-  .trust{background:#070b14;color:#8f96a3;font-size:12px;border-bottom:1px solid rgba(201,168,76,.2)}
-  .trust .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;flex-wrap:wrap;gap:6px}
-  .trust b{color:#cdd2dc;font-weight:600}
 
   /* ---- header ---- */
   header{position:absolute;top:0;left:0;right:0;z-index:40;background:linear-gradient(180deg,rgba(7,11,20,.55),transparent);border-bottom:0}
   nav{display:flex;align-items:center;justify-content:space-between;padding:15px 24px;max-width:1160px;margin:0 auto}
   .brand{color:var(--cream);font-weight:700;letter-spacing:.16em;font-size:15px;text-transform:uppercase;line-height:1}
   .brand span{display:block;color:var(--gold-2);font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0;text-transform:none;margin-top:3px}
-  .nav-links{display:flex;gap:28px;align-items:center}
-  .nav-links a{color:var(--on-dark);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{color:var(--on-dark);font-size:14px;font-weight:500;transition:color .2s;text-decoration:none}
   .nav-links a:hover{color:var(--cream)}
   .nav-cta{background:var(--gold);color:var(--navy);padding:9px 18px;font-weight:700;font-size:13.5px}
   .nav-cta:hover{background:var(--gold-2)}
   @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
 
-  /* ---- hero ---- */
-  .hero{background:
-     radial-gradient(1100px 460px at 82% -10%,rgba(201,168,76,.16),transparent 58%),
-     radial-gradient(700px 400px at 0% 120%,rgba(201,168,76,.06),transparent 60%),
-     linear-gradient(180deg,#0b1220,#0d1626);color:var(--cream);overflow:hidden;position:relative}
-  .hero .wrap{padding:70px 24px 40px}
-  .hero h1{font-size:clamp(38px,6.4vw,66px);line-height:1.03;max-width:15ch}
-  .hero h1 i{color:var(--gold-2);font-style:italic}
-  .hero .lede{font-size:17.5px;color:var(--on-dark);max-width:52ch;margin:22px 0 0;line-height:1.62}
-  .hero .sig{font-size:13.5px;color:#7f8590;margin-top:14px;font-style:italic;font-family:var(--serif)}
-  /* live proof strip grounded on real data */
-  .proof{display:flex;gap:0;margin-top:34px;border:1px solid rgba(201,168,76,.24);background:rgba(244,242,236,.03)}
-  .proof .p{flex:1;padding:16px 18px;border-right:1px solid rgba(201,168,76,.16)}
-  .proof .p:last-child{border-right:0}
-  .proof .v{font-family:var(--serif);font-size:26px;color:var(--gold-3);line-height:1}
-  .proof .l{font-size:11.5px;color:var(--on-dark-2);margin-top:6px;letter-spacing:.02em}
-  @media(max-width:720px){.proof{flex-wrap:wrap}.proof .p{flex:1 1 50%;border-bottom:1px solid rgba(201,168,76,.16)}}
-
-  .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:16px}
-  .door{background:rgba(244,242,236,.04);border:1px solid rgba(201,168,76,.2);padding:22px;cursor:pointer;transition:.22s;display:block;color:inherit}
-  .door:hover{background:rgba(201,168,76,.1);border-color:var(--gold);transform:translateY(-3px)}
-  .door h3{font-size:18px;font-weight:600;margin:12px 0 5px;color:var(--cream)}
-  .door p{font-size:13px;color:var(--on-dark-2);line-height:1.5}
-  .door .go{color:var(--gold-2);font-size:12px;font-weight:700;margin-top:11px;display:inline-block;letter-spacing:.04em}
-  .door.primary{background:var(--gold);border-color:var(--gold)}
-  .door.primary h3,.door.primary .go{color:var(--navy)} .door.primary p{color:#43371f}
-  .door.primary .ico{stroke:var(--navy)}
-  @media(max-width:820px){.doors{grid-template-columns:1fr}}
-
   section{padding:76px 0}
-  .sec-head{max-width:640px;margin:0 auto 40px;text-align:center}
-  .sec-head h2{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:10px 0}
-  .sec-head p{color:var(--mut);font-size:16px}
-
-  /* ---- ESTIMATION (the centerpiece) ---- */
-  .estimate{background:var(--soft)}
-  .est-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:stretch}
-  @media(max-width:920px){.est-grid{grid-template-columns:1fr;gap:28px}}
-  .est-left h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12}
-  .est-left h2 i{color:var(--gold);font-style:italic}
-  .est-left .p{color:var(--mut);font-size:15.5px;margin-top:12px;max-width:44ch}
-  .why{margin-top:26px;display:flex;flex-direction:column;gap:16px}
-  .why .row{display:flex;gap:14px;align-items:flex-start}
-  .why .bi{flex:0 0 40px;height:40px;background:var(--navy);display:flex;align-items:center;justify-content:center}
-  .why .bi .ico{width:20px;height:20px}
-  .why h4{font-size:15.5px;font-weight:600}
-  .why p{font-size:13.5px;color:var(--mut);line-height:1.5;margin-top:2px}
-
-  .calc{background:#fff;border:1px solid var(--line);box-shadow:0 30px 70px -44px rgba(11,18,32,.6);display:flex;flex-direction:column}
-  .calc .top{background:var(--navy);color:var(--cream);padding:18px 22px}
-  .calc .top h3{font-size:18px;font-weight:600;font-family:var(--serif)}
-  .calc .top .s{font-size:12px;color:var(--on-dark-2);margin-top:2px}
-  .calc .body{padding:22px}
-  .zones-pick{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-  .zchip{border:1px solid var(--line);background:var(--paper);padding:7px 12px;font-size:12.5px;cursor:pointer;transition:.15s;font-weight:500}
-  .zchip:hover{border-color:var(--gold)}
-  .zchip.on{background:var(--navy);color:var(--cream);border-color:var(--navy)}
-  .lab{font-size:11px;color:var(--mut);font-weight:700;letter-spacing:.03em;text-transform:uppercase;display:block;margin-bottom:7px}
-  .slider-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
-  .slider-row .val{font-family:var(--serif);font-size:22px;color:var(--navy)}
-  input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:var(--line);outline:none;margin:12px 0 18px}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(169,138,92,.5)}
-  input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--gold);border:0;cursor:pointer}
-  .seg{display:flex;gap:0;border:1px solid var(--line);margin-bottom:6px}
-  .seg button{flex:1;background:#fff;border:0;padding:9px;font-size:13px;cursor:pointer;font-family:inherit;color:var(--mut);transition:.15s}
-  .seg button.on{background:var(--navy);color:var(--cream);font-weight:600}
-  /* live result */
-  .result{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
-  .result .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:700}
-  .result .range{font-family:var(--serif);font-size:clamp(26px,4.4vw,36px);color:var(--navy);line-height:1.1;margin:6px 0 3px}
-  .result .range b{color:var(--gold)}
-  .result .meta{font-size:12.5px;color:var(--mut)}
-  .result .zbuyers{margin-top:14px;background:var(--navy);color:var(--cream);padding:11px 14px;font-size:13px;display:flex;align-items:center;gap:10px}
-  .result .zbuyers .dot{width:8px;height:8px;background:#37b981;box-shadow:0 0 0 4px rgba(55,185,129,.22);flex:0 0 auto}
-  .result .zbuyers b{color:var(--gold-3)}
-  .unlock{margin-top:16px;border:1px dashed var(--gold);background:rgba(201,168,76,.06);padding:16px}
-  .unlock .u-h{font-size:14px;font-weight:700;color:var(--ink)}
-  .unlock .u-s{font-size:12.5px;color:var(--mut);margin:3px 0 12px}
-  .u-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-  .u-fields input{width:100%;padding:10px 11px;border:1px solid var(--line);background:#fff;font-size:14px;font-family:inherit}
-  .u-fields input:focus{outline:none;border-color:var(--gold)}
-  .u-btn{width:100%;background:var(--gold);color:var(--navy);border:0;padding:12px;font-weight:700;font-size:14.5px;cursor:pointer;margin-top:9px;transition:.2s}
-  .u-btn:hover{background:var(--gold-2)}
-  .u-note{font-size:11px;color:#a99f88;margin-top:9px;display:flex;gap:6px;align-items:flex-start}
-  .comps{margin-top:14px;display:none}
-  .comps.show{display:block;animation:fade .4s ease}
-  .comps table{width:100%;border-collapse:collapse;font-size:12px}
-  .comps th{text-align:left;color:var(--mut);font-weight:600;border-bottom:1px solid var(--line);padding:6px 5px}
-  .comps td{padding:6px 5px;border-bottom:1px solid var(--line)}
-  .tag{font-size:9.5px;font-weight:700;padding:2px 6px;letter-spacing:.03em}
-  .tag.sold{background:var(--sold-bg);color:var(--sold)} .tag.listed{background:var(--listed-bg);color:var(--listed)}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-  /* ---- BUYER (off-market teaser) ---- */
-  .buyer{background:var(--navy);color:var(--cream)}
-  .buyer .head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
-  .buyer h2{font-size:clamp(26px,3.6vw,38px);line-height:1.12}
-  .buyer h2 i{color:var(--gold-2);font-style:italic}
-  .buyer .head p{color:var(--on-dark-2);font-size:15px;margin-top:8px;max-width:46ch}
-  .zpick2{display:flex;gap:7px;flex-wrap:wrap}
-  .zpick2 .zchip{background:rgba(244,242,236,.05);border-color:rgba(201,168,76,.25);color:var(--on-dark)}
-  .zpick2 .zchip.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:820px){.cards{grid-template-columns:1fr}}
-  .pcard{background:var(--navy-3);border:1px solid rgba(201,168,76,.18);padding:0;overflow:hidden}
-  .pcard .ph{height:120px;background:linear-gradient(135deg,#1b2740,#0e1626);position:relative;display:flex;align-items:center;justify-content:center}
-  .pcard .ph .lock{color:var(--gold-2);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,168,76,.35);padding:5px 10px}
-  .pcard .b{padding:15px 16px}
-  .pcard .t{font-size:15px;font-weight:600;color:var(--cream)}
-  .pcard .d{font-size:12.5px;color:var(--on-dark-2);margin-top:4px}
-  .pcard .pr{font-family:var(--serif);font-size:19px;color:var(--gold-3);margin-top:10px}
-  .pcard .pr small{font-size:11px;color:var(--on-dark-2);font-family:var(--sans)}
-  .buyer .cta-row{margin-top:22px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-  .buyer .cta-row input{background:rgba(244,242,236,.06);border:1px solid rgba(201,168,76,.25);color:var(--cream);padding:12px 14px;font-size:14px;font-family:inherit;flex:1;min-width:180px}
-  .buyer .cta-row input::placeholder{color:#7d8390}
-  .buyer .cta-row button{background:var(--gold);color:var(--navy);border:0;padding:12px 22px;font-weight:700;cursor:pointer;white-space:nowrap}
-  .buyer .okmsg{color:var(--gold-3);font-size:13.5px;margin-top:12px;display:none}
-
-  /* ---- SIMULATION panel ---- */
-  .sim{background:var(--paper)}
-  .sim .headline{text-align:center;max-width:720px;margin:0 auto 12px}
-  .sim .big{font-family:var(--serif);font-size:clamp(40px,7vw,72px);color:var(--navy);line-height:1}
-  .sim .big .arrow{color:var(--gold);font-style:normal}
-  .sim .big .up{color:var(--sold)}
-  .sim .cap{color:var(--mut);font-size:15px;margin-top:10px}
-  .sim-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:38px}
-  @media(max-width:860px){.sim-cols{grid-template-columns:1fr}}
-  .fcard{background:#fff;border:1px solid var(--line);padding:22px}
-  .fcard h4{font-size:15px;font-weight:700;margin-bottom:3px}
-  .fcard .fsub{font-size:12.5px;color:var(--mut);margin-bottom:18px}
-  .fstep{margin:11px 0}
-  .fstep .fl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px}
-  .fstep .fl .name{color:var(--ink)}
-  .fstep .fl .n{color:var(--mut);font-weight:600}
-  .ftrack{height:22px;background:var(--soft);position:relative;overflow:hidden}
-  .ffill{height:100%;width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
-  .ffill.cur{background:linear-gradient(90deg,#b9401f,#d46a3c)}
-  .ffill.red{background:linear-gradient(90deg,var(--gold),var(--gold-2))}
-  .fstep .drop{font-size:11px;color:#b9401f;font-weight:600}
-  .fstep .keep{font-size:11px;color:var(--sold);font-weight:600}
-  .legend{display:flex;gap:20px;justify-content:center;margin-top:24px;font-size:12.5px;color:var(--mut);flex-wrap:wrap}
-  .legend span{display:inline-flex;align-items:center;gap:7px}
-  .sw{width:22px;height:9px}
-  .sw.cur{background:#c65330} .sw.red{background:var(--gold)}
-
-  .insights{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:820px){.insights{grid-template-columns:1fr}}
-  .ins{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);padding:20px}
-  .ins .n{font-family:var(--serif);font-size:15px;color:var(--gold);font-weight:400}
-  .ins h4{font-size:15.5px;font-weight:700;margin:8px 0 6px}
-  .ins p{font-size:13.5px;color:var(--mut);line-height:1.55}
-  .ins .fix{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:block}
-
-  /* ---- réseau ---- */
-  .reseau{background:var(--soft);border-top:1px solid var(--line)}
-  .reseau .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
-  @media(max-width:900px){.reseau .grid{grid-template-columns:1fr}}
-  .reseau ul{list-style:none;margin:16px 0}
-  .reseau li{padding:8px 0 8px 24px;position:relative;font-size:15px;color:#40392c}
-  .reseau li::before{content:"";position:absolute;left:0;top:14px;width:11px;height:1.4px;background:var(--gold)}
-  .simcard{background:var(--navy);color:var(--on-dark);padding:24px;border:1px solid rgba(201,168,76,.2)}
-  .simcard h4{color:#fff;font-size:15px;margin-bottom:14px;font-weight:600}
-  .bar{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}
-  .bar .lbl{width:112px;color:var(--on-dark-2)}
-  .bar .track{flex:1;height:19px;background:rgba(244,242,236,.08)}
-  .bar .fill{height:100%;display:flex;align-items:center;padding-left:8px;color:var(--navy);font-weight:700;font-size:11px}
-  .btn-ghost{display:inline-block;border:1px solid var(--gold);color:var(--gold-2);padding:11px 22px;font-weight:600;font-size:14px;margin-top:8px}
-
-  .hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .hscroll::-webkit-scrollbar{height:8px}
-  .hscroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,.4)}
-  /* "Plein Écran" (validé Abbas 27/07, piste 2 de la maquette) : la photo EST la carte,
-     légende en surimpression sur un voile sombre — remplace l'ancien format photo+bandeau. */
-  .hscard{flex:0 0 240px;scroll-snap-align:start;position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;background:var(--navy-3)}
-  .hscard .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  .hscard:hover .ph{transform:scale(1.06)}
-  .hscard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,18,32,.92) 0%,rgba(11,18,32,0) 55%);pointer-events:none}
-  .hscard .ph.lockph{position:absolute;inset:0;background:linear-gradient(135deg,#1b2740,#0e1626);display:flex;align-items:center;justify-content:center}
-  .hscard .ph.lockph span{color:var(--gold-2);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,168,76,.4);padding:5px 9px}
-  .hscard .corner{position:absolute;top:14px;left:14px;z-index:2;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--cream);border:1px solid rgba(244,242,236,.5);padding:4px 9px}
-  .hscard .b{position:absolute;left:15px;right:15px;bottom:15px;z-index:2}
-  .hscard .t{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold-3);font-weight:700}
-  .hscard .s{font-family:var(--serif);font-size:18px;margin-top:3px;color:var(--cream)}
-  .hscard .p{font-weight:700;margin-top:6px;font-size:16px;color:var(--cream)}
-
-  /* ---- fiche bien (modal, ouverte au clic sur une carte "avec photos") ---- */
-  .bmodal{position:fixed;inset:0;z-index:200;display:none}
-  .bmodal.on{display:block}
-  .bmodal .backdrop{position:absolute;inset:0;background:rgba(11,18,32,.86);backdrop-filter:blur(2px)}
-  .bmodal .panel{position:relative;z-index:1;max-width:900px;margin:4vh auto;background:var(--paper);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)}
-  @media(max-width:760px){.bmodal .panel{margin:0;max-height:100vh;height:100vh}}
-  .bmodal .close{position:absolute;top:16px;right:16px;z-index:3;width:36px;height:36px;background:rgba(11,18,32,.55);color:#fff;border:0;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-  .bmodal .gallery{position:relative;aspect-ratio:16/10;background:var(--navy-3);overflow:hidden}
-  .bmodal .gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
-  .bmodal .gallery img.on{opacity:1}
-  .bmodal .gnav{position:absolute;top:0;bottom:0;width:64px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#fff;font-size:26px;cursor:pointer;opacity:.7;z-index:2}
-  .bmodal .gnav:hover{opacity:1}
-  .bmodal .gnav.prev{left:0}
-  .bmodal .gnav.next{right:0}
-  .bmodal .gcount{position:absolute;bottom:14px;right:16px;z-index:2;color:#fff;font-size:11px;letter-spacing:.06em;background:rgba(11,18,32,.55);padding:4px 10px;font-variant-numeric:tabular-nums}
-  .bmodal .info{padding:30px 32px 34px}
-  .bmodal .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
-  .bmodal .loc{font-family:var(--serif);font-size:26px;margin-top:6px}
-  .bmodal .price{font-size:22px;font-weight:700;margin-top:10px}
-  .bmodal .price small{font-size:13px;color:var(--mut);font-weight:400}
-  .bmodal .facts{display:flex;gap:20px;margin-top:14px;color:#5c564a;font-size:14px;flex-wrap:wrap}
-  .bmodal .facts b{color:var(--ink);font-variant-numeric:tabular-nums}
-  .bmodal .desc{margin-top:20px;font-size:14.5px;line-height:1.7;color:#3d3a33;max-width:60ch;white-space:pre-line}
-  .bmodal .cta{margin-top:26px;display:inline-block;background:var(--ink);color:var(--cream);text-decoration:none;padding:13px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
-  .bmodal .load{padding:60px 32px;text-align:center;color:var(--mut)}
-
-  footer{background:#070b14;color:#8a8271;font-size:13px;padding:56px 0 28px}
-  footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-  @media(max-width:820px){footer .cols{grid-template-columns:1fr 1fr}}
-  footer h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
-  footer a{color:var(--gold-2)}
-  footer .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:22px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ===== Hero plein écran façon Junot / Daniel Féau ===== */
-.hero-photo{position:relative;min-height:92vh;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end}
-.hero-top{padding-top:168px;padding-bottom:40px;max-width:760px}
-.hero-top .eyebrow{color:#f1ecdd}
-.hero-top h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.12;color:#fff;margin:14px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-.hero-top h1 i{color:var(--gold-2);font-style:italic}
-.hero-top .lede{color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(0,0,0,.3)}
-.hero-top .sig{color:rgba(255,255,255,.75)}
-.hero-search{padding-bottom:34px}
-.hs-tabs{display:flex;gap:2px}
-.hs-tabs .hs-tab{background:rgba(7,11,20,.55);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:700 12px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
-.hs-tabs .hs-tab.on{background:var(--cream,#f4f2ec);color:#14161a;border-bottom-color:var(--gold-2)}
-.hs-row{display:flex;align-items:stretch;background:var(--cream,#f4f2ec);box-shadow:0 18px 50px rgba(0,0,0,.28)}
-.hs-field{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 22px;border-right:1px solid rgba(20,20,18,.1);text-decoration:none;color:inherit;min-width:0}
-.hs-field:last-of-type{border-right:0}
-.hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778}
-.hs-v{font:400 14.5px/1.3 system-ui;color:#14161a;margin-top:2px}
-.hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#14161a;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
-.hs-go:hover{background:var(--gold-2,#b9401f)}
-@media (max-width:860px){
-  .hero-top{padding-top:128px}
-  .hero-top h1{font-size:32px}
-  .hs-row{flex-direction:column}
-  .hs-field{border-right:0;border-bottom:1px solid rgba(20,20,18,.1)}
-  .hs-go{padding:16px;justify-content:center}
-}
+  /* ===== Hero plein écran ===== */
+  .hero-photo{position:relative;min-height:92vh;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end}
+  .hero-top{padding-top:168px;padding-bottom:40px;max-width:760px}
+  .hero-top .eyebrow{color:#f1ecdd}
+  .hero-top h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.12;color:#fff;margin:14px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+  .hero-top h1 i{color:var(--gold-2);font-style:italic}
+  .hero-top .lede{font-size:17.5px;color:rgba(255,255,255,.92);max-width:52ch;margin:22px 0 0;line-height:1.62;text-shadow:0 1px 12px rgba(0,0,0,.3)}
+  .hero-top .sig{font-size:13.5px;color:rgba(255,255,255,.75);margin-top:14px;font-style:italic;font-family:var(--serif)}
+  .hero-search{padding-bottom:34px}
+  .hs-tabs{display:flex;gap:2px}
+  .hs-tabs .hs-tab{background:rgba(7,11,20,.55);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:700 12px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
+  .hs-tabs .hs-tab.on{background:var(--cream,#f4f2ec);color:#14161a;border-bottom-color:var(--gold-2)}
+  .hs-row{display:flex;align-items:stretch;background:var(--cream,#f4f2ec);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+  .hs-field{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 22px;border-right:1px solid rgba(20,20,18,.1);text-decoration:none;color:inherit;min-width:0}
+  .hs-field:last-of-type{border-right:0}
+  .hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778}
+  .hs-v{font:400 14.5px/1.3 system-ui;color:#14161a;margin-top:2px}
+  .hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#14161a;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
+  .hs-go:hover{background:var(--gold-2,#b9401f)}
+  @media (max-width:860px){
+    .hero-top{padding-top:128px}
+    .hero-top h1{font-size:32px}
+    .hs-tabs{flex-wrap:wrap}
+    .hs-tabs .hs-tab{flex:1 1 auto;padding:11px 10px;font-size:11px}
+    .hs-row{flex-direction:column}
+    .hs-field{border-right:0;border-bottom:1px solid rgba(20,20,18,.1)}
+    .hs-go{padding:16px;justify-content:center}
+  }
+
+  /* ===== Nos biens — grandes cartes galerie ===== */
+  .biens{background:var(--paper);padding:72px 0 64px}
+  .biens .head{max-width:640px;margin-bottom:34px}
+  .biens h2{font-family:var(--serif);font-size:clamp(28px,3.8vw,40px);line-height:1.12;margin:10px 0 0}
+  .biens h2 i{color:var(--gold);font-style:italic}
+  .biens .sub{color:var(--mut);font-size:15.5px;margin-top:10px}
+  .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  @media(max-width:840px){.bgrid{grid-template-columns:1fr}}
+  .bcard{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);transition:border-color .2s}
+  .bcard:hover{border-color:var(--gold)}
+  .bcard .bph{position:relative;height:380px;overflow:hidden;background:var(--soft)}
+  .bcard .bph img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .bcard:hover .bph img{transform:scale(1.04)}
+  .bcard .badge{position:absolute;top:16px;left:16px;background:var(--gold);color:var(--ink);font:700 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:7px 12px}
+  .bcard .bb{padding:20px 22px 24px}
+  .bcard .bt{font-family:var(--serif);font-size:24px;line-height:1.25}
+  .bcard .bp{font-size:19px;font-weight:700;margin-top:8px;font-variant-numeric:tabular-nums}
+  .bcard .bp small{font-size:13px;font-weight:400;color:var(--mut)}
+  .bcard .bf{display:flex;gap:18px;margin-top:10px;color:#5c564a;font-size:13.5px;flex-wrap:wrap}
+  .bcard .bf b{color:var(--ink);font-variant-numeric:tabular-nums}
+  @media(max-width:600px){.bcard .bph{height:250px}}
+  .biens .more{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap}
+  .biens .more a{font:700 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold)}
+  .biens .more a:hover{color:var(--gold)}
+  .bloading{color:var(--mut);padding:24px 0;grid-column:1/-1}
+
+  /* ===== footer harmonisé ===== */
+  footer.site{background:#070b14;color:#8a8271;font-size:13px;padding:52px 0 26px}
+  footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
+  footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
+  footer.site a{color:var(--gold-2);text-decoration:none}
+  footer.site a:hover{text-decoration:underline}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
 
-<!-- demo-tag retiré (résidu artifact) -->
-
-<!-- bandeau legal retiré du haut : voir footer -->
-
 <header><nav>
   <div class="brand">HM Immobilier<span>Vente · Location · Investissement</span></div>
   <div class="nav-links">
-    <a href="#vendre">Vendre</a>
-    <a href="#acheter">Acheter</a>
+    <a href="index.html">Accueil</a>
     <a href="ventes.html">À vendre</a>
     <a href="location.html">À louer</a>
-    <a href="#reseau">Le réseau pro</a>
-    <a href="#investir">Investir</a>
-    <a href="#vendre">Estimer</a>
-    <a class="nav-cta" href="#vendre">Estimer mon bien</a>
+    <a href="vendre.html">Vendre</a>
+    <a href="quartiers.html">Quartiers</a>
+    <a href="agence.html">L'agence</a>
+    <a class="nav-cta" href="vendre.html">Estimer mon bien</a>
   </div>
 </nav></header>
 
@@ -358,10 +163,10 @@
       <button class="hs-tab" data-t="est">Estimer</button>
     </div>
     <div class="hs-row">
-      <a class="hs-field" href="#vendre"><span class="hs-k">Je vends</span><span class="hs-v">Estimer mon bien en 15 secondes →</span></a>
-      <a class="hs-field" href="#acheter"><span class="hs-k">Je cherche</span><span class="hs-v">Voir le off-market par secteur →</span></a>
-      <a class="hs-field" href="#reseau"><span class="hs-k">Je suis un pro</span><span class="hs-v">Rejoindre le réseau →</span></a>
-      <a class="hs-go" href="#vendre">RECHERCHER</a>
+      <a class="hs-field" href="vendre.html"><span class="hs-k">Je vends</span><span class="hs-v">Estimer mon bien en 15 secondes →</span></a>
+      <a class="hs-field" href="ventes.html"><span class="hs-k">J'achète</span><span class="hs-v">Voir nos biens à vendre →</span></a>
+      <a class="hs-field" href="location.html"><span class="hs-k">Je loue</span><span class="hs-v">Voir nos biens à louer →</span></a>
+      <a class="hs-go" href="vendre.html#estimation">ESTIMER</a>
     </div>
   </div>
 </div>
@@ -392,486 +197,116 @@
   </div>
 </section>
 
-<!-- ============ VENDRE — deux voies ============ -->
-<section id="vendre" style="background:#14161a;color:#f4f2ec;padding:74px 20px">
-  <div style="max-width:1080px;margin:0 auto">
-    <div style="font:700 11px/1 system-ui;letter-spacing:.22em;text-transform:uppercase;color:#b9401f">Vendre votre bien</div>
-    <h2 style="font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,3.6vw,38px);margin:12px 0 8px">Deux façons de vendre. <i style="color:#c9a86a">Vous choisissez.</i></h2>
-    <p style="font:400 15px/1.6 system-ui;color:#cfc7b8;max-width:60ch;margin-bottom:30px">Selon que vous privilégiez la <b style="color:#f4f2ec">discrétion</b> ou l'<b style="color:#f4f2ec">exposition maximale</b>, on adapte la stratégie de vente à votre bien.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
-
-      <!-- Voie 1 : OFF-MARKET -->
-      <div style="background:linear-gradient(160deg,#1b1e23,#131519);border:1px solid #2c2f36;padding:28px">
-        <div style="font-size:26px">🔒</div>
-        <h3 style="font-family:Georgia,serif;font-weight:400;font-size:23px;margin:14px 0 6px">Vendre en off-market</h3>
-        <p style="font:400 13.5px/1.65 system-ui;color:#cfc7b8;margin-bottom:16px"><b style="color:#f4f2ec">Jamais publié.</b> Présenté uniquement à un réseau d'indépendants vérifiés et à leurs acquéreurs déjà en recherche.</p>
-        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:20px">
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#c9a86a;font-weight:800;font-size:13px">1.</span><span style="font:400 13px/1.5 system-ui;color:#bdb5a6"><b style="color:#e9e2d4">Mandat off-market</b> — confidentialité totale.</span></div>
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#c9a86a;font-weight:800;font-size:13px">2.</span><span style="font:400 13px/1.5 system-ui;color:#bdb5a6">Présenté sous pseudonyme aux acquéreurs qualifiés du réseau.</span></div>
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#c9a86a;font-weight:800;font-size:13px">3.</span><span style="font:400 13px/1.5 system-ui;color:#bdb5a6">Chaque présentation <b style="color:#e9e2d4">tracée et horodatée</b> — vous êtes protégé.</span></div>
-        </div>
-        <div style="background:#0f1114;border:1px solid #2c2f36;padding:12px 14px;margin-bottom:18px">
-          <div style="font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778;margin-bottom:5px">Pour qui ?</div>
-          <div style="font:400 12.5px/1.55 system-ui;color:#bdb5a6">Biens rares, propriétaires discrets, situations sensibles.</div>
-        </div>
-        <a href="https://loffmarketimmo.com/api/site" style="display:inline-block;background:#c9a86a;color:#14161a;font:700 13px system-ui;letter-spacing:.03em;padding:13px 22px;text-decoration:none">Publier mon bien en off-market →</a>
-      </div>
-
-      <!-- Voie 2 : VENTE PUBLIQUE -->
-      <div style="background:#faf8f2;color:#14161a;border:1px solid #e3ded2;padding:28px">
-        <div style="font-size:26px">📣</div>
-        <h3 style="font-family:Georgia,serif;font-weight:400;font-size:23px;margin:14px 0 6px">Vendre en publicité</h3>
-        <p style="font:400 13.5px/1.65 system-ui;color:#5a544a;margin-bottom:16px">Exposition <b>maximale</b> : portails, photos professionnelles, visites qualifiées — après une <b>estimation gratuite</b> fondée sur les ventes réelles de votre rue.</p>
-        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:20px">
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#b9401f;font-weight:800;font-size:13px">1.</span><span style="font:400 13px/1.5 system-ui;color:#5a544a">Estimation en direct — sans laisser vos coordonnées.</span></div>
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#b9401f;font-weight:800;font-size:13px">2.</span><span style="font:400 13px/1.5 system-ui;color:#5a544a">Rapport détaillé et comparables, puis mise en vente clé en main.</span></div>
-          <div style="display:flex;gap:11px;align-items:flex-start"><span style="color:#b9401f;font-weight:800;font-size:13px">3.</span><span style="font:400 13px/1.5 system-ui;color:#5a544a">Diffusion, visites, négociation, signature — de bout en bout.</span></div>
-        </div>
-        <div style="background:#f1ecdd;border:1px solid #e3ded2;padding:12px 14px;margin-bottom:18px">
-          <div style="font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778;margin-bottom:5px">Pour qui ?</div>
-          <div style="font:400 12.5px/1.55 system-ui;color:#5a544a">Toucher le plus d'acquéreurs possible, vite.</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
-          <a href="#vente-publique" style="display:inline-block;background:#14161a;color:#f4f2ec;font:700 13px system-ui;letter-spacing:.03em;padding:13px 22px;text-decoration:none">Estimer mon bien gratuitement →</a>
-          <a href="mailto:contact@henrimartinimmobilier.com?subject=Confier%20mon%20bien%20en%20publicit%C3%A9" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Nous confier directement votre bien en publicité →</a>
-          <a href="ventes.html" style="font:700 13px system-ui;color:#14161a;text-decoration:none">Voir nos biens en publicité →</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ NOS BIENS EN PUBLICITÉ (défilement, avec photos) ============ -->
-<section style="background:#faf8f2;padding:60px 0 50px;border-bottom:1px solid var(--line)">
+<!-- ============ NOS BIENS — grandes cartes galerie ============ -->
+<section class="biens" id="biens">
   <div class="wrap">
-    <div class="eyebrow">Ce que nous vendons en publicité</div>
-    <h2 class="serif" style="font-size:clamp(24px,3vw,32px);margin:10px 0 20px">Nos biens en <i style="color:var(--gold)">publicité</i>, avec photos.</h2>
-    <div class="hscroll" id="pubScroll"><div style="color:var(--mut);padding:20px">Chargement…</div></div>
+    <div class="head">
+      <div class="eyebrow" style="color:var(--gold)">Sélection du moment</div>
+      <h2>Nos biens, <i>à vendre et à louer</i>.</h2>
+      <p class="sub">Une sélection de nos mandats avec photos. L'intégralité de nos biens — dont l'off-market — est visible sur les pages dédiées.</p>
+    </div>
+    <div class="bgrid" id="biensGrid"><div class="bloading">Chargement de la sélection…</div></div>
+    <div class="more">
+      <a href="ventes.html">Voir tous nos biens à vendre →</a>
+      <a href="location.html">Voir tous nos biens à louer →</a>
+    </div>
   </div>
 </section>
 
-<!-- ============ NOS BIENS EN OFF-MARKET (défilement, vignettes) ============ -->
-<section style="background:var(--navy);color:var(--cream);padding:60px 0 50px">
-  <div class="wrap">
-    <div class="eyebrow" style="color:var(--gold-2)">Ce qui se vend en off-market</div>
-    <h2 class="serif" style="font-size:clamp(24px,3vw,32px);margin:10px 0 20px">Nos biens en <i style="color:var(--gold-2)">off-market</i>, hors des vitrines.</h2>
-    <div class="hscroll" id="offScroll"><div style="color:var(--on-dark-2);padding:20px">Chargement…</div></div>
-  </div>
-</section>
-
-<!-- ============ ESTIMATION — pièce maîtresse ============ -->
-<section class="estimate" id="vente-publique"><div class="wrap">
-  <div class="est-grid">
-    <div class="est-left">
-      <div class="eyebrow">Vendre avec HM</div>
-      <h2 class="serif">Votre prix, <i>tout de suite</i>. Vos coordonnées, seulement si vous le voulez.</h2>
-      <p class="p">Avant, il fallait donner son numéro pour voir la moindre estimation. Désormais, réglez le curseur : votre fourchette s'affiche en direct, fondée sur les ventes réelles de votre secteur. Le rapport détaillé et les comparables se débloquent ensuite, en un clic.</p>
-      <div class="why">
-        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><path d="M6 2h9l3 3v17H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></div><div><h4>Fondée sur les ventes réellement signées</h4><p>Données DVF de votre rue + comparables du secteur, pas un algorithme opaque.</p></div></div>
-        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg></div><div><h4>Zéro exposition</h4><p>Votre bien n'apparaît sur aucun portail. Présenté directement aux acquéreurs qualifiés.</p></div></div>
-        <div class="row"><div class="bi"><svg class="ico" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 11l2 2 4-4"/></svg></div><div><h4>Des acquéreurs déjà là</h4><p>134 acheteurs solvables suivis en continu. Votre bien a peut-être déjà preneur.</p></div></div>
-      </div>
-    </div>
-
-    <div class="calc">
-      <div class="top"><h3>Estimation confidentielle</h3><div class="s">Gratuite · immédiate · sans engagement</div></div>
-      <div class="body">
-        <span class="lab">Votre secteur</span>
-        <div class="zones-pick" id="zpick"></div>
-
-        <span class="lab">Surface</span>
-        <div class="slider-row"><span style="color:var(--mut);font-size:12px">Réglez le curseur</span><span class="val num" id="surfVal">85 m²</span></div>
-        <input type="range" id="surf" min="18" max="400" value="85" step="1">
-
-        <span class="lab">Type &amp; état</span>
-        <div class="seg" id="typeSeg"><button data-f="1" class="on">Appartement</button><button data-f="1.06">Maison / hôtel part.</button></div>
-        <div class="seg" id="condSeg"><button data-f="0.9">À rénover</button><button data-f="1" class="on">Bon état</button><button data-f="1.12">Refait / prestige</button></div>
-
-        <div class="result">
-          <div class="k">Fourchette estimée</div>
-          <div class="range num"><b id="rlow">—</b> – <b id="rhigh">—</b></div>
-          <div class="meta num" id="rmeta">Valeur centrale — · —/m² · fondée sur les ventes réelles du secteur.</div>
-          <div class="zbuyers"><span class="dot"></span><span id="zbuyers"><b>—</b></span></div>
-
-          <div class="unlock">
-            <div class="u-h">Recevez le rapport détaillé + les comparables</div>
-            <div class="u-s">Vous avez votre fourchette. Pour le détail rue par rue et être rappelé sous 24 h :</div>
-            <div class="u-fields"><input placeholder="Prénom" id="uName"><input placeholder="Téléphone / WhatsApp" id="uTel"></div>
-            <button class="u-btn" id="uBtn">Débloquer mon rapport confidentiel</button>
-            <div class="u-note"><span>🔒</span><span>Vos données ne sont ni diffusées ni revendues (RGPD). Aucun démarchage abusif.</span></div>
-          </div>
-
-          <div class="comps" id="comps">
-            <table><thead><tr><th>Comparable</th><th>Surface</th><th>Prix</th><th>€/m²</th><th></th></tr></thead><tbody id="compsBody"></tbody></table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<!-- ============ ACHETEUR — teaser off-market ============ -->
-<section class="buyer" id="acheter"><div class="wrap">
-  <div class="head">
+<!-- ============ CTA ESTIMATION ============ -->
+<section style="background:#14161a;color:#f4f2ec;padding:64px 0">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
     <div>
-      <div class="eyebrow">Acheter / louer off-market</div>
-      <h2 class="serif">Ce qui se vend <i>avant</i> d'être en vente.</h2>
-      <p>Choisissez votre secteur : voyez les grandes lignes des biens off-market qui correspondent, puis activez votre alerte pour la suite.</p>
+      <h2 class="serif" style="font-size:clamp(24px,3.4vw,34px)">Un projet de vente ?</h2>
+      <p style="color:#cfc7b8;font-size:15px;margin-top:8px;max-width:56ch">Estimation gratuite, fondée sur les ventes réellement signées.</p>
     </div>
-    <div class="zpick2" id="zpick2"></div>
-  </div>
-  <div class="cards" id="cards"></div>
-  <div class="cta-row">
-    <input id="a_contact" placeholder="Email ou WhatsApp pour être alerté">
-    <button id="a_btn">Activer mon alerte confidentielle</button>
-  </div>
-  <div class="okmsg" id="a_ok">✓ Alerte activée. Vous serez prévenu dès qu'un bien off-market correspond — avant toute diffusion.</div>
-</div></section>
-
-<!-- ============ SIMULATION / MÉTHODE ============ -->
-<!-- section démo/méthode interne retirée du site public -->
-
-<!-- ============ RÉSEAU ============ -->
-
-<!-- ============ INVESTIR ============ -->
-<section id="investir" style="background:#f1ecdd;padding:72px 20px">
-  <div style="max-width:1080px;margin:0 auto">
-    <div style="font:600 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#8a6d3b">Investissement locatif</div>
-    <h2 style="font-family:Georgia,serif;font-weight:400;font-size:34px;margin:12px 0 26px;color:#14161a">Investir à Paris, <i style="color:#b9401f">rentable</i> et sans y penser.</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
-      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
-        <div style="font-size:22px">🎯</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Chasse investisseur</h3>
-        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Nous sourçons les biens à potentiel (décote, travaux, découpe) avant le marché, grâce à notre veille quotidienne et notre réseau off-market.</p>
-        <a href="https://loffmarketimmo.com/api/app" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Enregistrer ma recherche (chasseur/pro) →</a>
-      </div>
-      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
-        <div style="font-size:22px">📈</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Étude de rentabilité</h3>
-        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Rendement brut/net, vacance, fiscalité : une projection chiffrée avant d'acheter.</p>
-        <a href="mailto:contact@henrimartinimmobilier.com?subject=Etude%20de%20rentabilite" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Calculer une rentabilité →</a>
-      </div>
-      <div style="background:#faf8f2;border:1px solid #e3ded2;padding:22px">
-        <div style="font-size:22px">🔑</div><h3 style="font:700 16px system-ui;margin:10px 0 6px;color:#14161a">Gestion & conciergerie</h3>
-        <p style="font:400 13.5px/1.6 system-ui;color:#5a544a">Location classique ou courte durée (Airbnb) : mise en location, gestion, ménage, voyageurs — clé en main.</p>
-        <a href="mailto:contact@henrimartinimmobilier.com?subject=Conciergerie" style="font:700 13px system-ui;color:#b9401f;text-decoration:none">Découvrir la conciergerie →</a>
-      </div>
-    </div>
+    <a href="vendre.html" style="background:#c9a86a;color:#14161a;text-decoration:none;padding:15px 26px;font:700 13px system-ui;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Estimer mon bien →</a>
   </div>
 </section>
-<section class="reseau" id="reseau"><div class="wrap">
-  <div class="grid">
-    <div>
-      <div class="eyebrow">Plateforme B2B — entre professionnels</div>
-      <h2 class="serif" style="font-size:clamp(26px,3.5vw,36px)">Un réseau off-market fermé, cadré, anonyme.</h2>
-      <ul>
-        <li>Diffusez vos biens sous pseudonyme — jamais votre nom ni votre client exposés.</li>
-        <li>Mise en relation, bon de visite et délégation de mandat générés automatiquement.</li>
-        <li>Répartition d'honoraires connue d'avance, calculée selon la carte T de chacun.</li>
-        <li>Réservé aux pros vérifiés (KYC) · sans abonnement · anti-picking intégré.</li>
-      </ul>
-      <a class="btn-ghost" href="https://loffmarketimmo.com/api/app">Déposer mon dossier professionnel →</a>
-    </div>
-    <div class="simcard">
-      <h4>Répartition d'honoraires — transparente</h4>
-      <div class="bar"><span class="lbl">Agent rentreur</span><div class="track"><div class="fill" style="width:45%;background:#a98a5c">45 %</div></div></div>
-      <div class="bar"><span class="lbl">Agent acquéreur</span><div class="track"><div class="fill" style="width:45%;background:#8a6d3b">45 %</div></div></div>
-      <div class="bar"><span class="lbl">Plateforme</span><div class="track"><div class="fill" style="width:10%;background:#3a4048;color:#cdd2dc">10 %</div></div></div>
-      <p style="font-size:12px;color:#8d8f97;margin-top:12px">Exemple « mise en relation directe, 2 cartes T ». 13 cas calculés automatiquement selon le montage.</p>
-    </div>
-  </div>
-</div></section>
 
-<footer><div class="wrap">
+<footer class="site"><div class="wrap">
   <div class="cols">
-    <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier.<br>58 rue de Monceau, CS 48756, 75008 Paris.<br>RCS Paris 942 327 941.<br>Abbas Berrada, Président.</div>
-    <div id="contact"><h5>Contact</h5>06 67 68 37 43<br>contact@henrimartinimmobilier.com<br>WhatsApp · sous 24 h ouvrées</div>
-    <div><h5>Mentions légales</h5>Carte T CPI 7501 2026 000 000 160<br>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener">Mentions légales complètes →</a></div>
-    <div><h5>Médiation</h5>Loi Hoguet n°70-9 du 2/01/1970.<br>Médiateur de la consommation.<br>Données personnelles : RGPD.</div>
+    <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
+    <div id="contact"><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
+    <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
+    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a></div>
   </div>
-  <div class="foot"><span>© 2026 HM Immobilier — Vente · Location · Investissement.</span><span>Vente · Location · Investissement · Estimation — Paris.</span></div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
-<div class="bmodal" id="bModal" role="dialog" aria-modal="true">
-  <div class="backdrop"></div>
-  <div class="panel">
-    <button class="close" id="bModalClose" aria-label="Fermer">✕</button>
-    <div id="bModalBody"><div class="load">Chargement…</div></div>
-  </div>
-</div>
-
 <script>
 (function(){
-  var modal=document.getElementById('bModal');
-  var body=document.getElementById('bModalBody');
-  var closeBtn=document.getElementById('bModalClose');
-  if(!modal||!body)return;
-  var curPhotos=[], curIdx=0, curLabel='';
-  function fmtN(n){ try{return Number(n).toLocaleString('fr-FR');}catch(e){return n;} }
-  function escAttr(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
-  function renderGallery(){
-    var imgs=curPhotos.map(function(u,i){return '<img src="'+u+'" class="'+(i===curIdx?'on':'')+'" alt="'+escAttr((curLabel||'Bien')+' — photo '+(i+1)+'/'+curPhotos.length)+'">';}).join('');
-    var nav = curPhotos.length>1 ? '<button class="gnav prev" id="gPrev" aria-label="Précédent">‹</button><button class="gnav next" id="gNext" aria-label="Suivant">›</button><div class="gcount">'+(curIdx+1)+'/'+curPhotos.length+'</div>' : '';
-    return '<div class="gallery">'+imgs+nav+'</div>';
-  }
-  function renderInfo(d){
-    var facts=[];
-    if(d.surface!=null) facts.push('<b>'+d.surface+' m²</b>');
-    if(d.pieces!=null) facts.push('<b>'+d.pieces+'</b> pièces');
-    if(d.chambres!=null) facts.push('<b>'+d.chambres+'</b> chambres');
-    return '<div class="info">'
-      +'<div class="tag">'+(d.mode==='location'?'Location':'Vente')+'</div>'
-      +'<div class="loc serif">'+(d.adresse||d.secteur||'Paris')+'</div>'
-      +'<div class="price">'+(d.prix!=null?fmtN(d.prix)+' €':'')+(d.mode==='location'?' <small>/ mois hors charges</small>':'')+'</div>'
-      +(facts.length?'<div class="facts">'+facts.join('')+'</div>':'')
-      +(d.description?'<div class="desc">'+String(d.description).replace(/</g,'&lt;')+'</div>':'')
-      +'<a class="cta" href="mailto:contact@henrimartinimmobilier.com?subject='+encodeURIComponent('Renseignements — '+(d.adresse||d.secteur||'bien'))+'">Demander une visite →</a>'
-      +'</div>';
-  }
-  function bindGalleryNav(){
-    var prev=document.getElementById('gPrev'), next=document.getElementById('gNext');
-    if(prev) prev.addEventListener('click',function(){curIdx=(curIdx-1+curPhotos.length)%curPhotos.length;var g=body.querySelector('.gallery');if(g)g.outerHTML=renderGallery();bindGalleryNav();});
-    if(next) next.addEventListener('click',function(){curIdx=(curIdx+1)%curPhotos.length;var g=body.querySelector('.gallery');if(g)g.outerHTML=renderGallery();bindGalleryNav();});
-  }
-  window.openBienModal=function(id){
-    if(!id)return;
-    curPhotos=[]; curIdx=0;
-    body.innerHTML='<div class="load">Chargement…</div>';
-    modal.classList.add('on');
-    document.body.style.overflow='hidden';
-    fetch('https://loffmarketimmo.com/api/public/bien/'+encodeURIComponent(id)).then(function(r){return r.json();}).then(function(d){
-      if(!d||!d.ok||!Array.isArray(d.photos)||!d.photos.length){body.innerHTML='<div class="load">Fiche indisponible.</div>';return;}
-      curPhotos=d.photos; curIdx=0; curLabel=d.adresse||d.secteur||'Bien Henri Martin Immobilier';
-      body.innerHTML=renderGallery()+renderInfo(d);
-      bindGalleryNav();
-    }).catch(function(){body.innerHTML='<div class="load">Fiche indisponible.</div>';});
-  };
-  function closeModal(){modal.classList.remove('on');document.body.style.overflow='';}
-  closeBtn.addEventListener('click',closeModal);
-  modal.querySelector('.backdrop').addEventListener('click',closeModal);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-})();
-</script>
-<script>
-(function(){
-  var fmt=function(n){return new Intl.NumberFormat('fr-FR').format(Math.round(n));};
-  var fmtEur=function(n){ if(n>=1e6){return (n/1e6).toFixed(n>=1e7?1:2).replace('.',',')+' M€';} return fmt(n)+' €'; };
-  // Secteurs : €/m² réalistes haut de gamme 2026 + acquéreurs actifs réels (données Neon).
-  var ZONES=[
-    {name:'Paris 16ᵉ', ppm2:13200, buyers:91},
-    {name:'Paris 8ᵉ',  ppm2:13800, buyers:14},
-    {name:'Paris 17ᵉ', ppm2:11200, buyers:25},
-    {name:'Paris 6ᵉ',  ppm2:16400, buyers:19},
-    {name:'Paris 7ᵉ',  ppm2:15200, buyers:19},
-    {name:'Neuilly',   ppm2:11600, buyers:25},
-    {name:'Boulogne',  ppm2:10200, buyers:11},
-    {name:'Levallois', ppm2:10400, buyers:10}
-  ];
-  var state={zone:0, surf:85, type:1, cond:1, unlocked:false};
-
-  // build zone chips (calc + buyer)
-  var zp=document.getElementById('zpick'), zp2=document.getElementById('zpick2');
-  ZONES.forEach(function(z,i){
-    var c=document.createElement('div'); c.className='zchip'+(i===0?' on':''); c.textContent=z.name; c.dataset.i=i;
-    c.onclick=function(){state.zone=i; [].forEach.call(zp.children,function(x){x.classList.remove('on');}); c.classList.add('on'); recalc();};
-    zp.appendChild(c);
-    var c2=document.createElement('div'); c2.className='zchip'+(i===0?' on':''); c2.textContent=z.name; c2.dataset.i=i;
-    c2.onclick=function(){buyerZone=i; [].forEach.call(zp2.children,function(x){x.classList.remove('on');}); c2.classList.add('on'); renderCards();};
-    zp2.appendChild(c2);
-  });
-
-  var surf=document.getElementById('surf'), surfVal=document.getElementById('surfVal');
-  surf.oninput=function(){state.surf=+surf.value; surfVal.textContent=state.surf+' m²'; recalc();};
-  function seg(id,key){var s=document.getElementById(id);s.onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(s.children,function(x){x.classList.remove('on');});b.classList.add('on');state[key]=+b.dataset.f;recalc();};}
-  seg('typeSeg','type'); seg('condSeg','cond');
-
-  function animateTo(el, target){
-    var start=+(el.dataset.v||0), t0=null, dur=650;
-    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-p,3);
-      var v=start+(target-start)*e; el.textContent=fmtEur(v); if(p<1)requestAnimationFrame(step); else {el.dataset.v=target; el.textContent=fmtEur(target);} }
-    requestAnimationFrame(step);
-  }
-  function recalc(){
-    var z=ZONES[state.zone];
-    var ppm2=z.ppm2*state.type*state.cond;
-    // léger effet taille : petites surfaces = €/m² un peu plus élevé
-    var sizeAdj = state.surf<40?1.06 : state.surf>150?0.95 : 1;
-    ppm2=ppm2*sizeAdj;
-    var central=ppm2*state.surf;
-    animateTo(document.getElementById('rlow'), central*0.92);
-    animateTo(document.getElementById('rhigh'), central*1.08);
-    document.getElementById('rmeta').innerHTML='Valeur centrale ~'+fmtEur(central)+' · '+fmt(ppm2)+' €/m² · '+z.name+' · fondée sur les ventes réelles du secteur.';
-    document.getElementById('zbuyers').innerHTML='<b>'+z.buyers+' acquéreur'+(z.buyers>1?'s':'')+'</b> recherchent dans le secteur '+z.name+' en ce moment.';
-    if(state.unlocked) renderComps(central, ppm2);
-  }
-  function renderComps(central, ppm2){
-    var z=ZONES[state.zone], body=document.getElementById('compsBody'), rows='';
-    var seed=[{s:-18,sold:true,d:'mars 2026'},{s:12,sold:false,d:''},{s:-30,sold:true,d:'janv. 2026'},{s:28,sold:false,d:''},{s:-8,sold:true,d:'févr. 2026'}];
-    seed.forEach(function(r){
-      var sf=Math.max(20,Math.round(state.surf*(1+r.s/100)));
-      var pm=Math.round(ppm2*(1+(r.sold?-0.02:0.04)));
-      var pr=sf*pm;
-      var tag=r.sold?'<span class="tag sold">VENDU</span>':'<span class="tag listed">EN VENTE</span>';
-      var lbl=z.name+(r.d?' · '+r.d:'');
-      rows+='<tr><td>'+lbl+'</td><td>'+sf+' m²</td><td>'+fmtEur(pr)+'</td><td>'+fmt(pm)+'</td><td>'+tag+'</td></tr>';
-    });
-    body.innerHTML=rows;
-    document.getElementById('comps').classList.add('show');
-  }
-  document.getElementById('uBtn').onclick=function(){
-    var n=document.getElementById('uName').value.trim(), t=document.getElementById('uTel').value.trim();
-    if(!n||!t){alert('Prénom et téléphone pour recevoir votre rapport détaillé.');return;}
-    state.unlocked=true; this.textContent='✓ Rapport envoyé — un conseiller vous rappelle sous 24 h'; this.disabled=true; this.style.opacity=.7;
-    recalc();
-    document.getElementById('comps').scrollIntoView({behavior:'smooth',block:'nearest'});
-  };
-
-  // buyer cards — alimentées par la vraie base (plus de données fictives/formule, 24/07).
-  var buyerZone=0;
-  var ALL_BIENS=[]; // rempli par loadRealBiens() ; chaque item : {secteur,prix,surface,pieces,chambres,type,photos?}
-  // "Neuilly" doit matcher "Neuilly-sur-Seine" etc. (le secteur vient de Listing.city, pas normalisé).
-  function zoneMatches(secteur, zoneName){
-    var s=(secteur||'').toLowerCase(), z=zoneName.toLowerCase().replace(/[ᵉe]$/,'');
-    return s.indexOf(z)===0 || s.indexOf(z)>-1;
-  }
-  function renderCards(){
-    var z=ZONES[buyerZone], el=document.getElementById('cards');
-    if(!el) return;
-    if(!ALL_BIENS.length){ el.innerHTML='<div style="color:var(--on-dark-2);font-size:13.5px;padding:10px 0">Chargement de la sélection…</div>'; return; }
-    var picks=ALL_BIENS.filter(function(x){ return zoneMatches(x.secteur, z.name) && x.prix!=null; }).slice(0,3);
-    if(!picks.length){ el.innerHTML='<div style="color:var(--on-dark-2);font-size:13.5px;padding:10px 0">Aucun bien off-market en ce moment sur '+z.name+' — activez une alerte ci-dessous.</div>'; return; }
-    el.innerHTML = picks.map(function(p){
-      var facts=[p.surface?p.surface+' m²':null, p.pieces?p.pieces+' p.':null, p.type].filter(Boolean).join(' · ');
-      return '<div class="pcard"><div class="ph"><span class="lock">Adresse confidentielle</span></div>'
-        +'<div class="b"><div class="t">'+(p.type||'Appartement')+'</div>'
-        +'<div class="d">'+facts+' · '+(p.secteur||z.name)+' · off-market</div>'
-        +'<div class="pr">'+fmtEur(p.prix)+(p.prix<20000?'<small> / mois</small>':'')+'</div></div></div>';
-    }).join('');
-  }
-  // fetch() n'a pas de timeout natif — sur un réseau qui bloque/ignore silencieusement la
-  // requête (proxy d'entreprise, wifi capricieux...), la promesse ne se règle JAMAIS, donc
-  // Promise.all ci-dessous restait bloqué indéfiniment et les sections gardaient "Chargement…"
-  // pour toujours, sans jamais atteindre le .catch() (remonté 27/07 : "je ne vois rien").
-  function fetchWithTimeout(url, ms){
-    var ctrl = ('AbortController' in window) ? new AbortController() : null;
-    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
-    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
-  }
-  function loadRealBiens(){
-    var euro=fmt;
-    Promise.all([
-      fetchWithTimeout('https://loffmarketimmo.com/api/public/locations',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
-      fetchWithTimeout('https://loffmarketimmo.com/api/public/sales',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
-    ]).then(function(res){
-      var loc=(res[0]&&res[0].items||[]).map(function(x){return Object.assign({},x,{unit:' / mois'});});
-      var ven=(res[1]&&res[1].items||[]).map(function(x){return Object.assign({},x,{unit:''});});
-      ALL_BIENS = loc.concat(ven);
-      renderCards();
-      var pub=ALL_BIENS.filter(function(x){return Array.isArray(x.photos)&&x.photos.length;});
-      var off=ALL_BIENS.filter(function(x){return !(Array.isArray(x.photos)&&x.photos.length);});
-      var pubHost=document.getElementById('pubScroll'), offHost=document.getElementById('offScroll');
-      function pubCard(x){
-        var open = x.id ? ' style="cursor:pointer" onclick="window.openBienModal(\''+String(x.id).replace(/'/g,"\\'")+'\')"' : '';
-        return '<div class="hscard"'+open+'><div class="ph" style="background-image:url(\''+x.photos[0]+'\')"></div>'
-          +'<div class="corner">'+(x.unit?'Location':'Vente')+'</div>'
-          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
-          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
-      }
-      function offCard(x){
-        return '<div class="hscard"><div class="ph lockph"><span>Adresse confidentielle</span></div>'
-          +'<div class="corner">'+(x.unit?'Location':'Vente')+'</div>'
-          +'<div class="b"><div class="t">'+(x.type||'Appartement')+'</div><div class="s serif">'+(x.secteur||'Paris')+'</div>'
-          +'<div class="p">'+(x.prix!=null?fmt(x.prix)+' €':'')+' <span style="font-size:11px;color:var(--on-dark-2);font-weight:400">'+x.unit+'</span></div></div></div>';
-      }
-      if(pubHost) pubHost.innerHTML = pub.length ? pub.map(pubCard).join('') : '<div style="color:var(--mut);padding:20px">Aucun bien en publicité pour le moment — écrivez-nous.</div>';
-      if(offHost) offHost.innerHTML = off.length ? off.map(offCard).join('') : '<div style="color:var(--on-dark-2);padding:20px">Aucun bien off-market pour le moment.</div>';
-    }).catch(function(){
-      var pubHost=document.getElementById('pubScroll'), offHost=document.getElementById('offScroll');
-      if(pubHost) pubHost.innerHTML='<div style="color:var(--mut);padding:20px">Sélection momentanément indisponible.</div>';
-      if(offHost) offHost.innerHTML='<div style="color:var(--on-dark-2);padding:20px">Sélection momentanément indisponible.</div>';
-    });
-  }
-  document.getElementById('a_btn').onclick=function(){
-    var c=document.getElementById('a_contact').value.trim();
-    if(!c){alert('Indiquez un email ou WhatsApp pour être alerté.');return;}
-    document.getElementById('a_ok').style.display='block'; this.textContent='✓ Alerte active';
-  };
-
-  // ---- simulation funnels (données réelles de la simulation) ----
-  var F_VEND={
-    cur:[['Arrive',84],['Ouvre le formulaire',84],['Remplit 4 champs',61],['Donne son n° avant l’estimation',31],['Voit l’estimation',5]],
-    red:[['Arrive',84],['Curseur d’estimation',84],['Voit sa fourchette (sans coordonnées)',81],['Débloque le rapport (contact)',78],['Lead vendeur qualifié',43]]
-  };
-  var F_ACH={
-    cur:[['Arrive',108],['Voit le bloc « Je cherche »',108],['Dépose secteur+budget+email d’un bloc',72],['Recherche enregistrée',15]],
-    red:[['Arrive',108],['Voit « X biens · Y acquéreurs »',108],['Aperçu anonyme de biens',90],['Active l’alerte',62],['Recherche enregistrée',34]]
-  };
-  function buildFunnel(containerId, data, maxN){
-    var host=document.getElementById(containerId);
-    // Conteneur absent de la page (ex. #fVend/#fAch jamais ajoutés au HTML) → sortie
-    // silencieuse au lieu de planter : une exception non attrapée ici arrêtait TOUT le
-    // script restant, empêchant loadRealBiens() de s'exécuter — donc "Chargement…" figé
-    // pour toujours sur toute la page, sans rapport avec le réseau (remonté 27/07, trouvé
-    // via la console : "Cannot set properties of null (setting 'innerHTML') at buildFunnel").
-    if(!host)return;
-    var html='';
-    var steps=Math.max(data.cur.length, data.red.length);
-    for(var i=0;i<steps;i++){
-      var c=data.cur[i], r=data.red[i];
-      html+='<div class="fstep">';
-      html+='<div class="fl"><span class="name">'+((r&&r[0])||(c&&c[0]))+'</span></div>';
-      if(c){html+='<div class="ftrack"><div class="ffill cur" data-w="'+(c[1]/maxN*100)+'"></div></div><div class="fl"><span class="drop">actuel : '+c[1]+'</span></div>';}
-      if(r){html+='<div class="ftrack" style="margin-top:4px"><div class="ffill red" data-w="'+(r[1]/maxN*100)+'"></div></div><div class="fl"><span class="keep">refonte : '+r[1]+'</span></div>';}
-      html+='</div>';
-    }
-    host.innerHTML=html;
-  }
-  buildFunnel('fVend', F_VEND, 84);
-  buildFunnel('fAch', F_ACH, 108);
-  // animate on scroll
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.querySelectorAll('.ffill').forEach(function(f){ f.style.width=f.dataset.w+'%'; }); io.unobserve(e.target);} });
-  },{threshold:.25});
-  document.querySelectorAll('.fcard').forEach(function(c){io.observe(c);});
-
-  recalc(); renderCards(); loadRealBiens();
-})();
-</script>
-<script>
-(function(){
-  // Onglets Vendre/Acheter/Louer/Estimer sous la photo d'accueil — n'avaient aucun
-  // gestionnaire de clic (bug signalé 24/07 : "j'appuie sur louer/acheter, rien ne se passe").
+  // Onglets Vendre/Acheter/Louer/Estimer sous la photo d'accueil → nouvelles pages.
   var tabs = document.querySelectorAll('.hs-tab');
   var ACTIONS = {
-    vend: function(){ document.getElementById('vendre').scrollIntoView({behavior:'smooth'}); },
-    ach: function(){ document.getElementById('acheter').scrollIntoView({behavior:'smooth'}); },
-    lou: function(){ window.location.href = 'location.html'; },
-    est: function(){ document.getElementById('vente-publique').scrollIntoView({behavior:'smooth'}); }
+    vend: 'vendre.html',
+    ach: 'ventes.html',
+    lou: 'location.html',
+    est: 'vendre.html#estimation'
   };
   tabs.forEach(function(btn){
     btn.addEventListener('click', function(){
       tabs.forEach(function(b){ b.classList.remove('on'); });
       btn.classList.add('on');
-      var fn = ACTIONS[btn.dataset.t];
-      if (fn) fn();
+      var url = ACTIONS[btn.dataset.t];
+      if (url) window.location.href = url;
     });
   });
 })();
 </script>
 <script>
 (function(){
-  var b=document.getElementById('uBtn');if(!b)return;
-  b.addEventListener('click',function(){
-    try{
-      var prenom=(document.getElementById('uName')||{}).value||'';
-      var tel=(document.getElementById('uTel')||{}).value||'';
-      if(!tel.trim())return;
-      var surface=Number((document.getElementById('surf')||{}).value)||null;
-      var zone='';var zc=document.querySelector('#zpick .zchip.on,#zpick .zchip[aria-pressed="true"]');if(zc)zone=zc.textContent.trim();
-      var fourchette=((document.getElementById('rlow')||{}).textContent||'')+' \u2013 '+((document.getElementById('rhigh')||{}).textContent||'');
-      fetch('https://loffmarketimmo.com/api/site/estimation',{method:'POST',headers:{'content-type':'application/json'},
-        body:JSON.stringify({prenom:prenom,tel:tel,surface:surface,secteur:zone,fourchette:fourchette,source:'henrimartinimmobilier.com'})}).catch(function(){});
-    }catch(e){}
+  // « Nos biens » — grandes cartes galerie, alimentées par les 2 APIs publiques.
+  var grid = document.getElementById('biensGrid');
+  if(!grid) return;
+  var fmt = function(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n)); };
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  function hasPhotos(x){ return Array.isArray(x.photos) && x.photos.length > 0; }
+  // fetch() n'a pas de timeout natif — sur un réseau qui bloque silencieusement la requête,
+  // la promesse ne se règle jamais et la section resterait sur « Chargement… ».
+  function fetchWithTimeout(url, ms){
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
+    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
+  }
+  function card(x){
+    var vente = x.mode === 'vente';
+    var facts = [];
+    if(x.surface) facts.push('<span><b>'+x.surface+'</b> m²</span>');
+    if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> pièces</span>');
+    if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> chambres</span>');
+    var alt = esc((x.type||'Appartement')+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
+    var inner = '<div class="bph"><img src="'+esc(x.photos[0])+'" alt="'+alt+'" loading="lazy">'
+      + '<span class="badge">'+(vente?'À vendre':'À louer')+'</span></div>'
+      + '<div class="bb">'
+      + '<div class="bt">'+esc(x.type||'Appartement')+' — '+esc(x.secteur||'Paris')+'</div>'
+      + (x.prix!=null ? '<div class="bp">'+fmt(x.prix)+' €'+(vente?'':' <small>/ mois</small>')+'</div>' : '')
+      + (facts.length ? '<div class="bf">'+facts.join('')+'</div>' : '')
+      + '</div>';
+    return x.id
+      ? '<a class="bcard" href="https://loffmarketimmo.com/bien/'+encodeURIComponent(x.id)+'">'+inner+'</a>'
+      : '<article class="bcard">'+inner+'</article>';
+  }
+  Promise.all([
+    fetchWithTimeout('https://loffmarketimmo.com/api/public/sales',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
+    fetchWithTimeout('https://loffmarketimmo.com/api/public/locations',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
+  ]).then(function(res){
+    var ven = ((res[0]&&res[0].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'vente'});});
+    var loc = ((res[1]&&res[1].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'location'});});
+    // priorité aux biens avec id + photos (fiche détail disponible)
+    var pri = function(list){ return list.slice().sort(function(a,b){ return (b.id?1:0)-(a.id?1:0); }); };
+    ven = pri(ven); loc = pri(loc);
+    // mélange ventes / locations, max 6
+    var mix = [];
+    while(mix.length < 6 && (ven.length || loc.length)){
+      if(ven.length) mix.push(ven.shift());
+      if(mix.length < 6 && loc.length) mix.push(loc.shift());
+    }
+    grid.innerHTML = mix.length
+      ? mix.map(card).join('')
+      : '<div class="bloading">Aucun bien avec photos pour le moment — parcourez nos biens à vendre et à louer ci-dessous.</div>';
+  }).catch(function(){
+    grid.innerHTML = '<div class="bloading">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div>';
   });
 })();
 </script>

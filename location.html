@@ -70,7 +70,12 @@
   .cta h3{font-family:var(--serif);font-weight:400;font-size:24px;max-width:22ch}
   .cta p{color:#9aa0ab;font-size:14px;margin-top:6px;max-width:46ch}
   .cta a{background:var(--gold);color:var(--ink);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
-  footer{padding:22px 0;color:var(--mut);font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
+  footer.site{background:#070b14;color:#8a8271;font-size:13px;padding:52px 0 26px;margin-top:0;text-align:left}
+  footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
+  footer.site h5{color:#c7cad2;font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
+  footer.site a{color:#c9a84c;text-decoration:none}
+  footer.site a:hover{text-decoration:underline}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
@@ -81,11 +86,11 @@
       <a href="index.html">Accueil</a>
       <a href="ventes.html">À vendre</a>
       <a href="location.html" class="on">À louer</a>
-      <a href="index.html#acheter">Acheter</a>
-      <a href="index.html#reseau">Le réseau</a>
-      <a href="index.html#vendre">Vendre</a>
+      <a href="vendre.html">Vendre</a>
+      <a href="quartiers.html">Quartiers</a>
+      <a href="agence.html">L'agence</a>
     </nav>
-    <a class="nav-cta" href="mailto:contact@henrimartinimmobilier.com">Nous contacter</a>
+    <a class="nav-cta" href="vendre.html">Estimer mon bien</a>
   </div>
 </header>
 
@@ -122,7 +127,15 @@
   </div>
 </section>
 
-<footer>© 2026 SASU Henri Martin Immobilier — RCS Paris 942 327 941 — Carte T CPI 7501 2026 000 000 160 (CCI Paris Île-de-France) — <a href="https://loffmarketimmo.com/mentions-legales" style="color:inherit" target="_blank" rel="noopener">Mentions légales</a></footer>
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
+    <div><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
+    <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
+    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a></div>
+  </div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+</div></footer>
 
 <script>
 (function(){
