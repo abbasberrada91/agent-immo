@@ -96,12 +96,12 @@
 
 <section class="intro">
   <div class="wrap">
-    <p class="eyebrow">Mandats directs · Paris &amp; Ouest</p>
-    <h1 class="serif">Nos appartements <i>à vendre</i>, en mandat direct.</h1>
-    <p class="lede">Des biens que nous représentons directement, sélectionnés pour leur adresse et leur qualité. Secteur, prix et surface ci-dessous — <b>photos, adresse exacte et visite communiquées en privé</b>, aux acquéreurs qualifiés.</p>
+    <p class="eyebrow">Mandats directs &amp; réseau · Paris &amp; Ouest</p>
+    <h1 class="serif">Nos appartements <i>à vendre</i>.</h1>
+    <p class="lede">Nos mandats directs, complétés par une sélection de biens de confrères de notre réseau (repérés « Réseau »). Secteur, prix et surface ci-dessous — <b>photos, adresse exacte et visite communiquées en privé</b>, aux acquéreurs qualifiés.</p>
     <div class="meta">
       <div><b id="kpi-count">—</b>biens à la vente</div>
-      <div><b>Mandat direct</b>HM Immobilier</div>
+      <div><b>Direct &amp; réseau</b>HM Immobilier</div>
       <div><b>24 h</b>mise à jour des disponibilités</div>
     </div>
   </div>
@@ -139,10 +139,11 @@
 
 <script>
 (function(){
-  // ?direct=1 : cette page se présente comme "mandats directs HM Immobilier" — sans ce
-  // paramètre, l'API mélange nos mandats avec des biens de confrères du réseau, comptés à
-  // tort comme les nôtres (retour Abbas 29/07 : "je n'ai pas 27 mandats").
-  var API = "https://loffmarketimmo.com/api/public/sales?direct=1";
+  // Mandats directs HM + biens du réseau (confrères) — chaque carte réseau porte un badge
+  // "Réseau" distinct pour ne jamais laisser croire que c'est un mandat direct HM (retour
+  // Abbas 29/07 : d'abord "je n'ai pas 27 mandats" → filtré en direct-only ; puis "remets le
+  // réseau aussi, avec le badge").
+  var API = "https://loffmarketimmo.com/api/public/sales";
   var euro = function(n){ return new Intl.NumberFormat("fr-FR").format(n); };
   var grid = document.getElementById("grid");
   var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
@@ -152,6 +153,7 @@
     if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> p.</span>');
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
     var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
+    var isReseau = x.source === "reseau";
     var altTxt = esc((x.adresse || (x.secteur||"Paris")) + " — " + (x.type||"Appartement") + " à vendre" + (x.surface?(" "+x.surface+" m²"):""));
     var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">' : '';
     var tag = hasPhotos
@@ -159,7 +161,7 @@
       : '<span class="tag">Photos &amp; adresse sur demande</span>';
     var body = '<article class="card'+(hasPhotos?' has-photo':'')+'">'
       + photo
-      + '<div class="type">'+(x.type||"Appartement")+'</div>'
+      + (isReseau ? '<div class="type" style="display:flex;justify-content:space-between;align-items:center"><span>'+(x.type||"Appartement")+'</span><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a6d3f;border:1px solid currentColor;border-radius:3px;padding:1px 6px">Réseau</span></div>' : '<div class="type">'+(x.type||"Appartement")+'</div>')
       + '<div class="sect serif">'+(x.secteur||"Paris")+'</div>'
       + (x.prix!=null ? '<div class="price">'+euro(x.prix)+' €</div>' : '')
       + (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : '')
