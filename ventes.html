@@ -139,7 +139,10 @@
 
 <script>
 (function(){
-  var API = "https://loffmarketimmo.com/api/public/sales";
+  // ?direct=1 : cette page se présente comme "mandats directs HM Immobilier" — sans ce
+  // paramètre, l'API mélange nos mandats avec des biens de confrères du réseau, comptés à
+  // tort comme les nôtres (retour Abbas 29/07 : "je n'ai pas 27 mandats").
+  var API = "https://loffmarketimmo.com/api/public/sales?direct=1";
   var euro = function(n){ return new Intl.NumberFormat("fr-FR").format(n); };
   var grid = document.getElementById("grid");
   var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
