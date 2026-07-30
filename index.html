@@ -36,10 +36,10 @@
 </script>
 <style>
   :root{
-    --navy:#0b1220; --navy-2:#0e1626; --navy-3:#131d31; --ink:#14161a;
-    --gold:#a98a5c; --gold-2:#c9a84c; --gold-3:#e2c877;
-    --cream:#f4f2ec; --paper:#faf8f2; --soft:#efece3; --line:#e2ddd0;
-    --mut:#8d8778; --on-dark:#c7cad2; --on-dark-2:#9aa0ab;
+    --navy:#22201A; --navy-2:#2A2518; --navy-3:#332D1D; --ink:#22201A;
+    --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A;
+    --cream:#F4F0E6; --paper:#FBF8F0; --soft:#F0EADA; --line:#D9D0B8;
+    --mut:#8C8367; --on-dark:#D9D0B8; --on-dark-2:#B7AC8A;
     --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
     --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -48,7 +48,7 @@
   body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
   .serif{font-family:var(--serif)}
   .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+  .eyebrow{font-family:'SF Mono','Courier New',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);font-weight:400}
   h1,h2,h3{font-weight:400;letter-spacing:-.01em;text-wrap:balance}
   .num{font-variant-numeric:tabular-nums}
   svg{display:block}
@@ -79,14 +79,14 @@
   .hero-search{padding-bottom:34px}
   .hs-tabs{display:flex;gap:2px}
   .hs-tabs .hs-tab{background:rgba(7,11,20,.55);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:700 12px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
-  .hs-tabs .hs-tab.on{background:var(--cream,#f4f2ec);color:#14161a;border-bottom-color:var(--gold-2)}
-  .hs-row{display:flex;align-items:stretch;background:var(--cream,#f4f2ec);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+  .hs-tabs .hs-tab.on{background:var(--cream,#F4F0E6);color:#22201A;border-bottom-color:var(--gold-2)}
+  .hs-row{display:flex;align-items:stretch;background:var(--cream,#F4F0E6);box-shadow:0 18px 50px rgba(0,0,0,.28)}
   .hs-field{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 22px;border-right:1px solid rgba(20,20,18,.1);text-decoration:none;color:inherit;min-width:0}
   .hs-field:last-of-type{border-right:0}
-  .hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8d8778}
-  .hs-v{font:400 14.5px/1.3 system-ui;color:#14161a;margin-top:2px}
-  .hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#14161a;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
-  .hs-go:hover{background:var(--gold-2,#b9401f)}
+  .hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8C8367}
+  .hs-v{font:400 14.5px/1.3 system-ui;color:#22201A;margin-top:2px}
+  .hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#22201A;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
+  .hs-go:hover{background:var(--gold-2,#9C4A34)}
   @media (max-width:860px){
     .hero-top{padding-top:128px}
     .hero-top h1{font-size:32px}
@@ -110,13 +110,13 @@
   .bcard .bph{position:relative;height:380px;overflow:hidden;background:var(--soft)}
   .bcard .bph img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
   .bcard:hover .bph img{transform:scale(1.04)}
-  .bcard .badge{position:absolute;top:16px;left:16px;background:var(--gold);color:var(--ink);font:700 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:7px 12px}
+  .bcard .badge{position:absolute;top:16px;left:16px;background:var(--gold);color:#F4F0E6;font:400 10px/1 'SF Mono','Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px}
   .bcard .bb{padding:20px 22px 24px}
-  .bcard .bt{font-family:var(--serif);font-size:24px;line-height:1.25}
-  .bcard .bp{font-size:19px;font-weight:700;margin-top:8px;font-variant-numeric:tabular-nums}
+  .bcard .bt{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.25}
+  .bcard .bp{font-family:'SF Mono','Courier New',monospace;font-size:18px;font-weight:400;margin-top:10px;font-variant-numeric:tabular-nums}
   .bcard .bp small{font-size:13px;font-weight:400;color:var(--mut)}
-  .bcard .bf{display:flex;gap:18px;margin-top:10px;color:#5c564a;font-size:13.5px;flex-wrap:wrap}
-  .bcard .bf b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .bcard .bf{display:flex;gap:18px;margin-top:10px;color:#5A5140;font-size:13.5px;flex-wrap:wrap}
+  .bcard .bf b{color:var(--ink);font-family:'SF Mono','Courier New',monospace;font-variant-numeric:tabular-nums}
   @media(max-width:600px){.bcard .bph{height:250px}}
   .biens .more{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap}
   .biens .more a{font:700 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold)}
@@ -124,12 +124,12 @@
   .bloading{color:var(--mut);padding:24px 0;grid-column:1/-1}
 
   /* ===== footer harmonisé ===== */
-  footer.site{background:#070b14;color:#8a8271;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
@@ -172,27 +172,27 @@
 </div>
 
 <!-- ============ NOS PILIERS ============ -->
-<section style="background:#faf8f2;border-bottom:1px solid #e2ddd0;padding:46px 0">
+<section style="background:#FBF8F0;border-bottom:1px solid #D9D0B8;padding:46px 0">
   <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px">
     <div>
-      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#a98a5c">Équipe</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#14161a">À taille humaine</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#6b6455">Un seul interlocuteur, du premier appel à la signature.</p>
+      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Équipe</div>
+      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">À taille humaine</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Un seul interlocuteur, du premier appel à la signature.</p>
     </div>
     <div>
-      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#a98a5c">Estimation</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#14161a">Juste et gratuite</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#6b6455">Basée sur la data des ventes réellement signées.</p>
+      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Estimation</div>
+      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Juste et gratuite</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Basée sur la data des ventes réellement signées.</p>
     </div>
     <div>
-      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#a98a5c">Off-market</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#14161a">Une culture</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#6b6455">Vendre sans exposer, quand la discrétion s'impose.</p>
+      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Off-market</div>
+      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une culture</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Vendre sans exposer, quand la discrétion s'impose.</p>
     </div>
     <div>
-      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#a98a5c">Réseau</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#14161a">Une force</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#6b6455">Des indépendants vérifiés, partout dans Paris.</p>
+      <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Réseau</div>
+      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une force</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Des indépendants vérifiés, partout dans Paris.</p>
     </div>
   </div>
 </section>
@@ -214,13 +214,13 @@
 </section>
 
 <!-- ============ CTA ESTIMATION ============ -->
-<section style="background:#14161a;color:#f4f2ec;padding:64px 0">
+<section style="background:#22201A;color:#F4F0E6;padding:64px 0">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
     <div>
       <h2 class="serif" style="font-size:clamp(24px,3.4vw,34px)">Un projet de vente ?</h2>
-      <p style="color:#cfc7b8;font-size:15px;margin-top:8px;max-width:56ch">Estimation gratuite, fondée sur les ventes réellement signées.</p>
+      <p style="color:#D9D0B8;font-size:15px;margin-top:8px;max-width:56ch">Estimation gratuite, fondée sur les ventes réellement signées.</p>
     </div>
-    <a href="vendre.html" style="background:#c9a86a;color:#14161a;text-decoration:none;padding:15px 26px;font:700 13px system-ui;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Estimer mon bien →</a>
+    <a href="vendre.html" style="background:#B7784F;color:#22201A;text-decoration:none;padding:15px 26px;font:700 13px system-ui;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Estimer mon bien →</a>
   </div>
 </section>
 

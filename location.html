@@ -16,8 +16,8 @@
 <meta name="twitter:description" content="Nos appartements à louer en off-market à Paris & Ouest — secteur, loyer, surface." />
 <style>
   :root{
-    --ink:#14161a; --gold:#a98a5c; --gold-2:#c9a84c; --cream:#f4f2ec; --paper:#faf8f2;
-    --soft:#efece3; --line:#e2ddd0; --mut:#8d8778;
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --cream:#F4F0E6; --paper:#FBF8F0;
+    --soft:#F0EADA; --line:#D9D0B8; --mut:#8C8367;
     --serif:Georgia,"Times New Roman",serif;
     --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -26,14 +26,14 @@
   a{color:inherit}
   .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
   .serif{font-family:var(--serif)}
-  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .eyebrow{font-family:'SF Mono','Courier New',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:400}
   /* header */
   header.top{background:var(--ink);color:var(--cream)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
   .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
-  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9aa0ab;margin-top:2px}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
   .nav-links{display:flex;gap:22px;font-size:13.5px}
-  .nav-links a{color:#c7cad2;text-decoration:none}
+  .nav-links a{color:#D9D0B8;text-decoration:none}
   .nav-links a:hover,.nav-links a.on{color:var(--cream)}
   .nav-cta{border:1px solid var(--gold);color:var(--gold);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
   @media(max-width:760px){.nav-links{display:none}}
@@ -41,7 +41,7 @@
   .intro{padding:52px 0 26px;border-bottom:1px solid var(--line)}
   .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,48px);line-height:1.08;margin:12px 0 0;max-width:18ch}
   .intro h1 i{color:var(--gold);font-style:italic}
-  .intro .lede{color:#5c564a;font-size:16px;max-width:60ch;margin-top:16px}
+  .intro .lede{color:#5A5140;font-size:16px;max-width:60ch;margin-top:16px}
   .intro .meta{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap;font-size:13px;color:var(--mut)}
   .intro .meta b{color:var(--ink);font-size:20px;font-family:var(--serif);display:block}
   /* grid */
@@ -55,12 +55,12 @@
   .card:hover{border-color:var(--gold)}
   .card.has-photo{padding-top:0}
   .card .photo{width:calc(100% + 40px);margin:0 -20px 14px;height:170px;object-fit:cover;display:block}
-  .card .sect{font-family:var(--serif);font-size:21px}
-  .card .type{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
-  .card .price{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:10px}
+  .card .sect{font-family:var(--serif);font-style:italic;font-size:21px}
+  .card .type{font-family:'SF Mono','Courier New',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:8px}
+  .card .price{font-family:'SF Mono','Courier New',monospace;font-size:22px;font-weight:400;font-variant-numeric:tabular-nums;margin-top:10px}
   .card .price span{font-size:14px;font-weight:400;color:var(--mut)}
-  .card .facts{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:#5c564a;font-size:13.5px}
-  .card .facts b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .card .facts{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:#5A5140;font-size:13.5px}
+  .card .facts b{color:var(--ink);font-family:'SF Mono','Courier New',monospace;font-variant-numeric:tabular-nums}
   .card .tag{display:inline-block;margin-top:14px;font-size:11px;color:var(--mut);border-top:1px dashed var(--line);padding-top:12px}
   .card .tag.pub{color:var(--ink);font-weight:600}
   .empty{color:var(--mut);text-align:center;padding:50px 12px;grid-column:1/-1}
@@ -68,14 +68,14 @@
   .cta{background:var(--ink);color:var(--cream);margin-top:44px;padding:40px 0}
   .cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .cta h3{font-family:var(--serif);font-weight:400;font-size:24px;max-width:22ch}
-  .cta p{color:#9aa0ab;font-size:14px;margin-top:6px;max-width:46ch}
+  .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:46ch}
   .cta a{background:var(--gold);color:var(--ink);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
-  footer.site{background:#070b14;color:#8a8271;font-size:13px;padding:52px 0 26px;margin-top:0;text-align:left}
+  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px;margin-top:0;text-align:left}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
-  footer.site h5{color:#c7cad2;font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
-  footer.site a{color:#c9a84c;text-decoration:none}
+  footer.site h5{color:#D9D0B8;font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
+  footer.site a{color:#B7784F;text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>

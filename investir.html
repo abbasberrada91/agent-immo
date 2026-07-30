@@ -16,8 +16,8 @@
 <meta name="twitter:description" content="Chasse investisseur, étude de rentabilité et gestion-conciergerie clé en main, à Paris.">
 <style>
   :root{
-    --ink:#14161a; --gold:#a98a5c; --gold-2:#c9a84c; --cream:#f4f2ec; --paper:#faf8f2;
-    --soft:#efece3; --line:#e2ddd0; --mut:#8d8778; --on-dark:#c7cad2;
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --cream:#F4F0E6; --paper:#FBF8F0;
+    --soft:#F0EADA; --line:#D9D0B8; --mut:#8C8367; --on-dark:#D9D0B8;
     --serif:Georgia,"Times New Roman",serif;
     --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -26,43 +26,44 @@
   a{color:inherit}
   .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
   .serif{font-family:var(--serif)}
-  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .eyebrow{font-family:'SF Mono','Courier New',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:400}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   /* header */
   header.top{background:var(--ink);color:var(--cream)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
   .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
-  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9aa0ab;margin-top:2px}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
   .nav-links{display:flex;gap:22px;font-size:13.5px}
-  .nav-links a{color:#c7cad2;text-decoration:none}
+  .nav-links a{color:#D9D0B8;text-decoration:none}
   .nav-links a:hover,.nav-links a.on{color:var(--cream)}
   .nav-cta{border:1px solid var(--gold);color:var(--gold-2);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   @media(max-width:820px){.nav-links{display:none}}
   /* intro */
   .intro{padding:52px 0 44px;border-bottom:1px solid var(--line)}
   .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,46px);line-height:1.1;margin:12px 0 0;max-width:22ch}
-  .intro h1 i{color:#b9401f;font-style:italic}
-  .intro .lede{color:#5c564a;font-size:16px;max-width:62ch;margin-top:16px;line-height:1.7}
+  .intro h1 i{color:#9C4A34;font-style:italic}
+  .intro .lede{color:#5A5140;font-size:16px;max-width:62ch;margin-top:16px;line-height:1.7}
   /* cards */
   .invest{background:#f1ecdd;padding:64px 0}
   .igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .icard{background:#faf8f2;border:1px solid #e3ded2;padding:22px}
-  .icard h3{font:700 16px var(--sans);margin:10px 0 6px;color:#14161a}
-  .icard p{font:400 13.5px/1.6 var(--sans);color:#5a544a;margin-bottom:12px}
-  .icard a{font:700 13px var(--sans);color:#b9401f;text-decoration:none}
+  .icard{background:#FBF8F0;border:1px solid #D9D0B8;padding:22px}
+  .icard .ino{font-family:'SF Mono','Courier New',monospace;font-size:12px;letter-spacing:.1em;color:#9C4A34}
+  .icard h3{font:700 16px var(--sans);margin:10px 0 6px;color:#22201A}
+  .icard p{font:400 13.5px/1.6 var(--sans);color:#5A5140;margin-bottom:12px}
+  .icard a{font:700 13px var(--sans);color:#9C4A34;text-decoration:none}
   /* cta */
   .cta{background:var(--ink);color:var(--cream);padding:56px 0}
   .cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .cta h3{font-family:var(--serif);font-weight:400;font-size:26px;max-width:26ch}
-  .cta p{color:#9aa0ab;font-size:14px;margin-top:6px;max-width:50ch}
+  .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:50ch}
   .cta a{background:var(--gold);color:var(--ink);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
   /* footer harmonisé */
-  footer.site{background:#070b14;color:#8a8271;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#6f6a5e;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
@@ -94,17 +95,17 @@
   <div class="wrap">
     <div class="igrid">
       <div class="icard">
-        <div style="font-size:22px">🎯</div><h3>Chasse investisseur</h3>
+        <div class="ino">01</div><h3>Chasse investisseur</h3>
         <p>Nous sourçons les biens à potentiel (décote, travaux, découpe) avant le marché, grâce à notre veille quotidienne et notre réseau off-market.</p>
         <a href="https://loffmarketimmo.com/api/app">Enregistrer ma recherche (chasseur/pro) →</a>
       </div>
       <div class="icard">
-        <div style="font-size:22px">📈</div><h3>Étude de rentabilité</h3>
+        <div class="ino">02</div><h3>Étude de rentabilité</h3>
         <p>Rendement brut/net, vacance, fiscalité : une projection chiffrée avant d'acheter.</p>
         <a href="mailto:contact@henrimartinimmobilier.com?subject=Etude%20de%20rentabilite">Calculer une rentabilité →</a>
       </div>
       <div class="icard">
-        <div style="font-size:22px">🔑</div><h3>Gestion &amp; conciergerie</h3>
+        <div class="ino">03</div><h3>Gestion &amp; conciergerie</h3>
         <p>Location classique ou courte durée (Airbnb) : mise en location, gestion, ménage, voyageurs — clé en main.</p>
         <a href="mailto:contact@henrimartinimmobilier.com?subject=Conciergerie">Découvrir la conciergerie →</a>
       </div>
