@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bien à Paris — Henri Martin Immobilier</title>
+<meta name="description" content="Fiche détaillée d'un bien Henri Martin Immobilier à Paris — photos, prix, surface. Contact anonyme, sans laisser vos coordonnées." />
+<meta name="robots" content="noindex,follow">
+<!-- noindex volontaire : cette page miroir dépend d'un fetch JS côté client (id en query
+     string, pas d'URL propre par bien) — l'URL indexable et canonique reste
+     loffmarketimmo.com/bien/:id (server-rendue, JSON-LD inclus). Cette page sert
+     l'expérience visiteur (rester sur henrimartinimmobilier.com), pas le SEO. -->
+<style>
+  :root{
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --cream:#F4F0E6; --paper:#FBF8F0;
+    --soft:#F0EADA; --line:#D9D0B8; --rule:#B7AC8A; --mut:#8C8367; --ink2:#5A5140;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+  svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none;flex:0 0 auto}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px}
+  /* header (identique aux autres pages du site) */
+  header.top{background:var(--ink);color:var(--cream);font-family:var(--sans)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px;max-width:1160px;margin:0 auto;padding-left:22px;padding-right:22px}
+  .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
+  .nav-links{display:flex;gap:22px;font-size:13.5px}
+  .nav-links a{color:#D9D0B8;text-decoration:none}
+  .nav-links a:hover{color:var(--cream)}
+  .nav-cta{border:1px solid var(--gold);color:var(--gold);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+  @media(max-width:760px){.nav-links{display:none}}
+  /* fiche */
+  .prehead{padding-top:14px}
+  a.back{color:var(--mut);font-size:12px;letter-spacing:.03em}
+  a.back:hover{color:var(--ink)}
+  .fichetop{border-bottom:3px double var(--rule);padding:16px 0 20px;display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .fichetop .wm{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink)}
+  .fichetop .ref{font-family:"SF Mono","Courier New",monospace;font-size:11px;color:var(--mut);letter-spacing:.05em}
+  .fhero{padding:36px 0 18px;text-align:center}
+  .eyebrow{font-family:"SF Mono","Courier New",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  h1{font-size:clamp(26px,4.2vw,40px);font-weight:400;font-style:italic;margin:14px 0 6px;line-height:1.15}
+  .addr{font-size:13.5px;color:var(--ink2)}
+  .price{font-family:"SF Mono","Courier New",monospace;font-size:26px;margin-top:16px;font-variant-numeric:tabular-nums}
+  .price small{font-family:var(--serif);font-size:13px;color:var(--mut)}
+  .filet{width:52px;height:1px;background:var(--gold);margin:20px auto 0}
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:24px}
+  .stats .s{flex:1 1 130px;max-width:200px;padding:16px 8px;text-align:center;border-right:1px solid var(--line)}
+  .stats .s:last-child{border-right:0}
+  .stats .v{font-family:"SF Mono","Courier New",monospace;font-size:19px;font-variant-numeric:tabular-nums}
+  .stats .l{font-size:9.5px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+  .bleed{width:100vw;position:relative;left:calc(50% - 50vw)}
+  figure.phero,figure.pt{margin:0;cursor:zoom-in;overflow:hidden;position:relative}
+  .phero{height:clamp(420px,72vh,760px);margin-top:26px;background:var(--soft)}
+  .phero img{width:100%;height:100%;object-fit:cover;filter:sepia(.08) contrast(1.02);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .phero:hover img{transform:scale(1.015)}
+  .phero-count{position:absolute;right:18px;bottom:16px;background:rgba(34,32,26,.72);color:var(--cream);font-family:"SF Mono","Courier New",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px}
+  .pgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:34px}
+  .pgrid .pt{height:340px;flex:0 1 380px;background:var(--soft)}
+  .pgrid img{width:100%;height:100%;object-fit:cover;filter:sepia(.08) contrast(1.02);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .pgrid .pt:hover img{transform:scale(1.03)}
+  @media(max-width:640px){.phero{height:52vh;margin-top:18px}.pgrid{gap:3px;margin-top:22px}.pgrid .pt{height:150px;flex:0 1 calc(50% - 1.5px)}}
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(15,13,10,.96);display:none;align-items:center;justify-content:center}
+  .lb.on{display:flex}
+  .lb img{max-width:94vw;max-height:88vh;object-fit:contain;display:block}
+  .lb button{position:absolute;background:none;border:0;color:var(--cream);cursor:pointer;font-family:var(--serif)}
+  .lb .lb-x{top:18px;right:22px;font-size:26px;line-height:1}
+  .lb .lb-p,.lb .lb-n{top:0;bottom:0;width:16vw;font-size:44px;opacity:.65}
+  .lb .lb-p{left:0;text-align:left;padding-left:24px}
+  .lb .lb-n{right:0;text-align:right;padding-right:24px}
+  .lb .lb-p:hover,.lb .lb-n:hover{opacity:1}
+  .lb .lb-c{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#B7AC8A;font-family:"SF Mono","Courier New",monospace;font-size:11px;letter-spacing:.14em}
+  .lb .lb-tag{position:absolute;top:20px;left:24px;color:var(--cream);background:rgba(156,74,52,.85);font-family:"SF Mono","Courier New",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;display:none}
+  .tag-ia{position:absolute;left:6px;bottom:6px;background:rgba(34,32,26,.72);color:var(--cream);font-family:"SF Mono","Courier New",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px}
+  .body2{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;margin-top:32px}
+  .body2-full{grid-template-columns:1fr;max-width:62ch}
+  @media(max-width:700px){.body2{grid-template-columns:1fr}}
+  .desc{font-size:14.5px;color:var(--ink2);white-space:pre-line;max-width:62ch}
+  .desc::first-letter{font-size:2.6em;float:left;line-height:.8;padding-right:6px;color:var(--gold);font-style:normal}
+  .box{margin-bottom:26px}
+  h3{font-family:"SF Mono","Courier New",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;font-style:normal}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  td{padding:8px 0;border-bottom:1px dotted var(--rule);color:var(--ink2)}
+  td:last-child{text-align:right;font-family:"SF Mono","Courier New",monospace;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .planlink{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--gold);padding-bottom:2px;margin:14px 0 8px;text-decoration:none}
+  .pvnote{font-size:12.5px;font-style:italic;color:var(--mut);margin-top:14px}
+  .sec{margin-top:22px}
+  .sec h2{font-size:17px;font-style:italic;font-weight:400;display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  video{width:100%;background:#000}
+  .cta{border:1px solid var(--ink);margin:36px 0 24px;padding:26px;text-align:center}
+  .cta h4{font-style:italic;font-size:19px;margin-bottom:14px;font-weight:400}
+  .cta form{max-width:420px;margin:0 auto}
+  .cta input,.cta textarea{width:100%;font-family:inherit;font-size:14px;padding:11px;border:1px solid var(--rule);background:var(--cream);color:var(--ink);margin-bottom:8px}
+  .cta textarea{min-height:56px;resize:vertical}
+  .cta input:focus,.cta textarea:focus{outline:none;border-color:var(--gold)}
+  .cta button{background:var(--ink);color:var(--cream);border:0;padding:12px 26px;font-family:"SF Mono","Courier New",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .cta button:hover{opacity:.85}
+  .cta-msg{font-size:13px;margin-top:10px;min-height:1em;color:var(--gold)}
+  .chat-hint{font-size:13px;color:var(--ink2);max-width:52ch;margin:0 auto 14px}
+  .chatlog{max-width:420px;margin:0 auto 12px;text-align:left;display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;border:1px solid var(--rule);padding:12px;background:var(--paper)}
+  .cm{font-size:13.5px;line-height:1.5;padding:8px 11px;max-width:88%}
+  .cm b{font-family:"SF Mono","Courier New",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+  .cm.me{background:var(--ink);color:var(--cream);align-self:flex-end}
+  .cm.me b{color:var(--rule)}
+  .cm.them{background:#EFE8D8;align-self:flex-start}
+  .cm.them b{color:var(--gold)}
+  .cm.sys{background:none;border:1px dashed var(--rule);color:var(--mut);font-style:italic;align-self:center;max-width:100%}
+  .chat-actions{display:none;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px;margin:0 auto 10px}
+  .ghostbtn{background:none;color:var(--ink);border:1px solid var(--ink);padding:9px 14px;font-family:"SF Mono","Courier New",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .ghostbtn:hover{border-color:var(--gold);color:var(--gold)}
+  .loading,.notfound{padding:80px 22px;text-align:center;color:var(--mut)}
+  .notfound a{color:var(--gold);text-decoration:underline}
+  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px;margin-top:0;text-align:left;font-family:var(--sans)}
+  footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;max-width:1160px;margin:0 auto;padding:0 22px}
+  footer.site h5{color:#D9D0B8;font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
+  footer.site a{color:#B7784F;text-decoration:none}
+  footer.site a:hover{text-decoration:underline}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;max-width:1160px;margin-left:auto;margin-right:auto;padding-left:22px;padding-right:22px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="nav">
+    <a class="brand" href="index.html">Henri Martin Immobilier<small>Vente · Location · Investissement</small></a>
+    <nav class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="ventes.html">À vendre</a>
+      <a href="location.html">À louer</a>
+      <a href="vendre.html">Vendre</a>
+      <a href="quartiers.html">Quartiers</a>
+      <a href="agence.html">L'agence</a>
+    </nav>
+    <a class="nav-cta" href="vendre.html">Estimer mon bien</a>
+  </div>
+</header>
+
+<div id="ficheRoot" class="wrap"><div class="loading">Chargement de la fiche…</div></div>
+
+<footer class="site"><div class="cols">
+  <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
+  <div><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
+  <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
+  <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
+</div>
+<div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var API = "https://loffmarketimmo.com";
+  var root = document.getElementById("ficheRoot");
+  var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+  var eurFmt = function(n){ return Number(n).toLocaleString("fr-FR"); };
+  var photoUrl = function(p){ return (p && typeof p === "object") ? p.url : p; };
+  var photoLabel = function(p){ return (p && typeof p === "object") ? (p.label || null) : null; };
+
+  var id = new URLSearchParams(location.search).get("id");
+  if (!id) {
+    root.innerHTML = '<div class="notfound">Bien introuvable. <a href="ventes.html">Voir nos biens à vendre →</a></div>';
+    return;
+  }
+
+  function fetchWithTimeout(url, ms){
+    var ctrl = ("AbortController" in window) ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||10000) : null;
+    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
+  }
+
+  fetchWithTimeout(API + "/api/public/bien/" + encodeURIComponent(id), 10000)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if (!j || !j.ok) { showNotFound(); return; }
+      render(j);
+    })
+    .catch(function(){ showNotFound(); });
+
+  function showNotFound(){
+    root.innerHTML = '<div class="notfound">Cette annonce n\'est plus disponible ou a été retirée. <a href="ventes.html">Voir nos biens à vendre →</a> · <a href="location.html">à louer →</a></div>';
+  }
+
+  function buildGallery(photos){
+    if (!photos || !photos.length) return { heroHtml: "", gridHtml: "" };
+    var alt = function(i){ return esc("Photo " + (i+1) + "/" + photos.length); };
+    var tile = function(p, i){
+      var u = photoUrl(p), label = photoLabel(p);
+      return '<figure class="pt" data-lb="'+i+'"><img src="'+esc(u)+'" alt="'+alt(i)+'" loading="lazy">'+(label?('<span class="tag-ia">'+esc(label)+'</span>'):'')+'</figure>';
+    };
+    var first = photos[0];
+    var heroHtml = '<figure class="bleed phero" data-lb="0"><img src="'+esc(photoUrl(first))+'" alt="'+alt(0)+'" loading="eager">'+(photoLabel(first)?('<span class="tag-ia">'+esc(photoLabel(first))+'</span>'):'')+'<span class="phero-count">'+photos.length+' photo'+(photos.length>1?'s':'')+' — cliquer pour agrandir</span></figure>';
+    var rest = photos.slice(1);
+    var gridHtml = rest.length ? ('<div class="bleed pgrid">'+rest.map(function(p,i){ return tile(p, i+1); }).join('')+'</div>') : '';
+    return { heroHtml: heroHtml, gridHtml: gridHtml };
+  }
+
+  function render(d){
+    var modeLabel = d.mode === "location" ? "Location" : "Vente";
+    var typeLabel = "Appartement";
+    var titre = (d.adresse || d.secteur) + " — " + modeLabel + " " + typeLabel + (d.surface ? (" " + d.surface + " m²") : "") + " | Henri Martin Immobilier";
+    document.title = titre;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    var factsTxt = [d.surface?d.surface+" m²":null, d.pieces?d.pieces+" pièces":null, d.chambres?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(", ");
+    var descMeta = modeLabel+" — "+(d.adresse||d.secteur)+(factsTxt?", "+factsTxt:"")+(d.prix?", "+eurFmt(d.prix)+" €":"")+". Par Henri Martin Immobilier, agence carte T à Paris.";
+    if (metaDesc) metaDesc.setAttribute("content", descMeta);
+
+    var addrLine = [typeLabel, d.pieces!=null?d.pieces+" pièces":null, d.surface!=null?d.surface+" m²":null, d.chambres!=null?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(" · ");
+    var statBoxes = [
+      d.surface!=null?[d.surface,"Surface m²"]:null,
+      d.pieces!=null?[String(d.pieces),"Pièces"]:null,
+      d.chambres!=null?[String(d.chambres),"Chambres"]:null,
+      d.meuble==="meublé"?["Meublé","État"]:null,
+    ].concat((d.facts||[]).filter(function(f){return f.label==="DPE";}).map(function(f){return [f.value,"DPE"];})).filter(Boolean);
+    var statsHtml = statBoxes.length ? ('<div class="stats">'+statBoxes.map(function(b){return '<div class="s"><div class="v">'+esc(b[0])+'</div><div class="l">'+esc(b[1])+'</div></div>';}).join('')+'</div>') : '';
+
+    var caracRows = (d.facts||[]).filter(function(f){return f.label!=="DPE";});
+    var caracHtml = caracRows.length ? ('<div class="box"><h3>Caractéristiques</h3><table>'+caracRows.map(function(f){return '<tr><td>'+esc(f.label)+'</td><td>'+esc(f.value)+'</td></tr>';}).join('')+'</table></div>') : '';
+    var piecesRows = d.piecesDetail||[];
+    var piecesHtml = piecesRows.length ? ('<div class="box"><h3>Désignation des pièces</h3><table>'+piecesRows.map(function(p){return '<tr><td>'+esc(p.label)+'</td><td>'+String(p.surface).replace('.',',')+' m²</td></tr>';}).join('')+'</table></div>') : '';
+    var hasSideCol = !!(caracHtml || piecesHtml);
+
+    var gal = buildGallery(d.photos);
+    var planHtml = d.planId ? ('<a class="planlink" href="'+API+'/api/bien/'+encodeURIComponent(d.id)+'/plan" target="_blank" rel="noopener">Voir le plan du bien</a>') : '';
+    var videoHtml = d.videoId ? ('<div class="sec"><h2>Visite virtuelle</h2><video controls preload="none" poster="'+esc(photoUrl((d.photos||[])[0]))+'" src="'+API+'/api/bien/'+encodeURIComponent(d.id)+'/video"></video></div>') : '';
+    var planVideoNote = (!d.planId && !d.videoId) ? '<p class="pvnote">Plan et visite virtuelle disponibles sur demande auprès de l\'agence.</p>' : '';
+
+    root.innerHTML =
+      '<div class="prehead"><a class="back" href="'+(d.mode==="location"?"location.html":"ventes.html")+'">← Retour à nos biens</a></div>'+
+      '<div class="fichetop"><span class="wm">Henri Martin Immobilier</span>'+(d.reference?('<span class="ref">Réf. '+esc(d.reference)+'</span>'):'')+'</div>'+
+      gal.heroHtml+
+      '<div class="fhero">'+
+        '<p class="eyebrow">'+esc(modeLabel)+' — '+esc(d.secteur)+'</p>'+
+        '<h1>'+esc(d.adresse||d.secteur)+'</h1>'+
+        (addrLine?('<div class="addr">'+esc(addrLine)+'</div>'):'')+
+        (d.prix!=null?('<div class="price">'+eurFmt(d.prix)+' €'+(d.mode==="location"?' <small>/ mois</small>':'')+'</div>'):'')+
+        '<div class="filet"></div>'+
+      '</div>'+
+      statsHtml+
+      gal.gridHtml+
+      '<div class="body2'+(hasSideCol?'':' body2-full')+'">'+
+        '<div>'+(d.description?('<p class="desc">'+esc(d.description)+'</p>'):'')+planHtml+videoHtml+planVideoNote+'</div>'+
+        (hasSideCol?('<div>'+caracHtml+piecesHtml+'</div>'):'')+
+      '</div>'+
+      '<div class="cta" id="chat-cta">'+
+        '<h4>Cette annonce vous intéresse ?</h4>'+
+        '<p class="chat-hint">Posez vos questions ou demandez une visite — <b>sans laisser vos coordonnées</b>. Vous ne les transmettez que si une visite s\'organise.</p>'+
+        '<div class="chatlog" id="chat-log" style="display:none"></div>'+
+        '<form id="cf"><textarea id="cf-msg" placeholder="Votre question ou demande (anonyme)…" required></textarea><button type="submit">Envoyer — anonyme →</button></form>'+
+        '<div class="chat-actions" id="chat-actions" style="display:none">'+
+          '<button type="button" class="ghostbtn" id="cf-visit-btn">📅 Organiser la visite — transmettre mes coordonnées</button>'+
+          '<button type="button" class="ghostbtn" id="cf-notify-btn">🔔 Être prévenu d\'une réponse</button>'+
+        '</div>'+
+        '<form id="cf-visit" style="display:none"><input id="cfv-name" placeholder="Votre nom" required><input id="cfv-phone" placeholder="Votre téléphone" required><button type="submit">Transmettre à l\'agence →</button></form>'+
+        '<form id="cf-notify" style="display:none"><input id="cfn-contact" placeholder="Email ou téléphone (jamais communiqué à des tiers)" required><button type="submit">Me prévenir →</button></form>'+
+        '<div class="cta-msg" id="cf-out"></div>'+
+      '</div>'+
+      '<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo agrandie">'+
+        '<button class="lb-x" aria-label="Fermer">✕</button><button class="lb-p" aria-label="Photo précédente">‹</button>'+
+        '<img id="lb-img" alt=""><button class="lb-n" aria-label="Photo suivante">›</button>'+
+        '<span class="lb-tag" id="lb-tag"></span><div class="lb-c" id="lb-c"></div>'+
+      '</div>';
+
+    wireLightbox(d.photos||[]);
+    wireChat(d.id);
+  }
+
+  function wireLightbox(photos){
+    var PHOTOS = photos.map(function(p){ return { u: photoUrl(p), l: photoLabel(p) || "" }; });
+    var lb = document.getElementById("lb"), img = document.getElementById("lb-img");
+    var tag = document.getElementById("lb-tag"), cnt = document.getElementById("lb-c");
+    var idx = 0;
+    function show(i){
+      idx = (i + PHOTOS.length) % PHOTOS.length;
+      img.src = PHOTOS[idx].u;
+      cnt.textContent = (idx+1) + " / " + PHOTOS.length;
+      tag.textContent = PHOTOS[idx].l || "";
+      tag.style.display = PHOTOS[idx].l ? "block" : "none";
+    }
+    function open(i){ show(i); lb.classList.add("on"); document.body.style.overflow = "hidden"; }
+    function close(){ lb.classList.remove("on"); document.body.style.overflow = ""; }
+    document.querySelectorAll("[data-lb]").forEach(function(f){
+      f.addEventListener("click", function(){ open(Number(f.getAttribute("data-lb")) || 0); });
+    });
+    lb.querySelector(".lb-x").addEventListener("click", close);
+    lb.querySelector(".lb-p").addEventListener("click", function(e){ e.stopPropagation(); show(idx-1); });
+    lb.querySelector(".lb-n").addEventListener("click", function(e){ e.stopPropagation(); show(idx+1); });
+    lb.addEventListener("click", function(e){ if (e.target===lb || e.target===img) close(); });
+    document.addEventListener("keydown", function(e){
+      if (!lb.classList.contains("on")) return;
+      if (e.key==="Escape") close();
+      else if (e.key==="ArrowLeft") show(idx-1);
+      else if (e.key==="ArrowRight") show(idx+1);
+    });
+  }
+
+  function wireChat(bienId){
+    var BID = encodeURIComponent(bienId);
+    var KEY = "pubchat_" + BID;
+    var out = document.getElementById("cf-out"), log = document.getElementById("chat-log");
+    var acts = document.getElementById("chat-actions");
+    try {
+      var qs = new URLSearchParams(location.search);
+      if (qs.get("conv")) localStorage.setItem(KEY, qs.get("conv"));
+    } catch(e){}
+    function token(){ try{ return localStorage.getItem(KEY) || ""; }catch(e){ return ""; } }
+    function render(d){
+      if (!d || !d.messages || !d.messages.length) return;
+      log.style.display = "block"; acts.style.display = "flex";
+      log.innerHTML = d.messages.map(function(m){
+        return '<div class="cm '+(m.isSystem?'sys':(m.me?'me':'them'))+'"><b>'+esc(m.from)+'</b><br>'+esc(m.body)+'</div>';
+      }).join("");
+      log.scrollTop = log.scrollHeight;
+      if (d.status==="visit_requested") document.getElementById("cf-visit-btn").style.display = "none";
+      if (d.hasContact) document.getElementById("cf-notify-btn").style.display = "none";
+      document.getElementById("cf-msg").placeholder = "Votre message…";
+    }
+    function refresh(){
+      if (!token()) return;
+      fetch(API+"/api/bien/"+BID+"/chat?token="+encodeURIComponent(token())).then(function(r){return r.json();})
+        .then(function(j){ if (j && j.ok) render(j); }).catch(function(){});
+    }
+    refresh();
+    setInterval(refresh, 25000);
+    document.getElementById("cf").addEventListener("submit", function(e){
+      e.preventDefault();
+      var btn = e.target.querySelector("button"), msg = document.getElementById("cf-msg").value.trim();
+      if (!msg) return;
+      btn.disabled = true; out.textContent = "";
+      fetch(API+"/api/bien/"+BID+"/chat", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({message: msg, token: token()})})
+        .then(function(r){return r.json();})
+        .then(function(j){
+          btn.disabled = false;
+          if (j && j.ok) { try{ localStorage.setItem(KEY, j.token); }catch(e){} document.getElementById("cf-msg").value = ""; refresh(); }
+          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
+        }).catch(function(){ btn.disabled = false; out.textContent = "Erreur réseau — réessayez."; });
+    });
+    document.getElementById("cf-visit-btn").onclick = function(){ var f=document.getElementById("cf-visit"); f.style.display = f.style.display==="none"?"block":"none"; };
+    document.getElementById("cf-notify-btn").onclick = function(){ var f=document.getElementById("cf-notify"); f.style.display = f.style.display==="none"?"block":"none"; };
+    document.getElementById("cf-visit").addEventListener("submit", function(e){
+      e.preventDefault();
+      var name = document.getElementById("cfv-name").value.trim(), phone = document.getElementById("cfv-phone").value.trim();
+      if (!name || !phone) { out.textContent = "Nom et téléphone requis."; return; }
+      fetch(API+"/api/bien/"+BID+"/chat/identity", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({token: token(), name: name, phone: phone})})
+        .then(function(r){return r.json();})
+        .then(function(j){
+          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Coordonnées transmises — nous vous confirmons le créneau très vite."; refresh(); }
+          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
+        }).catch(function(){ out.textContent = "Erreur réseau — réessayez."; });
+    });
+    document.getElementById("cf-notify").addEventListener("submit", function(e){
+      e.preventDefault();
+      var c = document.getElementById("cfn-contact").value.trim();
+      if (!c) return;
+      fetch(API+"/api/bien/"+BID+"/chat/contact", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({token: token(), contact: c})})
+        .then(function(r){return r.json();})
+        .then(function(j){
+          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Noté — vous serez prévenu en cas de réponse."; }
+          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
+        }).catch(function(){ out.textContent = "Erreur réseau — réessayez."; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

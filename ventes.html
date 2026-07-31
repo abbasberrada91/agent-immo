@@ -178,7 +178,7 @@
       + tag
       + '</article>';
     return hasPhotos && x.id
-      ? '<a class="card-link" href="https://loffmarketimmo.com/bien/'+encodeURIComponent(x.id)+'">'+body+'</a>'
+      ? '<a class="card-link" href="bien.html?id='+encodeURIComponent(x.id)+'">'+body+'</a>'
       : body;
   }
   function fetchWithTimeout(url, ms){

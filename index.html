@@ -309,7 +309,7 @@
       + (facts.length ? '<div class="bf">'+facts.join('')+'</div>' : '')
       + '</div>';
     return x.id
-      ? '<a class="bcard" href="https://loffmarketimmo.com/bien/'+encodeURIComponent(x.id)+'">'+inner+'</a>'
+      ? '<a class="bcard" href="bien.html?id='+encodeURIComponent(x.id)+'">'+inner+'</a>'
       : '<article class="bcard">'+inner+'</article>';
   }
   // Mandats directs HM UNIQUEMENT (?direct=1) — décision Abbas 31/07, jamais les biens du
