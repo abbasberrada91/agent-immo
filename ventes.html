@@ -96,12 +96,12 @@
 
 <section class="intro">
   <div class="wrap">
-    <p class="eyebrow">Mandats directs &amp; réseau · Paris &amp; Ouest</p>
+    <p class="eyebrow">Mandats directs · Paris &amp; Ouest</p>
     <h1 class="serif">Nos appartements <i>à vendre</i>.</h1>
-    <p class="lede">Nos mandats directs, complétés par une sélection de biens de confrères de notre réseau (repérés « Réseau »). Secteur, prix et surface ci-dessous — <b>photos, adresse exacte et visite communiquées en privé</b>, aux acquéreurs qualifiés.</p>
+    <p class="lede">Nos mandats directs uniquement — les biens que nous avons personnellement en charge. Secteur, prix et surface ci-dessous — <b>photos, adresse exacte et visite communiquées en privé</b>, aux acquéreurs qualifiés.</p>
     <div class="meta">
       <div><b id="kpi-count">—</b>biens à la vente</div>
-      <div><b>Direct &amp; réseau</b>HM Immobilier</div>
+      <div><b>Mandats directs</b>HM Immobilier</div>
       <div><b>24 h</b>mise à jour des disponibilités</div>
     </div>
   </div>
@@ -132,18 +132,19 @@
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
     <div><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
-    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a></div>
+    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
   <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
 <script>
 (function(){
-  // Mandats directs HM + biens du réseau (confrères) — chaque carte réseau porte un badge
-  // "Réseau" distinct pour ne jamais laisser croire que c'est un mandat direct HM (retour
-  // Abbas 29/07 : d'abord "je n'ai pas 27 mandats" → filtré en direct-only ; puis "remets le
-  // réseau aussi, avec le badge").
-  var API = "https://loffmarketimmo.com/api/public/sales";
+  // Mandats directs HM UNIQUEMENT (?direct=1) — jamais les biens du réseau (confrères) : ce
+  // site est la vitrine publique de nos propres mandats (décision Abbas 31/07, tranche
+  // l'aller-retour du 29/07 sur ce même point : plus de mélange direct/réseau ici). Un bien
+  // réseau pourra réapparaître plus tard SI un confrère nous donne explicitement un mandat de
+  // publicité (pas encore le cas à ce jour).
+  var API = "https://loffmarketimmo.com/api/public/sales?direct=1";
   var euro = function(n){ return new Intl.NumberFormat("fr-FR").format(n); };
   var grid = document.getElementById("grid");
   var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };

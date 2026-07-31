@@ -123,6 +123,19 @@
   .biens .more a:hover{color:var(--gold)}
   .bloading{color:var(--mut);padding:24px 0;grid-column:1/-1}
 
+  /* ===== Recherches actives — preuve sociale côté vendeur/bailleur ===== */
+  .demande{background:var(--soft);padding:64px 0}
+  .demande .head{max-width:640px;margin-bottom:30px}
+  .demande h2{font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);line-height:1.15;margin:10px 0 0}
+  .demande h2 i{color:var(--gold);font-style:italic}
+  .demande .sub{color:var(--mut);font-size:15px;margin-top:10px}
+  .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
+  .dcard{background:#fff;border:1px solid var(--line);padding:16px 18px}
+  .dcard .dtype{font:700 10px/1 'SF Mono','Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .dcard .dsec{font-family:var(--serif);font-style:italic;font-size:17px;margin-top:7px}
+  .dcard .dbud{font-family:'SF Mono','Courier New',monospace;font-size:14px;margin-top:9px;color:var(--ink)}
+  .dcard .dcrit{font-size:12px;color:var(--mut);margin-top:4px}
+
   /* ===== footer harmonisé ===== */
   footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
@@ -213,6 +226,18 @@
   </div>
 </section>
 
+<!-- ============ RECHERCHES ACTIVES — preuve de la demande ============ -->
+<section class="demande" id="demande">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" style="color:var(--gold)">La demande est là</div>
+      <h2>Des acheteurs <i>et des locataires</i>, déjà en recherche.</h2>
+      <p class="sub">Un aperçu de nos recherches actives, tous secteurs confondus. Nous confier votre bien, c'est aussi accéder à des profils déjà qualifiés — sans attendre qu'ils tombent sur votre annonce.</p>
+    </div>
+    <div class="dgrid" id="demandeGrid"><div class="bloading">Chargement des recherches actives…</div></div>
+  </div>
+</section>
+
 <!-- ============ CTA ESTIMATION ============ -->
 <section style="background:#22201A;color:#F4F0E6;padding:64px 0">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
@@ -229,7 +254,7 @@
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
     <div id="contact"><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
-    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a></div>
+    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
   <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
@@ -287,9 +312,11 @@
       ? '<a class="bcard" href="https://loffmarketimmo.com/bien/'+encodeURIComponent(x.id)+'">'+inner+'</a>'
       : '<article class="bcard">'+inner+'</article>';
   }
+  // Mandats directs HM UNIQUEMENT (?direct=1) — décision Abbas 31/07, jamais les biens du
+  // réseau (confrères) sur ce site.
   Promise.all([
-    fetchWithTimeout('https://loffmarketimmo.com/api/public/sales',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
-    fetchWithTimeout('https://loffmarketimmo.com/api/public/locations',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
+    fetchWithTimeout('https://loffmarketimmo.com/api/public/sales?direct=1',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
+    fetchWithTimeout('https://loffmarketimmo.com/api/public/locations?direct=1',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
   ]).then(function(res){
     var ven = ((res[0]&&res[0].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'vente'});});
     var loc = ((res[1]&&res[1].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'location'});});
@@ -307,6 +334,49 @@
       : '<div class="bloading">Aucun bien avec photos pour le moment — parcourez nos biens à vendre et à louer ci-dessous.</div>';
   }).catch(function(){
     grid.innerHTML = '<div class="bloading">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div>';
+  });
+})();
+</script>
+<script>
+(function(){
+  // « Recherches actives » — preuve sociale anonymisée (aucune coordonnée, aucun nom) pour
+  // convaincre un vendeur/bailleur qu'il y a déjà des acheteurs qui cherchent (demande Abbas
+  // 31/07). Alimenté par /api/public/searches (nos clients CRM + recherches du réseau).
+  var grid = document.getElementById('demandeGrid');
+  if(!grid) return;
+  var euro = function(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n)); };
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  function range(min, max, unit){
+    if(min==null && max==null) return '';
+    if(min!=null && max!=null) return euro(min)+'–'+euro(max)+unit;
+    if(max!=null) return 'jusqu’à '+euro(max)+unit;
+    return euro(min)+unit+' min';
+  }
+  function card(x){
+    var bud = range(x.budgetMin, x.budgetMax, ' €');
+    var crit = [];
+    if(x.propertyType) crit.push(x.propertyType);
+    var surf = range(x.surfaceMin, x.surfaceMax, ' m²'); if(surf) crit.push(surf);
+    var ch = range(x.chambresMin, x.chambresMax, ' ch.'); if(ch) crit.push(ch);
+    return '<div class="dcard">'
+      + '<div class="dtype">'+(x.type==='location'?'Recherche location':'Recherche achat')+'</div>'
+      + '<div class="dsec">'+esc(x.secteurs||'Paris & environs')+'</div>'
+      + (bud ? '<div class="dbud">'+bud+'</div>' : '')
+      + (crit.length ? '<div class="dcrit">'+esc(crit.join(' · '))+'</div>' : '')
+      + '</div>';
+  }
+  function fetchWithTimeout(url, ms){
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
+    return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
+  }
+  fetchWithTimeout('https://loffmarketimmo.com/api/public/searches', 8000).then(function(r){ return r.json(); }).then(function(j){
+    var items = (j && j.items) || [];
+    grid.innerHTML = items.length
+      ? items.map(card).join('')
+      : '<div class="bloading">Aucune recherche active à afficher pour le moment.</div>';
+  }).catch(function(){
+    grid.innerHTML = '<div class="bloading">Sélection momentanément indisponible.</div>';
   });
 })();
 </script>
