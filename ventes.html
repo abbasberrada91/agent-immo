@@ -51,10 +51,16 @@
   .count{color:var(--mut);font-size:13px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   .card-link{display:block;text-decoration:none;color:inherit}
-  .card{background:#fff;border:1px solid var(--line);padding:20px 20px 18px;display:flex;flex-direction:column;gap:2px;transition:border-color .15s}
+  .card{background:#fff;border:1px solid var(--line);padding:0 20px 18px;display:flex;flex-direction:column;gap:2px;transition:border-color .15s}
   .card:hover{border-color:var(--gold)}
-  .card.has-photo{padding-top:0}
   .card .photo{width:calc(100% + 40px);margin:0 -20px 14px;height:170px;object-fit:cover;display:block}
+  /* Chaque carte réserve le même bloc photo en haut (vraie photo OU cadenas) — sinon les
+     cartes sans photo sont plus courtes que leurs voisines, la grille s'étire pour compenser
+     et le titre/prix ne démarre plus à la même hauteur d'une carte à l'autre (repéré par
+     Abbas 31/07, capture d'écran "les visuels ne sont pas alignés"). */
+  .card .photo.placeholder{width:calc(100% + 40px);margin:0 -20px 14px;height:170px;display:flex;align-items:center;justify-content:center;gap:7px;
+    background:linear-gradient(165deg,#EFE9DB 0%,#E2D8C0 100%);color:#8C8367;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .card .photo.placeholder svg{width:14px;height:14px;stroke:#8C8367;stroke-width:1.6;fill:none}
   .card .sect{font-family:var(--serif);font-style:italic;font-size:21px}
   .card .type{font-family:'SF Mono','Courier New',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:8px}
   .card .price{font-family:'SF Mono','Courier New',monospace;font-size:22px;font-weight:400;font-variant-numeric:tabular-nums;margin-top:10px}
@@ -156,11 +162,14 @@
     var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
     var isReseau = x.source === "reseau";
     var altTxt = esc((x.adresse || (x.secteur||"Paris")) + " — " + (x.type||"Appartement") + " à vendre" + (x.surface?(" "+x.surface+" m²"):""));
-    var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">' : '';
+    var lockSvg = '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+    var photo = hasPhotos
+      ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">'
+      : '<div class="photo placeholder">'+lockSvg+'Photos sur demande</div>';
     var tag = hasPhotos
       ? '<span class="tag pub">'+(x.adresse ? esc(x.adresse) : "Adresse sur demande")+'</span>'
       : '<span class="tag">Photos &amp; adresse sur demande</span>';
-    var body = '<article class="card'+(hasPhotos?' has-photo':'')+'">'
+    var body = '<article class="card">'
       + photo
       + (isReseau ? '<div class="type" style="display:flex;justify-content:space-between;align-items:center"><span>'+(x.type||"Appartement")+'</span><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a6d3f;border:1px solid currentColor;border-radius:3px;padding:1px 6px">Réseau</span></div>' : '<div class="type">'+(x.type||"Appartement")+'</div>')
       + '<div class="sect serif">'+(x.secteur||"Paris")+'</div>'
