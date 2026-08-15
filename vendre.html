@@ -114,6 +114,65 @@
   footer.site a:hover{text-decoration:underline}
   footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Henri Martin Immobilier",
+  "url": "https://henrimartinimmobilier.com/",
+  "telephone": "+33625226194",
+  "email": "contact@henrimartinimmobilier.com",
+  "areaServed": {"@type": "City", "name": "Paris"},
+  "address": {"@type": "PostalAddress", "streetAddress": "58 rue de Monceau", "postalCode": "75008", "addressLocality": "Paris", "addressCountry": "FR"},
+  "makesOffer": [
+    {"@type": "Offer", "name": "Vente immobilière"},
+    {"@type": "Offer", "name": "Location immobilière"},
+    {"@type": "Offer", "name": "Investissement locatif"},
+    {"@type": "Offer", "name": "Conciergerie"}
+  ]
+}
+</script>
+<script src="/assets/mesure.js" defer></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "L'estimation est-elle vraiment gratuite et sans laisser mes coordonnées ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui. Vous réglez le curseur, votre fourchette s'affiche immédiatement, sans nom ni téléphone. Vos coordonnées ne sont demandées que si vous souhaitez le rapport détaillé et les comparables rue par rue — et uniquement à ce moment-là."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Sur quoi repose la fourchette affichée ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sur les ventes réellement signées de votre secteur (données DVF publiques, actes notariés) croisées avec les comparables récents du quartier — pas sur un algorithme opaque ni sur des annonces en cours, qui reflètent des prix espérés, pas des prix payés."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Off-market ou publicité classique : que choisir ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "L'off-market présente votre bien directement à des acquéreurs qualifiés déjà suivis par l'agence, sans annonce publique — la discrétion prime. La publicité maximise l'exposition sur les portails. On choisit ensemble selon votre bien, votre calendrier et votre besoin de confidentialité, et on peut passer de l'un à l'autre."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Mon bien peut-il apparaître quelque part sans mon accord ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non. Rien n'est diffusé sans votre accord écrit : ni photos, ni adresse, ni annonce. Chaque canal de diffusion est activé avec vous, et l'adresse précise n'apparaît jamais publiquement."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 
@@ -242,6 +301,30 @@
   </div>
 </div></section>
 
+<!-- ============ FAQ vendeurs (contenu visible = miroir exact du JSON-LD FAQPage du head) ============ -->
+<section id="faq" style="background:var(--cream);padding:64px 20px;border-top:1px solid var(--line)">
+  <div style="max-width:760px;margin:0 auto">
+    <p class="eyebrow">Questions fréquentes</p>
+    <h2 class="serif" style="font-weight:400;font-size:clamp(26px,3.4vw,34px);margin:10px 0 26px">Avant de vendre, <i>ce qu'on nous demande</i></h2>
+    <details style="border-bottom:1px solid var(--line);padding:16px 0">
+      <summary style="cursor:pointer;font-weight:600;font-size:15.5px">L'estimation est-elle vraiment gratuite et sans laisser mes coordonnées ?</summary>
+      <p style="margin-top:10px;color:var(--mut);line-height:1.6">Oui. Vous réglez le curseur, votre fourchette s'affiche immédiatement, sans nom ni téléphone. Vos coordonnées ne sont demandées que si vous souhaitez le rapport détaillé et les comparables rue par rue — et uniquement à ce moment-là.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);padding:16px 0">
+      <summary style="cursor:pointer;font-weight:600;font-size:15.5px">Sur quoi repose la fourchette affichée ?</summary>
+      <p style="margin-top:10px;color:var(--mut);line-height:1.6">Sur les ventes réellement signées de votre secteur (données DVF publiques, actes notariés) croisées avec les comparables récents du quartier — pas sur un algorithme opaque ni sur des annonces en cours, qui reflètent des prix espérés, pas des prix payés.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);padding:16px 0">
+      <summary style="cursor:pointer;font-weight:600;font-size:15.5px">Off-market ou publicité classique : que choisir ?</summary>
+      <p style="margin-top:10px;color:var(--mut);line-height:1.6">L'off-market présente votre bien directement à des acquéreurs qualifiés déjà suivis par l'agence, sans annonce publique — la discrétion prime. La publicité maximise l'exposition sur les portails. On choisit ensemble selon votre bien, votre calendrier et votre besoin de confidentialité, et on peut passer de l'un à l'autre.</p>
+    </details>
+    <details style="padding:16px 0">
+      <summary style="cursor:pointer;font-weight:600;font-size:15.5px">Mon bien peut-il apparaître quelque part sans mon accord ?</summary>
+      <p style="margin-top:10px;color:var(--mut);line-height:1.6">Non. Rien n'est diffusé sans votre accord écrit : ni photos, ni adresse, ni annonce. Chaque canal de diffusion est activé avec vous, et l'adresse précise n'apparaît jamais publiquement.</p>
+    </details>
+  </div>
+</section>
+
 <footer class="site"><div class="wrap">
   <div class="cols">
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
@@ -339,6 +422,22 @@
       fetch('https://loffmarketimmo.com/api/site/estimation',{method:'POST',headers:{'content-type':'application/json'},
         body:JSON.stringify({prenom:prenom,tel:tel,surface:surface,secteur:zone,fourchette:fourchette,source:'henrimartinimmobilier.com'})}).catch(function(){});
     }catch(e){}
+  });
+})();
+</script>
+<script>
+/* Événements GA4 (inertes tant que mesure.js n'a pas d'ID) :
+   - estimation_affichee : premier réglage de l'estimateur (fourchette visible)
+   - lead_estimation : coordonnées laissées — LA conversion importée dans Google Ads */
+(function(){
+  var fired=false;
+  function once(){ if(fired)return; fired=true; if(window.hmiEvent)hmiEvent('estimation_affichee',{}); }
+  var zp=document.getElementById('zpick'); if(zp)zp.addEventListener('click',once);
+  var sf=document.getElementById('surf'); if(sf)sf.addEventListener('input',once);
+  var b=document.getElementById('uBtn');
+  if(b)b.addEventListener('click',function(){
+    var tel=(document.getElementById('uTel')||{}).value||'';
+    if(tel.trim()&&window.hmiEvent)hmiEvent('lead_estimation',{});
   });
 })();
 </script>
