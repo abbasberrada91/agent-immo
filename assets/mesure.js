@@ -7,7 +7,7 @@
    6 mois et ne recharge jamais rien. */
 (function () {
   "use strict";
-  var HMI_GA4_ID = ""; // ← ID de mesure GA4 (G-XXXXXXX). Vide = tout est désactivé.
+  var HMI_GA4_ID = "G-EX8VKZXBFJ"; // ID de mesure GA4 — propriété « henrimartinimmobilier.com », flux « Site vitrine », créée le 16/08/2026.
 
   if (!HMI_GA4_ID) { window.hmiEvent = function () {}; return; }
 
