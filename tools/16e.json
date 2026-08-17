@@ -1,0 +1,27 @@
+{
+  "ok": true, "zip": "75016", "arrondissement": 16, "type": "appartement",
+  "millesime": "2025",
+  "ventes": 2681, "ppm2Median": 11200, "ppm2P25": 9520, "ppm2P75": 13210,
+  "surfaceMediane": 71, "prixMedian": 786000,
+  "parPieces": [
+    {"pieces":1,"ventes":490,"ppm2Median":10810,"surfaceMediane":23,"prixMedian":260000},
+    {"pieces":2,"ventes":553,"ppm2Median":10580,"surfaceMediane":49,"prixMedian":511000},
+    {"pieces":3,"ventes":555,"ppm2Median":10830,"surfaceMediane":75,"prixMedian":810000},
+    {"pieces":4,"ventes":424,"ppm2Median":11530,"surfaceMediane":107,"prixMedian":1203000},
+    {"pieces":5,"cinqEtPlus":true,"ventes":441,"ppm2Median":12210,"surfaceMediane":159,"prixMedian":1948000}
+  ],
+  "rues": [
+    {"voie":"Avenue de Versailles","ventes":81,"ppm2Median":9220,"prixMedian":450000},
+    {"voie":"Rue Lauriston","ventes":61,"ppm2Median":11500,"prixMedian":500000},
+    {"voie":"Rue Michel-Ange","ventes":58,"ppm2Median":9380,"prixMedian":619000},
+    {"voie":"Boulevard Exelmans","ventes":57,"ppm2Median":9660,"prixMedian":690000},
+    {"voie":"Avenue Victor-Hugo","ventes":56,"ppm2Median":12670,"prixMedian":1005000},
+    {"voie":"Boulevard Murat","ventes":48,"ppm2Median":9420,"prixMedian":531000},
+    {"voie":"Avenue Paul-Doumer","ventes":44,"ppm2Median":12700,"prixMedian":1278000},
+    {"voie":"Rue Jean de La Fontaine","ventes":42,"ppm2Median":10410,"prixMedian":783000},
+    {"voie":"Rue de la Tour","ventes":42,"ppm2Median":11970,"prixMedian":888000},
+    {"voie":"Rue de la Pompe","ventes":38,"ppm2Median":12110,"prixMedian":773000},
+    {"voie":"Rue de Longchamp","ventes":37,"ppm2Median":12900,"prixMedian":1005000},
+    {"voie":"Avenue Foch","ventes":35,"ppm2Median":12790,"prixMedian":1079000}
+  ]
+}
