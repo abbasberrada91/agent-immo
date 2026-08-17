@@ -48,13 +48,24 @@ jobs:
           if [ "$A_LETIQUETTE" = "true" ]; then
             echo "Étiquette « automerge » présente sur la PR #$PR — activation."
             # --squash : l'historique de main reste une ligne par changement.
-            gh pr merge "$PR" --repo "$REPO" --squash --auto \
-              && echo "Fusion automatique armée : GitHub fusionnera dès que les contrôles seront verts." \
-              || {
-                   echo "L'activation a échoué. Cause la plus fréquente : « Allow auto-merge »"
-                   echo "n'est pas coché dans Settings → General → Pull Requests."
-                   exit 1
-                 }
+            #
+            # Deux chemins, parce que GitHub REFUSE d'armer l'auto-merge sur une PR déjà en
+            # statut « clean » (« Pull request is in clean status »). Or c'est le cas normal
+            # ici : ce dépôt n'a aucun contrôle requis, donc une PR est mergeable dès son
+            # ouverture. Sans ce repli, l'automate échouerait précisément dans la situation
+            # la plus fréquente.
+            if SORTIE=$(gh pr merge "$PR" --repo "$REPO" --squash --auto 2>&1); then
+              echo "Fusion automatique armée : GitHub fusionnera dès que les contrôles seront verts."
+            elif echo "$SORTIE" | grep -qi "clean status"; then
+              echo "Aucun contrôle en attente sur cette PR — fusion immédiate."
+              gh pr merge "$PR" --repo "$REPO" --squash
+              echo "Fusionnée."
+            else
+              echo "::error::Impossible d'armer la fusion : $SORTIE"
+              echo "Cause la plus fréquente : « Allow auto-merge » n'est pas coché dans"
+              echo "Settings → General → Pull Requests."
+              exit 1
+            fi
           else
             echo "Pas d'étiquette « automerge » sur la PR #$PR — annulation de toute fusion en attente."
             gh pr merge "$PR" --repo "$REPO" --disable-auto || true
