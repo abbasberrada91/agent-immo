@@ -127,6 +127,15 @@ function page(d) {
   tr:last-child td{border-bottom:none}
   td:first-child,td:nth-child(2){color:var(--ink)}
   tbody tr:nth-child(even) td{background:#FCFAF5}
+  .crit{background:var(--soft);padding:56px 0;border-bottom:1px solid var(--line)}
+  .crit h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.2vw,32px);margin:8px 0 6px}
+  .crit h2 i{color:var(--gold);font-style:italic}
+  .crit .sub{color:var(--mut);font-size:14.5px;max-width:70ch;margin-bottom:26px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px}
+  .ccard{background:var(--paper);border:1px solid var(--line);padding:20px 22px}
+  .ccard h3{font:700 15px var(--sans);margin-bottom:7px;color:var(--ink)}
+  .ccard p{font:400 13.5px/1.62 var(--sans);color:#5A5140}
+  .crit .fin{margin-top:24px;font-size:15px;color:var(--ink);max-width:70ch;border-left:3px solid var(--gold);padding-left:16px}
   .meth{background:var(--soft);padding:48px 0}
   .meth h2{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
   .meth p{font-size:13.5px;color:#5A5140;max-width:78ch;margin:9px 0;line-height:1.65}
@@ -232,11 +241,58 @@ ${JSON.stringify(ld, null, 1)}
   </div>
 </section>
 
+<section class="crit">
+  <div class="wrap">
+    <p class="eyebrow">Ce que la médiane ne dit pas</p>
+    <h2 class="serif">Deux appartements de la même rue, <i>deux prix différents</i>.</h2>
+    <p class="sub">Les chiffres ci-dessus décrivent un marché. Ils ne décrivent pas un logement. Voici les critères qui font l'écart, et que la donnée publique ne voit pas — c'est le travail du professionnel de les peser.</p>
+    <div class="cgrid">
+
+      <div class="ccard">
+        <h3>L'étage</h3>
+        <p>À surface égale, un étage élevé se paie plus cher qu'un deuxième : plus de lumière, moins de bruit, souvent une vue dégagée. La surcote monte avec chaque niveau — mais elle s'inverse dans un immeuble sans ascenseur, où les derniers étages redeviennent une contrainte.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>L'année de construction</h3>
+        <p>Un haussmannien et un immeuble des années 1970 ne valent pas la même chose au mètre carré, même au même numéro de rue. Hauteur sous plafond, moulures, parquet, épaisseur des murs, qualité de la façade : ce sont des critères de prix, pas seulement de goût.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>L'état de l'immeuble</h3>
+        <p>Ravalement fait ou à provisionner, ascenseur récent ou vieillissant, parties communes soignées, montant des charges. Un acquéreur averti lit les procès-verbaux d'assemblée générale avant de faire son offre — et en tient compte dans son prix.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>Le plan</h3>
+        <p>Une même surface peut être parfaitement distribuée ou impraticable. Pièces traversantes, absence de couloirs perdus, chambres à l'écart du séjour, cuisine ouvrable : la qualité du plan se paie, et un mauvais plan se négocie.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>L'exposition et la vue</h3>
+        <p>Sud et sud-ouest se paient. Le vis-à-vis, la hauteur du bâtiment d'en face, l'orientation sur cour ou sur rue changent la lumière toute la journée — et la sensation de calme. Deux critères qu'aucune donnée cadastrale n'enregistre.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>L'état du bien et les travaux</h3>
+        <p>Un appartement refait à neuf et un bien à rénover ne se comparent pas. L'acquéreur déduit le coût des travaux — et souvent davantage, parce qu'il valorise aussi le temps, l'incertitude et le risque de mauvaise surprise.</p>
+      </div>
+
+      <div class="ccard">
+        <h3>L'offre et la demande du secteur</h3>
+        <p>Combien de biens comparables sont en vente en ce moment, et combien d'acquéreurs les cherchent. C'est ce que la donnée publique ne montre jamais : elle décrit des ventes passées, pas la tension du marché d'aujourd'hui.</p>
+      </div>
+
+    </div>
+    <p class="fin">C'est pourquoi une estimation précise change la donne : mal évalué, un bien se vend trop bas — ou reste en ligne des mois et finit par se négocier plus bas encore.</p>
+  </div>
+</section>
+
 <section class="cta">
   <div class="wrap">
     <div>
       <h3 class="serif">Ces chiffres sont une moyenne. Votre bien, non.</h3>
-      <p>Étage, exposition, état, vis-à-vis, ascenseur : l'écart entre deux appartements d'une même rue dépasse souvent 20 %. Notre estimation part de ces ventes-là, puis les ajuste à votre bien.</p>
+      <p>Notre estimation part de ces ventes réelles, puis les ajuste à votre étage, votre exposition, votre plan et l'état de votre immeuble. Gratuite, immédiate, sans laisser vos coordonnées.</p>
     </div>
     <a href="vendre.html#estimation">Estimer mon bien</a>
   </div>
