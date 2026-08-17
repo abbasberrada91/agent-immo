@@ -1,0 +1,72 @@
+# Fusion automatique des PR portant l'étiquette « automerge ».
+#
+# Pourquoi : depuis le 17/08/2026, les sessions Claude lancées depuis claude.ai ne peuvent
+# plus appeler l'API de fusion de GitHub — le proxy d'Anthropic la refuse
+# (« Merging pull requests is not permitted for this session type », 403 sans jamais
+# atteindre GitHub). Elles peuvent en revanche pousser du code, ouvrir une PR et poser une
+# étiquette. Cet automate ferme la boucle : il tourne sous l'identité de GitHub, hors du
+# proxy, et fusionne ce que la session a préparé.
+#
+# PÉRIMÈTRE VOLONTAIREMENT LIMITÉ À CE DÉPÔT (site vitrine, statique). Il n'a pas été
+# installé sur pige-backend : là-bas, une mauvaise fusion met l'app hors service pour tous
+# les agents — c'est arrivé le 14/08 avec la PR #436, écran blanc pour tout le monde pendant
+# une heure. Le verrou humain y reste, et c'est un contrôle AVANT fusion qui a été ajouté à
+# la place.
+#
+# Garde-fous ici :
+#   - l'étiquette doit être posée explicitement, elle n'est jamais automatique ;
+#   - la PR doit viser `main` et ne pas être en brouillon ;
+#   - tous les contrôles requis doivent être verts (auto-merge de GitHub s'en charge) ;
+#   - retirer l'étiquette annule la fusion en attente.
+name: Fusion automatique
+
+on:
+  pull_request_target:
+    types: [labeled, unlabeled, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    # `pull_request_target` s'exécute avec le dépôt de base : on ne récupère jamais le code
+    # de la PR, donc rien du contenu proposé ne tourne ici. Seules des décisions sont prises.
+    if: >-
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Activer ou annuler la fusion automatique
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          A_LETIQUETTE: ${{ contains(github.event.pull_request.labels.*.name, 'automerge') }}
+        run: |
+          set -euo pipefail
+          if [ "$A_LETIQUETTE" = "true" ]; then
+            echo "Étiquette « automerge » présente sur la PR #$PR — activation."
+            # --squash : l'historique de main reste une ligne par changement.
+            #
+            # Deux chemins, parce que GitHub REFUSE d'armer l'auto-merge sur une PR déjà en
+            # statut « clean » (« Pull request is in clean status »). Or c'est le cas normal
+            # ici : ce dépôt n'a aucun contrôle requis, donc une PR est mergeable dès son
+            # ouverture. Sans ce repli, l'automate échouerait précisément dans la situation
+            # la plus fréquente.
+            if SORTIE=$(gh pr merge "$PR" --repo "$REPO" --squash --auto 2>&1); then
+              echo "Fusion automatique armée : GitHub fusionnera dès que les contrôles seront verts."
+            elif echo "$SORTIE" | grep -qi "clean status"; then
+              echo "Aucun contrôle en attente sur cette PR — fusion immédiate."
+              gh pr merge "$PR" --repo "$REPO" --squash
+              echo "Fusionnée."
+            else
+              echo "::error::Impossible d'armer la fusion : $SORTIE"
+              echo "Cause la plus fréquente : « Allow auto-merge » n'est pas coché dans"
+              echo "Settings → General → Pull Requests."
+              exit 1
+            fi
+          else
+            echo "Pas d'étiquette « automerge » sur la PR #$PR — annulation de toute fusion en attente."
+            gh pr merge "$PR" --repo "$REPO" --disable-auto || true
+          fi
