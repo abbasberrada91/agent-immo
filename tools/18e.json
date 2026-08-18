@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75018",
+ "type": "Appartement",
+ "ventes": 3182,
+ "ppm2Median": 9270,
+ "ppm2P25": 7960,
+ "ppm2P75": 11070,
+ "surfaceMediane": 37,
+ "prixMedian": 345000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 790,
+   "ppm2Median": 9150,
+   "ppm2P25": 7870,
+   "ppm2P75": 10770,
+   "surfaceMediane": 20,
+   "prixMedian": 191000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 1286,
+   "ppm2Median": 9130,
+   "ppm2P25": 7970,
+   "ppm2P75": 10690,
+   "surfaceMediane": 35,
+   "prixMedian": 320000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 717,
+   "ppm2Median": 9490,
+   "ppm2P25": 8000,
+   "ppm2P75": 11250,
+   "surfaceMediane": 55,
+   "prixMedian": 532000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 173,
+   "ppm2Median": 9640,
+   "ppm2P25": 8040,
+   "ppm2P75": 11880,
+   "surfaceMediane": 85,
+   "prixMedian": 820000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 53,
+   "ppm2Median": 9560,
+   "ppm2P25": 8000,
+   "ppm2P75": 11430,
+   "surfaceMediane": 109,
+   "prixMedian": 1042000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 3182,
+   "ppm2Median": 9270,
+   "ppm2P25": 7960,
+   "ppm2P75": 11070,
+   "surfaceMediane": 37,
+   "prixMedian": 345000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue Marcadet",
+   "ventes": 115,
+   "ppm2Median": 9370,
+   "ppm2P25": 8330,
+   "ppm2P75": 10810,
+   "surfaceMediane": 42,
+   "prixMedian": 410000
+  },
+  {
+   "voie": "Rue Championnet",
+   "ventes": 115,
+   "ppm2Median": 8650,
+   "ppm2P25": 7880,
+   "ppm2P75": 9420,
+   "surfaceMediane": 31,
+   "prixMedian": 263000
+  },
+  {
+   "voie": "Rue Ordener",
+   "ventes": 109,
+   "ppm2Median": 8890,
+   "ppm2P25": 7830,
+   "ppm2P75": 10470,
+   "surfaceMediane": 43,
+   "prixMedian": 415000
+  },
+  {
+   "voie": "Rue Lamarck",
+   "ventes": 87,
+   "ppm2Median": 10550,
+   "ppm2P25": 9280,
+   "ppm2P75": 12790,
+   "surfaceMediane": 43,
+   "prixMedian": 485000
+  },
+  {
+   "voie": "Rue Duhesme",
+   "ventes": 70,
+   "ppm2Median": 9310,
+   "ppm2P25": 8330,
+   "ppm2P75": 10680,
+   "surfaceMediane": 39,
+   "prixMedian": 380000
+  },
+  {
+   "voie": "Rue de Clignancourt",
+   "ventes": 68,
+   "ppm2Median": 8330,
+   "ppm2P25": 7280,
+   "ppm2P75": 9340,
+   "surfaceMediane": 41,
+   "prixMedian": 338000
+  },
+  {
+   "voie": "Avenue de Saint Ouen",
+   "ventes": 67,
+   "ppm2Median": 9000,
+   "ppm2P25": 8080,
+   "ppm2P75": 10150,
+   "surfaceMediane": 29,
+   "prixMedian": 280000
+  },
+  {
+   "voie": "Rue du Mont Cenis",
+   "ventes": 65,
+   "ppm2Median": 9890,
+   "ppm2P25": 8330,
+   "ppm2P75": 11670,
+   "surfaceMediane": 38,
+   "prixMedian": 353000
+  },
+  {
+   "voie": "Rue Damremont",
+   "ventes": 64,
+   "ppm2Median": 10010,
+   "ppm2P25": 9080,
+   "ppm2P75": 11760,
+   "surfaceMediane": 42,
+   "prixMedian": 429000
+  },
+  {
+   "voie": "Rue Doudeauville",
+   "ventes": 60,
+   "ppm2Median": 8000,
+   "ppm2P25": 7120,
+   "ppm2P75": 9320,
+   "surfaceMediane": 35,
+   "prixMedian": 300000
+  },
+  {
+   "voie": "Rue Caulaincourt",
+   "ventes": 57,
+   "ppm2Median": 11710,
+   "ppm2P25": 9710,
+   "ppm2P75": 16260,
+   "surfaceMediane": 69,
+   "prixMedian": 702000
+  },
+  {
+   "voie": "Rue Marx Dormoy",
+   "ventes": 56,
+   "ppm2Median": 7550,
+   "ppm2P25": 6850,
+   "ppm2P75": 8780,
+   "surfaceMediane": 38,
+   "prixMedian": 318000
+  }
+ ],
+ "ruesTotal": 145,
+ "genereLe": "2026-08-18T13:06:44.825Z",
+ "arrondissement": 18,
+ "millesime": "2025"
+}

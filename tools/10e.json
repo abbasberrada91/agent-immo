@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75010",
+ "type": "Appartement",
+ "ventes": 1604,
+ "ppm2Median": 9630,
+ "ppm2P25": 8330,
+ "ppm2P75": 11110,
+ "surfaceMediane": 39,
+ "prixMedian": 386000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 434,
+   "ppm2Median": 9590,
+   "ppm2P25": 8330,
+   "ppm2P75": 11300,
+   "surfaceMediane": 19,
+   "prixMedian": 193000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 506,
+   "ppm2Median": 9690,
+   "ppm2P25": 8430,
+   "ppm2P75": 11110,
+   "surfaceMediane": 36,
+   "prixMedian": 349000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 303,
+   "ppm2Median": 9720,
+   "ppm2P25": 8420,
+   "ppm2P75": 10830,
+   "surfaceMediane": 60,
+   "prixMedian": 581000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 144,
+   "ppm2Median": 9460,
+   "ppm2P25": 8430,
+   "ppm2P75": 11030,
+   "surfaceMediane": 86,
+   "prixMedian": 833000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 57,
+   "ppm2Median": 9450,
+   "ppm2P25": 8130,
+   "ppm2P75": 10470,
+   "surfaceMediane": 123,
+   "prixMedian": 1185000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1604,
+   "ppm2Median": 9630,
+   "ppm2P25": 8330,
+   "ppm2P75": 11110,
+   "surfaceMediane": 39,
+   "prixMedian": 386000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue du Faubourg Saint Martin",
+   "ventes": 81,
+   "ppm2Median": 9170,
+   "ppm2P25": 8110,
+   "ppm2P75": 10180,
+   "surfaceMediane": 35,
+   "prixMedian": 320000
+  },
+  {
+   "voie": "Rue du Faubourg Saint Denis",
+   "ventes": 67,
+   "ppm2Median": 9350,
+   "ppm2P25": 8240,
+   "ppm2P75": 10450,
+   "surfaceMediane": 39,
+   "prixMedian": 363000
+  },
+  {
+   "voie": "Rue la Fayette",
+   "ventes": 66,
+   "ppm2Median": 8980,
+   "ppm2P25": 7630,
+   "ppm2P75": 10820,
+   "surfaceMediane": 53,
+   "prixMedian": 480000
+  },
+  {
+   "voie": "Boulevard de Magenta",
+   "ventes": 60,
+   "ppm2Median": 9900,
+   "ppm2P25": 8210,
+   "ppm2P75": 11630,
+   "surfaceMediane": 48,
+   "prixMedian": 550000
+  },
+  {
+   "voie": "Quai de Jemmapes",
+   "ventes": 38,
+   "ppm2Median": 11270,
+   "ppm2P25": 9060,
+   "ppm2P75": 12980,
+   "surfaceMediane": 47,
+   "prixMedian": 555000
+  },
+  {
+   "voie": "Rue Louis Blanc",
+   "ventes": 37,
+   "ppm2Median": 8990,
+   "ppm2P25": 7970,
+   "ppm2P75": 10640,
+   "surfaceMediane": 39,
+   "prixMedian": 392000
+  },
+  {
+   "voie": "Rue de Paradis",
+   "ventes": 35,
+   "ppm2Median": 10000,
+   "ppm2P25": 9120,
+   "ppm2P75": 11550,
+   "surfaceMediane": 40,
+   "prixMedian": 450000
+  },
+  {
+   "voie": "Rue Bichat",
+   "ventes": 35,
+   "ppm2Median": 9560,
+   "ppm2P25": 8700,
+   "ppm2P75": 11060,
+   "surfaceMediane": 25,
+   "prixMedian": 233000
+  },
+  {
+   "voie": "Rue du Fbg St Martin",
+   "ventes": 32,
+   "ppm2Median": 9920,
+   "ppm2P25": 8260,
+   "ppm2P75": 10610,
+   "surfaceMediane": 50,
+   "prixMedian": 479000
+  },
+  {
+   "voie": "Boulevard de la Villette",
+   "ventes": 32,
+   "ppm2Median": 8960,
+   "ppm2P25": 8070,
+   "ppm2P75": 10000,
+   "surfaceMediane": 31,
+   "prixMedian": 247000
+  },
+  {
+   "voie": "Rue Lucien Sampaix",
+   "ventes": 32,
+   "ppm2Median": 9620,
+   "ppm2P25": 8560,
+   "ppm2P75": 12150,
+   "surfaceMediane": 36,
+   "prixMedian": 414000
+  },
+  {
+   "voie": "Rue Jacques Louvel Tessier",
+   "ventes": 31,
+   "ppm2Median": 9670,
+   "ppm2P25": 8890,
+   "ppm2P75": 12040,
+   "surfaceMediane": 31,
+   "prixMedian": 320000
+  }
+ ],
+ "ruesTotal": 81,
+ "genereLe": "2026-08-18T13:05:28.428Z",
+ "arrondissement": 10,
+ "millesime": "2025"
+}

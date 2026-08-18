@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75007",
+ "type": "Appartement",
+ "ventes": 1047,
+ "ppm2Median": 14310,
+ "ppm2P25": 12000,
+ "ppm2P75": 17910,
+ "surfaceMediane": 65,
+ "prixMedian": 924000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 203,
+   "ppm2Median": 12900,
+   "ppm2P25": 11260,
+   "ppm2P75": 15310,
+   "surfaceMediane": 22,
+   "prixMedian": 287000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 229,
+   "ppm2Median": 13920,
+   "ppm2P25": 11820,
+   "ppm2P75": 17340,
+   "surfaceMediane": 42,
+   "prixMedian": 579000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 200,
+   "ppm2Median": 14030,
+   "ppm2P25": 12120,
+   "ppm2P75": 17070,
+   "surfaceMediane": 69,
+   "prixMedian": 967000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 147,
+   "ppm2Median": 16070,
+   "ppm2P25": 13330,
+   "ppm2P75": 18330,
+   "surfaceMediane": 100,
+   "prixMedian": 1525000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 188,
+   "ppm2Median": 17590,
+   "ppm2P25": 13990,
+   "ppm2P75": 22840,
+   "surfaceMediane": 154,
+   "prixMedian": 2753000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1047,
+   "ppm2Median": 14310,
+   "ppm2P25": 12000,
+   "ppm2P75": 17910,
+   "surfaceMediane": 65,
+   "prixMedian": 924000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue de Grenelle",
+   "ventes": 57,
+   "ppm2Median": 13610,
+   "ppm2P25": 10820,
+   "ppm2P75": 17290,
+   "surfaceMediane": 65,
+   "prixMedian": 850000
+  },
+  {
+   "voie": "Rue du Bac",
+   "ventes": 53,
+   "ppm2Median": 17060,
+   "ppm2P25": 14360,
+   "ppm2P75": 21250,
+   "surfaceMediane": 70,
+   "prixMedian": 1099000
+  },
+  {
+   "voie": "Rue de l Universite",
+   "ventes": 48,
+   "ppm2Median": 14560,
+   "ppm2P25": 12550,
+   "ppm2P75": 19170,
+   "surfaceMediane": 83,
+   "prixMedian": 1203000
+  },
+  {
+   "voie": "Rue Saint Dominique",
+   "ventes": 42,
+   "ppm2Median": 13330,
+   "ppm2P25": 11770,
+   "ppm2P75": 15310,
+   "surfaceMediane": 47,
+   "prixMedian": 613000
+  },
+  {
+   "voie": "Avenue de la Bourdonnais",
+   "ventes": 40,
+   "ppm2Median": 13880,
+   "ppm2P25": 11720,
+   "ppm2P75": 15590,
+   "surfaceMediane": 76,
+   "prixMedian": 1186000
+  },
+  {
+   "voie": "Rue de Lille",
+   "ventes": 33,
+   "ppm2Median": 17290,
+   "ppm2P25": 14670,
+   "ppm2P75": 19580,
+   "surfaceMediane": 56,
+   "prixMedian": 1000000
+  },
+  {
+   "voie": "Avenue de la Motte Picquet",
+   "ventes": 29,
+   "ppm2Median": 14390,
+   "ppm2P25": 13380,
+   "ppm2P75": 17230,
+   "surfaceMediane": 60,
+   "prixMedian": 990000
+  },
+  {
+   "voie": "Rue Vaneau",
+   "ventes": 27,
+   "ppm2Median": 17920,
+   "ppm2P25": 13260,
+   "ppm2P75": 21870,
+   "surfaceMediane": 53,
+   "prixMedian": 897000
+  },
+  {
+   "voie": "Avenue Bosquet",
+   "ventes": 26,
+   "ppm2Median": 13310,
+   "ppm2P25": 12200,
+   "ppm2P75": 17000,
+   "surfaceMediane": 85,
+   "prixMedian": 1096000
+  },
+  {
+   "voie": "Rue de Bourgogne",
+   "ventes": 24,
+   "ppm2Median": 12590,
+   "ppm2P25": 8910,
+   "ppm2P75": 16220,
+   "surfaceMediane": 54,
+   "prixMedian": 550000
+  },
+  {
+   "voie": "Rue Pierre Leroux",
+   "ventes": 19,
+   "ppm2Median": 13060,
+   "ppm2P25": 12220,
+   "ppm2P75": 15100,
+   "surfaceMediane": 43,
+   "prixMedian": 579000
+  },
+  {
+   "voie": "Rue de Varenne",
+   "ventes": 19,
+   "ppm2Median": 15760,
+   "ppm2P25": 13910,
+   "ppm2P75": 21780,
+   "surfaceMediane": 34,
+   "prixMedian": 550000
+  }
+ ],
+ "ruesTotal": 62,
+ "genereLe": "2026-08-18T13:05:11.192Z",
+ "arrondissement": 7,
+ "millesime": "2025"
+}

@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75003",
+ "type": "Appartement",
+ "ventes": 854,
+ "ppm2Median": 12200,
+ "ppm2P25": 10470,
+ "ppm2P75": 14400,
+ "surfaceMediane": 40,
+ "prixMedian": 503000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 251,
+   "ppm2Median": 12000,
+   "ppm2P25": 10170,
+   "ppm2P75": 14090,
+   "surfaceMediane": 22,
+   "prixMedian": 258000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 261,
+   "ppm2Median": 12110,
+   "ppm2P25": 10600,
+   "ppm2P75": 14000,
+   "surfaceMediane": 38,
+   "prixMedian": 460000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 126,
+   "ppm2Median": 12740,
+   "ppm2P25": 10980,
+   "ppm2P75": 14520,
+   "surfaceMediane": 69,
+   "prixMedian": 842000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 64,
+   "ppm2Median": 12560,
+   "ppm2P25": 10800,
+   "ppm2P75": 15350,
+   "surfaceMediane": 91,
+   "prixMedian": 1138000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 36,
+   "ppm2Median": 12920,
+   "ppm2P25": 11810,
+   "ppm2P75": 14410,
+   "surfaceMediane": 124,
+   "prixMedian": 1550000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 854,
+   "ppm2Median": 12200,
+   "ppm2P25": 10470,
+   "ppm2P75": 14400,
+   "surfaceMediane": 40,
+   "prixMedian": 503000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue du Temple",
+   "ventes": 53,
+   "ppm2Median": 12160,
+   "ppm2P25": 10740,
+   "ppm2P75": 13620,
+   "surfaceMediane": 36,
+   "prixMedian": 509000
+  },
+  {
+   "voie": "Rue de Turenne",
+   "ventes": 48,
+   "ppm2Median": 12000,
+   "ppm2P25": 10890,
+   "ppm2P75": 14180,
+   "surfaceMediane": 54,
+   "prixMedian": 608000
+  },
+  {
+   "voie": "Rue Charlot",
+   "ventes": 42,
+   "ppm2Median": 12840,
+   "ppm2P25": 11410,
+   "ppm2P75": 14170,
+   "surfaceMediane": 35,
+   "prixMedian": 419000
+  },
+  {
+   "voie": "Rue Notre-dame de Nazareth",
+   "ventes": 39,
+   "ppm2Median": 11330,
+   "ppm2P25": 9800,
+   "ppm2P75": 12730,
+   "surfaceMediane": 35,
+   "prixMedian": 406000
+  },
+  {
+   "voie": "Rue Saint Martin",
+   "ventes": 35,
+   "ppm2Median": 11130,
+   "ppm2P25": 10000,
+   "ppm2P75": 13130,
+   "surfaceMediane": 46,
+   "prixMedian": 512000
+  },
+  {
+   "voie": "Rue Chapon",
+   "ventes": 25,
+   "ppm2Median": 12240,
+   "ppm2P25": 11000,
+   "ppm2P75": 13270,
+   "surfaceMediane": 22,
+   "prixMedian": 362000
+  },
+  {
+   "voie": "Rue du Vertbois",
+   "ventes": 25,
+   "ppm2Median": 12110,
+   "ppm2P25": 9500,
+   "ppm2P75": 15470,
+   "surfaceMediane": 27,
+   "prixMedian": 259000
+  },
+  {
+   "voie": "Rue Pastourelle",
+   "ventes": 24,
+   "ppm2Median": 12850,
+   "ppm2P25": 10900,
+   "ppm2P75": 14890,
+   "surfaceMediane": 21,
+   "prixMedian": 335000
+  },
+  {
+   "voie": "Rue Beaubourg",
+   "ventes": 22,
+   "ppm2Median": 14010,
+   "ppm2P25": 11490,
+   "ppm2P75": 18030,
+   "surfaceMediane": 30,
+   "prixMedian": 540000
+  },
+  {
+   "voie": "Rue Reaumur",
+   "ventes": 22,
+   "ppm2Median": 12090,
+   "ppm2P25": 11000,
+   "ppm2P75": 13400,
+   "surfaceMediane": 51,
+   "prixMedian": 569000
+  },
+  {
+   "voie": "Rue Vieille du Temple",
+   "ventes": 22,
+   "ppm2Median": 13980,
+   "ppm2P25": 11810,
+   "ppm2P75": 15880,
+   "surfaceMediane": 59,
+   "prixMedian": 865000
+  },
+  {
+   "voie": "Rue des Gravilliers",
+   "ventes": 22,
+   "ppm2Median": 12720,
+   "ppm2P25": 10670,
+   "ppm2P75": 16920,
+   "surfaceMediane": 32,
+   "prixMedian": 433000
+  }
+ ],
+ "ruesTotal": 46,
+ "genereLe": "2026-08-18T13:04:47.848Z",
+ "arrondissement": 3,
+ "millesime": "2025"
+}

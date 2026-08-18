@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75020",
+ "type": "Appartement",
+ "ventes": 2009,
+ "ppm2Median": 8560,
+ "ppm2P25": 7630,
+ "ppm2P75": 9600,
+ "surfaceMediane": 40,
+ "prixMedian": 341000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 538,
+   "ppm2Median": 8660,
+   "ppm2P25": 7710,
+   "ppm2P75": 9970,
+   "surfaceMediane": 23,
+   "prixMedian": 202000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 743,
+   "ppm2Median": 8500,
+   "ppm2P25": 7620,
+   "ppm2P75": 9430,
+   "surfaceMediane": 38,
+   "prixMedian": 320000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 444,
+   "ppm2Median": 8610,
+   "ppm2P25": 7740,
+   "ppm2P75": 9430,
+   "surfaceMediane": 60,
+   "prixMedian": 510000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 165,
+   "ppm2Median": 8380,
+   "ppm2P25": 7190,
+   "ppm2P75": 9440,
+   "surfaceMediane": 85,
+   "prixMedian": 655000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 45,
+   "ppm2Median": 8090,
+   "ppm2P25": 7480,
+   "ppm2P75": 9310,
+   "surfaceMediane": 100,
+   "prixMedian": 837000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 2009,
+   "ppm2Median": 8560,
+   "ppm2P25": 7630,
+   "ppm2P75": 9600,
+   "surfaceMediane": 40,
+   "prixMedian": 341000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue des Pyrenees",
+   "ventes": 159,
+   "ppm2Median": 8460,
+   "ppm2P25": 7730,
+   "ppm2P75": 9440,
+   "surfaceMediane": 41,
+   "prixMedian": 358000
+  },
+  {
+   "voie": "Rue Lesage",
+   "ventes": 88,
+   "ppm2Median": 8620,
+   "ppm2P25": 7330,
+   "ppm2P75": 10200,
+   "surfaceMediane": 30,
+   "prixMedian": 275000
+  },
+  {
+   "voie": "Avenue Gambetta",
+   "ventes": 74,
+   "ppm2Median": 9050,
+   "ppm2P25": 8100,
+   "ppm2P75": 9620,
+   "surfaceMediane": 57,
+   "prixMedian": 521000
+  },
+  {
+   "voie": "Rue Pelleport",
+   "ventes": 68,
+   "ppm2Median": 8210,
+   "ppm2P25": 7350,
+   "ppm2P75": 9050,
+   "surfaceMediane": 37,
+   "prixMedian": 311000
+  },
+  {
+   "voie": "Rue de Belleville",
+   "ventes": 61,
+   "ppm2Median": 8690,
+   "ppm2P25": 7830,
+   "ppm2P75": 10030,
+   "surfaceMediane": 45,
+   "prixMedian": 370000
+  },
+  {
+   "voie": "Rue de Bagnolet",
+   "ventes": 49,
+   "ppm2Median": 8830,
+   "ppm2P25": 7880,
+   "ppm2P75": 9520,
+   "surfaceMediane": 33,
+   "prixMedian": 310000
+  },
+  {
+   "voie": "Boulevard de Charonne",
+   "ventes": 47,
+   "ppm2Median": 8820,
+   "ppm2P25": 8300,
+   "ppm2P75": 9830,
+   "surfaceMediane": 40,
+   "prixMedian": 409000
+  },
+  {
+   "voie": "Rue d Avron",
+   "ventes": 45,
+   "ppm2Median": 8170,
+   "ppm2P25": 7590,
+   "ppm2P75": 9270,
+   "surfaceMediane": 29,
+   "prixMedian": 240000
+  },
+  {
+   "voie": "Rue Saint Fargeau",
+   "ventes": 42,
+   "ppm2Median": 7740,
+   "ppm2P25": 7110,
+   "ppm2P75": 8700,
+   "surfaceMediane": 59,
+   "prixMedian": 427000
+  },
+  {
+   "voie": "Rue Orfila",
+   "ventes": 40,
+   "ppm2Median": 9020,
+   "ppm2P25": 8140,
+   "ppm2P75": 9760,
+   "surfaceMediane": 35,
+   "prixMedian": 353000
+  },
+  {
+   "voie": "Rue Pixerecourt",
+   "ventes": 37,
+   "ppm2Median": 8320,
+   "ppm2P25": 7270,
+   "ppm2P75": 9120,
+   "surfaceMediane": 45,
+   "prixMedian": 362000
+  },
+  {
+   "voie": "Rue de Menilmontant",
+   "ventes": 37,
+   "ppm2Median": 8520,
+   "ppm2P25": 7850,
+   "ppm2P75": 9170,
+   "surfaceMediane": 45,
+   "prixMedian": 360000
+  }
+ ],
+ "ruesTotal": 103,
+ "genereLe": "2026-08-18T13:06:56.856Z",
+ "arrondissement": 20,
+ "millesime": "2025"
+}

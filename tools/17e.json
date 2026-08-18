@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75017",
+ "type": "Appartement",
+ "ventes": 2738,
+ "ppm2Median": 10390,
+ "ppm2P25": 8950,
+ "ppm2P75": 12160,
+ "surfaceMediane": 45,
+ "prixMedian": 470000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 627,
+   "ppm2Median": 10200,
+   "ppm2P25": 8900,
+   "ppm2P75": 12190,
+   "surfaceMediane": 20,
+   "prixMedian": 215000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 849,
+   "ppm2Median": 10000,
+   "ppm2P25": 8670,
+   "ppm2P75": 11440,
+   "surfaceMediane": 37,
+   "prixMedian": 371000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 557,
+   "ppm2Median": 10480,
+   "ppm2P25": 8970,
+   "ppm2P75": 12130,
+   "surfaceMediane": 59,
+   "prixMedian": 625000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 303,
+   "ppm2Median": 11020,
+   "ppm2P25": 9560,
+   "ppm2P75": 12490,
+   "surfaceMediane": 89,
+   "prixMedian": 1000000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 220,
+   "ppm2Median": 11390,
+   "ppm2P25": 10150,
+   "ppm2P75": 13110,
+   "surfaceMediane": 146,
+   "prixMedian": 1700000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 2738,
+   "ppm2Median": 10390,
+   "ppm2P25": 8950,
+   "ppm2P75": 12160,
+   "surfaceMediane": 45,
+   "prixMedian": 470000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Boulevard Pereire",
+   "ventes": 86,
+   "ppm2Median": 10750,
+   "ppm2P25": 9460,
+   "ppm2P75": 12720,
+   "surfaceMediane": 64,
+   "prixMedian": 744000
+  },
+  {
+   "voie": "Rue Legendre",
+   "ventes": 72,
+   "ppm2Median": 10420,
+   "ppm2P25": 9000,
+   "ppm2P75": 11700,
+   "surfaceMediane": 41,
+   "prixMedian": 429000
+  },
+  {
+   "voie": "Rue Truffaut",
+   "ventes": 59,
+   "ppm2Median": 10350,
+   "ppm2P25": 8820,
+   "ppm2P75": 12850,
+   "surfaceMediane": 38,
+   "prixMedian": 360000
+  },
+  {
+   "voie": "Rue Saussure",
+   "ventes": 58,
+   "ppm2Median": 9870,
+   "ppm2P25": 8320,
+   "ppm2P75": 11750,
+   "surfaceMediane": 39,
+   "prixMedian": 381000
+  },
+  {
+   "voie": "Rue des Moines",
+   "ventes": 57,
+   "ppm2Median": 10000,
+   "ppm2P25": 9210,
+   "ppm2P75": 11180,
+   "surfaceMediane": 37,
+   "prixMedian": 362000
+  },
+  {
+   "voie": "Avenue de Clichy",
+   "ventes": 57,
+   "ppm2Median": 9190,
+   "ppm2P25": 8330,
+   "ppm2P75": 10590,
+   "surfaceMediane": 30,
+   "prixMedian": 300000
+  },
+  {
+   "voie": "Avenue de Wagram",
+   "ventes": 56,
+   "ppm2Median": 11290,
+   "ppm2P25": 10150,
+   "ppm2P75": 12780,
+   "surfaceMediane": 65,
+   "prixMedian": 726000
+  },
+  {
+   "voie": "Rue Nollet",
+   "ventes": 54,
+   "ppm2Median": 10510,
+   "ppm2P25": 8750,
+   "ppm2P75": 12000,
+   "surfaceMediane": 37,
+   "prixMedian": 397000
+  },
+  {
+   "voie": "Rue de Tocqueville",
+   "ventes": 54,
+   "ppm2Median": 10550,
+   "ppm2P25": 9240,
+   "ppm2P75": 12610,
+   "surfaceMediane": 52,
+   "prixMedian": 632000
+  },
+  {
+   "voie": "Rue Jouffroy D'abbans",
+   "ventes": 51,
+   "ppm2Median": 12640,
+   "ppm2P25": 10670,
+   "ppm2P75": 19360,
+   "surfaceMediane": 75,
+   "prixMedian": 1452000
+  },
+  {
+   "voie": "Rue Lemercier",
+   "ventes": 51,
+   "ppm2Median": 11000,
+   "ppm2P25": 9260,
+   "ppm2P75": 11770,
+   "surfaceMediane": 45,
+   "prixMedian": 565000
+  },
+  {
+   "voie": "Rue Cardinet",
+   "ventes": 48,
+   "ppm2Median": 10520,
+   "ppm2P25": 9180,
+   "ppm2P75": 12110,
+   "surfaceMediane": 44,
+   "prixMedian": 513000
+  }
+ ],
+ "ruesTotal": 138,
+ "genereLe": "2026-08-18T12:48:57.621Z",
+ "arrondissement": 17,
+ "millesime": "2025"
+}

@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75006",
+ "type": "Appartement",
+ "ventes": 919,
+ "ppm2Median": 14520,
+ "ppm2P25": 12310,
+ "ppm2P75": 18050,
+ "surfaceMediane": 50,
+ "prixMedian": 700000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 223,
+   "ppm2Median": 14020,
+   "ppm2P25": 12000,
+   "ppm2P75": 16800,
+   "surfaceMediane": 22,
+   "prixMedian": 314000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 238,
+   "ppm2Median": 13880,
+   "ppm2P25": 12030,
+   "ppm2P75": 16200,
+   "surfaceMediane": 39,
+   "prixMedian": 550000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 149,
+   "ppm2Median": 14060,
+   "ppm2P25": 12200,
+   "ppm2P75": 17460,
+   "surfaceMediane": 68,
+   "prixMedian": 933000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 100,
+   "ppm2Median": 16780,
+   "ppm2P25": 13810,
+   "ppm2P75": 19530,
+   "surfaceMediane": 97,
+   "prixMedian": 1520000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 100,
+   "ppm2Median": 17070,
+   "ppm2P25": 14440,
+   "ppm2P75": 22430,
+   "surfaceMediane": 133,
+   "prixMedian": 2421000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 919,
+   "ppm2Median": 14520,
+   "ppm2P25": 12310,
+   "ppm2P75": 18050,
+   "surfaceMediane": 50,
+   "prixMedian": 700000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue du Cherche-midi",
+   "ventes": 45,
+   "ppm2Median": 14690,
+   "ppm2P25": 12710,
+   "ppm2P75": 17760,
+   "surfaceMediane": 47,
+   "prixMedian": 790000
+  },
+  {
+   "voie": "Boulevard du Montparnasse",
+   "ventes": 38,
+   "ppm2Median": 12630,
+   "ppm2P25": 10940,
+   "ppm2P75": 16070,
+   "surfaceMediane": 59,
+   "prixMedian": 700000
+  },
+  {
+   "voie": "Rue de Vaugirard",
+   "ventes": 36,
+   "ppm2Median": 13520,
+   "ppm2P25": 12090,
+   "ppm2P75": 15650,
+   "surfaceMediane": 41,
+   "prixMedian": 595000
+  },
+  {
+   "voie": "Rue d Assas",
+   "ventes": 36,
+   "ppm2Median": 14850,
+   "ppm2P25": 12790,
+   "ppm2P75": 18500,
+   "surfaceMediane": 49,
+   "prixMedian": 647000
+  },
+  {
+   "voie": "Rue Bonaparte",
+   "ventes": 35,
+   "ppm2Median": 17440,
+   "ppm2P25": 14200,
+   "ppm2P75": 21830,
+   "surfaceMediane": 58,
+   "prixMedian": 820000
+  },
+  {
+   "voie": "Rue de Rennes",
+   "ventes": 32,
+   "ppm2Median": 14760,
+   "ppm2P25": 12320,
+   "ppm2P75": 17460,
+   "surfaceMediane": 95,
+   "prixMedian": 1365000
+  },
+  {
+   "voie": "Rue de Sevres",
+   "ventes": 31,
+   "ppm2Median": 14650,
+   "ppm2P25": 12520,
+   "ppm2P75": 16200,
+   "surfaceMediane": 46,
+   "prixMedian": 597000
+  },
+  {
+   "voie": "Rue Mazarine",
+   "ventes": 28,
+   "ppm2Median": 13720,
+   "ppm2P25": 12360,
+   "ppm2P75": 17180,
+   "surfaceMediane": 34,
+   "prixMedian": 497000
+  },
+  {
+   "voie": "Rue de Seine",
+   "ventes": 21,
+   "ppm2Median": 14200,
+   "ppm2P25": 12670,
+   "ppm2P75": 15990,
+   "surfaceMediane": 45,
+   "prixMedian": 570000
+  },
+  {
+   "voie": "Boulevard Raspail",
+   "ventes": 21,
+   "ppm2Median": 16760,
+   "ppm2P25": 14440,
+   "ppm2P75": 23420,
+   "surfaceMediane": 114,
+   "prixMedian": 1745000
+  },
+  {
+   "voie": "Rue du Four",
+   "ventes": 20,
+   "ppm2Median": 17470,
+   "ppm2P25": 13070,
+   "ppm2P75": 19550,
+   "surfaceMediane": 65,
+   "prixMedian": 788000
+  },
+  {
+   "voie": "Rue Notre-dame des Champs",
+   "ventes": 19,
+   "ppm2Median": 13290,
+   "ppm2P25": 12630,
+   "ppm2P75": 15220,
+   "surfaceMediane": 49,
+   "prixMedian": 630000
+  }
+ ],
+ "ruesTotal": 57,
+ "genereLe": "2026-08-18T13:05:05.704Z",
+ "arrondissement": 6,
+ "millesime": "2025"
+}

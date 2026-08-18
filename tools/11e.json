@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75011",
+ "type": "Appartement",
+ "ventes": 2655,
+ "ppm2Median": 10140,
+ "ppm2P25": 8960,
+ "ppm2P75": 11430,
+ "surfaceMediane": 37,
+ "prixMedian": 388000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 706,
+   "ppm2Median": 10000,
+   "ppm2P25": 8820,
+   "ppm2P75": 11340,
+   "surfaceMediane": 21,
+   "prixMedian": 216000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 1002,
+   "ppm2Median": 10140,
+   "ppm2P25": 9030,
+   "ppm2P75": 11380,
+   "surfaceMediane": 35,
+   "prixMedian": 365000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 520,
+   "ppm2Median": 10330,
+   "ppm2P25": 9310,
+   "ppm2P75": 11270,
+   "surfaceMediane": 60,
+   "prixMedian": 610000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 160,
+   "ppm2Median": 10550,
+   "ppm2P25": 9380,
+   "ppm2P75": 11710,
+   "surfaceMediane": 85,
+   "prixMedian": 927000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 82,
+   "ppm2Median": 9850,
+   "ppm2P25": 8730,
+   "ppm2P75": 11590,
+   "surfaceMediane": 110,
+   "prixMedian": 1078000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 2655,
+   "ppm2Median": 10140,
+   "ppm2P25": 8960,
+   "ppm2P75": 11430,
+   "surfaceMediane": 37,
+   "prixMedian": 388000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Boulevard Voltaire",
+   "ventes": 146,
+   "ppm2Median": 9950,
+   "ppm2P25": 8960,
+   "ppm2P75": 11250,
+   "surfaceMediane": 47,
+   "prixMedian": 462000
+  },
+  {
+   "voie": "Rue Saint Maur",
+   "ventes": 134,
+   "ppm2Median": 10330,
+   "ppm2P25": 8930,
+   "ppm2P75": 11600,
+   "surfaceMediane": 30,
+   "prixMedian": 301000
+  },
+  {
+   "voie": "Rue de Charonne",
+   "ventes": 91,
+   "ppm2Median": 10090,
+   "ppm2P25": 9200,
+   "ppm2P75": 11980,
+   "surfaceMediane": 38,
+   "prixMedian": 415000
+  },
+  {
+   "voie": "Rue de la Roquette",
+   "ventes": 90,
+   "ppm2Median": 10600,
+   "ppm2P25": 9310,
+   "ppm2P75": 12340,
+   "surfaceMediane": 37,
+   "prixMedian": 435000
+  },
+  {
+   "voie": "Rue Oberkampf",
+   "ventes": 84,
+   "ppm2Median": 10160,
+   "ppm2P25": 9210,
+   "ppm2P75": 11660,
+   "surfaceMediane": 40,
+   "prixMedian": 387000
+  },
+  {
+   "voie": "Avenue Philippe Auguste",
+   "ventes": 78,
+   "ppm2Median": 9320,
+   "ppm2P25": 8290,
+   "ppm2P75": 10500,
+   "surfaceMediane": 52,
+   "prixMedian": 502000
+  },
+  {
+   "voie": "Rue du Chemin Vert",
+   "ventes": 69,
+   "ppm2Median": 10190,
+   "ppm2P25": 8970,
+   "ppm2P75": 11120,
+   "surfaceMediane": 39,
+   "prixMedian": 415000
+  },
+  {
+   "voie": "Avenue Parmentier",
+   "ventes": 69,
+   "ppm2Median": 10000,
+   "ppm2P25": 8970,
+   "ppm2P75": 11320,
+   "surfaceMediane": 42,
+   "prixMedian": 440000
+  },
+  {
+   "voie": "Boulevard Richard Lenoir",
+   "ventes": 68,
+   "ppm2Median": 10610,
+   "ppm2P25": 8640,
+   "ppm2P75": 11780,
+   "surfaceMediane": 50,
+   "prixMedian": 550000
+  },
+  {
+   "voie": "Rue de Montreuil",
+   "ventes": 61,
+   "ppm2Median": 9690,
+   "ppm2P25": 8530,
+   "ppm2P75": 10440,
+   "surfaceMediane": 33,
+   "prixMedian": 376000
+  },
+  {
+   "voie": "Rue de la Folie Mericourt",
+   "ventes": 55,
+   "ppm2Median": 10330,
+   "ppm2P25": 8780,
+   "ppm2P75": 11760,
+   "surfaceMediane": 34,
+   "prixMedian": 360000
+  },
+  {
+   "voie": "Rue Jean Pierre Timbaud",
+   "ventes": 52,
+   "ppm2Median": 9560,
+   "ppm2P25": 8460,
+   "ppm2P75": 10980,
+   "surfaceMediane": 44,
+   "prixMedian": 447000
+  }
+ ],
+ "ruesTotal": 113,
+ "genereLe": "2026-08-18T13:05:33.941Z",
+ "arrondissement": 11,
+ "millesime": "2025"
+}

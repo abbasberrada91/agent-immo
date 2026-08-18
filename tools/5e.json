@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75005",
+ "type": "Appartement",
+ "ventes": 1035,
+ "ppm2Median": 12000,
+ "ppm2P25": 10500,
+ "ppm2P75": 14440,
+ "surfaceMediane": 38,
+ "prixMedian": 480000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 331,
+   "ppm2Median": 11830,
+   "ppm2P25": 10320,
+   "ppm2P75": 14310,
+   "surfaceMediane": 20,
+   "prixMedian": 249000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 290,
+   "ppm2Median": 12010,
+   "ppm2P25": 10620,
+   "ppm2P75": 14520,
+   "surfaceMediane": 37,
+   "prixMedian": 467000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 179,
+   "ppm2Median": 12220,
+   "ppm2P25": 10710,
+   "ppm2P75": 13240,
+   "surfaceMediane": 55,
+   "prixMedian": 664000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 80,
+   "ppm2Median": 12230,
+   "ppm2P25": 10610,
+   "ppm2P75": 14360,
+   "surfaceMediane": 91,
+   "prixMedian": 1098000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 68,
+   "ppm2Median": 13090,
+   "ppm2P25": 11490,
+   "ppm2P75": 15950,
+   "surfaceMediane": 129,
+   "prixMedian": 1708000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1035,
+   "ppm2Median": 12000,
+   "ppm2P25": 10500,
+   "ppm2P75": 14440,
+   "surfaceMediane": 38,
+   "prixMedian": 480000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue Monge",
+   "ventes": 57,
+   "ppm2Median": 12170,
+   "ppm2P25": 10710,
+   "ppm2P75": 13330,
+   "surfaceMediane": 33,
+   "prixMedian": 360000
+  },
+  {
+   "voie": "Rue Saint Jacques",
+   "ventes": 48,
+   "ppm2Median": 12430,
+   "ppm2P25": 10420,
+   "ppm2P75": 14950,
+   "surfaceMediane": 42,
+   "prixMedian": 633000
+  },
+  {
+   "voie": "Boulevard Saint Michel",
+   "ventes": 39,
+   "ppm2Median": 14360,
+   "ppm2P25": 11640,
+   "ppm2P75": 25980,
+   "surfaceMediane": 114,
+   "prixMedian": 1800000
+  },
+  {
+   "voie": "Rue Claude Bernard",
+   "ventes": 37,
+   "ppm2Median": 11470,
+   "ppm2P25": 10320,
+   "ppm2P75": 13530,
+   "surfaceMediane": 38,
+   "prixMedian": 484000
+  },
+  {
+   "voie": "Rue Mouffetard",
+   "ventes": 29,
+   "ppm2Median": 13360,
+   "ppm2P25": 9910,
+   "ppm2P75": 21940,
+   "surfaceMediane": 37,
+   "prixMedian": 790000
+  },
+  {
+   "voie": "Rue des Ecoles",
+   "ventes": 29,
+   "ppm2Median": 11850,
+   "ppm2P25": 9590,
+   "ppm2P75": 13240,
+   "surfaceMediane": 37,
+   "prixMedian": 476000
+  },
+  {
+   "voie": "Boulevard Saint Germain",
+   "ventes": 29,
+   "ppm2Median": 13000,
+   "ppm2P25": 11580,
+   "ppm2P75": 14550,
+   "surfaceMediane": 55,
+   "prixMedian": 750000
+  },
+  {
+   "voie": "Rue du Cardinal Lemoine",
+   "ventes": 27,
+   "ppm2Median": 12830,
+   "ppm2P25": 11200,
+   "ppm2P75": 15210,
+   "surfaceMediane": 35,
+   "prixMedian": 450000
+  },
+  {
+   "voie": "Boulevard de l Hopital",
+   "ventes": 26,
+   "ppm2Median": 9870,
+   "ppm2P25": 8600,
+   "ppm2P75": 12640,
+   "surfaceMediane": 31,
+   "prixMedian": 303000
+  },
+  {
+   "voie": "Rue Poliveau",
+   "ventes": 22,
+   "ppm2Median": 9900,
+   "ppm2P25": 8790,
+   "ppm2P75": 11440,
+   "surfaceMediane": 45,
+   "prixMedian": 470000
+  },
+  {
+   "voie": "Rue Tournefort",
+   "ventes": 21,
+   "ppm2Median": 13460,
+   "ppm2P25": 12290,
+   "ppm2P75": 14410,
+   "surfaceMediane": 31,
+   "prixMedian": 410000
+  },
+  {
+   "voie": "Boulevard de Port-royal",
+   "ventes": 20,
+   "ppm2Median": 12410,
+   "ppm2P25": 10640,
+   "ppm2P75": 13710,
+   "surfaceMediane": 50,
+   "prixMedian": 595000
+  }
+ ],
+ "ruesTotal": 67,
+ "genereLe": "2026-08-18T13:05:00.037Z",
+ "arrondissement": 5,
+ "millesime": "2025"
+}
