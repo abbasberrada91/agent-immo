@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75012",
+ "type": "Appartement",
+ "ventes": 1717,
+ "ppm2Median": 9180,
+ "ppm2P25": 8200,
+ "ppm2P75": 10380,
+ "surfaceMediane": 42,
+ "prixMedian": 386000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 383,
+   "ppm2Median": 9330,
+   "ppm2P25": 8260,
+   "ppm2P75": 10670,
+   "surfaceMediane": 23,
+   "prixMedian": 220000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 623,
+   "ppm2Median": 9060,
+   "ppm2P25": 8210,
+   "ppm2P75": 10240,
+   "surfaceMediane": 38,
+   "prixMedian": 340000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 397,
+   "ppm2Median": 9250,
+   "ppm2P25": 8290,
+   "ppm2P75": 10260,
+   "surfaceMediane": 58,
+   "prixMedian": 550000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 161,
+   "ppm2Median": 9080,
+   "ppm2P25": 8080,
+   "ppm2P75": 10260,
+   "surfaceMediane": 83,
+   "prixMedian": 752000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 55,
+   "ppm2Median": 9550,
+   "ppm2P25": 8490,
+   "ppm2P75": 10490,
+   "surfaceMediane": 109,
+   "prixMedian": 1000000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1717,
+   "ppm2Median": 9180,
+   "ppm2P25": 8200,
+   "ppm2P75": 10380,
+   "surfaceMediane": 42,
+   "prixMedian": 386000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue de Charenton",
+   "ventes": 129,
+   "ppm2Median": 9480,
+   "ppm2P25": 8320,
+   "ppm2P75": 10580,
+   "surfaceMediane": 38,
+   "prixMedian": 370000
+  },
+  {
+   "voie": "Avenue Daumesnil",
+   "ventes": 74,
+   "ppm2Median": 9100,
+   "ppm2P25": 8400,
+   "ppm2P75": 10900,
+   "surfaceMediane": 45,
+   "prixMedian": 402000
+  },
+  {
+   "voie": "Rue de Picpus",
+   "ventes": 71,
+   "ppm2Median": 8770,
+   "ppm2P25": 8050,
+   "ppm2P75": 9780,
+   "surfaceMediane": 44,
+   "prixMedian": 420000
+  },
+  {
+   "voie": "Rue de Reuilly",
+   "ventes": 56,
+   "ppm2Median": 9380,
+   "ppm2P25": 7680,
+   "ppm2P75": 10260,
+   "surfaceMediane": 40,
+   "prixMedian": 348000
+  },
+  {
+   "voie": "Avenue du Gal Michel Bizot",
+   "ventes": 53,
+   "ppm2Median": 8780,
+   "ppm2P25": 7830,
+   "ppm2P75": 9860,
+   "surfaceMediane": 46,
+   "prixMedian": 390000
+  },
+  {
+   "voie": "Boulevard de Reuilly",
+   "ventes": 46,
+   "ppm2Median": 9180,
+   "ppm2P25": 8610,
+   "ppm2P75": 10630,
+   "surfaceMediane": 39,
+   "prixMedian": 359000
+  },
+  {
+   "voie": "Boulevard de Picpus",
+   "ventes": 45,
+   "ppm2Median": 9310,
+   "ppm2P25": 8410,
+   "ppm2P75": 10230,
+   "surfaceMediane": 47,
+   "prixMedian": 430000
+  },
+  {
+   "voie": "Rue Crozatier",
+   "ventes": 39,
+   "ppm2Median": 10000,
+   "ppm2P25": 9030,
+   "ppm2P75": 11830,
+   "surfaceMediane": 45,
+   "prixMedian": 431000
+  },
+  {
+   "voie": "Avenue de Saint-mande",
+   "ventes": 35,
+   "ppm2Median": 8720,
+   "ppm2P25": 8260,
+   "ppm2P75": 10230,
+   "surfaceMediane": 42,
+   "prixMedian": 365000
+  },
+  {
+   "voie": "Crs de Vincennes",
+   "ventes": 35,
+   "ppm2Median": 9030,
+   "ppm2P25": 7780,
+   "ppm2P75": 9940,
+   "surfaceMediane": 36,
+   "prixMedian": 319000
+  },
+  {
+   "voie": "Boulevard Diderot",
+   "ventes": 35,
+   "ppm2Median": 9370,
+   "ppm2P25": 8050,
+   "ppm2P75": 10440,
+   "surfaceMediane": 38,
+   "prixMedian": 371000
+  },
+  {
+   "voie": "Rue du Faubourg Saint Antoine",
+   "ventes": 33,
+   "ppm2Median": 10000,
+   "ppm2P25": 8590,
+   "ppm2P75": 10740,
+   "surfaceMediane": 35,
+   "prixMedian": 330000
+  }
+ ],
+ "ruesTotal": 80,
+ "genereLe": "2026-08-18T13:05:40.189Z",
+ "arrondissement": 12,
+ "millesime": "2025"
+}

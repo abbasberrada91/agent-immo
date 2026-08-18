@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75013",
+ "type": "Appartement",
+ "ventes": 1533,
+ "ppm2Median": 8940,
+ "ppm2P25": 7870,
+ "ppm2P75": 10290,
+ "surfaceMediane": 40,
+ "prixMedian": 360000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 409,
+   "ppm2Median": 9290,
+   "ppm2P25": 8180,
+   "ppm2P75": 10800,
+   "surfaceMediane": 21,
+   "prixMedian": 205000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 552,
+   "ppm2Median": 8770,
+   "ppm2P25": 7860,
+   "ppm2P75": 10120,
+   "surfaceMediane": 38,
+   "prixMedian": 340000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 352,
+   "ppm2Median": 8790,
+   "ppm2P25": 7810,
+   "ppm2P75": 9830,
+   "surfaceMediane": 60,
+   "prixMedian": 510000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 118,
+   "ppm2Median": 8650,
+   "ppm2P25": 7590,
+   "ppm2P75": 10210,
+   "surfaceMediane": 83,
+   "prixMedian": 713000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 34,
+   "ppm2Median": 9050,
+   "ppm2P25": 7580,
+   "ppm2P75": 10680,
+   "surfaceMediane": 110,
+   "prixMedian": 1045000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1533,
+   "ppm2Median": 8940,
+   "ppm2P25": 7870,
+   "ppm2P75": 10290,
+   "surfaceMediane": 40,
+   "prixMedian": 360000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue de Tolbiac",
+   "ventes": 97,
+   "ppm2Median": 8680,
+   "ppm2P25": 7840,
+   "ppm2P75": 10000,
+   "surfaceMediane": 47,
+   "prixMedian": 379000
+  },
+  {
+   "voie": "Rue de la Glaciere",
+   "ventes": 66,
+   "ppm2Median": 9070,
+   "ppm2P25": 7980,
+   "ppm2P75": 9960,
+   "surfaceMediane": 48,
+   "prixMedian": 440000
+  },
+  {
+   "voie": "Avenue d Italie",
+   "ventes": 64,
+   "ppm2Median": 7990,
+   "ppm2P25": 7570,
+   "ppm2P75": 9000,
+   "surfaceMediane": 47,
+   "prixMedian": 416000
+  },
+  {
+   "voie": "Rue Bobillot",
+   "ventes": 57,
+   "ppm2Median": 9070,
+   "ppm2P25": 8120,
+   "ppm2P75": 9700,
+   "surfaceMediane": 48,
+   "prixMedian": 470000
+  },
+  {
+   "voie": "Avenue de Choisy",
+   "ventes": 47,
+   "ppm2Median": 7500,
+   "ppm2P25": 7240,
+   "ppm2P75": 9350,
+   "surfaceMediane": 40,
+   "prixMedian": 310000
+  },
+  {
+   "voie": "Boulevard Arago",
+   "ventes": 37,
+   "ppm2Median": 11200,
+   "ppm2P25": 9480,
+   "ppm2P75": 12120,
+   "surfaceMediane": 60,
+   "prixMedian": 590000
+  },
+  {
+   "voie": "Rue de Patay",
+   "ventes": 37,
+   "ppm2Median": 8150,
+   "ppm2P25": 7430,
+   "ppm2P75": 9620,
+   "surfaceMediane": 31,
+   "prixMedian": 271000
+  },
+  {
+   "voie": "Rue Dunois",
+   "ventes": 36,
+   "ppm2Median": 8800,
+   "ppm2P25": 7550,
+   "ppm2P75": 9810,
+   "surfaceMediane": 46,
+   "prixMedian": 425000
+  },
+  {
+   "voie": "Rue Pascal",
+   "ventes": 26,
+   "ppm2Median": 10220,
+   "ppm2P25": 9140,
+   "ppm2P75": 11830,
+   "surfaceMediane": 30,
+   "prixMedian": 331000
+  },
+  {
+   "voie": "Boulevard Auguste Blanqui",
+   "ventes": 26,
+   "ppm2Median": 8120,
+   "ppm2P25": 7300,
+   "ppm2P75": 9130,
+   "surfaceMediane": 53,
+   "prixMedian": 466000
+  },
+  {
+   "voie": "Rue Albert",
+   "ventes": 24,
+   "ppm2Median": 8670,
+   "ppm2P25": 7760,
+   "ppm2P75": 9270,
+   "surfaceMediane": 30,
+   "prixMedian": 294000
+  },
+  {
+   "voie": "Boulevard Vincent Auriol",
+   "ventes": 23,
+   "ppm2Median": 8430,
+   "ppm2P25": 7850,
+   "ppm2P75": 9000,
+   "surfaceMediane": 33,
+   "prixMedian": 245000
+  }
+ ],
+ "ruesTotal": 90,
+ "genereLe": "2026-08-18T13:05:46.287Z",
+ "arrondissement": 13,
+ "millesime": "2025"
+}

@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75004",
+ "type": "Appartement",
+ "ventes": 641,
+ "ppm2Median": 13170,
+ "ppm2P25": 11210,
+ "ppm2P75": 15930,
+ "surfaceMediane": 44,
+ "prixMedian": 600000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 165,
+   "ppm2Median": 12750,
+   "ppm2P25": 10760,
+   "ppm2P75": 14960,
+   "surfaceMediane": 22,
+   "prixMedian": 280000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 182,
+   "ppm2Median": 12840,
+   "ppm2P25": 10930,
+   "ppm2P75": 15000,
+   "surfaceMediane": 40,
+   "prixMedian": 519000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 120,
+   "ppm2Median": 13170,
+   "ppm2P25": 11440,
+   "ppm2P75": 15540,
+   "surfaceMediane": 63,
+   "prixMedian": 874000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 70,
+   "ppm2Median": 14050,
+   "ppm2P25": 11550,
+   "ppm2P75": 16790,
+   "surfaceMediane": 95,
+   "prixMedian": 1330000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 41,
+   "ppm2Median": 15000,
+   "ppm2P25": 12110,
+   "ppm2P75": 18760,
+   "surfaceMediane": 134,
+   "prixMedian": 1970000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 641,
+   "ppm2Median": 13170,
+   "ppm2P25": 11210,
+   "ppm2P75": 15930,
+   "surfaceMediane": 44,
+   "prixMedian": 600000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue Saint Antoine",
+   "ventes": 48,
+   "ppm2Median": 13650,
+   "ppm2P25": 11490,
+   "ppm2P75": 15250,
+   "surfaceMediane": 40,
+   "prixMedian": 553000
+  },
+  {
+   "voie": "Rue du Temple",
+   "ventes": 34,
+   "ppm2Median": 14490,
+   "ppm2P25": 10270,
+   "ppm2P75": 18460,
+   "surfaceMediane": 65,
+   "prixMedian": 831000
+  },
+  {
+   "voie": "Rue Vieille du Temple",
+   "ventes": 24,
+   "ppm2Median": 13030,
+   "ppm2P25": 11250,
+   "ppm2P75": 15700,
+   "surfaceMediane": 37,
+   "prixMedian": 463000
+  },
+  {
+   "voie": "Rue des Archives",
+   "ventes": 21,
+   "ppm2Median": 14090,
+   "ppm2P25": 11500,
+   "ppm2P75": 16870,
+   "surfaceMediane": 110,
+   "prixMedian": 1213000
+  },
+  {
+   "voie": "Rue de Rivoli",
+   "ventes": 20,
+   "ppm2Median": 14590,
+   "ppm2P25": 11600,
+   "ppm2P75": 17750,
+   "surfaceMediane": 84,
+   "prixMedian": 1109000
+  },
+  {
+   "voie": "Rue de la Verrerie",
+   "ventes": 19,
+   "ppm2Median": 11920,
+   "ppm2P25": 10450,
+   "ppm2P75": 13890,
+   "surfaceMediane": 43,
+   "prixMedian": 494000
+  },
+  {
+   "voie": "Rue Saint Paul",
+   "ventes": 19,
+   "ppm2Median": 13200,
+   "ppm2P25": 11670,
+   "ppm2P75": 15380,
+   "surfaceMediane": 34,
+   "prixMedian": 460000
+  },
+  {
+   "voie": "Rue des Tournelles",
+   "ventes": 19,
+   "ppm2Median": 12240,
+   "ppm2P25": 10940,
+   "ppm2P75": 16980,
+   "surfaceMediane": 40,
+   "prixMedian": 500000
+  },
+  {
+   "voie": "Rue Saint Louis En l Ile",
+   "ventes": 18,
+   "ppm2Median": 15170,
+   "ppm2P25": 12200,
+   "ppm2P75": 17190,
+   "surfaceMediane": 43,
+   "prixMedian": 423000
+  },
+  {
+   "voie": "Rue Beautreillis",
+   "ventes": 17,
+   "ppm2Median": 13180,
+   "ppm2P25": 11170,
+   "ppm2P75": 14810,
+   "surfaceMediane": 27,
+   "prixMedian": 370000
+  },
+  {
+   "voie": "Square Ste Croix de la Bretonneri",
+   "ventes": 14,
+   "ppm2Median": 12730,
+   "ppm2P25": 10660,
+   "ppm2P75": 22290,
+   "surfaceMediane": 132,
+   "prixMedian": 1504000
+  },
+  {
+   "voie": "Rue Madame de Sevigne",
+   "ventes": 13,
+   "ppm2Median": 13350,
+   "ppm2P25": 11710,
+   "ppm2P75": 17220,
+   "surfaceMediane": 31,
+   "prixMedian": 413000
+  }
+ ],
+ "ruesTotal": 46,
+ "genereLe": "2026-08-18T13:04:54.138Z",
+ "arrondissement": 4,
+ "millesime": "2025"
+}

@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75001",
+ "type": "Appartement",
+ "ventes": 349,
+ "ppm2Median": 12730,
+ "ppm2P25": 10890,
+ "ppm2P75": 15680,
+ "surfaceMediane": 49,
+ "prixMedian": 614000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 88,
+   "ppm2Median": 12260,
+   "ppm2P25": 11090,
+   "ppm2P75": 14110,
+   "surfaceMediane": 21,
+   "prixMedian": 280000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 89,
+   "ppm2Median": 12280,
+   "ppm2P25": 10400,
+   "ppm2P75": 14520,
+   "surfaceMediane": 40,
+   "prixMedian": 500000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 50,
+   "ppm2Median": 11940,
+   "ppm2P25": 10420,
+   "ppm2P75": 15090,
+   "surfaceMediane": 65,
+   "prixMedian": 795000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 28,
+   "ppm2Median": 12980,
+   "ppm2P25": 10970,
+   "ppm2P75": 15600,
+   "surfaceMediane": 92,
+   "prixMedian": 1210000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 25,
+   "ppm2Median": 18750,
+   "ppm2P25": 14960,
+   "ppm2P75": 20380,
+   "surfaceMediane": 126,
+   "prixMedian": 2278000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 349,
+   "ppm2Median": 12730,
+   "ppm2P25": 10890,
+   "ppm2P75": 15680,
+   "surfaceMediane": 49,
+   "prixMedian": 614000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue Saint-honore",
+   "ventes": 43,
+   "ppm2Median": 13130,
+   "ppm2P25": 11110,
+   "ppm2P75": 16850,
+   "surfaceMediane": 51,
+   "prixMedian": 668000
+  },
+  {
+   "voie": "Rue Jean Jacques Rousseau",
+   "ventes": 21,
+   "ppm2Median": 12380,
+   "ppm2P25": 10000,
+   "ppm2P75": 13640,
+   "surfaceMediane": 30,
+   "prixMedian": 380000
+  },
+  {
+   "voie": "Rue Saint-denis",
+   "ventes": 19,
+   "ppm2Median": 10420,
+   "ppm2P25": 9230,
+   "ppm2P75": 12050,
+   "surfaceMediane": 45,
+   "prixMedian": 470000
+  },
+  {
+   "voie": "Rue de Richelieu",
+   "ventes": 18,
+   "ppm2Median": 13160,
+   "ppm2P25": 11040,
+   "ppm2P75": 15380,
+   "surfaceMediane": 44,
+   "prixMedian": 564000
+  },
+  {
+   "voie": "Rue de Rivoli",
+   "ventes": 11,
+   "ppm2Median": 17020,
+   "ppm2P25": 12780,
+   "ppm2P75": 22080,
+   "surfaceMediane": 56,
+   "prixMedian": 936000
+  },
+  {
+   "voie": "Rue des Pyramides",
+   "ventes": 10,
+   "ppm2Median": 13610,
+   "ppm2P25": 13020,
+   "ppm2P75": 18440,
+   "surfaceMediane": 54,
+   "prixMedian": 786000
+  },
+  {
+   "voie": "Rue des Bourdonnais",
+   "ventes": 8,
+   "ppm2Median": 12260,
+   "ppm2P25": 11110,
+   "ppm2P75": 13000,
+   "surfaceMediane": 55,
+   "prixMedian": 621000
+  },
+  {
+   "voie": "Rue Pierre Lescot",
+   "ventes": 7,
+   "ppm2Median": 13780,
+   "ppm2P25": 12500,
+   "ppm2P75": 15440,
+   "surfaceMediane": 41,
+   "prixMedian": 517000
+  },
+  {
+   "voie": "Rue du Bouloi",
+   "ventes": 7,
+   "ppm2Median": 13510,
+   "ppm2P25": 13000,
+   "ppm2P75": 15600,
+   "surfaceMediane": 36,
+   "prixMedian": 442000
+  },
+  {
+   "voie": "Avenue de l Opera",
+   "ventes": 7,
+   "ppm2Median": 14120,
+   "ppm2P25": 13440,
+   "ppm2P75": 16640,
+   "surfaceMediane": 85,
+   "prixMedian": 1760000
+  },
+  {
+   "voie": "Rue Villedo",
+   "ventes": 7,
+   "ppm2Median": 14960,
+   "ppm2P25": 12500,
+   "ppm2P75": 15890,
+   "surfaceMediane": 88,
+   "prixMedian": 1398000
+  },
+  {
+   "voie": "Rue de la Sourdiere",
+   "ventes": 6,
+   "ppm2Median": 11040,
+   "ppm2P25": 9720,
+   "ppm2P75": 14290,
+   "surfaceMediane": 48,
+   "prixMedian": 531000
+  }
+ ],
+ "ruesTotal": 26,
+ "genereLe": "2026-08-18T13:04:35.598Z",
+ "arrondissement": 1,
+ "millesime": "2025"
+}

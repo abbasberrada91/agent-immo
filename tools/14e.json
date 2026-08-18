@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75014",
+ "type": "Appartement",
+ "ventes": 1754,
+ "ppm2Median": 9710,
+ "ppm2P25": 8560,
+ "ppm2P75": 11360,
+ "surfaceMediane": 41,
+ "prixMedian": 405000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 425,
+   "ppm2Median": 10000,
+   "ppm2P25": 8770,
+   "ppm2P75": 11570,
+   "surfaceMediane": 22,
+   "prixMedian": 225000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 616,
+   "ppm2Median": 9590,
+   "ppm2P25": 8520,
+   "ppm2P75": 11150,
+   "surfaceMediane": 36,
+   "prixMedian": 357000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 387,
+   "ppm2Median": 9560,
+   "ppm2P25": 8410,
+   "ppm2P75": 10750,
+   "surfaceMediane": 60,
+   "prixMedian": 558000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 137,
+   "ppm2Median": 9750,
+   "ppm2P25": 8520,
+   "ppm2P75": 11180,
+   "surfaceMediane": 88,
+   "prixMedian": 816000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 55,
+   "ppm2Median": 10280,
+   "ppm2P25": 9140,
+   "ppm2P75": 12160,
+   "surfaceMediane": 113,
+   "prixMedian": 1158000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1754,
+   "ppm2Median": 9710,
+   "ppm2P25": 8560,
+   "ppm2P75": 11360,
+   "surfaceMediane": 41,
+   "prixMedian": 405000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue d Alesia",
+   "ventes": 88,
+   "ppm2Median": 9240,
+   "ppm2P25": 8350,
+   "ppm2P75": 10210,
+   "surfaceMediane": 49,
+   "prixMedian": 472000
+  },
+  {
+   "voie": "Avenue du General Leclerc",
+   "ventes": 69,
+   "ppm2Median": 9200,
+   "ppm2P25": 8270,
+   "ppm2P75": 10480,
+   "surfaceMediane": 69,
+   "prixMedian": 555000
+  },
+  {
+   "voie": "Rue Raymond Losserand",
+   "ventes": 59,
+   "ppm2Median": 9220,
+   "ppm2P25": 8320,
+   "ppm2P75": 11120,
+   "surfaceMediane": 38,
+   "prixMedian": 365000
+  },
+  {
+   "voie": "Avenue du Maine",
+   "ventes": 57,
+   "ppm2Median": 10180,
+   "ppm2P25": 9000,
+   "ppm2P75": 11820,
+   "surfaceMediane": 46,
+   "prixMedian": 460000
+  },
+  {
+   "voie": "Rue de la Tombe Issoire",
+   "ventes": 51,
+   "ppm2Median": 9540,
+   "ppm2P25": 8330,
+   "ppm2P75": 11230,
+   "surfaceMediane": 38,
+   "prixMedian": 382000
+  },
+  {
+   "voie": "Rue Didot",
+   "ventes": 38,
+   "ppm2Median": 8840,
+   "ppm2P25": 7940,
+   "ppm2P75": 10440,
+   "surfaceMediane": 40,
+   "prixMedian": 298000
+  },
+  {
+   "voie": "Avenue Jean Moulin",
+   "ventes": 32,
+   "ppm2Median": 8790,
+   "ppm2P25": 7740,
+   "ppm2P75": 9840,
+   "surfaceMediane": 66,
+   "prixMedian": 535000
+  },
+  {
+   "voie": "Rue Daguerre",
+   "ventes": 31,
+   "ppm2Median": 10000,
+   "ppm2P25": 9590,
+   "ppm2P75": 11150,
+   "surfaceMediane": 30,
+   "prixMedian": 320000
+  },
+  {
+   "voie": "Rue Louis Morard",
+   "ventes": 30,
+   "ppm2Median": 9650,
+   "ppm2P25": 8830,
+   "ppm2P75": 11560,
+   "surfaceMediane": 33,
+   "prixMedian": 318000
+  },
+  {
+   "voie": "Boulevard Raspail",
+   "ventes": 30,
+   "ppm2Median": 11410,
+   "ppm2P25": 9730,
+   "ppm2P75": 13270,
+   "surfaceMediane": 63,
+   "prixMedian": 720000
+  },
+  {
+   "voie": "Rue du Moulin Vert",
+   "ventes": 30,
+   "ppm2Median": 9760,
+   "ppm2P25": 8800,
+   "ppm2P75": 10880,
+   "surfaceMediane": 42,
+   "prixMedian": 418000
+  },
+  {
+   "voie": "Rue du Chateau",
+   "ventes": 29,
+   "ppm2Median": 9320,
+   "ppm2P25": 8320,
+   "ppm2P75": 10820,
+   "surfaceMediane": 30,
+   "prixMedian": 292000
+  }
+ ],
+ "ruesTotal": 110,
+ "genereLe": "2026-08-18T13:05:52.298Z",
+ "arrondissement": 14,
+ "millesime": "2025"
+}

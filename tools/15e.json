@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75015",
+ "type": "Appartement",
+ "ventes": 3298,
+ "ppm2Median": 9670,
+ "ppm2P25": 8500,
+ "ppm2P75": 11000,
+ "surfaceMediane": 44,
+ "prixMedian": 428000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 796,
+   "ppm2Median": 9750,
+   "ppm2P25": 8660,
+   "ppm2P75": 10990,
+   "surfaceMediane": 23,
+   "prixMedian": 221000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 1130,
+   "ppm2Median": 9520,
+   "ppm2P25": 8420,
+   "ppm2P75": 10840,
+   "surfaceMediane": 40,
+   "prixMedian": 377000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 677,
+   "ppm2Median": 9530,
+   "ppm2P25": 8450,
+   "ppm2P75": 10770,
+   "surfaceMediane": 61,
+   "prixMedian": 580000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 346,
+   "ppm2Median": 9870,
+   "ppm2P25": 8640,
+   "ppm2P75": 11310,
+   "surfaceMediane": 87,
+   "prixMedian": 850000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 179,
+   "ppm2Median": 10090,
+   "ppm2P25": 8700,
+   "ppm2P75": 11860,
+   "surfaceMediane": 114,
+   "prixMedian": 1150000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 3298,
+   "ppm2Median": 9670,
+   "ppm2P25": 8500,
+   "ppm2P75": 11000,
+   "surfaceMediane": 44,
+   "prixMedian": 428000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue de Vaugirard",
+   "ventes": 146,
+   "ppm2Median": 9580,
+   "ppm2P25": 8550,
+   "ppm2P75": 10760,
+   "surfaceMediane": 50,
+   "prixMedian": 475000
+  },
+  {
+   "voie": "Rue Lecourbe",
+   "ventes": 111,
+   "ppm2Median": 9510,
+   "ppm2P25": 8700,
+   "ppm2P75": 10950,
+   "surfaceMediane": 47,
+   "prixMedian": 400000
+  },
+  {
+   "voie": "Rue de la Croix Nivert",
+   "ventes": 80,
+   "ppm2Median": 9750,
+   "ppm2P25": 8580,
+   "ppm2P75": 10810,
+   "surfaceMediane": 37,
+   "prixMedian": 355000
+  },
+  {
+   "voie": "Avenue Felix Faure",
+   "ventes": 75,
+   "ppm2Median": 9230,
+   "ppm2P25": 8050,
+   "ppm2P75": 10310,
+   "surfaceMediane": 54,
+   "prixMedian": 509000
+  },
+  {
+   "voie": "Rue de la Convention",
+   "ventes": 75,
+   "ppm2Median": 9560,
+   "ppm2P25": 8780,
+   "ppm2P75": 10330,
+   "surfaceMediane": 55,
+   "prixMedian": 520000
+  },
+  {
+   "voie": "Boulevard de Grenelle",
+   "ventes": 66,
+   "ppm2Median": 9970,
+   "ppm2P25": 8930,
+   "ppm2P75": 11630,
+   "surfaceMediane": 44,
+   "prixMedian": 459000
+  },
+  {
+   "voie": "Rue Mathurin Regnier",
+   "ventes": 64,
+   "ppm2Median": 9950,
+   "ppm2P25": 9100,
+   "ppm2P75": 27950,
+   "surfaceMediane": 33,
+   "prixMedian": 438000
+  },
+  {
+   "voie": "Rue de Lourmel",
+   "ventes": 64,
+   "ppm2Median": 9090,
+   "ppm2P25": 8080,
+   "ppm2P75": 10290,
+   "surfaceMediane": 52,
+   "prixMedian": 498000
+  },
+  {
+   "voie": "Rue de Javel",
+   "ventes": 61,
+   "ppm2Median": 9240,
+   "ppm2P25": 8300,
+   "ppm2P75": 10420,
+   "surfaceMediane": 36,
+   "prixMedian": 383000
+  },
+  {
+   "voie": "Rue de l Abbe Groult",
+   "ventes": 55,
+   "ppm2Median": 9900,
+   "ppm2P25": 8870,
+   "ppm2P75": 11080,
+   "surfaceMediane": 40,
+   "prixMedian": 406000
+  },
+  {
+   "voie": "Avenue de Suffren",
+   "ventes": 52,
+   "ppm2Median": 11290,
+   "ppm2P25": 10030,
+   "ppm2P75": 12790,
+   "surfaceMediane": 68,
+   "prixMedian": 690000
+  },
+  {
+   "voie": "Rue Saint Charles",
+   "ventes": 49,
+   "ppm2Median": 9410,
+   "ppm2P25": 8550,
+   "ppm2P75": 10340,
+   "surfaceMediane": 50,
+   "prixMedian": 500000
+  }
+ ],
+ "ruesTotal": 163,
+ "genereLe": "2026-08-18T13:05:57.792Z",
+ "arrondissement": 15,
+ "millesime": "2025"
+}

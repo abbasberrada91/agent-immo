@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75009",
+ "type": "Appartement",
+ "ventes": 1333,
+ "ppm2Median": 11180,
+ "ppm2P25": 9640,
+ "ppm2P75": 12940,
+ "surfaceMediane": 47,
+ "prixMedian": 536000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 318,
+   "ppm2Median": 10700,
+   "ppm2P25": 9110,
+   "ppm2P75": 12500,
+   "surfaceMediane": 20,
+   "prixMedian": 210000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 333,
+   "ppm2Median": 11040,
+   "ppm2P25": 9720,
+   "ppm2P75": 12700,
+   "surfaceMediane": 36,
+   "prixMedian": 416000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 258,
+   "ppm2Median": 11190,
+   "ppm2P25": 9990,
+   "ppm2P75": 12690,
+   "surfaceMediane": 61,
+   "prixMedian": 685000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 147,
+   "ppm2Median": 11460,
+   "ppm2P25": 10040,
+   "ppm2P75": 12920,
+   "surfaceMediane": 89,
+   "prixMedian": 1008000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 106,
+   "ppm2Median": 11660,
+   "ppm2P25": 10340,
+   "ppm2P75": 13470,
+   "surfaceMediane": 125,
+   "prixMedian": 1491000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1333,
+   "ppm2Median": 11180,
+   "ppm2P25": 9640,
+   "ppm2P75": 12940,
+   "surfaceMediane": 47,
+   "prixMedian": 536000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue Marguerite de Rochechouart",
+   "ventes": 67,
+   "ppm2Median": 10220,
+   "ppm2P25": 9210,
+   "ppm2P75": 11710,
+   "surfaceMediane": 32,
+   "prixMedian": 339000
+  },
+  {
+   "voie": "Rue de la Tour d Auvergne",
+   "ventes": 42,
+   "ppm2Median": 9960,
+   "ppm2P25": 9110,
+   "ppm2P75": 12690,
+   "surfaceMediane": 44,
+   "prixMedian": 540000
+  },
+  {
+   "voie": "Rue Blanche",
+   "ventes": 42,
+   "ppm2Median": 11010,
+   "ppm2P25": 9620,
+   "ppm2P75": 12700,
+   "surfaceMediane": 89,
+   "prixMedian": 850000
+  },
+  {
+   "voie": "Rue des Martyrs",
+   "ventes": 39,
+   "ppm2Median": 11910,
+   "ppm2P25": 10440,
+   "ppm2P75": 14000,
+   "surfaceMediane": 48,
+   "prixMedian": 560000
+  },
+  {
+   "voie": "Rue Claude Rodier",
+   "ventes": 36,
+   "ppm2Median": 11600,
+   "ppm2P25": 10560,
+   "ppm2P75": 13000,
+   "surfaceMediane": 33,
+   "prixMedian": 476000
+  },
+  {
+   "voie": "Rue de Maubeuge",
+   "ventes": 34,
+   "ppm2Median": 11430,
+   "ppm2P25": 9760,
+   "ppm2P75": 13310,
+   "surfaceMediane": 63,
+   "prixMedian": 728000
+  },
+  {
+   "voie": "Rue Saint-lazare",
+   "ventes": 34,
+   "ppm2Median": 11590,
+   "ppm2P25": 9580,
+   "ppm2P75": 13330,
+   "surfaceMediane": 58,
+   "prixMedian": 760000
+  },
+  {
+   "voie": "Rue du Fbourg Montmartre",
+   "ventes": 33,
+   "ppm2Median": 11160,
+   "ppm2P25": 9730,
+   "ppm2P75": 12700,
+   "surfaceMediane": 45,
+   "prixMedian": 416000
+  },
+  {
+   "voie": "Rue de Clichy",
+   "ventes": 33,
+   "ppm2Median": 10940,
+   "ppm2P25": 8940,
+   "ppm2P75": 12500,
+   "surfaceMediane": 40,
+   "prixMedian": 447000
+  },
+  {
+   "voie": "Rue Pierre Fontaine",
+   "ventes": 32,
+   "ppm2Median": 11010,
+   "ppm2P25": 9020,
+   "ppm2P75": 12050,
+   "surfaceMediane": 48,
+   "prixMedian": 520000
+  },
+  {
+   "voie": "Rue de Dunkerque",
+   "ventes": 29,
+   "ppm2Median": 10530,
+   "ppm2P25": 9140,
+   "ppm2P75": 13410,
+   "surfaceMediane": 38,
+   "prixMedian": 337000
+  },
+  {
+   "voie": "Rue Condorcet",
+   "ventes": 29,
+   "ppm2Median": 10910,
+   "ppm2P25": 10000,
+   "ppm2P75": 12940,
+   "surfaceMediane": 53,
+   "prixMedian": 586000
+  }
+ ],
+ "ruesTotal": 78,
+ "genereLe": "2026-08-18T13:05:22.230Z",
+ "arrondissement": 9,
+ "millesime": "2025"
+}

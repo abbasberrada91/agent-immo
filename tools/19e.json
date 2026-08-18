@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75019",
+ "type": "Appartement",
+ "ventes": 1593,
+ "ppm2Median": 8450,
+ "ppm2P25": 7500,
+ "ppm2P75": 9740,
+ "surfaceMediane": 41,
+ "prixMedian": 350000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 410,
+   "ppm2Median": 8350,
+   "ppm2P25": 7480,
+   "ppm2P75": 9680,
+   "surfaceMediane": 24,
+   "prixMedian": 203000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 602,
+   "ppm2Median": 8500,
+   "ppm2P25": 7540,
+   "ppm2P75": 9520,
+   "surfaceMediane": 40,
+   "prixMedian": 330000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 322,
+   "ppm2Median": 8510,
+   "ppm2P25": 7550,
+   "ppm2P75": 9740,
+   "surfaceMediane": 61,
+   "prixMedian": 507000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 120,
+   "ppm2Median": 7990,
+   "ppm2P25": 7240,
+   "ppm2P75": 9600,
+   "surfaceMediane": 86,
+   "prixMedian": 668000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 41,
+   "ppm2Median": 8060,
+   "ppm2P25": 7240,
+   "ppm2P75": 9170,
+   "surfaceMediane": 103,
+   "prixMedian": 810000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 1593,
+   "ppm2Median": 8450,
+   "ppm2P25": 7500,
+   "ppm2P75": 9740,
+   "surfaceMediane": 41,
+   "prixMedian": 350000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Avenue Jean Jaures",
+   "ventes": 98,
+   "ppm2Median": 8400,
+   "ppm2P25": 7680,
+   "ppm2P75": 9090,
+   "surfaceMediane": 38,
+   "prixMedian": 320000
+  },
+  {
+   "voie": "Rue de Crimee",
+   "ventes": 94,
+   "ppm2Median": 8330,
+   "ppm2P25": 7060,
+   "ppm2P75": 9420,
+   "surfaceMediane": 35,
+   "prixMedian": 294000
+  },
+  {
+   "voie": "Rue de l Ourcq",
+   "ventes": 91,
+   "ppm2Median": 9100,
+   "ppm2P25": 7850,
+   "ppm2P75": 10480,
+   "surfaceMediane": 47,
+   "prixMedian": 440000
+  },
+  {
+   "voie": "Rue Manin",
+   "ventes": 60,
+   "ppm2Median": 8230,
+   "ppm2P25": 7280,
+   "ppm2P75": 9740,
+   "surfaceMediane": 45,
+   "prixMedian": 377000
+  },
+  {
+   "voie": "Avenue Simon Bolivar",
+   "ventes": 53,
+   "ppm2Median": 8790,
+   "ppm2P25": 7920,
+   "ppm2P75": 9770,
+   "surfaceMediane": 43,
+   "prixMedian": 400000
+  },
+  {
+   "voie": "Avenue de Flandre",
+   "ventes": 51,
+   "ppm2Median": 7730,
+   "ppm2P25": 6900,
+   "ppm2P75": 8500,
+   "surfaceMediane": 40,
+   "prixMedian": 310000
+  },
+  {
+   "voie": "Rue de Meaux",
+   "ventes": 49,
+   "ppm2Median": 9130,
+   "ppm2P25": 7970,
+   "ppm2P75": 10220,
+   "surfaceMediane": 35,
+   "prixMedian": 337000
+  },
+  {
+   "voie": "Rue de Belleville",
+   "ventes": 41,
+   "ppm2Median": 9230,
+   "ppm2P25": 8230,
+   "ppm2P75": 11370,
+   "surfaceMediane": 38,
+   "prixMedian": 335000
+  },
+  {
+   "voie": "Avenue Secretan",
+   "ventes": 36,
+   "ppm2Median": 8950,
+   "ppm2P25": 7830,
+   "ppm2P75": 10300,
+   "surfaceMediane": 32,
+   "prixMedian": 312000
+  },
+  {
+   "voie": "Rue Eugene Jumin",
+   "ventes": 31,
+   "ppm2Median": 8440,
+   "ppm2P25": 7500,
+   "ppm2P75": 9480,
+   "surfaceMediane": 34,
+   "prixMedian": 300000
+  },
+  {
+   "voie": "Rue de Romainville",
+   "ventes": 27,
+   "ppm2Median": 7930,
+   "ppm2P25": 6970,
+   "ppm2P75": 8460,
+   "surfaceMediane": 44,
+   "prixMedian": 330000
+  },
+  {
+   "voie": "Rue de la Villette",
+   "ventes": 27,
+   "ppm2Median": 9150,
+   "ppm2P25": 8070,
+   "ppm2P75": 10180,
+   "surfaceMediane": 25,
+   "prixMedian": 248000
+  }
+ ],
+ "ruesTotal": 82,
+ "genereLe": "2026-08-18T13:06:50.819Z",
+ "arrondissement": 19,
+ "millesime": "2025"
+}

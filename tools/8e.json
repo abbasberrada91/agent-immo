@@ -1,0 +1,189 @@
+{
+ "ok": true,
+ "zip": "75008",
+ "type": "Appartement",
+ "ventes": 937,
+ "ppm2Median": 12460,
+ "ppm2P25": 10500,
+ "ppm2P75": 15850,
+ "surfaceMediane": 71,
+ "prixMedian": 940000,
+ "parPieces": [
+  {
+   "pieces": 1,
+   "cinqEtPlus": false,
+   "ventes": 135,
+   "ppm2Median": 12500,
+   "ppm2P25": 10200,
+   "ppm2P75": 14880,
+   "surfaceMediane": 23,
+   "prixMedian": 307000
+  },
+  {
+   "pieces": 2,
+   "cinqEtPlus": false,
+   "ventes": 186,
+   "ppm2Median": 12070,
+   "ppm2P25": 10420,
+   "ppm2P75": 15540,
+   "surfaceMediane": 47,
+   "prixMedian": 580000
+  },
+  {
+   "pieces": 3,
+   "cinqEtPlus": false,
+   "ventes": 138,
+   "ppm2Median": 12140,
+   "ppm2P25": 10620,
+   "ppm2P75": 14340,
+   "surfaceMediane": 69,
+   "prixMedian": 855000
+  },
+  {
+   "pieces": 4,
+   "cinqEtPlus": false,
+   "ventes": 101,
+   "ppm2Median": 12810,
+   "ppm2P25": 11150,
+   "ppm2P75": 15600,
+   "surfaceMediane": 105,
+   "prixMedian": 1302000
+  },
+  {
+   "pieces": 5,
+   "cinqEtPlus": true,
+   "ventes": 144,
+   "ppm2Median": 12590,
+   "ppm2P25": 10920,
+   "ppm2P75": 15880,
+   "surfaceMediane": 160,
+   "prixMedian": 2000000
+  }
+ ],
+ "parAnnee": [
+  {
+   "annee": "2025",
+   "ventes": 937,
+   "ppm2Median": 12460,
+   "ppm2P25": 10500,
+   "ppm2P75": 15850,
+   "surfaceMediane": 71,
+   "prixMedian": 940000
+  }
+ ],
+ "evolution": null,
+ "rues": [
+  {
+   "voie": "Rue du Faubourg Saint Honore",
+   "ventes": 64,
+   "ppm2Median": 14940,
+   "ppm2P25": 12350,
+   "ppm2P75": 18180,
+   "surfaceMediane": 86,
+   "prixMedian": 1302000
+  },
+  {
+   "voie": "Boulevard Malesherbes",
+   "ventes": 38,
+   "ppm2Median": 12040,
+   "ppm2P25": 10940,
+   "ppm2P75": 13390,
+   "surfaceMediane": 81,
+   "prixMedian": 1003000
+  },
+  {
+   "voie": "Rue de Miromesnil",
+   "ventes": 27,
+   "ppm2Median": 11530,
+   "ppm2P25": 10550,
+   "ppm2P75": 12750,
+   "surfaceMediane": 61,
+   "prixMedian": 710000
+  },
+  {
+   "voie": "Avenue Montaigne",
+   "ventes": 27,
+   "ppm2Median": 24340,
+   "ppm2P25": 21720,
+   "ppm2P75": 31530,
+   "surfaceMediane": 81,
+   "prixMedian": 2064000
+  },
+  {
+   "voie": "Boulevard Haussmann",
+   "ventes": 25,
+   "ppm2Median": 13330,
+   "ppm2P25": 12400,
+   "ppm2P75": 17550,
+   "surfaceMediane": 79,
+   "prixMedian": 1315000
+  },
+  {
+   "voie": "Avenue de Wagram",
+   "ventes": 22,
+   "ppm2Median": 14700,
+   "ppm2P25": 12930,
+   "ppm2P75": 16500,
+   "surfaceMediane": 47,
+   "prixMedian": 745000
+  },
+  {
+   "voie": "Rue de Moscou",
+   "ventes": 20,
+   "ppm2Median": 10930,
+   "ppm2P25": 8190,
+   "ppm2P75": 12190,
+   "surfaceMediane": 52,
+   "prixMedian": 448000
+  },
+  {
+   "voie": "Rue de Berri",
+   "ventes": 19,
+   "ppm2Median": 11310,
+   "ppm2P25": 10010,
+   "ppm2P75": 12110,
+   "surfaceMediane": 75,
+   "prixMedian": 706000
+  },
+  {
+   "voie": "Avenue Matignon",
+   "ventes": 19,
+   "ppm2Median": 15650,
+   "ppm2P25": 12000,
+   "ppm2P75": 16830,
+   "surfaceMediane": 130,
+   "prixMedian": 2354000
+  },
+  {
+   "voie": "Rue d Artois",
+   "ventes": 18,
+   "ppm2Median": 12330,
+   "ppm2P25": 8890,
+   "ppm2P75": 14300,
+   "surfaceMediane": 57,
+   "prixMedian": 733000
+  },
+  {
+   "voie": "Rue du Rocher",
+   "ventes": 17,
+   "ppm2Median": 10540,
+   "ppm2P25": 9580,
+   "ppm2P75": 12120,
+   "surfaceMediane": 51,
+   "prixMedian": 655000
+  },
+  {
+   "voie": "Rue d Amsterdam",
+   "ventes": 17,
+   "ppm2Median": 10760,
+   "ppm2P25": 9990,
+   "ppm2P75": 11430,
+   "surfaceMediane": 105,
+   "prixMedian": 1200000
+  }
+ ],
+ "ruesTotal": 61,
+ "genereLe": "2026-08-18T13:05:16.696Z",
+ "arrondissement": 8,
+ "millesime": "2025"
+}
