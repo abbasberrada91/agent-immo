@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <circle cx="256" cy="256" r="248" fill="#22201A"/>
+  <circle cx="256" cy="256" r="232" fill="none" stroke="#B99763" stroke-width="9"/>
+  <circle cx="256" cy="256" r="212" fill="none" stroke="#B99763" stroke-width="3" opacity="0.7"/>
+  <text x="256" y="336" font-family="Georgia,'Liberation Serif',serif" font-size="215"
+        fill="#B99763" text-anchor="middle" letter-spacing="4">HM</text>
+</svg>

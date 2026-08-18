@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="#22201A"/>
+  <circle cx="512" cy="512" r="474" fill="none" stroke="#B99763" stroke-width="5"/>
+  <circle cx="512" cy="512" r="452" fill="none" stroke="#B99763" stroke-width="2" opacity="0.75"/>
+  <text x="512" y="530" font-family="Georgia,'Liberation Serif',serif" font-size="310"
+        fill="#B99763" text-anchor="middle" letter-spacing="6">HM</text>
+  <line x1="360" y1="628" x2="664" y2="628" stroke="#B99763" stroke-width="3" opacity="0.9"/>
+  <text x="512" y="722" font-family="Georgia,'Liberation Serif',serif" font-size="76"
+        fill="#B99763" text-anchor="middle" letter-spacing="9">HENRI MARTIN</text>
+  <text x="512" y="800" font-family="Georgia,'Liberation Serif',serif" font-size="44"
+        fill="#B99763" text-anchor="middle" letter-spacing="19" opacity="0.9">IMMOBILIER</text>
+</svg>
