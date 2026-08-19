@@ -76,6 +76,15 @@
   .cta h3{font-family:var(--serif);font-weight:400;font-size:24px;max-width:22ch}
   .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:46ch}
   .cta a{background:var(--gold);color:var(--ink);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+  .cta form{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .cta form input{background:rgba(244,240,230,.08);border:1px solid rgba(183,172,138,.35);color:var(--cream);padding:12px 14px;font-size:13.5px;font-family:var(--sans);min-width:150px}
+  .cta form input::placeholder{color:#8C8367}
+  .cta form input:focus{outline:none;border-color:var(--gold)}
+  .cta form button{background:var(--gold);color:var(--ink);border:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;cursor:pointer;font-family:var(--sans)}
+  .cta form button:disabled{opacity:.6;cursor:default}
+  .cta .msg{font-size:13.5px;margin-top:10px;display:none}
+  .cta .msg.ok{color:#a8d9bb}
+  .cta .msg.err{color:#e0a3a3}
   footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px;margin-top:0;text-align:left}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:#D9D0B8;font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
@@ -146,9 +155,16 @@
   <div class="wrap">
     <div>
       <h3 class="serif">Un de ces biens vous intéresse ?</h3>
-      <p>Dites-nous votre recherche (secteur, budget, date) — nous vous envoyons les photos, l'adresse et un créneau de visite en privé, avant toute diffusion.</p>
+      <p>Déposez votre recherche (secteur, loyer max) — nous vous envoyons les biens qui correspondent, photos et adresse en privé, avant toute diffusion.</p>
+      <div class="msg ok" id="rechOk">✓ Recherche enregistrée — nous revenons vers vous sous 24 h dès qu'un bien correspond.</div>
+      <div class="msg err" id="rechErr">Merci d'indiquer un secteur et un moyen de vous contacter.</div>
     </div>
-    <a href="mailto:contact@henrimartinimmobilier.com?subject=Recherche%20location%20off-market">Demander l'accès</a>
+    <form id="rechForm">
+      <input id="rechSecteur" placeholder="Secteur (ex. Paris 16e)" required>
+      <input id="rechBudget" placeholder="Loyer max (€/mois)" inputmode="numeric">
+      <input id="rechContact" placeholder="Email ou téléphone" required>
+      <button id="rechBtn" type="submit">Déposer ma recherche</button>
+    </form>
   </div>
 </section>
 
@@ -157,7 +173,7 @@
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
     <div><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
-    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
+    <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="rejoindre.html">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
   <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
@@ -212,6 +228,36 @@
     grid.innerHTML = items.map(card).join("");
   }).catch(function(){
     grid.innerHTML = '<div class="empty">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div>';
+  });
+})();
+</script>
+<script>
+(function(){
+  var f=document.getElementById("rechForm"); if(!f) return;
+  var btn=document.getElementById("rechBtn"), ok=document.getElementById("rechOk"), err=document.getElementById("rechErr");
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var secteur=(document.getElementById("rechSecteur")||{}).value.trim();
+    var budget=(document.getElementById("rechBudget")||{}).value.trim();
+    var contact=(document.getElementById("rechContact")||{}).value.trim();
+    ok.style.display="none"; err.style.display="none";
+    if(!secteur || !contact){ err.style.display="block"; return; }
+    btn.disabled=true; btn.textContent="Envoi…";
+    fetch("https://loffmarketimmo.com/api/site/alerte-acheteur",{method:"POST",headers:{"content-type":"application/json"},
+      body:JSON.stringify({secteur:secteur,budget:budget,contact:contact,source:"henrimartinimmobilier.com/location"})})
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(j){
+        if(j && j.ok===false){
+          btn.disabled=false; btn.textContent="Déposer ma recherche";
+          err.textContent=j.error||"Erreur — réessayez."; err.style.display="block";
+          return;
+        }
+        ok.style.display="block"; f.style.display="none";
+      })
+      .catch(function(){
+        btn.disabled=false; btn.textContent="Déposer ma recherche";
+        err.textContent="Erreur réseau — réessayez ou écrivez-nous."; err.style.display="block";
+      });
   });
 })();
 </script>
