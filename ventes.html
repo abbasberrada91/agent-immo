@@ -256,6 +256,7 @@
           return;
         }
         ok.style.display="block"; f.style.display="none";
+        if(window.hmiEvent)hmiEvent("recherche_deposee",{page:"ventes"});
       })
       .catch(function(){
         btn.disabled=false; btn.textContent="Déposer ma recherche";
