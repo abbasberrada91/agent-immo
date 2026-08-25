@@ -222,7 +222,13 @@
     document.title = titre;
     var metaDesc = document.querySelector('meta[name="description"]');
     var factsTxt = [d.surface?d.surface+" m²":null, d.pieces?d.pieces+" pièces":null, d.chambres?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(", ");
-    var descMeta = modeLabel+" — "+(d.adresse||d.secteur)+(factsTxt?", "+factsTxt:"")+(d.prix?", "+eurFmt(d.prix)+" €":"")+". Par Henri Martin Immobilier, agence carte T à Paris.";
+    // Un bien peut porter deux prix : celui du reseau (d.prix, valable en inter-cabinet) et
+    // celui de cette vitrine grand public (d.prixHenriMartin), quand le mandat prevoit un
+    // montant different. Gros Caillou : 777 000 au reseau, 758 500 ici. Sans cette ligne la
+    // fiche affichait le prix reseau alors que la carte de ventes.html affichait le bon —
+    // 18 500 € d'ecart en un clic (constate par Abbas le 25/08).
+    var prixSite = (d.prixHenriMartin!=null) ? d.prixHenriMartin : d.prix;
+    var descMeta = modeLabel+" — "+(d.adresse||d.secteur)+(factsTxt?", "+factsTxt:"")+(prixSite?", "+eurFmt(prixSite)+" €":"")+". Par Henri Martin Immobilier, agence carte T à Paris.";
     if (metaDesc) metaDesc.setAttribute("content", descMeta);
 
     var addrLine = [typeLabel, d.pieces!=null?d.pieces+" pièces":null, d.surface!=null?d.surface+" m²":null, d.chambres!=null?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(" · ");
@@ -253,7 +259,7 @@
         '<p class="eyebrow">'+esc(modeLabel)+' — '+esc(d.secteur)+'</p>'+
         '<h1>'+esc(d.adresse||d.secteur)+'</h1>'+
         (addrLine?('<div class="addr">'+esc(addrLine)+'</div>'):'')+
-        (d.prix!=null?('<div class="price">'+eurFmt(d.prix)+' €'+(d.mode==="location"?' <small>/ mois</small>':'')+'</div>'):'')+
+        (prixSite!=null?('<div class="price">'+eurFmt(prixSite)+' €'+(d.mode==="location"?' <small>/ mois</small>':'')+'</div>'):'')+
         '<div class="filet"></div>'+
       '</div>'+
       statsHtml+
