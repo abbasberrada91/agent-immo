@@ -171,6 +171,13 @@
     var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
     return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
   }
+  // Le type de bien arrive tel qu'il a été saisi : « appartement » chez l'un, « Appartement »
+  // chez l'autre. Deux cartes côte à côte affichaient donc deux casses différentes. On
+  // normalise à l'affichage (05/09) — la saisie, elle, ne se contrôle pas d'ici.
+  function typeBien(t){
+    var s = String(t == null ? '' : t).trim() || 'Appartement';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
   function card(x){
     var vente = x.mode === 'vente';
     var facts = [];
@@ -179,12 +186,12 @@
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
     if(x.meuble===true||x.meuble==='meublé') facts.push('<span>meublé</span>');
     var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
-    var altTxt = esc((x.type||'Appartement')+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
+    var altTxt = esc(typeBien(x.type)+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
     var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">' : '';
     var body = '<article class="card'+(hasPhotos?' has-photo':'')+'">'
       + photo
       + '<span class="mode">'+(vente?'À vendre':'À louer')+'</span>'
-      + '<div class="type">'+esc(x.type||'Appartement')+'</div>'
+      + '<div class="type">'+esc(typeBien(x.type))+'</div>'
       + '<div class="sect serif">'+esc(x.secteur||'Paris')+'</div>'
       + (x.prix!=null ? '<div class="price">'+euro(x.prix)+' € '+(vente?'':'<span>/ mois</span>')+'</div>' : '')
       + (facts.length ? '<div class="facts">'+facts.join('')+'</div>' : '')

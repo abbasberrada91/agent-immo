@@ -302,17 +302,24 @@
     var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
     return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
   }
+  // Le type de bien arrive tel qu'il a été saisi : « appartement » chez l'un, « Appartement »
+  // chez l'autre. Deux cartes côte à côte affichaient donc deux casses différentes. On
+  // normalise à l'affichage (05/09) — la saisie, elle, ne se contrôle pas d'ici.
+  function typeBien(t){
+    var s = String(t == null ? '' : t).trim() || 'Appartement';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
   function card(x){
     var vente = x.mode === 'vente';
     var facts = [];
     if(x.surface) facts.push('<span><b>'+x.surface+'</b> m²</span>');
     if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> pièces</span>');
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> chambres</span>');
-    var alt = esc((x.type||'Appartement')+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
+    var alt = esc(typeBien(x.type)+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
     var inner = '<div class="bph"><img src="'+esc(x.photos[0])+'" alt="'+alt+'" loading="lazy">'
       + '<span class="badge">'+(vente?'À vendre':'À louer')+'</span></div>'
       + '<div class="bb">'
-      + '<div class="bt">'+esc(x.type||'Appartement')+' — '+esc(x.secteur||'Paris')+'</div>'
+      + '<div class="bt">'+esc(typeBien(x.type))+' — '+esc(x.secteur||'Paris')+'</div>'
       + (x.prix!=null ? '<div class="bp">'+fmt(x.prix)+' €'+(vente?'':' <small>/ mois</small>')+'</div>' : '')
       + (facts.length ? '<div class="bf">'+facts.join('')+'</div>' : '')
       + '</div>';
