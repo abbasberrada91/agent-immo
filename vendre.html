@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
 <title>Vendre son bien à Paris — estimation gratuite | Henri Martin Immobilier</title>
 <meta name="description" content="Vendre votre bien à Paris avec une équipe dédiée : vente classique ou sans annonce publique. Estimation gratuite et immédiate, fondée sur les ventes réellement signées de votre secteur.">
 <link rel="canonical" href="https://henrimartinimmobilier.com/vendre.html">
@@ -17,7 +19,7 @@
 <style>
   :root{
     --navy:#22201A; --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A;
-    --cream:#F4F0E6; --paper:#FBF8F0; --soft:#F0EADA; --line:#D9D0B8; --mut:#8C8367;
+    --cream:#F4F0E6; --paper:#FBF8F0; --soft:#F0EADA; --line:#D9D0B8; --mut:#736A52;
     --on-dark:#D9D0B8; --on-dark-2:#B7AC8A;
     --sold:#2e6a4e; --sold-bg:#e6efe8; --listed:#8a6d3b; --listed-bg:#f1ecdd;
     --serif:Georgia,"Times New Roman",serif;
@@ -354,15 +356,19 @@
   var fmt=function(n){return new Intl.NumberFormat('fr-FR').format(Math.round(n));};
   var fmtEur=function(n){ if(n>=1e6){return (n/1e6).toFixed(n>=1e7?1:2).replace('.',',')+' M€';} return fmt(n)+' €'; };
   // Secteurs : €/m² réalistes haut de gamme 2026 + acquéreurs actifs réels (données Neon).
+  /* Le code postal est ce que le moteur d'estimation attend. Sans lui, le formulaire
+     envoyait seulement le libellé du secteur (« Paris 16ᵉ »), l'API répondait « Secteur ou
+     adresse requis », et le lead était enregistré SANS estimation : le vendeur repartait
+     avec une fourchette calculée dans son navigateur, et nous avec un contact sans chiffre. */
   var ZONES=[
-    {name:'Paris 16ᵉ', ppm2:13200, buyers:91},
-    {name:'Paris 8ᵉ',  ppm2:13800, buyers:14},
-    {name:'Paris 17ᵉ', ppm2:11200, buyers:25},
-    {name:'Paris 6ᵉ',  ppm2:16400, buyers:19},
-    {name:'Paris 7ᵉ',  ppm2:15200, buyers:19},
-    {name:'Neuilly',   ppm2:11600, buyers:25},
-    {name:'Boulogne',  ppm2:10200, buyers:11},
-    {name:'Levallois', ppm2:10400, buyers:10}
+    {name:'Paris 16ᵉ', zip:'75016', ville:'Paris',                 ppm2:13200, buyers:91},
+    {name:'Paris 8ᵉ',  zip:'75008', ville:'Paris',                 ppm2:13800, buyers:14},
+    {name:'Paris 17ᵉ', zip:'75017', ville:'Paris',                 ppm2:11200, buyers:25},
+    {name:'Paris 6ᵉ',  zip:'75006', ville:'Paris',                 ppm2:16400, buyers:19},
+    {name:'Paris 7ᵉ',  zip:'75007', ville:'Paris',                 ppm2:15200, buyers:19},
+    {name:'Neuilly',   zip:'92200', ville:'Neuilly-sur-Seine',     ppm2:11600, buyers:25},
+    {name:'Boulogne',  zip:'92100', ville:'Boulogne-Billancourt',  ppm2:10200, buyers:11},
+    {name:'Levallois', zip:'92300', ville:'Levallois-Perret',      ppm2:10400, buyers:10}
   ];
   var state={zone:0, surf:85, type:1, cond:1, unlocked:false};
 
@@ -411,32 +417,47 @@
     body.innerHTML=rows;
     document.getElementById('comps').classList.add('show');
   }
+  /* Le bouton annonçait « ✓ Rapport envoyé » AVANT l'envoi, et l'envoi vivait dans un autre
+     bloc de script qui ignorait la réponse. Un vendeur pouvait donc repartir convaincu qu'on
+     allait le rappeler alors que rien n'était parti. Un seul geste désormais : on envoie, on
+     attend la réponse, et on n'annonce l'envoi que s'il a eu lieu. */
   document.getElementById('uBtn').onclick=function(){
+    var btn=this;
     var n=document.getElementById('uName').value.trim(), t=document.getElementById('uTel').value.trim();
     if(!n||!t){alert('Prénom et téléphone pour recevoir votre rapport détaillé.');return;}
-    state.unlocked=true; this.textContent='✓ Rapport envoyé — un conseiller vous rappelle sous 24 h'; this.disabled=true; this.style.opacity=.7;
-    recalc();
+    var z=ZONES[state.zone]||ZONES[0];
+    var libelle=btn.textContent;
+    btn.disabled=true; btn.textContent='Envoi en cours…';
+    var av=document.getElementById('uEchec'); if(av)av.remove();
+    /* Les comparables s'affichent tout de suite : ils sont calculés ici, ils ne dépendent
+       pas de l'envoi. Ce qui dépend de l'envoi, c'est la promesse de rappel. */
+    state.unlocked=true; recalc();
     document.getElementById('comps').scrollIntoView({behavior:'smooth',block:'nearest'});
+    var fini=function(recu){
+      if(recu){btn.textContent='✓ Rapport envoyé — un conseiller vous rappelle sous 24 h'; btn.style.opacity=.7; return;}
+      btn.disabled=false; btn.textContent=libelle;
+      var d=document.createElement('div');
+      d.id='uEchec';
+      d.style.cssText='margin-top:10px;font-size:13px;line-height:1.45;color:#8f3527';
+      d.innerHTML='Votre fourchette s’affiche, mais votre demande n’est pas arrivée jusqu’à nous. Réessayez, ou appelez-nous au <a href="tel:+33625226194" style="color:inherit">06 25 22 61 94</a>.';
+      if(btn.parentNode)btn.parentNode.insertBefore(d, btn.nextSibling);
+    };
+    try{
+      fetch('https://loffmarketimmo.com/api/site/estimation',{method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({
+          prenom:n, tel:t,
+          surface:Number(document.getElementById('surf').value)||null,
+          zip:z.zip, address:z.zip+' '+z.ville,
+          secteur:z.name,
+          fourchette:(document.getElementById('rlow').textContent||'')+' – '+(document.getElementById('rhigh').textContent||''),
+          source:'henrimartinimmobilier.com'
+        })})
+        .then(function(r){return r.ok;}, function(){return false;})
+        .then(fini, function(){fini(false);});
+    }catch(e){fini(false);}
   };
 
   recalc();
-})();
-</script>
-<script>
-(function(){
-  var b=document.getElementById('uBtn');if(!b)return;
-  b.addEventListener('click',function(){
-    try{
-      var prenom=(document.getElementById('uName')||{}).value||'';
-      var tel=(document.getElementById('uTel')||{}).value||'';
-      if(!tel.trim())return;
-      var surface=Number((document.getElementById('surf')||{}).value)||null;
-      var zone='';var zc=document.querySelector('#zpick .zchip.on,#zpick .zchip[aria-pressed="true"]');if(zc)zone=zc.textContent.trim();
-      var fourchette=((document.getElementById('rlow')||{}).textContent||'')+' – '+((document.getElementById('rhigh')||{}).textContent||'');
-      fetch('https://loffmarketimmo.com/api/site/estimation',{method:'POST',headers:{'content-type':'application/json'},
-        body:JSON.stringify({prenom:prenom,tel:tel,surface:surface,secteur:zone,fourchette:fourchette,source:'henrimartinimmobilier.com'})}).catch(function(){});
-    }catch(e){}
-  });
 })();
 </script>
 <script>
@@ -453,6 +474,65 @@
     var tel=(document.getElementById('uTel')||{}).value||'';
     if(tel.trim()&&window.hmiEvent)hmiEvent('lead_estimation',{});
   });
+})();
+</script>
+<!-- Menu de navigation sur téléphone (05/09). La barre du haut masque tous ses liens
+     sous 860 px : il ne restait que « Estimer mon bien », et le reste du site devenait
+     inatteignable au doigt. Le panneau est OPAQUE et plein écran (demande d'Abbas : un fond
+     translucide se superposait à la page et faisait doublon). Les liens sont recopiés depuis
+     la barre de la page, donc la page courante reste signalée et rien n'est à maintenir en
+     double. -->
+<style>
+.hm-burger{display:none;position:fixed;top:12px;right:12px;z-index:60;width:44px;height:44px;
+  border:1px solid rgba(217,208,184,.35);background:#22201A;cursor:pointer;padding:0;
+  flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.hm-burger span{display:block;width:18px;height:1.5px;background:#F4F0E6;transition:transform .2s,opacity .2s}
+.hm-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hm-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.hm-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.hm-menu{display:none;position:fixed;inset:0;z-index:55;background:#22201A;overflow-y:auto;
+  padding:74px 26px calc(32px + env(safe-area-inset-bottom))}
+.hm-menu.open{display:block}
+.hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(217,208,184,.14);
+  color:#F4F0E6;text-decoration:none;letter-spacing:.01em;
+  font:500 17px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif}
+.hm-menu a.on{color:#D9917A}
+.hm-menu a.hm-tel{margin-top:24px;border:1px solid #B7784F;border-bottom:1px solid #B7784F;
+  color:#D9917A;text-align:center;padding:15px 18px;letter-spacing:.12em;text-transform:uppercase;
+  font:600 12.5px/1 -apple-system,"Segoe UI",system-ui,sans-serif}
+@media(max-width:860px){.hm-burger{display:flex}}
+@media(prefers-reduced-motion:reduce){.hm-burger span{transition:none}}
+</style>
+<button class="hm-burger" id="hmBurger" type="button" aria-label="Ouvrir le menu"
+        aria-expanded="false" aria-controls="hmMenu"><span></span><span></span><span></span></button>
+<nav class="hm-menu" id="hmMenu" aria-label="Menu"></nav>
+<script>
+(function(){
+  var b=document.getElementById('hmBurger'), m=document.getElementById('hmMenu');
+  if(!b||!m)return;
+  var src=document.querySelectorAll('.nav-links a, a.nav-cta');
+  var vus={};
+  for(var i=0;i<src.length;i++){
+    var a=src[i], href=a.getAttribute('href')||'';
+    if(vus[href])continue; vus[href]=1;
+    var c=document.createElement('a');
+    c.href=href; c.textContent=(a.textContent||'').trim();
+    if(a.classList.contains('on'))c.className='on';
+    m.appendChild(c);
+  }
+  var tel=document.createElement('a');
+  tel.href='tel:+33625226194'; tel.className='hm-tel'; tel.textContent='Appeler l’agence';
+  m.appendChild(tel);
+  function ferme(){b.setAttribute('aria-expanded','false');m.classList.remove('open');
+    document.body.style.overflow='';b.setAttribute('aria-label','Ouvrir le menu');}
+  b.addEventListener('click',function(){
+    var ouvert=b.getAttribute('aria-expanded')==='true';
+    if(ouvert)return ferme();
+    b.setAttribute('aria-expanded','true');m.classList.add('open');
+    document.body.style.overflow='hidden';b.setAttribute('aria-label','Fermer le menu');
+  });
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')ferme();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')ferme();});
 })();
 </script>
 </body>
