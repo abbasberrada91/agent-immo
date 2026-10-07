@@ -81,6 +81,8 @@
   /* ===== Ouverture en masque (07/10) ===== */
   .hm-mask{position:relative;height:230vh;padding:0;background:var(--navy)}
   .mk-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--navy)}
+  /* Autour de la fenêtre, la même photo floutée, qui se défloute au défilement (demande Abbas 07/10). */
+  .mk-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(var(--mb,22px)) brightness(var(--mbr,.72));will-change:filter}
   .mk-ph{position:absolute;inset:0;background-size:cover;background-position:center;
     clip-path:inset(var(--mi,24%) var(--mj,20%) var(--mi,24%) var(--mj,20%));will-change:clip-path}
   .mk-ph:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,20,.35),rgba(7,11,20,0) 35%,rgba(7,11,20,.6))}
@@ -151,7 +153,7 @@
   .biens .more a:hover{color:var(--gold)}
   .bloading{color:var(--mut);padding:24px 0}
   @media(prefers-reduced-motion:reduce){
-    .hm-mask{height:auto}.mk-stage{position:relative}.mk-ph{clip-path:none!important}.mk-cap{opacity:1}
+    .hm-mask{height:auto}.mk-stage{position:relative}.mk-ph{clip-path:none!important}.mk-bg{filter:none!important}.mk-cap{opacity:1}
     .rl-stage{position:relative;height:auto;padding:24px 0}.rl-track{overflow-x:auto;transform:none!important}
   }
 
@@ -198,6 +200,7 @@
      l'écran. Au repos (et sans JavaScript), la fenêtre et le titre sont déjà là. -->
 <section class="hm-mask" id="hmMask" aria-label="Henri Martin Immobilier">
   <div class="mk-stage">
+    <div class="mk-bg" id="mkBg" style="background-image:url(https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1920)"></div>
     <div class="mk-ph" id="mkPh" style="background-image:url(https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1920)"></div>
     <div class="mk-ttl">
       <div class="mk-brand serif">Henri Martin</div>
@@ -339,7 +342,7 @@
   // ouverture en masque sur le plus grand bien. Alimenté par les 2 APIs publiques.
   var pile = document.getElementById('pile'), rail = document.getElementById('rail'),
       track = document.getElementById('railTrack'), railN = document.getElementById('railN'),
-      mask = document.getElementById('hmMask'), ph = document.getElementById('mkPh'), cap = document.getElementById('mkCap');
+      mask = document.getElementById('hmMask'), ph = document.getElementById('mkPh'), bg = document.getElementById('mkBg'), cap = document.getElementById('mkCap');
   if(!pile) return;
   var fmt = function(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n)); };
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
@@ -380,6 +383,7 @@
     if(mask && ph){
       var p=prog(mask), e=Math.min(1,p/0.75), ease=1-Math.pow(1-e,3);
       ph.style.setProperty('--mi',(24*(1-ease))+'%'); ph.style.setProperty('--mj',(20*(1-ease))+'%');
+      if(bg){ bg.style.setProperty('--mb',(22*(1-ease)).toFixed(1)+'px'); bg.style.setProperty('--mbr',(0.72+0.28*ease).toFixed(3)); }
       if(cap) cap.style.setProperty('--mo', Math.max(0,(p-0.7)/0.3));
     }
     if(!rail.hidden){ var q=prog(rail), extra=Math.max(0,track.scrollWidth-window.innerWidth); track.style.transform='translate3d('+(-extra*q)+'px,0,0)'; }
@@ -417,6 +421,7 @@
       im.onload = function(){
         if(window.scrollY >= 10) return;
         ph.style.backgroundImage = 'url('+JSON.stringify(grand.photos[0])+')';
+        if(bg) bg.style.backgroundImage = ph.style.backgroundImage;
         cap.href = lien(grand);
         cap.innerHTML = '<span class="k">'+(grand.mode==='vente'?'À vendre':'À louer')+'</span><span class="t">'+esc(secteur(grand.secteur))+'</span><span class="m">'+esc([meta(grand),prix(grand)].filter(Boolean).join(' · '))+'</span>';
         cap.hidden = false; image();
