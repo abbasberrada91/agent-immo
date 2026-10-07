@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600;700&display=swap">
 <style>
   :root{
-    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --cream:#F4F0E6; --paper:#FBF8F0;
-    --soft:#F0EADA; --line:#D9D0B8; --mut:#736A52; --on-dark:#D9D0B8;
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --cream:#EFEFEE; --paper:#F7F7F6;
+    --soft:#ECECEA; --line:#DADAD8; --mut:#6B6B68; --on-dark:#DADAD8;
     --serif:"Bodoni Moda",Didot,"Times New Roman",serif;
     --sans:"Jost",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
@@ -37,9 +37,9 @@
   header.top{background:var(--ink);color:var(--cream)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
   .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
-  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#ADADAA;margin-top:2px}
   .nav-links{display:flex;gap:22px;font-size:13.5px}
-  .nav-links a{color:#D9D0B8;text-decoration:none}
+  .nav-links a{color:#DADAD8;text-decoration:none}
   .nav-links a:hover,.nav-links a.on{color:var(--cream)}
   .nav-cta{border:1px solid var(--gold);color:var(--gold-2);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   @media(max-width:820px){.nav-links{display:none}}
@@ -47,28 +47,28 @@
   .intro{padding:52px 0 44px;border-bottom:1px solid var(--line)}
   .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,46px);line-height:1.1;margin:12px 0 0;max-width:22ch}
   .intro h1 i{color:#9C4A34;font-style:italic}
-  .intro .lede{color:#5A5140;font-size:16px;max-width:62ch;margin-top:16px;line-height:1.7}
+  .intro .lede{color:#555553;font-size:16px;max-width:62ch;margin-top:16px;line-height:1.7}
   /* cards */
-  .invest{background:#f1ecdd;padding:64px 0}
+  .invest{background:#EFEFEE;padding:64px 0}
   .igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .icard{background:#FBF8F0;border:1px solid #D9D0B8;padding:22px}
+  .icard{background:#F7F7F6;border:1px solid #DADAD8;padding:22px}
   .icard .ino{font-family:'SF Mono','Courier New',monospace;font-size:12px;letter-spacing:.1em;color:#9C4A34}
   .icard h3{font:700 16px var(--sans);margin:10px 0 6px;color:#22201A}
-  .icard p{font:400 13.5px/1.6 var(--sans);color:#5A5140;margin-bottom:12px}
+  .icard p{font:400 13.5px/1.6 var(--sans);color:#555553;margin-bottom:12px}
   .icard a{font:700 13px var(--sans);color:#9C4A34;text-decoration:none}
   /* cta */
   .cta{background:var(--ink);color:var(--cream);padding:56px 0}
   .cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .cta h3{font-family:var(--serif);font-weight:400;font-size:26px;max-width:26ch}
-  .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:50ch}
+  .cta p{color:#ADADAA;font-size:14px;margin-top:6px;max-width:50ch}
   .cta a{background:var(--gold);color:var(--ink);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
   /* footer harmonisé */
-  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#888884;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#888884;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 <script type="application/ld+json">
 {
@@ -167,7 +167,7 @@
 .hm-burger{display:none;position:fixed;top:12px;right:12px;z-index:60;width:44px;height:44px;
   border:1px solid rgba(217,208,184,.35);background:#22201A;cursor:pointer;padding:0;
   flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.hm-burger span{display:block;width:18px;height:1.5px;background:#F4F0E6;transition:transform .2s,opacity .2s}
+.hm-burger span{display:block;width:18px;height:1.5px;background:#EFEFEE;transition:transform .2s,opacity .2s}
 .hm-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .hm-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .hm-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
@@ -175,7 +175,7 @@
   padding:74px 26px calc(32px + env(safe-area-inset-bottom))}
 .hm-menu.open{display:block}
 .hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(217,208,184,.14);
-  color:#F4F0E6;text-decoration:none;letter-spacing:.01em;
+  color:#EFEFEE;text-decoration:none;letter-spacing:.01em;
   font:500 17px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif}
 .hm-menu a.on{color:#D9917A}
 .hm-menu a.hm-tel{margin-top:24px;border:1px solid #B7784F;border-bottom:1px solid #B7784F;

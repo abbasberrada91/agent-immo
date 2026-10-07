@@ -82,8 +82,8 @@ function page(d) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600;700&display=swap">
 <style>
   :root{
-    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A; --cream:#F4F0E6; --paper:#FBF8F0;
-    --soft:#F0EADA; --line:#D9D0B8; --mut:#8C8367; --on-dark:#D9D0B8; --on-dark-2:#B7AC8A;
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A; --cream:#EFEFEE; --paper:#F7F7F6;
+    --soft:#ECECEA; --line:#DADAD8; --mut:#888884; --on-dark:#DADAD8; --on-dark-2:#ADADAA;
     --serif:"Bodoni Moda",Didot,"Times New Roman",serif;
     --sans:"Jost",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     --mono:'SF Mono','Courier New',monospace;
@@ -101,9 +101,9 @@ function page(d) {
   header.top{background:var(--ink);color:var(--cream)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
   .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
-  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#ADADAA;margin-top:2px}
   .nav-links{display:flex;gap:22px;font-size:13.5px}
-  .nav-links a{color:#D9D0B8;text-decoration:none}
+  .nav-links a{color:#DADAD8;text-decoration:none}
   .nav-links a:hover,.nav-links a.on{color:var(--cream)}
   .nav-cta{border:1px solid var(--gold);color:var(--gold-2);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   @media(max-width:820px){.nav-links{display:none}}
@@ -126,7 +126,7 @@ function page(d) {
   table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
   th{background:var(--ink);color:var(--cream);text-align:left;padding:12px 15px;font:700 11.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
   th.num,td.num{text-align:right}
-  td{padding:11px 15px;border-bottom:1px solid var(--line);color:#5A5140}
+  td{padding:11px 15px;border-bottom:1px solid var(--line);color:#555553}
   tr:last-child td{border-bottom:none}
   td:first-child,td:nth-child(2){color:var(--ink)}
   tbody tr:nth-child(even) td{background:#FCFAF5}
@@ -137,29 +137,29 @@ function page(d) {
   .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px}
   .ccard{background:var(--paper);border:1px solid var(--line);padding:20px 22px}
   .ccard h3{font:700 15px var(--sans);margin-bottom:7px;color:var(--ink)}
-  .ccard p{font:400 13.5px/1.62 var(--sans);color:#5A5140}
+  .ccard p{font:400 13.5px/1.62 var(--sans);color:#555553}
   .crit .fin{margin-top:24px;font-size:15px;color:var(--ink);max-width:70ch;border-left:3px solid var(--gold);padding-left:16px}
   .meth{background:var(--soft);padding:48px 0}
   .meth h2{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
-  .meth p{font-size:13.5px;color:#5A5140;max-width:78ch;margin:9px 0;line-height:1.65}
+  .meth p{font-size:13.5px;color:#555553;max-width:78ch;margin:9px 0;line-height:1.65}
   .meth a{color:var(--gold);text-decoration:none}
   .meth a:hover{text-decoration:underline}
   .cta{background:var(--ink);color:var(--cream);padding:54px 0}
   .cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
   .cta h3{font-family:var(--serif);font-weight:400;font-size:26px;max-width:30ch}
-  .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:54ch}
+  .cta p{color:#ADADAA;font-size:14px;margin-top:6px;max-width:54ch}
   .cta a{background:var(--gold);color:var(--cream);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
   .voisins{padding:34px 0;font-size:13.5px}
   .voisins .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
   .voisins .liens{display:flex;flex-wrap:wrap;gap:9px}
   .voisins a{border:1px solid var(--line);padding:7px 13px;text-decoration:none;color:var(--ink);background:#fff}
   .voisins a:hover{border-color:var(--gold);color:var(--gold)}
-  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#888884;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#888884;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 <script type="application/ld+json">
 ${JSON.stringify(ld, null, 1)}
