@@ -2,7 +2,7 @@
 // Génère une page « Prix au m² » à partir des statistiques DVF d'un secteur.
 //
 // Le site est statique (GitHub Pages) : les pages sont fabriquées ici puis commitées, plutôt
-// que calculées à l'affichage. C'est le bon choix pour trois raisons — Google indexe des
+// que calculées à l'affichage. C'est le bon choix pour trois raisons · Google indexe des
 // chiffres présents dans le HTML et non injectés par JavaScript ; la page reste instantanée ;
 // et les données DVF ne changent que deux fois par an, donc régénérer à la parution suffit.
 //
@@ -14,7 +14,7 @@
 // L'entrée est la réponse de GET /api/admin/dvf/secteur (pige-backend), enrichie du numéro
 // d'arrondissement et du millésime.
 //
-// RÈGLE ABBAS — LE NUMÉRO DE VOIE NE SORT JAMAIS : les libellés de rues arrivent déjà
+// RÈGLE ABBAS · LE NUMÉRO DE VOIE NE SORT JAMAIS : les libellés de rues arrivent déjà
 // nettoyés du numéro par le service. Ce générateur n'en réintroduit aucun.
 
 const fs = require("fs");
@@ -25,7 +25,7 @@ const ordinal = (n) => (n === 1 ? "1er" : `${n}e`);
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-// Espaces insécables entre les groupes de chiffres — lisible, et jamais coupé en fin de ligne.
+// Espaces insécables entre les groupes de chiffres, lisible, et jamais coupé en fin de ligne.
 const nb = (n) => Number(n).toLocaleString("fr-FR").replace(/ | | /g, "&nbsp;");
 const eur = (n) => `${nb(n)}&nbsp;€`;
 const ppm2 = (n) => `${nb(n)}&nbsp;€/m²`;
@@ -36,7 +36,7 @@ const piecesLabel = (p) =>
 function page(d) {
   const arr = d.arrondissement;
   const nomArr = `Paris ${ordinal(arr)}`;
-  const titre = `Prix au m² à ${nomArr} — ${d.millesime} | Henri Martin Immobilier`;
+  const titre = `Prix au m² à ${nomArr} · ${d.millesime} | Henri Martin Immobilier`;
   const desc = `Prix au m² à ${nomArr} : ${nb(d.ppm2Median)} €/m² en médiane sur ${nb(d.ventes)} ventes réellement signées en ${d.millesime}. Détail par typologie et par rue, source DVF.`;
   const url = `https://henrimartinimmobilier.com/prix-m2-paris-${arr}.html`;
 
@@ -197,7 +197,7 @@ ${JSON.stringify(ld, null, 1)}
       </div>
       <div class="kpi">
         <div class="k">Fourchette courante</div>
-        <div class="v">${nb(d.ppm2P25)} – ${ppm2(d.ppm2P75)}</div>
+        <div class="v">${nb(d.ppm2P25)} · ${ppm2(d.ppm2P75)}</div>
         <div class="s">La moitié centrale des ventes. En dehors : biens d'exception ou à rénover.</div>
       </div>
       <div class="kpi">
@@ -233,7 +233,7 @@ ${JSON.stringify(ld, null, 1)}
   <div class="wrap">
     <p class="eyebrow">Rue par rue</p>
     <h2 class="serif">Les ${d.rues.length} voies les plus actives.</h2>
-    <p class="sub">Classées par nombre de ventes, pas par prix : ce sont les rues sur lesquelles on dispose du plus de recul. Une rue absente n'est pas une rue sans transaction — simplement trop peu pour en tirer une médiane fiable.</p>
+    <p class="sub">Classées par nombre de ventes, pas par prix : ce sont les rues sur lesquelles on dispose du plus de recul. Une rue absente n'est pas une rue sans transaction, simplement trop peu pour en tirer une médiane fiable.</p>
     <div class="tw">
       <table>
         <thead><tr><th class="num">#</th><th>Voie</th><th class="num">Prix au m²</th><th class="num">Prix médian</th><th class="num">Ventes</th></tr></thead>
@@ -248,12 +248,12 @@ ${JSON.stringify(ld, null, 1)}
   <div class="wrap">
     <p class="eyebrow">Ce que la médiane ne dit pas</p>
     <h2 class="serif">Deux appartements de la même rue, <i>deux prix différents</i>.</h2>
-    <p class="sub">Les chiffres ci-dessus décrivent un marché. Ils ne décrivent pas un logement. Voici les critères qui font l'écart, et que la donnée publique ne voit pas — c'est le travail du professionnel de les peser.</p>
+    <p class="sub">Les chiffres ci-dessus décrivent un marché. Ils ne décrivent pas un logement. Voici les critères qui font l'écart, et que la donnée publique ne voit pas, c'est le travail du professionnel de les peser.</p>
     <div class="cgrid">
 
       <div class="ccard">
         <h3>L'étage</h3>
-        <p>À surface égale, un étage élevé se paie plus cher qu'un deuxième : plus de lumière, moins de bruit, souvent une vue dégagée. La surcote monte avec chaque niveau — mais elle s'inverse dans un immeuble sans ascenseur, où les derniers étages redeviennent une contrainte.</p>
+        <p>À surface égale, un étage élevé se paie plus cher qu'un deuxième : plus de lumière, moins de bruit, souvent une vue dégagée. La surcote monte avec chaque niveau, mais elle s'inverse dans un immeuble sans ascenseur, où les derniers étages redeviennent une contrainte.</p>
       </div>
 
       <div class="ccard">
@@ -263,7 +263,7 @@ ${JSON.stringify(ld, null, 1)}
 
       <div class="ccard">
         <h3>L'état de l'immeuble</h3>
-        <p>Ravalement fait ou à provisionner, ascenseur récent ou vieillissant, parties communes soignées, montant des charges. Un acquéreur averti lit les procès-verbaux d'assemblée générale avant de faire son offre — et en tient compte dans son prix.</p>
+        <p>Ravalement fait ou à provisionner, ascenseur récent ou vieillissant, parties communes soignées, montant des charges. Un acquéreur averti lit les procès-verbaux d'assemblée générale avant de faire son offre, et en tient compte dans son prix.</p>
       </div>
 
       <div class="ccard">
@@ -273,12 +273,12 @@ ${JSON.stringify(ld, null, 1)}
 
       <div class="ccard">
         <h3>L'exposition et la vue</h3>
-        <p>Sud et sud-ouest se paient. Le vis-à-vis, la hauteur du bâtiment d'en face, l'orientation sur cour ou sur rue changent la lumière toute la journée — et la sensation de calme. Deux critères qu'aucune donnée cadastrale n'enregistre.</p>
+        <p>Sud et sud-ouest se paient. Le vis-à-vis, la hauteur du bâtiment d'en face, l'orientation sur cour ou sur rue changent la lumière toute la journée, et la sensation de calme. Deux critères qu'aucune donnée cadastrale n'enregistre.</p>
       </div>
 
       <div class="ccard">
         <h3>L'état du bien et les travaux</h3>
-        <p>Un appartement refait à neuf et un bien à rénover ne se comparent pas. L'acquéreur déduit le coût des travaux — et souvent davantage, parce qu'il valorise aussi le temps, l'incertitude et le risque de mauvaise surprise.</p>
+        <p>Un appartement refait à neuf et un bien à rénover ne se comparent pas. L'acquéreur déduit le coût des travaux, et souvent davantage, parce qu'il valorise aussi le temps, l'incertitude et le risque de mauvaise surprise.</p>
       </div>
 
       <div class="ccard">
@@ -287,7 +287,7 @@ ${JSON.stringify(ld, null, 1)}
       </div>
 
     </div>
-    <p class="fin">C'est pourquoi une estimation précise change la donne : mal évalué, un bien se vend trop bas — ou reste en ligne des mois et finit par se négocier plus bas encore.</p>
+    <p class="fin">C'est pourquoi une estimation précise change la donne : mal évalué, un bien se vend trop bas, ou reste en ligne des mois et finit par se négocier plus bas encore.</p>
   </div>
 </section>
 
@@ -305,10 +305,10 @@ ${JSON.stringify(ld, null, 1)}
   <div class="wrap">
     <p class="eyebrow">Méthode</p>
     <h2 class="serif">D'où viennent ces chiffres</h2>
-    <p>De la base <b>DVF — Demandes de valeurs foncières</b>, publiée par la Direction générale des Finances publiques : l'enregistrement des ventes réellement signées chez notaire. Ce ne sont pas des prix d'annonces, qui reflètent ce qu'un vendeur espère, mais des prix effectivement payés.</p>
+    <p>De la base <b>DVF · Demandes de valeurs foncières</b>, publiée par la Direction générale des Finances publiques : l'enregistrement des ventes réellement signées chez notaire. Ce ne sont pas des prix d'annonces, qui reflètent ce qu'un vendeur espère, mais des prix effectivement payés.</p>
     <p>Périmètre retenu : appartements vendus à ${nomArr} en ${d.millesime}, hors ventes en viager, hors parkings et caves isolés, hors surfaces inférieures à 9&nbsp;m². Les valeurs aberrantes (moins de 6&nbsp;000&nbsp;€/m² ou plus de 40&nbsp;000&nbsp;€/m² à Paris) sont écartées : elles correspondent presque toujours à des ventes entre proches, des démembrements ou des erreurs de saisie.</p>
-    <p>Nous publions le <b>nom des rues, jamais les numéros</b> — les données sont publiques, mais aucun logement n'a à être identifiable depuis une page de statistiques.</p>
-    <p>Source ouverte : <a href="https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/" target="_blank" rel="noopener">data.gouv.fr — DVF</a>, licence Etalab. Mise à jour à chaque parution semestrielle.</p>
+    <p>Nous publions le <b>nom des rues, jamais les numéros</b>, les données sont publiques, mais aucun logement n'a à être identifiable depuis une page de statistiques.</p>
+    <p>Source ouverte : <a href="https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/" target="_blank" rel="noopener">data.gouv.fr · DVF</a>, licence Etalab. Mise à jour à chaque parution semestrielle.</p>
   </div>
 </section>
 
@@ -326,7 +326,7 @@ ${JSON.stringify(ld, null, 1)}
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
     <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/presentation" target="_blank" rel="noopener">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
-  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier · Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
 </body>
@@ -344,7 +344,7 @@ if (!src) {
 const d = JSON.parse(fs.readFileSync(src, "utf8"));
 
 // Maillage interne : liens vers les arrondissements dont la page existe déjà. Sans argument,
-// on ne fabrique aucun lien mort — c'est la génération complète qui les remplira.
+// on ne fabrique aucun lien mort, c'est la génération complète qui les remplira.
 const dispo = (args.find((a) => a.startsWith("--voisins=")) || "").split("=")[1];
 const voisins = dispo
   ? dispo.split(",").map(Number).filter((n) => n && n !== d.arrondissement)
@@ -358,5 +358,5 @@ if (args.includes("--stdout")) {
 } else {
   const out = path.join(__dirname, "..", `prix-m2-paris-${d.arrondissement}.html`);
   fs.writeFileSync(out, html);
-  console.log(`écrit : ${path.basename(out)} — ${d.ventes} ventes, ${d.rues.length} rues`);
+  console.log(`écrit : ${path.basename(out)} · ${d.ventes} ventes, ${d.rues.length} rues`);
 }

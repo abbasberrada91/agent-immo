@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
-<title>Bien à Paris — Henri Martin Immobilier</title>
-<meta name="description" content="Fiche détaillée d'un bien Henri Martin Immobilier à Paris — photos, prix, surface. Contact anonyme, sans laisser vos coordonnées." />
+<title>Bien à Paris · Henri Martin Immobilier</title>
+<meta name="description" content="Fiche détaillée d'un bien Henri Martin Immobilier à Paris, photos, prix, surface. Contact anonyme, sans laisser vos coordonnées." />
 <meta name="robots" content="noindex,follow">
 <!-- noindex volontaire : cette page miroir dépend d'un fetch JS côté client (id en query
-     string, pas d'URL propre par bien) — l'URL indexable et canonique reste
+     string, pas d'URL propre par bien), l'URL indexable et canonique reste
      loffmarketimmo.com/bien/:id (server-rendue, JSON-LD inclus). Cette page sert
      l'expérience visiteur (rester sur henrimartinimmobilier.com), pas le SEO. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,7 +169,7 @@
   <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
   <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
 </div>
-<div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+<div class="foot"><span>© 2026 Henri Martin Immobilier · Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </footer>
 
 <script>
@@ -214,7 +214,7 @@
       return '<figure class="pt" data-lb="'+i+'"><img src="'+esc(u)+'" alt="'+alt(i)+'" loading="lazy">'+(label?('<span class="tag-ia">'+esc(label)+'</span>'):'')+'</figure>';
     };
     var first = photos[0];
-    var heroHtml = '<figure class="bleed phero" data-lb="0"><img src="'+esc(photoUrl(first))+'" alt="'+alt(0)+'" loading="eager">'+(photoLabel(first)?('<span class="tag-ia">'+esc(photoLabel(first))+'</span>'):'')+'<span class="phero-count">'+photos.length+' photo'+(photos.length>1?'s':'')+' — cliquer pour agrandir</span></figure>';
+    var heroHtml = '<figure class="bleed phero" data-lb="0"><img src="'+esc(photoUrl(first))+'" alt="'+alt(0)+'" loading="eager">'+(photoLabel(first)?('<span class="tag-ia">'+esc(photoLabel(first))+'</span>'):'')+'<span class="phero-count">'+photos.length+' photo'+(photos.length>1?'s':'')+', cliquer pour agrandir</span></figure>';
     var rest = photos.slice(1);
     var gridHtml = rest.length ? ('<div class="bleed pgrid">'+rest.map(function(p,i){ return tile(p, i+1); }).join('')+'</div>') : '';
     return { heroHtml: heroHtml, gridHtml: gridHtml };
@@ -223,17 +223,17 @@
   function render(d){
     var modeLabel = d.mode === "location" ? "Location" : "Vente";
     var typeLabel = "Appartement";
-    var titre = (d.adresse || d.secteur) + " — " + modeLabel + " " + typeLabel + (d.surface ? (" " + d.surface + " m²") : "") + " | Henri Martin Immobilier";
+    var titre = (d.adresse || d.secteur) + " · " + modeLabel + " " + typeLabel + (d.surface ? (" " + d.surface + " m²") : "") + " | Henri Martin Immobilier";
     document.title = titre;
     var metaDesc = document.querySelector('meta[name="description"]');
     var factsTxt = [d.surface?d.surface+" m²":null, d.pieces?d.pieces+" pièces":null, d.chambres?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(", ");
     // Un bien peut porter deux prix : celui du reseau (d.prix, valable en inter-cabinet) et
     // celui de cette vitrine grand public (d.prixHenriMartin), quand le mandat prevoit un
     // montant different. Gros Caillou : 777 000 au reseau, 758 500 ici. Sans cette ligne la
-    // fiche affichait le prix reseau alors que la carte de ventes.html affichait le bon —
+    // fiche affichait le prix reseau alors que la carte de ventes.html affichait le bon · 
     // 18 500 € d'ecart en un clic (constate par Abbas le 25/08).
     var prixSite = (d.prixHenriMartin!=null) ? d.prixHenriMartin : d.prix;
-    var descMeta = modeLabel+" — "+(d.adresse||d.secteur)+(factsTxt?", "+factsTxt:"")+(prixSite?", "+eurFmt(prixSite)+" €":"")+". Par Henri Martin Immobilier, agence carte T à Paris.";
+    var descMeta = modeLabel+" · "+(d.adresse||d.secteur)+(factsTxt?", "+factsTxt:"")+(prixSite?", "+eurFmt(prixSite)+" €":"")+". Par Henri Martin Immobilier, agence carte T à Paris.";
     if (metaDesc) metaDesc.setAttribute("content", descMeta);
 
     var addrLine = [typeLabel, d.pieces!=null?d.pieces+" pièces":null, d.surface!=null?d.surface+" m²":null, d.chambres!=null?d.chambres+" chambres":null, d.meuble==="meublé"?"meublé":null].filter(Boolean).join(" · ");
@@ -261,7 +261,7 @@
       '<div class="fichetop"><span class="wm">Henri Martin Immobilier</span>'+(d.reference?('<span class="ref">Réf. '+esc(d.reference)+'</span>'):'')+'</div>'+
       gal.heroHtml+
       '<div class="fhero">'+
-        '<p class="eyebrow">'+esc(modeLabel)+' — '+esc(d.secteur)+'</p>'+
+        '<p class="eyebrow">'+esc(modeLabel)+' · '+esc(d.secteur)+'</p>'+
         '<h1>'+esc(d.adresse||d.secteur)+'</h1>'+
         (addrLine?('<div class="addr">'+esc(addrLine)+'</div>'):'')+
         (prixSite!=null?('<div class="price">'+eurFmt(prixSite)+' €'+(d.mode==="location"?' <small>/ mois</small>':'')+'</div>'):'')+
@@ -275,11 +275,11 @@
       '</div>'+
       '<div class="cta" id="chat-cta">'+
         '<h4>Cette annonce vous intéresse ?</h4>'+
-        '<p class="chat-hint">Posez vos questions ou demandez une visite — <b>sans laisser vos coordonnées</b>. Vous ne les transmettez que si une visite s\'organise.</p>'+
+        '<p class="chat-hint">Posez vos questions ou demandez une visite, <b>sans laisser vos coordonnées</b>. Vous ne les transmettez que si une visite s\'organise.</p>'+
         '<div class="chatlog" id="chat-log" style="display:none"></div>'+
-        '<form id="cf"><textarea id="cf-msg" placeholder="Votre question ou demande (anonyme)…" required></textarea><button type="submit">Envoyer — anonyme →</button></form>'+
+        '<form id="cf"><textarea id="cf-msg" placeholder="Votre question ou demande (anonyme)…" required></textarea><button type="submit">Envoyer, anonyme →</button></form>'+
         '<div class="chat-actions" id="chat-actions" style="display:none">'+
-          '<button type="button" class="ghostbtn" id="cf-visit-btn">📅 Organiser la visite — transmettre mes coordonnées</button>'+
+          '<button type="button" class="ghostbtn" id="cf-visit-btn">📅 Organiser la visite, transmettre mes coordonnées</button>'+
           '<button type="button" class="ghostbtn" id="cf-notify-btn">🔔 Être prévenu d\'une réponse</button>'+
         '</div>'+
         '<form id="cf-visit" style="display:none"><input id="cfv-name" placeholder="Votre nom" required><input id="cfv-phone" placeholder="Votre téléphone" required><button type="submit">Transmettre à l\'agence →</button></form>'+
@@ -363,8 +363,8 @@
         .then(function(j){
           btn.disabled = false;
           if (j && j.ok) { try{ localStorage.setItem(KEY, j.token); }catch(e){} document.getElementById("cf-msg").value = ""; refresh(); }
-          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
-        }).catch(function(){ btn.disabled = false; out.textContent = "Erreur réseau — réessayez."; });
+          else { out.textContent = (j && j.error) || "Échec, réessayez."; }
+        }).catch(function(){ btn.disabled = false; out.textContent = "Erreur réseau, réessayez."; });
     });
     document.getElementById("cf-visit-btn").onclick = function(){ var f=document.getElementById("cf-visit"); f.style.display = f.style.display==="none"?"block":"none"; };
     document.getElementById("cf-notify-btn").onclick = function(){ var f=document.getElementById("cf-notify"); f.style.display = f.style.display==="none"?"block":"none"; };
@@ -375,9 +375,9 @@
       fetch(API+"/api/bien/"+BID+"/chat/identity", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({token: token(), name: name, phone: phone})})
         .then(function(r){return r.json();})
         .then(function(j){
-          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Coordonnées transmises — nous vous confirmons le créneau très vite."; refresh(); }
-          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
-        }).catch(function(){ out.textContent = "Erreur réseau — réessayez."; });
+          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Coordonnées transmises, nous vous confirmons le créneau très vite."; refresh(); }
+          else { out.textContent = (j && j.error) || "Échec, réessayez."; }
+        }).catch(function(){ out.textContent = "Erreur réseau, réessayez."; });
     });
     document.getElementById("cf-notify").addEventListener("submit", function(e){
       e.preventDefault();
@@ -386,9 +386,9 @@
       fetch(API+"/api/bien/"+BID+"/chat/contact", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({token: token(), contact: c})})
         .then(function(r){return r.json();})
         .then(function(j){
-          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Noté — vous serez prévenu en cas de réponse."; }
-          else { out.textContent = (j && j.error) || "Échec — réessayez."; }
-        }).catch(function(){ out.textContent = "Erreur réseau — réessayez."; });
+          if (j && j.ok) { e.target.style.display = "none"; out.textContent = "Noté, vous serez prévenu en cas de réponse."; }
+          else { out.textContent = (j && j.error) || "Échec, réessayez."; }
+        }).catch(function(){ out.textContent = "Erreur réseau, réessayez."; });
     });
   }
 })();

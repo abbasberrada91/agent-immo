@@ -125,10 +125,10 @@
 <section class="intro">
   <div class="wrap">
     <p class="eyebrow">Quartier · Paris 15e</p>
-    <h1 class="serif">Immobilier à 15e arrondissement — <i>vendre, acheter, louer</i></h1>
-    <p class="txt">Plus peuplé arrondissement de Paris, le 15e est avant tout un arrondissement où l'on vit : commerces de la rue du Commerce et de la rue de la Convention, marchés, écoles, parcs — André-Citroën et Georges-Brassens en tête. C'est le terrain naturel des familles et des primo-accédants qui veulent rester dans Paris sans renoncer à l'espace.</p>
+    <h1 class="serif">Immobilier à 15e arrondissement, <i>vendre, acheter, louer</i></h1>
+    <p class="txt">Plus peuplé arrondissement de Paris, le 15e est avant tout un arrondissement où l'on vit : commerces de la rue du Commerce et de la rue de la Convention, marchés, écoles, parcs · André-Citroën et Georges-Brassens en tête. C'est le terrain naturel des familles et des primo-accédants qui veulent rester dans Paris sans renoncer à l'espace.</p>
     <p class="txt">Le bâti y est plus varié qu'ailleurs : haussmannien côté Pasteur et Vaugirard, immeubles en brique des années 30 très bien construits, et ensembles modernes du Front de Seine, dont les tours de Beaugrenelle offrent des vues sur la Seine. Cette diversité permet des budgets et des projets très différents au sein d'un même arrondissement.</p>
-    <p class="txt">Henri Martin Immobilier accompagne vendeurs, acquéreurs et locataires sur tout le 15e — de Balard à Montparnasse — avec une estimation fondée sur les ventes réellement signées du secteur.</p>
+    <p class="txt">Henri Martin Immobilier accompagne vendeurs, acquéreurs et locataires sur tout le 15e, de Balard à Montparnasse, avec une estimation fondée sur les ventes réellement signées du secteur.</p>
   </div>
 </section>
 
@@ -146,7 +146,7 @@
   <div class="wrap">
     <div>
       <h3 class="serif">Vous vendez à 15e arrondissement ?</h3>
-      <p>Estimation gratuite et immédiate, fondée sur les ventes réellement signées du secteur — sans laisser vos coordonnées.</p>
+      <p>Estimation gratuite et immédiate, fondée sur les ventes réellement signées du secteur, sans laisser vos coordonnées.</p>
     </div>
     <a href="vendre.html">Estimer mon bien</a>
   </div>
@@ -159,7 +159,7 @@
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
     <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="rejoindre.html">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
-  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier · Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
 <script>
@@ -176,7 +176,7 @@
   }
   // Le type de bien arrive tel qu'il a été saisi : « appartement » chez l'un, « Appartement »
   // chez l'autre. Deux cartes côte à côte affichaient donc deux casses différentes. On
-  // normalise à l'affichage (05/09) — la saisie, elle, ne se contrôle pas d'ici.
+  // normalise à l'affichage (05/09), la saisie, elle, ne se contrôle pas d'ici.
   function typeBien(t){
     var s = String(t == null ? '' : t).trim() || 'Appartement';
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -189,7 +189,7 @@
     if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> ch.</span>');
     if(x.meuble===true||x.meuble==='meublé') facts.push('<span>meublé</span>');
     var hasPhotos = Array.isArray(x.photos) && x.photos.length > 0;
-    var altTxt = esc(typeBien(x.type)+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
+    var altTxt = esc(typeBien(x.type)+' '+(vente?'à vendre':'à louer')+' · '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
     var photo = hasPhotos ? '<img class="photo" src="'+esc(x.photos[0])+'" alt="'+altTxt+'" loading="lazy">' : '';
     var body = '<article class="card'+(hasPhotos?' has-photo':'')+'">'
       + photo
@@ -213,7 +213,7 @@
     var c = document.getElementById('count');
     if(c) c.textContent = items.length ? (items.length + ' bien' + (items.length>1?'s':'')) : '';
     if(!items.length){
-      grid.innerHTML = '<div class="empty">Aucun bien disponible dans ce secteur pour le moment — écrivez-nous, nous vous alertons dès qu\'un bien correspond.</div>';
+      grid.innerHTML = '<div class="empty">Aucun bien disponible dans ce secteur pour le moment, écrivez-nous, nous vous alertons dès qu\'un bien correspond.</div>';
       return;
     }
     // photos d'abord, puis prix décroissant
