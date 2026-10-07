@@ -81,8 +81,8 @@
   /* ===== Ouverture en masque (07/10) ===== */
   .hm-mask{position:relative;height:230vh;padding:0;background:var(--navy)}
   .mk-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--navy)}
-  /* Autour de la fenêtre, la même photo floutée, qui se défloute au défilement (demande Abbas 07/10). */
-  .mk-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(var(--mb,22px)) brightness(var(--mbr,.72));will-change:filter}
+  /* Autour de la fenêtre, la même photo : presque nette au repos, de plus en plus floue à l'ouverture (demande Abbas 07/10). */
+  .mk-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(var(--mb,5px)) brightness(var(--mbr,.9));will-change:filter}
   .mk-ph{position:absolute;inset:0;background-size:cover;background-position:center;
     clip-path:inset(var(--mi,24%) var(--mj,20%) var(--mi,24%) var(--mj,20%));will-change:clip-path}
   .mk-ph:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,20,.35),rgba(7,11,20,0) 35%,rgba(7,11,20,.6))}
@@ -90,10 +90,6 @@
   .mk-brand{font-size:clamp(52px,10vw,140px);line-height:.95;color:#fff;text-shadow:0 2px 28px rgba(0,0,0,.45)}
   .mk-ttl h1{font-family:var(--sans);font-weight:400;font-size:clamp(13px,1.3vw,16px);letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.4)}
   .mk-ttl h1 i{font-style:normal}
-  .mk-cap{position:absolute;left:max(24px,calc((100vw - 1160px)/2 + 24px));bottom:36px;display:flex;flex-direction:column;gap:6px;color:#fff;text-decoration:none;opacity:var(--mo,0);transition:opacity .1s}
-  .mk-cap .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-  .mk-cap .t{font-family:var(--serif);font-size:clamp(32px,4.4vw,56px);line-height:1}
-  .mk-cap .m{font-size:16px}
   .hero-intro{background:var(--paper);padding:56px 0 8px}
   .hero-intro .eyebrow{color:var(--gold)}
   .hero-intro .lede{font-size:17.5px;color:#4A4434;max-width:60ch;margin:14px 0 34px;line-height:1.62}
@@ -115,8 +111,7 @@
     .hs-row{flex-direction:column}
     .hs-field{border-right:0;border-bottom:1px solid rgba(20,20,18,.1)}
     .hs-go{padding:16px;justify-content:center}
-    .mk-cap{left:20px;bottom:28px}
-  }
+    }
 
   /* ===== Nos biens : pile (vente) et rail (location), 07/10 ===== */
   .biens{background:var(--paper);padding:72px 0 64px}
@@ -153,7 +148,7 @@
   .biens .more a:hover{color:var(--gold)}
   .bloading{color:var(--mut);padding:24px 0}
   @media(prefers-reduced-motion:reduce){
-    .hm-mask{height:auto}.mk-stage{position:relative}.mk-ph{clip-path:none!important}.mk-bg{filter:none!important}.mk-cap{opacity:1}
+    .hm-mask{height:auto}.mk-stage{position:relative}.mk-ph{clip-path:none!important}.mk-bg{filter:none!important}
     .rl-stage{position:relative;height:auto;padding:24px 0}.rl-track{overflow-x:auto;transform:none!important}
   }
 
@@ -206,7 +201,6 @@
       <div class="mk-brand serif">Henri Martin</div>
       <h1>Vendre, louer, <i>investir</i>, estimer au prix juste.</h1>
     </div>
-    <a class="mk-cap" id="mkCap" hidden></a>
   </div>
 </section>
 
@@ -342,7 +336,7 @@
   // ouverture en masque sur le plus grand bien. Alimenté par les 2 APIs publiques.
   var pile = document.getElementById('pile'), rail = document.getElementById('rail'),
       track = document.getElementById('railTrack'), railN = document.getElementById('railN'),
-      mask = document.getElementById('hmMask'), ph = document.getElementById('mkPh'), bg = document.getElementById('mkBg'), cap = document.getElementById('mkCap');
+      mask = document.getElementById('hmMask'), ph = document.getElementById('mkPh'), bg = document.getElementById('mkBg');
   if(!pile) return;
   var fmt = function(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n)); };
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
@@ -383,8 +377,10 @@
     if(mask && ph){
       var p=prog(mask), e=Math.min(1,p/0.75), ease=1-Math.pow(1-e,3);
       ph.style.setProperty('--mi',(24*(1-ease))+'%'); ph.style.setProperty('--mj',(20*(1-ease))+'%');
-      if(bg){ bg.style.setProperty('--mb',(22*(1-ease)).toFixed(1)+'px'); bg.style.setProperty('--mbr',(0.72+0.28*ease).toFixed(3)); }
-      if(cap) cap.style.setProperty('--mo', Math.max(0,(p-0.7)/0.3));
+      // Demande Abbas 07/10 : presque net au repos, flou fort à l'ouverture.
+      // Repos et premier tiers : presque net (5 px). Ensuite le flou monte jusqu'à 22 px.
+      var f=Math.min(1,Math.max(0,(p-0.33)/0.5));
+      if(bg){ bg.style.setProperty('--mb',(5+17*f).toFixed(1)+'px'); bg.style.setProperty('--mbr',(0.9-0.2*f).toFixed(3)); }
     }
     if(!rail.hidden){ var q=prog(rail), extra=Math.max(0,track.scrollWidth-window.innerWidth); track.style.transform='translate3d('+(-extra*q)+'px,0,0)'; }
   }
@@ -412,22 +408,8 @@
       for(var i=0;i<imgs.length;i++) imgs[i].addEventListener('load', function(){ tailleRail(); image(); });
       tailleRail();
     }
-    // L'ouverture montre le plus grand bien disponible, si la page n'a pas encore défilé
-    // (changer la photo sous les yeux du visiteur ferait un saut).
-    var tous = ven.concat(loc).filter(function(x){return x.id;});
-    var grand = tous.sort(function(a,b){ return (+b.surface||0)-(+a.surface||0); })[0];
-    if(grand && ph && cap && window.scrollY < 10){
-      var im = new Image();
-      im.onload = function(){
-        if(window.scrollY >= 10) return;
-        ph.style.backgroundImage = 'url('+JSON.stringify(grand.photos[0])+')';
-        if(bg) bg.style.backgroundImage = ph.style.backgroundImage;
-        cap.href = lien(grand);
-        cap.innerHTML = '<span class="k">'+(grand.mode==='vente'?'À vendre':'À louer')+'</span><span class="t">'+esc(secteur(grand.secteur))+'</span><span class="m">'+esc([meta(grand),prix(grand)].filter(Boolean).join(' · '))+'</span>';
-        cap.hidden = false; image();
-      };
-      im.src = grand.photos[0];
-    }
+    // L'ouverture garde sa photo sans logo (07/10) : les photos des biens portent le
+    // filigrane doré, qui se superposait au titre « Henri Martin ».
     image();
   }).catch(function(){
     pile.innerHTML = '<div class="wrap"><div class="bloading">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div></div>';
