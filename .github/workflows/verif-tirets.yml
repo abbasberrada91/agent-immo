@@ -1,0 +1,21 @@
+# Aucun tiret cadratin (—) ni demi-cadratin (–) sur le site (règle d'Abbas du 16/09/2026 :
+# « ne jamais mettre —, ça fait trop IA »). Retirés en entier le 07/10/2026 : ce contrôle
+# empêche leur retour sur une PR.
+name: Vérif tirets
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  tirets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Chercher les tirets cadratins et demi-cadratins
+        run: |
+          if LC_ALL=C.UTF-8 grep -n -P '[\x{2014}\x{2013}]' *.html tools/*.js; then
+            echo "::error::Tiret cadratin ou demi-cadratin trouvé. Remplacer par une virgule, deux-points, « · » ou « à » entre deux nombres."
+            exit 1
+          fi
+          echo "Aucun tiret cadratin."

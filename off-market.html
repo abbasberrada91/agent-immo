@@ -16,12 +16,15 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vendre en off-market à Paris | Henri Martin Immobilier">
 <meta name="twitter:description" content="Vendre sans annonce publique : comment fonctionne le réseau L'Off Market Immo, étape par étape.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600;700&display=swap">
 <style>
   :root{
-    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A; --cream:#F4F0E6; --paper:#FBF8F0;
-    --soft:#F0EADA; --line:#D9D0B8; --mut:#736A52; --on-dark:#D9D0B8; --on-dark-2:#B7AC8A;
-    --serif:Georgia,"Times New Roman",serif;
-    --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --ink:#22201A; --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A; --cream:#EFEFEF; --paper:#F7F7F7;
+    --soft:#ECECEC; --line:#DADADA; --mut:#6B6B6B; --on-dark:#DADADA; --on-dark-2:#ADADAD;
+    --serif:"Bodoni Moda",Didot,"Times New Roman",serif;
+    --sans:"Jost",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     --mono:'SF Mono','Courier New',monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
@@ -36,9 +39,9 @@
   header.top{background:var(--ink);color:var(--cream)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
   .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em;text-decoration:none;color:var(--cream)}
-  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B7AC8A;margin-top:2px}
+  .brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#ADADAD;margin-top:2px}
   .nav-links{display:flex;gap:22px;font-size:13.5px}
-  .nav-links a{color:#D9D0B8;text-decoration:none}
+  .nav-links a{color:#DADADA;text-decoration:none}
   .nav-links a:hover,.nav-links a.on{color:var(--cream)}
   .nav-cta{border:1px solid var(--gold);color:var(--gold-2);padding:9px 15px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
   @media(max-width:820px){.nav-links{display:none}}
@@ -50,7 +53,7 @@
   .intro{padding:52px 0 46px;border-bottom:1px solid var(--line)}
   .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,46px);line-height:1.1;margin:12px 0 0;max-width:20ch}
   .intro h1 i{color:var(--gold);font-style:italic}
-  .intro .lede{color:#5A5140;font-size:16px;max-width:64ch;margin-top:16px;line-height:1.7}
+  .intro .lede{color:#555555;font-size:16px;max-width:64ch;margin-top:16px;line-height:1.7}
   /* infographie */
   .schema{background:var(--ink);color:var(--cream);padding:60px 0 54px}
   .schema h2{font-family:var(--serif);font-weight:400;font-size:clamp(25px,3.4vw,34px);margin:10px 0 6px}
@@ -67,7 +70,7 @@
   .scard{background:var(--paper);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column}
   .scard .sno{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--gold)}
   .scard h3{font:700 15.5px var(--sans);margin:10px 0 7px}
-  .scard p{font:400 13.5px/1.6 var(--sans);color:#5A5140}
+  .scard p{font:400 13.5px/1.6 var(--sans);color:#555555}
   /* comparatif */
   .cmp{padding:60px 0}
   .cmp h2{font-family:var(--serif);font-weight:400;font-size:clamp(25px,3.4vw,34px);margin-bottom:8px}
@@ -75,23 +78,23 @@
   .tw{overflow-x:auto;border:1px solid var(--line)}
   table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px;background:#fff}
   th{background:var(--ink);color:var(--cream);text-align:left;padding:13px 16px;font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase}
-  td{padding:13px 16px;border-bottom:1px solid var(--line);color:#5A5140;vertical-align:top}
+  td{padding:13px 16px;border-bottom:1px solid var(--line);color:#555555;vertical-align:top}
   tr:last-child td{border-bottom:none}
   td:first-child{font-weight:700;color:var(--ink)}
   /* cta */
   .cta{background:var(--ink);color:var(--cream);padding:56px 0}
   .cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .cta h3{font-family:var(--serif);font-weight:400;font-size:26px;max-width:28ch}
-  .cta p{color:#B7AC8A;font-size:14px;margin-top:6px;max-width:52ch}
+  .cta p{color:#ADADAD;font-size:14px;margin-top:6px;max-width:52ch}
   .cta a{background:var(--gold);color:var(--cream);text-decoration:none;padding:14px 22px;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
   .cta .alt{display:block;margin-top:10px;background:none;color:var(--gold-2);padding:0;text-transform:none;letter-spacing:0;font-size:13px}
   /* footer */
-  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#888888;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(200,200,200,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#888888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 <script type="application/ld+json">
 {
@@ -99,7 +102,7 @@
   "@type": "RealEstateAgent",
   "name": "Henri Martin Immobilier",
   "url": "https://henrimartinimmobilier.com/",
-  "telephone": "+33625226194",
+  "telephone": "+33686381959",
   "email": "contact@henrimartinimmobilier.com",
   "areaServed": {"@type": "City", "name": "Paris"},
   "address": {"@type": "PostalAddress", "streetAddress": "58 rue de Monceau", "postalCode": "75008", "addressLocality": "Paris", "addressCountry": "FR"},
@@ -136,7 +139,7 @@
   <div class="wrap">
     <p class="eyebrow">Une des deux façons de vendre avec nous</p>
     <h1 class="serif">Vendre <i>sans annonce</i> publique.</h1>
-    <p class="lede">La plupart de nos ventes se font de façon classique : photos, portails, visites. Mais certains propriétaires ne souhaitent pas voir leur bien exposé publiquement — et certains biens se vendent mieux ainsi. Dans ce cas, nous le présentons directement aux acquéreurs déjà en recherche, via <b>L'Off Market Immo</b>, le réseau d'agents indépendants auquel nous adhérons. Voici comment cela fonctionne.</p>
+    <p class="lede">La plupart de nos ventes se font de façon classique : photos, portails, visites. Mais certains propriétaires ne souhaitent pas voir leur bien exposé publiquement, et certains biens se vendent mieux ainsi. Dans ce cas, nous le présentons directement aux acquéreurs déjà en recherche, via <b>L'Off Market Immo</b>, le réseau d'agents indépendants auquel nous adhérons. Voici comment cela fonctionne.</p>
   </div>
 </section>
 
@@ -152,20 +155,20 @@
         <desc id="figDesc">Votre bien est confié à Henri Martin Immobilier, entre dans le réseau L'Off Market Immo composé d'agents indépendants, et chacun le confronte aux acquéreurs qu'il suit déjà. Aucune annonce n'est publiée sur les portails publics.</desc>
 
         <!-- 1. VOTRE BIEN -->
-        <rect x="8" y="96" width="150" height="86" fill="#26231A" stroke="#4A4231"/>
+        <rect x="8" y="96" width="150" height="86" fill="#26231A" stroke="#474747"/>
         <text x="24" y="122" fill="#B7784F" font-family="'SF Mono',monospace" font-size="10" letter-spacing="1.4">VOTRE BIEN</text>
-        <text x="24" y="145" fill="#F4F0E6" font-family="Georgia,serif" font-size="15">Mandat</text>
-        <text x="24" y="164" fill="#F4F0E6" font-family="Georgia,serif" font-size="15">off-market</text>
+        <text x="24" y="145" fill="#EFEFEF" font-family="Bodoni Moda,Didot,serif" font-size="15">Mandat</text>
+        <text x="24" y="164" fill="#EFEFEF" font-family="Bodoni Moda,Didot,serif" font-size="15">off-market</text>
 
         <!-- flèche 1 -->
         <line x1="158" y1="139" x2="212" y2="139" stroke="#B7784F" stroke-width="1.5"/>
         <path d="M212 139 l-8 -4.5 v9 z" fill="#B7784F"/>
 
         <!-- 2. HENRI MARTIN -->
-        <rect x="216" y="96" width="150" height="86" fill="#26231A" stroke="#4A4231"/>
+        <rect x="216" y="96" width="150" height="86" fill="#26231A" stroke="#474747"/>
         <text x="232" y="122" fill="#B7784F" font-family="'SF Mono',monospace" font-size="10" letter-spacing="1.4">VOTRE AGENCE</text>
-        <text x="232" y="145" fill="#F4F0E6" font-family="Georgia,serif" font-size="15">Henri Martin</text>
-        <text x="232" y="164" fill="#F4F0E6" font-family="Georgia,serif" font-size="15">Immobilier</text>
+        <text x="232" y="145" fill="#EFEFEF" font-family="Bodoni Moda,Didot,serif" font-size="15">Henri Martin</text>
+        <text x="232" y="164" fill="#EFEFEF" font-family="Bodoni Moda,Didot,serif" font-size="15">Immobilier</text>
 
         <!-- flèche 2 -->
         <line x1="366" y1="139" x2="420" y2="139" stroke="#B7784F" stroke-width="1.5"/>
@@ -174,15 +177,15 @@
         <!-- 3. LE RÉSEAU -->
         <rect x="424" y="70" width="186" height="138" fill="#2E2A1E" stroke="#6B5836"/>
         <text x="442" y="96" fill="#D9917A" font-family="'SF Mono',monospace" font-size="10" letter-spacing="1.4">LE RÉSEAU</text>
-        <text x="442" y="118" fill="#F4F0E6" font-family="Georgia,serif" font-size="15">L'Off Market Immo</text>
-        <text x="442" y="137" fill="#B7AC8A" font-family="-apple-system,sans-serif" font-size="11.5">Agents indépendants</text>
-        <text x="442" y="153" fill="#B7AC8A" font-family="-apple-system,sans-serif" font-size="11.5">vérifiés, dans Paris</text>
+        <text x="442" y="118" fill="#EFEFEF" font-family="Bodoni Moda,Didot,serif" font-size="15">L'Off Market Immo</text>
+        <text x="442" y="137" fill="#ADADAD" font-family="-apple-system,sans-serif" font-size="11.5">Agents indépendants</text>
+        <text x="442" y="153" fill="#ADADAD" font-family="-apple-system,sans-serif" font-size="11.5">vérifiés, dans Paris</text>
         <circle cx="450" cy="180" r="7" fill="#B7784F"/>
         <circle cx="472" cy="180" r="7" fill="#B7784F"/>
         <circle cx="494" cy="180" r="7" fill="#B7784F"/>
         <circle cx="516" cy="180" r="7" fill="#B7784F"/>
         <circle cx="538" cy="180" r="7" fill="#B7784F"/>
-        <text x="556" y="184" fill="#8C8367" font-family="-apple-system,sans-serif" font-size="11">…</text>
+        <text x="556" y="184" fill="#888888" font-family="-apple-system,sans-serif" font-size="11">…</text>
 
         <!-- flèches éclatées vers acquéreurs -->
         <line x1="610" y1="112" x2="668" y2="86" stroke="#B7784F" stroke-width="1.5"/>
@@ -193,17 +196,17 @@
         <path d="M668 192 l-3.5 -8.3 l-5.5 6.8 z" fill="#B7784F"/>
 
         <!-- 4. ACQUÉREURS -->
-        <rect x="672" y="60" width="220" height="52" fill="#26231A" stroke="#4A4231"/>
+        <rect x="672" y="60" width="220" height="52" fill="#26231A" stroke="#474747"/>
         <text x="688" y="82" fill="#B7784F" font-family="'SF Mono',monospace" font-size="10" letter-spacing="1.4">ACQUÉREURS</text>
-        <text x="688" y="101" fill="#F4F0E6" font-family="-apple-system,sans-serif" font-size="12.5">Déjà en recherche, qualifiés</text>
+        <text x="688" y="101" fill="#EFEFEF" font-family="-apple-system,sans-serif" font-size="12.5">Déjà en recherche, qualifiés</text>
 
-        <rect x="672" y="116" width="220" height="46" fill="#26231A" stroke="#4A4231"/>
-        <text x="688" y="139" fill="#F4F0E6" font-family="-apple-system,sans-serif" font-size="12.5">Budget et financement vérifiés</text>
-        <text x="688" y="155" fill="#8C8367" font-family="-apple-system,sans-serif" font-size="11">par l'agent qui les suit</text>
+        <rect x="672" y="116" width="220" height="46" fill="#26231A" stroke="#474747"/>
+        <text x="688" y="139" fill="#EFEFEF" font-family="-apple-system,sans-serif" font-size="12.5">Budget et financement vérifiés</text>
+        <text x="688" y="155" fill="#888888" font-family="-apple-system,sans-serif" font-size="11">par l'agent qui les suit</text>
 
-        <rect x="672" y="166" width="220" height="46" fill="#26231A" stroke="#4A4231"/>
-        <text x="688" y="189" fill="#F4F0E6" font-family="-apple-system,sans-serif" font-size="12.5">Chaque présentation tracée</text>
-        <text x="688" y="205" fill="#8C8367" font-family="-apple-system,sans-serif" font-size="11">et horodatée — vous la voyez</text>
+        <rect x="672" y="166" width="220" height="46" fill="#26231A" stroke="#474747"/>
+        <text x="688" y="189" fill="#EFEFEF" font-family="-apple-system,sans-serif" font-size="12.5">Chaque présentation tracée</text>
+        <text x="688" y="205" fill="#888888" font-family="-apple-system,sans-serif" font-size="11">et horodatée, vous la voyez</text>
 
         <!-- CE QUI N'ARRIVE PAS -->
         <line x1="291" y1="182" x2="291" y2="244" stroke="#7A3A2A" stroke-width="1.3" stroke-dasharray="4 4"/>
@@ -212,7 +215,7 @@
         <line x1="166" y1="260" x2="180" y2="274" stroke="#D9917A" stroke-width="1.6"/>
         <line x1="180" y1="260" x2="166" y2="274" stroke="#D9917A" stroke-width="1.6"/>
         <text x="192" y="264" fill="#D9917A" font-family="-apple-system,sans-serif" font-size="12" font-weight="700">Aucune annonce publique</text>
-        <text x="192" y="280" fill="#B08070" font-family="-apple-system,sans-serif" font-size="11">SeLoger, Bien'ici, Le Figaro, vitrine — rien</text>
+        <text x="192" y="280" fill="#B08070" font-family="-apple-system,sans-serif" font-size="11">SeLoger, Bien'ici, Le Figaro, vitrine, rien</text>
       </svg>
       <p class="figcap">Le bien ne quitte jamais le cadre du réseau : il n'existe aucune annonce publique, aucune photo en ligne, aucune adresse diffusée. Ce sont les agents qui viennent à lui, avec les acquéreurs qu'ils suivent déjà.</p>
     </div>
@@ -223,7 +226,7 @@
   <div class="wrap">
     <p class="eyebrow">Étape par étape</p>
     <h2 class="serif">Ce qui se passe, dans l'ordre.</h2>
-    <p class="sub">Du premier rendez-vous à la signature, c'est votre conseiller Henri Martin qui mène — le réseau est un moyen, pas un intermédiaire de plus.</p>
+    <p class="sub">Du premier rendez-vous à la signature, c'est votre conseiller Henri Martin qui mène, le réseau est un moyen, pas un intermédiaire de plus.</p>
     <div class="sgrid">
       <div class="scard">
         <div class="sno">01</div>
@@ -233,12 +236,12 @@
       <div class="scard">
         <div class="sno">02</div>
         <h3>Entrée dans le réseau</h3>
-        <p>Votre bien est déposé sur L'Off Market Immo, accessible aux seuls agents indépendants vérifiés du réseau — jamais au grand public, jamais indexé par Google.</p>
+        <p>Votre bien est déposé sur L'Off Market Immo, accessible aux seuls agents indépendants vérifiés du réseau, jamais au grand public, jamais indexé par Google.</p>
       </div>
       <div class="scard">
         <div class="sno">03</div>
         <h3>Confrontation aux recherches</h3>
-        <p>Chaque agent compare votre bien aux acquéreurs qu'il suit déjà. Quand ça correspond, il vous le fait savoir — parfois en quelques jours.</p>
+        <p>Chaque agent compare votre bien aux acquéreurs qu'il suit déjà. Quand ça correspond, il vous le fait savoir, parfois en quelques jours.</p>
       </div>
       <div class="scard">
         <div class="sno">04</div>
@@ -278,7 +281,7 @@
   <div class="wrap">
     <div>
       <h3 class="serif">Votre bien vous semble fait pour l'off-market ?</h3>
-      <p>Commencez par l'estimation — elle est gratuite, immédiate, et n'engage à rien. Nous choisirons la stratégie ensuite, ensemble.</p>
+      <p>Commencez par l'estimation, elle est gratuite, immédiate, et n'engage à rien. Nous choisirons la stratégie ensuite, ensemble.</p>
     </div>
     <div>
       <a href="vendre.html#estimation">Estimer mon bien</a>
@@ -290,11 +293,11 @@
 <footer class="site"><div class="wrap">
   <div class="cols">
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
-    <div><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
+    <div><h5>Contact</h5>06 86 38 19 59<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
     <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="rejoindre.html">Professionnels : rejoindre le réseau →</a></div>
   </div>
-  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier · Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
 <!-- Menu de navigation sur téléphone (05/09). La barre du haut masque tous ses liens
@@ -305,17 +308,17 @@
      double. -->
 <style>
 .hm-burger{display:none;position:fixed;top:12px;right:12px;z-index:60;width:44px;height:44px;
-  border:1px solid rgba(217,208,184,.35);background:#22201A;cursor:pointer;padding:0;
+  border:1px solid rgba(218,218,218,.35);background:#22201A;cursor:pointer;padding:0;
   flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.hm-burger span{display:block;width:18px;height:1.5px;background:#F4F0E6;transition:transform .2s,opacity .2s}
+.hm-burger span{display:block;width:18px;height:1.5px;background:#EFEFEF;transition:transform .2s,opacity .2s}
 .hm-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .hm-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .hm-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 .hm-menu{display:none;position:fixed;inset:0;z-index:55;background:#22201A;overflow-y:auto;
   padding:74px 26px calc(32px + env(safe-area-inset-bottom))}
 .hm-menu.open{display:block}
-.hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(217,208,184,.14);
-  color:#F4F0E6;text-decoration:none;letter-spacing:.01em;
+.hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(218,218,218,.14);
+  color:#EFEFEF;text-decoration:none;letter-spacing:.01em;
   font:500 17px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif}
 .hm-menu a.on{color:#D9917A}
 .hm-menu a.hm-tel{margin-top:24px;border:1px solid #B7784F;border-bottom:1px solid #B7784F;
@@ -342,7 +345,7 @@
     m.appendChild(c);
   }
   var tel=document.createElement('a');
-  tel.href='tel:+33625226194'; tel.className='hm-tel'; tel.textContent='Appeler l’agence';
+  tel.href='tel:+33686381959'; tel.className='hm-tel'; tel.textContent='Appeler l’agence';
   m.appendChild(tel);
   function ferme(){b.setAttribute('aria-expanded','false');m.classList.remove('open');
     document.body.style.overflow='';b.setAttribute('aria-label','Ouvrir le menu');}

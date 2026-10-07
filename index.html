@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
-<title>Henri Martin Immobilier | Vente · Location · Investissement — Estimation gratuite à Paris</title>
+<title>Henri Martin Immobilier | Vente · Location · Investissement · Estimation gratuite à Paris</title>
 <meta name="description" content="Henri Martin Immobilier, agence carte T à Paris : vente, location, investissement locatif et conciergerie. Estimation gratuite immédiate fondée sur les ventes réelles de votre rue.">
 <link rel="canonical" href="https://henrimartinimmobilier.com/">
 <meta name="google-site-verification" content="GIJ_64nu-DevEtVQl_9TsQqluYwxO-kaCvc1RQOB1Zg">
@@ -14,7 +14,7 @@
      retirer la balise fait perdre la propriete, donc l acces aux performances de recherche
      et la possibilite de soumettre le sitemap. -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Henri Martin Immobilier | Vente · Location · Investissement — Estimation gratuite à Paris">
+<meta property="og:title" content="Henri Martin Immobilier | Vente · Location · Investissement · Estimation gratuite à Paris">
 <meta property="og:description" content="Agence carte T à Paris : vente, location, investissement locatif et conciergerie. Estimation gratuite immédiate fondée sur les ventes réelles de votre rue.">
 <meta property="og:url" content="https://henrimartinimmobilier.com/">
 <meta property="og:image" content="https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1200">
@@ -29,7 +29,7 @@
   "@type": "RealEstateAgent",
   "name": "Henri Martin Immobilier",
   "url": "https://henrimartinimmobilier.com/",
-  "telephone": "+33625226194",
+  "telephone": "+33686381959",
   "email": "contact@henrimartinimmobilier.com",
   "areaServed": {"@type": "City", "name": "Paris"},
   "address": {"@type": "PostalAddress", "streetAddress": "58 rue de Monceau", "postalCode": "75008", "addressLocality": "Paris", "addressCountry": "FR"},
@@ -41,14 +41,17 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600;700&display=swap">
 <style>
   :root{
     --navy:#22201A; --navy-2:#2A2518; --navy-3:#332D1D; --ink:#22201A;
     --gold:#9C4A34; --gold-2:#B7784F; --gold-3:#D9917A;
-    --cream:#F4F0E6; --paper:#FBF8F0; --soft:#F0EADA; --line:#D9D0B8;
-    --mut:#736A52; --on-dark:#D9D0B8; --on-dark-2:#B7AC8A;
-    --serif:Georgia,"Times New Roman","Iowan Old Style",serif;
-    --sans:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --cream:#EFEFEF; --paper:#F7F7F7; --soft:#ECECEC; --line:#DADADA;
+    --mut:#6B6B6B; --on-dark:#DADADA; --on-dark-2:#ADADAD;
+    --serif:"Bodoni Moda",Didot,"Times New Roman",serif;
+    --sans:"Jost",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
   html{scroll-behavior:smooth}
@@ -61,76 +64,95 @@
   svg{display:block}
 
   /* ---- header ---- */
-  header{position:absolute;top:0;left:0;right:0;z-index:40;background:linear-gradient(180deg,rgba(7,11,20,.55),transparent);border-bottom:0}
+  header{position:absolute;top:0;left:0;right:0;z-index:40;background:linear-gradient(180deg,rgba(247,247,247,.85),rgba(247,247,247,0));border-bottom:0}
   nav{display:flex;align-items:center;justify-content:space-between;padding:15px 24px;max-width:1160px;margin:0 auto}
-  .brand{color:var(--cream);font-weight:700;letter-spacing:.16em;font-size:15px;text-transform:uppercase;line-height:1}
+  .brand{color:var(--ink);font-weight:700;letter-spacing:.16em;font-size:15px;text-transform:uppercase;line-height:1}
   .brand span{display:block;color:var(--gold-2);font-family:var(--serif);font-style:italic;font-size:12px;letter-spacing:0;text-transform:none;margin-top:3px}
   .nav-links{display:flex;gap:24px;align-items:center}
-  .nav-links a{color:var(--on-dark);font-size:14px;font-weight:500;transition:color .2s;text-decoration:none}
-  .nav-links a:hover{color:var(--cream)}
+  .nav-links a{color:var(--ink);font-size:14px;font-weight:500;transition:color .2s;text-decoration:none}
+  .nav-links a:hover{color:var(--gold)}
   .nav-cta{background:var(--gold);color:var(--navy);padding:9px 18px;font-weight:700;font-size:13.5px}
   .nav-cta:hover{background:var(--gold-2)}
-  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}nav{padding-right:68px}.nav-cta{padding:9px 12px;font-size:12.5px}}
 
   section{padding:76px 0}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-  /* ===== Hero plein écran ===== */
-  .hero-photo{position:relative;min-height:92vh;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end}
-  .hero-top{padding-top:168px;padding-bottom:40px;max-width:760px}
-  .hero-top .eyebrow{color:#f1ecdd}
-  .hero-top h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.12;color:#fff;margin:14px 0 0;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-  .hero-top h1 i{color:var(--gold-2);font-style:italic}
-  .hero-top .lede{font-size:17.5px;color:rgba(255,255,255,.92);max-width:52ch;margin:22px 0 0;line-height:1.62;text-shadow:0 1px 12px rgba(0,0,0,.3)}
-  .hero-top .sig{font-size:13.5px;color:rgba(255,255,255,.75);margin-top:14px;font-style:italic;font-family:var(--serif)}
+  /* ===== Ouverture en masque (07/10) ===== */
+  .hm-mask{position:relative;height:230vh;padding:0;background:var(--paper)}
+  .mk-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--paper)}
+  /* Autour de la fenêtre, la même photo : presque nette au repos, de plus en plus floue à l'ouverture (demande Abbas 07/10). */
+  .mk-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(var(--mb,5px));will-change:filter}
+  .mk-ph{position:absolute;inset:0;background-size:cover;background-position:center;
+    clip-path:inset(var(--mi,24%) var(--mj,20%) var(--mi,24%) var(--mj,20%));will-change:clip-path}
+  .mk-ph:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.24),rgba(0,0,0,0) 65%)}
+  .mk-ttl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:0 20px;pointer-events:none}
+  .mk-brand{font-size:clamp(52px,10vw,140px);line-height:.95;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.28),0 4px 36px rgba(0,0,0,.4)}
+  .mk-ttl h1{font-family:var(--sans);font-weight:400;font-size:clamp(13px,1.3vw,16px);letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.4)}
+  .mk-ttl h1 i{font-style:normal}
+  .hero-intro{background:var(--paper);padding:56px 0 8px}
+  .hero-intro .eyebrow{color:var(--gold)}
+  .hero-intro .lede{font-size:17.5px;color:#474747;max-width:60ch;margin:14px 0 34px;line-height:1.62}
   .hero-search{padding-bottom:34px}
   .hs-tabs{display:flex;gap:2px}
-  .hs-tabs .hs-tab{background:rgba(7,11,20,.55);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:700 12px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px)}
-  .hs-tabs .hs-tab.on{background:var(--cream,#F4F0E6);color:#22201A;border-bottom-color:var(--gold-2)}
-  .hs-row{display:flex;align-items:stretch;background:var(--cream,#F4F0E6);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+  .hs-tabs .hs-tab{background:var(--navy);color:rgba(255,255,255,.75);border:0;border-bottom:2px solid transparent;padding:12px 22px;font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .hs-tabs .hs-tab.on{background:var(--cream,#EFEFEF);color:#22201A;border-bottom-color:var(--gold-2)}
+  .hs-row{display:flex;align-items:stretch;background:var(--cream,#EFEFEF);border:1px solid var(--line)}
   .hs-field{flex:1;display:flex;flex-direction:column;gap:3px;padding:16px 22px;border-right:1px solid rgba(20,20,18,.1);text-decoration:none;color:inherit;min-width:0}
   .hs-field:last-of-type{border-right:0}
-  .hs-k{font:700 10px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8C8367}
-  .hs-v{font:400 14.5px/1.3 system-ui;color:#22201A;margin-top:2px}
-  .hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#22201A;color:#f1ecdd;font:700 12.5px/1 system-ui;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
+  .hs-k{font:600 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#888888}
+  .hs-v{font:400 15px/1.3 var(--sans);color:#22201A;margin-top:2px}
+  .hs-go{flex:0 0 auto;display:flex;align-items:center;padding:0 34px;background:#22201A;color:#EFEFEF;font:600 12.5px/1 var(--sans);letter-spacing:.12em;text-decoration:none;white-space:nowrap}
   .hs-go:hover{background:var(--gold-2,#9C4A34)}
   @media (max-width:860px){
-    .hero-top{padding-top:128px}
-    .hero-top h1{font-size:32px}
+    .hm-mask{height:190vh}
     .hs-tabs{flex-wrap:wrap}
     .hs-tabs .hs-tab{flex:1 1 auto;padding:11px 10px;font-size:11px}
     .hs-row{flex-direction:column}
     .hs-field{border-right:0;border-bottom:1px solid rgba(20,20,18,.1)}
     .hs-go{padding:16px;justify-content:center}
-  }
+    }
 
-  /* ===== Nos biens — grandes cartes galerie ===== */
+  /* ===== Nos biens : pile (vente) et rail (location), 07/10 ===== */
   .biens{background:var(--paper);padding:72px 0 64px}
   .biens .head{max-width:640px;margin-bottom:34px}
-  .biens h2{font-family:var(--serif);font-size:clamp(28px,3.8vw,40px);line-height:1.12;margin:10px 0 0}
+  .biens h2{font-family:var(--serif);font-size:clamp(30px,4vw,44px);line-height:1.1;margin:10px 0 0}
   .biens h2 i{color:var(--gold);font-style:italic}
   .biens .sub{color:var(--mut);font-size:15.5px;margin-top:10px}
-  .bgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-  @media(max-width:840px){.bgrid{grid-template-columns:1fr}}
-  .bcard{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);transition:border-color .2s}
-  .bcard:hover{border-color:var(--gold)}
-  .bcard .bph{position:relative;height:380px;overflow:hidden;background:var(--soft)}
-  .bcard .bph img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  .bcard:hover .bph img{transform:scale(1.04)}
-  .bcard .badge{position:absolute;top:16px;left:16px;background:var(--gold);color:#F4F0E6;font:400 10px/1 'SF Mono','Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px}
-  .bcard .bb{padding:20px 22px 24px}
-  .bcard .bt{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.25}
-  .bcard .bp{font-family:'SF Mono','Courier New',monospace;font-size:18px;font-weight:400;margin-top:10px;font-variant-numeric:tabular-nums}
-  .bcard .bp small{font-size:13px;font-weight:400;color:var(--mut)}
-  .bcard .bf{display:flex;gap:18px;margin-top:10px;color:#5A5140;font-size:13.5px;flex-wrap:wrap}
-  .bcard .bf b{color:var(--ink);font-family:'SF Mono','Courier New',monospace;font-variant-numeric:tabular-nums}
-  @media(max-width:600px){.bcard .bph{height:250px}}
-  .biens .more{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap}
-  .biens .more a{font:700 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold)}
+  .pc{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;text-decoration:none;background:var(--navy);box-shadow:0 -14px 40px rgba(0,0,0,.25)}
+  .pc img{position:absolute;inset:0;width:100%;height:100%;max-width:100%;object-fit:cover}
+  .pc:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,11,20,0) 45%,rgba(7,11,20,.66))}
+  .pc .in{position:relative;z-index:2;width:100%;max-width:1160px;margin:0 auto;padding:0 24px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+  .pc .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .pc .t{font-family:var(--serif);font-size:clamp(38px,5.6vw,78px);line-height:1;margin:8px 0 6px}
+  .pc .m{font-size:17px;font-variant-numeric:tabular-nums}
+  .pc .go{border:1px solid rgba(255,255,255,.8);padding:13px 22px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .pc:hover .go{background:#fff;color:var(--ink)}
+  .rail{position:relative;margin-top:72px}
+  .rl-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:26px}
+  .rl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;width:100%}
+  .rl-head h2{margin:0}
+  .rl-head span{color:var(--mut)}
+  .rl-track{display:flex;gap:26px;padding:0 max(24px,calc((100vw - 1160px)/2 + 24px));will-change:transform}
+  .rs{flex:0 0 min(62vw,760px);display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none}
+  .rs .im{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--soft);max-width:100%}
+  .rs .im img{width:100%;height:100%;max-width:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .rs:hover .im img{transform:scale(1.03)}
+  .rs .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .rs .t{font-family:var(--serif);font-size:28px}
+  .rs .p{font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .rs .m{color:var(--mut);font-size:14px}
+  @media(max-width:860px){.rs{flex-basis:84vw}.pc .in{padding:0 20px 32px}}
+  .biens .more{margin-top:40px;display:flex;gap:26px;flex-wrap:wrap}
+  .biens .more a{font:600 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold)}
   .biens .more a:hover{color:var(--gold)}
-  .bloading{color:var(--mut);padding:24px 0;grid-column:1/-1}
+  .bloading{color:var(--mut);padding:24px 0}
+  @media(prefers-reduced-motion:reduce){
+    .hm-mask{height:auto}.mk-stage{position:relative}.mk-ph{clip-path:none!important}.mk-bg{filter:none!important}
+    .rl-stage{position:relative;height:auto;padding:24px 0}.rl-track{overflow-x:auto;transform:none!important}
+  }
 
-  /* ===== Recherches actives — preuve sociale côté vendeur/bailleur ===== */
+  /* ===== Recherches actives, preuve sociale côté vendeur/bailleur ===== */
   .demande{background:var(--soft);padding:64px 0}
   .demande .head{max-width:640px;margin-bottom:30px}
   .demande h2{font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);line-height:1.15;margin:10px 0 0}
@@ -144,12 +166,12 @@
   .dcard .dcrit{font-size:12px;color:var(--mut);margin-top:4px}
 
   /* ===== footer harmonisé ===== */
-  footer.site{background:#171510;color:#8C8367;font-size:13px;padding:52px 0 26px}
+  footer.site{background:#171510;color:#888888;font-size:13px;padding:52px 0 26px}
   footer.site .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px}
   footer.site h5{color:var(--on-dark);font-size:12px;font-weight:700;margin-bottom:9px;letter-spacing:.05em;text-transform:uppercase}
   footer.site a{color:var(--gold-2);text-decoration:none}
   footer.site a:hover{text-decoration:underline}
-  footer.site .foot{border-top:1px solid rgba(201,168,76,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#8C8367;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer.site .foot{border-top:1px solid rgba(200,200,200,.18);margin-top:24px;padding-top:16px;font-size:12px;color:#888888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 <script src="/assets/mesure.js" defer></script>
 </head>
@@ -168,14 +190,25 @@
   </div>
 </nav></header>
 
-<div class="hero-photo" style="background-image:linear-gradient(180deg,rgba(7,11,20,.5) 0%,rgba(7,11,20,.18) 42%,rgba(7,11,20,.9) 100%),url(https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1920)">
-  <div class="hero-top wrap">
-    <div class="eyebrow">Agence immobilière carte T · Paris &amp; Ouest</div>
-    <h1>Vendre, louer, <i>investir</i>, estimer — au prix juste.</h1>
-    <p class="lede">Le savoir-faire des grands groupes, l'attention d'une équipe dédiée. Estimation immédiate fondée sur les ventes réellement signées de votre rue, et un accompagnement de bout en bout, du premier appel à la signature.</p>
-    <p class="sig">HM Immobilier · Paris</p>
+<!-- ============ OUVERTURE EN MASQUE (07/10) ============
+     Une fenêtre sur un bien, sous le nom de l'agence. Au défilement, la photo prend tout
+     l'écran. Au repos (et sans JavaScript), la fenêtre et le titre sont déjà là. -->
+<section class="hm-mask" id="hmMask" aria-label="Henri Martin Immobilier">
+  <div class="mk-stage">
+    <div class="mk-bg" id="mkBg" style="background-image:url(https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1920)"></div>
+    <div class="mk-ph" id="mkPh" style="background-image:url(https://lh3.googleusercontent.com/d/1eDaY1QRbdmjp-4i_4hlo7K59Imh6-EYW=w1920)"></div>
+    <div class="mk-ttl">
+      <div class="mk-brand serif">Henri Martin</div>
+      <h1>Vendre, louer, <i>investir</i>, estimer au prix juste.</h1>
+    </div>
   </div>
+</section>
 
+<div class="hero-intro">
+  <div class="wrap">
+    <div class="eyebrow">Agence immobilière carte T · Paris &amp; Ouest</div>
+    <p class="lede">Le savoir-faire des grands groupes, l'attention d'une équipe dédiée. Estimation immédiate fondée sur les ventes réellement signées de votre rue, et un accompagnement de bout en bout, du premier appel à la signature.</p>
+  </div>
   <div class="hero-search wrap">
     <div class="hs-tabs">
       <button class="hs-tab on" data-t="vend">Vendre</button>
@@ -193,40 +226,50 @@
 </div>
 
 <!-- ============ NOS PILIERS ============ -->
-<section style="background:#FBF8F0;border-bottom:1px solid #D9D0B8;padding:46px 0">
+<section style="background:#F7F7F7;border-bottom:1px solid #DADADA;padding:46px 0">
   <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px">
     <div>
       <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Équipe</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Service personnalisé</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Une équipe dédiée à votre projet — trouvons une formule ensemble.</p>
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Service personnalisé</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#555555">Une équipe dédiée à votre projet, trouvons une formule ensemble.</p>
     </div>
     <div>
       <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Estimation</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Juste et gratuite</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Basée sur la data des ventes réellement signées.</p>
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Juste et gratuite</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#555555">Basée sur la data des ventes réellement signées.</p>
     </div>
     <div>
       <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Quartiers</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une connaissance fine</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Auteuil, Passy, Monceau, 15e : le marché rue par rue.</p>
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une connaissance fine</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#555555">Auteuil, Passy, Monceau, 15e : le marché rue par rue.</p>
     </div>
     <div>
       <div style="font:700 11px/1 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#9C4A34">Réseau</div>
-      <h3 style="font-family:Georgia,serif;font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une force</h3>
-      <p style="font:400 13px/1.55 system-ui;color:#5A5140">Des indépendants vérifiés, partout dans Paris.</p>
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:8px 0 5px;color:#22201A">Une force</h3>
+      <p style="font:400 13px/1.55 system-ui;color:#555555">Des indépendants vérifiés, partout dans Paris.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ NOS BIENS — grandes cartes galerie ============ -->
+<!-- ============ NOS BIENS : pile (vente) et rail (location), 07/10 ============
+     Un bien à vendre = un écran entier, le suivant glisse par-dessus. Les locations
+     défilent de côté quand on descend. Photos telles quelles, filigrane compris. -->
 <section class="biens" id="biens">
   <div class="wrap">
     <div class="head">
       <div class="eyebrow" style="color:var(--gold)">Sélection du moment</div>
-      <h2>Nos biens, <i>à vendre et à louer</i>.</h2>
-      <p class="sub">Une sélection de nos mandats avec photos. L'intégralité de nos biens — dont l'off-market — est visible sur les pages dédiées.</p>
+      <h2>Nos biens <i>à vendre</i>.</h2>
+      <p class="sub">Nos mandats directs. Photos, adresse et visite en privé pour les acquéreurs qualifiés.</p>
     </div>
-    <div class="bgrid" id="biensGrid"><div class="bloading">Chargement de la sélection…</div></div>
+  </div>
+  <div class="pile" id="pile"><div class="wrap"><div class="bloading">Chargement de la sélection…</div></div></div>
+  <div class="rail" id="rail" hidden>
+    <div class="rl-stage">
+      <div class="wrap rl-head"><h2>Nos biens <i>à louer</i>.</h2><span id="railN" class="num"></span></div>
+      <div class="rl-track" id="railTrack"></div>
+    </div>
+  </div>
+  <div class="wrap">
     <div class="more">
       <a href="ventes.html">Voir tous nos biens à vendre →</a>
       <a href="location.html">Voir tous nos biens à louer →</a>
@@ -234,24 +277,24 @@
   </div>
 </section>
 
-<!-- ============ RECHERCHES ACTIVES — preuve de la demande ============ -->
+<!-- ============ RECHERCHES ACTIVES, preuve de la demande ============ -->
 <section class="demande" id="demande">
   <div class="wrap">
     <div class="head">
       <div class="eyebrow" style="color:var(--gold)">La demande est là</div>
       <h2>Des acheteurs <i>et des locataires</i>, déjà en recherche.</h2>
-      <p class="sub">Un aperçu de nos recherches actives, tous secteurs confondus. Nous confier votre bien, c'est aussi accéder à des profils déjà qualifiés — sans attendre qu'ils tombent sur votre annonce.</p>
+      <p class="sub">Un aperçu de nos recherches actives, tous secteurs confondus. Nous confier votre bien, c'est aussi accéder à des profils déjà qualifiés, sans attendre qu'ils tombent sur votre annonce.</p>
     </div>
     <div class="dgrid" id="demandeGrid"><div class="bloading">Chargement des recherches actives…</div></div>
   </div>
 </section>
 
 <!-- ============ CTA ESTIMATION ============ -->
-<section style="background:#22201A;color:#F4F0E6;padding:64px 0">
+<section style="background:#22201A;color:#EFEFEF;padding:64px 0">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
     <div>
       <h2 class="serif" style="font-size:clamp(24px,3.4vw,34px)">Un projet de vente ?</h2>
-      <p style="color:#D9D0B8;font-size:15px;margin-top:8px;max-width:56ch">Estimation gratuite, fondée sur les ventes réellement signées.</p>
+      <p style="color:#DADADA;font-size:15px;margin-top:8px;max-width:56ch">Estimation gratuite, fondée sur les ventes réellement signées.</p>
     </div>
     <a href="vendre.html" style="background:#B7784F;color:#22201A;text-decoration:none;padding:15px 26px;font:700 13px system-ui;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Estimer mon bien →</a>
   </div>
@@ -260,11 +303,11 @@
 <footer class="site"><div class="wrap">
   <div class="cols">
     <div><h5>HM Immobilier</h5>SASU Henri Martin Immobilier<br>58 rue de Monceau, CS 48756, 75008 Paris<br>RCS Paris 942 327 941<br>Carte T CPI 7501 2026 000 000 160<br><a href="investir.html">Investir à Paris →</a></div>
-    <div id="contact"><h5>Contact</h5>06 25 22 61 94<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
+    <div id="contact"><h5>Contact</h5>06 86 38 19 59<br><a href="mailto:contact@henrimartinimmobilier.com">contact@henrimartinimmobilier.com</a><br>Réponse sous 24 h ouvrées</div>
     <div><h5>Quartiers</h5><a href="quartier-auteuil.html">Auteuil (16e)</a><br><a href="quartier-passy.html">Passy (16e)</a><br><a href="quartier-monceau.html">Monceau (8e · 17e)</a><br><a href="quartier-quinzieme.html">15e arrondissement</a><br><a href="quartiers.html">Tous les quartiers →</a></div>
     <div><h5>Mentions légales</h5>CCI Paris Île-de-France<br>Non soumise à garantie financière (absence de maniement de fonds)<br><a href="https://loffmarketimmo.com/mentions-legales" target="_blank" rel="noopener">Mentions légales complètes →</a><br><a href="rejoindre.html">Professionnels : rejoindre le réseau →</a><br><a href="https://loffmarketimmo.com/api/reseau/concept" target="_blank" rel="noopener">Comment ça marche, pour chacun →</a></div>
   </div>
-  <div class="foot"><span>© 2026 Henri Martin Immobilier — Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
+  <div class="foot"><span>© 2026 Henri Martin Immobilier · Paris.</span><span>Vente · Location · Investissement · Estimation.</span></div>
 </div></footer>
 
 <script>
@@ -289,72 +332,94 @@
 </script>
 <script>
 (function(){
-  // « Nos biens » — grandes cartes galerie, alimentées par les 2 APIs publiques.
-  var grid = document.getElementById('biensGrid');
-  if(!grid) return;
+  // « Nos biens » (07/10) : ventes en pile plein écran, locations en rail horizontal, et
+  // ouverture en masque sur le plus grand bien. Alimenté par les 2 APIs publiques.
+  var pile = document.getElementById('pile'), rail = document.getElementById('rail'),
+      track = document.getElementById('railTrack'), railN = document.getElementById('railN'),
+      mask = document.getElementById('hmMask'), ph = document.getElementById('mkPh'), bg = document.getElementById('mkBg');
+  if(!pile) return;
   var fmt = function(n){ return new Intl.NumberFormat('fr-FR').format(Math.round(n)); };
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
   function hasPhotos(x){ return Array.isArray(x.photos) && x.photos.length > 0; }
-  // fetch() n'a pas de timeout natif — sur un réseau qui bloque silencieusement la requête,
+  // fetch() n'a pas de timeout natif : sur un réseau qui bloque silencieusement la requête,
   // la promesse ne se règle jamais et la section resterait sur « Chargement… ».
   function fetchWithTimeout(url, ms){
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
     var t = ctrl ? setTimeout(function(){ctrl.abort();}, ms||8000) : null;
     return fetch(url, ctrl?{signal:ctrl.signal}:{}).finally(function(){if(t)clearTimeout(t);});
   }
-  // Le type de bien arrive tel qu'il a été saisi : « appartement » chez l'un, « Appartement »
-  // chez l'autre. Deux cartes côte à côte affichaient donc deux casses différentes. On
-  // normalise à l'affichage (05/09) — la saisie, elle, ne se contrôle pas d'ici.
-  function typeBien(t){
-    var s = String(t == null ? '' : t).trim() || 'Appartement';
-    return s.charAt(0).toUpperCase() + s.slice(1);
+  // Le type et le secteur arrivent tels qu'ils ont été saisis (« appartement » / « Appartement »,
+  // « Paris 8ème arrondissement » / « Paris 8e »). On normalise à l'affichage seulement.
+  function typeBien(t){ var s = String(t == null ? '' : t).trim() || 'Appartement'; return s.charAt(0).toUpperCase() + s.slice(1); }
+  function secteur(s){ return String(s||'Paris').replace(/(\d+)(?:ème|eme|e)\s+arrondissement/i,'$1e'); }
+  function meta(x){ var f=[]; if(x.surface) f.push(x.surface+' m²'); if(x.pieces) f.push(x.pieces+' pièces'); return f.join(' · '); }
+  function prix(x){ return x.prix!=null ? fmt(x.prix)+' €'+(x.mode==='vente'?'':' / mois') : ''; }
+  function lien(x){ return x.id ? 'bien.html?id='+encodeURIComponent(x.id) : (x.mode==='vente'?'ventes.html':'location.html'); }
+  function alt(x){ return esc(typeBien(x.type)+' '+(x.mode==='vente'?'à vendre':'à louer')+', '+secteur(x.secteur)+(x.surface?(', '+x.surface+' m²'):'')); }
+  function carte(x){
+    return '<a class="pc" href="'+lien(x)+'"><img src="'+esc(x.photos[0])+'" alt="'+alt(x)+'" loading="lazy">'
+      + '<div class="in"><div><div class="k">'+esc(typeBien(x.type))+' à vendre</div>'
+      + '<div class="t">'+esc(secteur(x.secteur))+'</div>'
+      + '<div class="m">'+esc([meta(x),prix(x)].filter(Boolean).join(' · '))+'</div></div>'
+      + '<span class="go">Voir le bien</span></div></a>';
   }
-  function card(x){
-    var vente = x.mode === 'vente';
-    var facts = [];
-    if(x.surface) facts.push('<span><b>'+x.surface+'</b> m²</span>');
-    if(x.pieces) facts.push('<span><b>'+x.pieces+'</b> pièces</span>');
-    if(x.chambres) facts.push('<span><b>'+x.chambres+'</b> chambres</span>');
-    var alt = esc(typeBien(x.type)+' '+(vente?'à vendre':'à louer')+' — '+(x.secteur||'Paris')+(x.surface?(', '+x.surface+' m²'):''));
-    var inner = '<div class="bph"><img src="'+esc(x.photos[0])+'" alt="'+alt+'" loading="lazy">'
-      + '<span class="badge">'+(vente?'À vendre':'À louer')+'</span></div>'
-      + '<div class="bb">'
-      + '<div class="bt">'+esc(typeBien(x.type))+' — '+esc(x.secteur||'Paris')+'</div>'
-      + (x.prix!=null ? '<div class="bp">'+fmt(x.prix)+' €'+(vente?'':' <small>/ mois</small>')+'</div>' : '')
-      + (facts.length ? '<div class="bf">'+facts.join('')+'</div>' : '')
-      + '</div>';
-    return x.id
-      ? '<a class="bcard" href="bien.html?id='+encodeURIComponent(x.id)+'">'+inner+'</a>'
-      : '<article class="bcard">'+inner+'</article>';
+  function slide(x){
+    return '<a class="rs" href="'+lien(x)+'"><div class="im"><img src="'+esc(x.photos[0])+'" alt="'+alt(x)+'"></div>'
+      + '<div class="row"><span class="t">'+esc(secteur(x.secteur))+'</span><span class="p">'+esc(prix(x))+'</span></div>'
+      + '<span class="m">'+esc(meta(x))+'</span></a>';
   }
-  // Mandats directs HM UNIQUEMENT (?direct=1) — décision Abbas 31/07, jamais les biens du
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function prog(el){ var r=el.getBoundingClientRect(), span=el.offsetHeight-window.innerHeight; return span>0?Math.min(1,Math.max(0,-r.top/span)):0; }
+  function tailleRail(){ if(reduce||rail.hidden) return; var extra=Math.max(0,track.scrollWidth-window.innerWidth); rail.style.height=(window.innerHeight+extra)+'px'; }
+  var attente=false;
+  function image(){
+    attente=false; if(reduce) return;
+    if(mask && ph){
+      // Ouverture régulière sur tout le défilement : à mi-course la fenêtre est à moitié ouverte et le flou se voit autour.
+      var p=prog(mask), e=Math.min(1,p/0.95), ease=e*e*(3-2*e);
+      ph.style.setProperty('--mi',(24*(1-ease))+'%'); ph.style.setProperty('--mj',(20*(1-ease))+'%');
+      // Demande Abbas 07/10 : pas de fond sombre, flou fort à mi-ouverture.
+      // Presque net au repos (5 px), flou fort (22 px) atteint à mi-défilement.
+      var f=Math.min(1,Math.max(0,(p-0.15)/0.35));
+      if(bg) bg.style.setProperty('--mb',(5+17*f).toFixed(1)+'px');
+    }
+    if(!rail.hidden){ var q=prog(rail), extra=Math.max(0,track.scrollWidth-window.innerWidth); track.style.transform='translate3d('+(-extra*q)+'px,0,0)'; }
+  }
+  function auDefilement(){ if(!attente){ attente=true; requestAnimationFrame(image); } }
+  window.addEventListener('scroll', auDefilement, {passive:true});
+  window.addEventListener('resize', function(){ tailleRail(); image(); });
+  image();
+
+  // Mandats directs HM UNIQUEMENT (?direct=1) : décision Abbas 31/07, jamais les biens du
   // réseau (confrères) sur ce site.
   Promise.all([
     fetchWithTimeout('https://loffmarketimmo.com/api/public/sales?direct=1',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};}),
     fetchWithTimeout('https://loffmarketimmo.com/api/public/locations?direct=1',8000).then(function(r){return r.json();}).catch(function(){return {items:[]};})
   ]).then(function(res){
-    var ven = ((res[0]&&res[0].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'vente'});});
-    var loc = ((res[1]&&res[1].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'location'});});
-    // priorité aux biens avec id + photos (fiche détail disponible)
     var pri = function(list){ return list.slice().sort(function(a,b){ return (b.id?1:0)-(a.id?1:0); }); };
-    ven = pri(ven); loc = pri(loc);
-    // mélange ventes / locations, max 6
-    var mix = [];
-    while(mix.length < 6 && (ven.length || loc.length)){
-      if(ven.length) mix.push(ven.shift());
-      if(mix.length < 6 && loc.length) mix.push(loc.shift());
+    var ven = pri(((res[0]&&res[0].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'vente'});}));
+    var loc = pri(((res[1]&&res[1].items)||[]).filter(hasPhotos).map(function(x){return Object.assign({},x,{mode:'location'});}));
+    pile.innerHTML = ven.length ? ven.map(carte).join('')
+      : '<div class="wrap"><div class="bloading">Aucun bien à vendre avec photos pour le moment. <a href="ventes.html">Voir tous nos biens à vendre</a>.</div></div>';
+    if(loc.length){
+      track.innerHTML = loc.map(slide).join('');
+      railN.textContent = loc.length + (loc.length>1?' biens':' bien');
+      rail.hidden = false;
+      var imgs = track.querySelectorAll('img');
+      for(var i=0;i<imgs.length;i++) imgs[i].addEventListener('load', function(){ tailleRail(); image(); });
+      tailleRail();
     }
-    grid.innerHTML = mix.length
-      ? mix.map(card).join('')
-      : '<div class="bloading">Aucun bien avec photos pour le moment — parcourez nos biens à vendre et à louer ci-dessous.</div>';
+    // L'ouverture garde sa photo sans logo (07/10) : les photos des biens portent le
+    // filigrane doré, qui se superposait au titre « Henri Martin ».
+    image();
   }).catch(function(){
-    grid.innerHTML = '<div class="bloading">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div>';
+    pile.innerHTML = '<div class="wrap"><div class="bloading">Sélection momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@henrimartinimmobilier.com.</div></div>';
   });
 })();
 </script>
 <script>
 (function(){
-  // « Recherches actives » — preuve sociale anonymisée (aucune coordonnée, aucun nom) pour
+  // « Recherches actives », preuve sociale anonymisée (aucune coordonnée, aucun nom) pour
   // convaincre un vendeur/bailleur qu'il y a déjà des acheteurs qui cherchent (demande Abbas
   // 31/07). Alimenté par /api/public/searches (nos clients CRM + recherches du réseau).
   var grid = document.getElementById('demandeGrid');
@@ -363,7 +428,7 @@
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
   function range(min, max, unit){
     if(min==null && max==null) return '';
-    if(min!=null && max!=null) return euro(min)+'–'+euro(max)+unit;
+    if(min!=null && max!=null) return euro(min)+' à '+euro(max)+unit;
     if(max!=null) return 'jusqu’à '+euro(max)+unit;
     return euro(min)+unit+' min';
   }
@@ -403,17 +468,17 @@
      double. -->
 <style>
 .hm-burger{display:none;position:fixed;top:12px;right:12px;z-index:60;width:44px;height:44px;
-  border:1px solid rgba(217,208,184,.35);background:#22201A;cursor:pointer;padding:0;
+  border:1px solid #DADADA;background:rgba(247,247,247,.92);cursor:pointer;padding:0;
   flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.hm-burger span{display:block;width:18px;height:1.5px;background:#F4F0E6;transition:transform .2s,opacity .2s}
+.hm-burger span{display:block;width:18px;height:1.5px;background:#22201A;transition:transform .2s,opacity .2s}
 .hm-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .hm-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .hm-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 .hm-menu{display:none;position:fixed;inset:0;z-index:55;background:#22201A;overflow-y:auto;
   padding:74px 26px calc(32px + env(safe-area-inset-bottom))}
 .hm-menu.open{display:block}
-.hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(217,208,184,.14);
-  color:#F4F0E6;text-decoration:none;letter-spacing:.01em;
+.hm-menu a{display:block;padding:16px 2px;border-bottom:1px solid rgba(218,218,218,.14);
+  color:#EFEFEF;text-decoration:none;letter-spacing:.01em;
   font:500 17px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif}
 .hm-menu a.on{color:#D9917A}
 .hm-menu a.hm-tel{margin-top:24px;border:1px solid #B7784F;border-bottom:1px solid #B7784F;
@@ -440,7 +505,7 @@
     m.appendChild(c);
   }
   var tel=document.createElement('a');
-  tel.href='tel:+33625226194'; tel.className='hm-tel'; tel.textContent='Appeler l’agence';
+  tel.href='tel:+33686381959'; tel.className='hm-tel'; tel.textContent='Appeler l’agence';
   m.appendChild(tel);
   function ferme(){b.setAttribute('aria-expanded','false');m.classList.remove('open');
     document.body.style.overflow='';b.setAttribute('aria-label','Ouvrir le menu');}
